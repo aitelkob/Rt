@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_pxl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/02/23 10:02:33 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/10 11:07:02 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_object **close, t_object *current)
 	double			dst;
 
 	tmp = rtv->obj;
-	rtv->min = -1;
+	rtv->hit.dst = -1;
 	while (tmp)
 	{
 		if (tmp->type == SPHERE)
@@ -30,16 +30,17 @@ t_object **close, t_object *current)
 			dst = intersection_cylinder(ray, *tmp);
 		else if (tmp->type == CONE)
 			dst = intersection_cone(ray, *tmp);
-		if (dst > 0 && (dst < rtv->min + 0.000001 || rtv->min == -1))
+		if (dst > 0 && (dst < rtv->hit.dst + 0.000001 || rtv->hit.dst == -1))
 		{
 			*close = tmp;
-			rtv->min = dst;
+			rtv->hit.dst = dst;
 		}
 		tmp = tmp->next;
 	}
+	rtv->hit.point = add(ray.origin, multi(ray.direction, rtv->hit.dst));
 	if (current != NULL && *close == current)
 		return (-1);
-	return (rtv->min);
+	return (rtv->hit.dst);
 }
 
 t_object			*obj_norm(t_ray ray, t_object *obj, double dst)
@@ -72,21 +73,21 @@ t_object			*obj_norm(t_ray ray, t_object *obj, double dst)
 
 t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 {
-	double			dst_min;
 	t_object		*obj;
-	t_vector		hit_point;
 	t_vector		color;
 	t_object		*current;
 
 	obj = NULL;
 	current = NULL;
 	color = (t_vector){0, 0, 0};
-	if ((dst_min = get_dest(rtv, ray, &obj, current)) < 0)
+	if (!(get_dest(rtv, ray, &obj, current)))
 		return (color);
-	hit_point = add(ray.origin, multi(ray.direction, dst_min));
-	if (dst_min > 0)
-		color = obj->color;
+	// rtv->hit.hit = add(ray.origin, multi(ray.direction, rtv->hit.dst));
+	color = effect(*rtv, ray, obj);
+	// if (rtv->hit.dst > 0)
+	// 	color = multi(obj->color, 0.1);
+	color = multi(color, 0.55);
 	if (rtv->light)
-		color = lighting(rtv, obj_norm(ray, obj, dst_min), hit_point, ray);
+		color = add(color, lighting(rtv, obj_norm(ray, obj, rtv->hit.dst), rtv->hit.point, ray));
 	return (color);
 }
