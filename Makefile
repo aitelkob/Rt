@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/23 16:25:47 by yait-el-          #+#    #+#              #
-#    Updated: 2021/03/10 07:57:20 by babdelka         ###   ########.fr        #
+#    Updated: 2021/03/10 08:13:23 by babdelka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ WHITE           := $(shell tput -Txterm setaf 7)
 RESET           := $(shell tput -Txterm setaf 9)
 ####################### Project Name
 
-NAME = RTv1
+NAME = RT
 
 ######################Executable / Libraries
 
