@@ -70,7 +70,7 @@ This is an example of how to list things you need to use the software and how to
 
 1. Clone the repo
    ```sh
-   git clone --recurse-submodules https://github.com/aitelkob/Rtv1.git
+   git clone --recurse-submodules https://github.com/aitelkob/Rt.git
    ```
 2. enter repository
    ```sh
@@ -125,4 +125,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email
 
-Project Link: [https://github.com/aitelkob/Rtv1](https://github.com/aitelkob/Rtv1)
+Project Link: [https://github.com/aitelkob/Rtv1](https://github.com/aitelkob/Rt)

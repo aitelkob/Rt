@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/10 10:08:02 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/02/27 18:49:18 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,6 @@ typedef struct		s_camera
 	t_vector		look_at;
 	int				check;
 }					t_camera;
-typedef	struct		s_hit
-{
-	t_vector		point;
-	double			dst;
-}					t_hit;
-
 typedef	struct		s_rtv
 {
 	t_mlix			mlx;
@@ -108,7 +102,7 @@ typedef	struct		s_rtv
 	t_parse			parse;
 	t_camera		*camera;
 	t_light			*light;
-	t_hit			hit;
+	double			min;
 	t_ray			ray;
 }					t_rtv;
 

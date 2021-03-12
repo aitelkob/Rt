@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/10 10:43:42 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/12 16:36:05 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ double			min_ray(double t1, double t2);
 double			deg_to_rad(double angle);
 int				rgb_to_int(t_vector v);
 void			rot_trans(t_object *obj);
-t_object		*obj_norm(t_ray ray, t_object *obj, double dst);
 /*
  ********************************mlx stuff
 */
@@ -90,7 +89,7 @@ t_object **close, t_object *current);
 void			raytracing(t_rtv *rtv);
 t_vector		lighting(t_rtv *rtv, t_object *obj, t_vector hit, t_ray ray);
 t_vector		get_pxl(t_rtv *rtv, t_ray ray);
-t_vector		effect(t_rtv rtv, t_ray ray, t_object *obj);
+
 /*
  ********************************** intersection
 */
@@ -110,4 +109,9 @@ void			exiting_program(t_rtv *rtv);
 
 void			print_vect(t_vector vec, char *str);
 void			loop_print(t_rtv *rtv);
+/*
+ ********************************* effects
+*/
+t_vector 	sepia(t_vector color);
+
 #endif

@@ -6,7 +6,7 @@
 #    By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/23 16:25:47 by yait-el-          #+#    #+#              #
-#    Updated: 2021/03/10 10:49:55 by babdelka         ###   ########.fr        #
+#    Updated: 2021/03/12 16:33:26 by babdelka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,8 +42,8 @@ CHILDDIR    += parse
 CHILDDIR    += mlx
 CHILDDIR    += libvect
 CHILDDIR    += raytracing
-CHILDDIR    += effects
 CHILDDIR    += error
+CHILDDIR    += effects
 ####################INC
 
 INCS		:= inc/rtv1.h
@@ -72,7 +72,7 @@ SRC			+=raytracing/rotation.c
 SRC			+=raytracing/intersection.c
 SRC			+=raytracing/get_pxl.c
 SRC			+=raytracing/colors.c
-SRC			+=effects/snaillaw.c
+SRC			+=effects/sepia.c
 
 #################### Libraries
 LIBS		:= -L$(MLXDIR) -lmlx

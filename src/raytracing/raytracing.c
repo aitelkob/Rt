@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 09:49:04 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/04 18:24:56 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/12 17:17:03 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void				raytracing(t_rtv *rtv)
 	int				x;
 	int				y;
 	t_vector		color;
+	t_vector		color2;
 	t_vector		up;
 	t_ray			ray2;
 
@@ -49,8 +50,17 @@ void				raytracing(t_rtv *rtv)
 		y = -1;
 		while (++y < WIN_W)
 		{
-			ray2.direction = nrm(camera(rtv->camera, x, y, up));
+			ray2.direction = nrm(camera(rtv->camera, x-15, y, up));
 			color = get_pxl(rtv, ray2);
+			color.y = 0;
+			color.x += 60;
+			ray2.direction = nrm(camera(rtv->camera, x+15, y, up));
+			color2 = get_pxl(rtv, ray2);
+			color2.x = 0;
+			color2.y += 60;
+			color.x = (color.x + color2.x) / 2;
+			color.y = (color.y + color2.y) / 2;
+			color.z = (color.z + color2.z) / 2;
 			rtv->mlx.img[(WIN_H - 1 - y) * WIN_W + x] = rgb_to_int(color);
 		}
 	}
