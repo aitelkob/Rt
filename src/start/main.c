@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 17:46:27 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/07 08:17:54 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/14 11:43:17 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			main(int ac, char **av)
 		if (rtv.camera->check != 1)
 			syntax_error(&rtv, ".", "camera parce plz  ", rtv.parse.nb_line);
 		setup_mlx(&rtv.mlx);
-		raytracing(&rtv);
+		raytracing(rtv);
 		display(&rtv, &rtv.mlx);
 	}
 	else

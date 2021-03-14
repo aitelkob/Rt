@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/02/23 10:02:33 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/14 11:50:44 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_object **close, t_object *current)
 	double			dst;
 
 	tmp = rtv->obj;
-	rtv->min = -1;
+	double min = -1;
 	while (tmp)
 	{
 		if (tmp->type == SPHERE)
@@ -30,19 +30,19 @@ t_object **close, t_object *current)
 			dst = intersection_cylinder(ray, *tmp);
 		else if (tmp->type == CONE)
 			dst = intersection_cone(ray, *tmp);
-		if (dst > 0 && (dst < rtv->min + 0.000001 || rtv->min == -1))
+		if (dst > 0 && (dst < min + 0.000001 || min == -1))
 		{
 			*close = tmp;
-			rtv->min = dst;
+			min = dst;
 		}
 		tmp = tmp->next;
 	}
 	if (current != NULL && *close == current)
 		return (-1);
-	return (rtv->min);
+	return (min);
 }
 
-t_object			*obj_norm(t_ray ray, t_object *obj, double dst)
+t_vector	obj_norm(t_ray ray, t_object *obj, double dst)
 {
 	double			m;
 	double			tk;
@@ -66,8 +66,7 @@ t_object			*obj_norm(t_ray ray, t_object *obj, double dst)
 		normal = sub(p_c, multi(obj->aim, tk * m));
 	if (dot(ray.direction, normal) > 0)
 		normal = multi(normal, -1);
-	obj->normal = nrm(normal);
-	return (obj);
+	return (nrm(normal));
 }
 
 t_vector			get_pxl(t_rtv *rtv, t_ray ray)
@@ -87,6 +86,8 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 	if (dst_min > 0)
 		color = obj->color;
 	if (rtv->light)
-		color = lighting(rtv, obj_norm(ray, obj, dst_min), hit_point, ray);
+	{
+		color = lighting(rtv, obj, obj_norm(ray, obj, dst_min), hit_point, ray);
+	}
 	return (color);
 }
