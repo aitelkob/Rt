@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 19:15:32 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/04 19:15:36 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/14 11:50:39 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ double specular, t_vector obj_color)
 	return (color);
 }
 
-t_vector			lighting(t_rtv *rtv, t_object *obj, t_vector hit, t_ray ray)
+t_vector			lighting(t_rtv *rtv, t_object *obj, t_vector normal ,t_vector hit, t_ray ray)
 {
 	t_light			*tmp;
 	t_vector		light_dir;
@@ -63,8 +63,8 @@ t_vector			lighting(t_rtv *rtv, t_object *obj, t_vector hit, t_ray ray)
 	{
 		light_dir = sub(tmp->origin, hit);
 		dst = shadow(tmp, light_dir, rtv, obj);
-		spec = specular(sub(ray.origin, hit), light_dir, dst, obj->normal);
-		color = coloring(color, diffuse(light_dir, dst, obj->normal) \
+		spec = specular(sub(ray.origin, hit), light_dir, dst,normal);
+		color = coloring(color, diffuse(light_dir, dst, normal) \
 		* (tmp->intensity / 100.0), spec, obj->color);
 		tmp = tmp->next;
 	}

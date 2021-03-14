@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/02/27 18:49:18 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/14 11:00:04 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,12 @@ typedef	struct		s_rtv
 	double			min;
 	t_ray			ray;
 }					t_rtv;
+
+typedef struct      s_thread
+{
+    t_rtv           *rt;
+    int             idthread;
+    int             ending;
+}                   t_thread;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/06 16:04:37 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/14 11:47:25 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ t_object **close, t_object *current);
  ********************************** raytracing
 */
 
-void			raytracing(t_rtv *rtv);
-t_vector		lighting(t_rtv *rtv, t_object *obj, t_vector hit, t_ray ray);
+void			raytracing(t_rtv rtv);
+t_vector		lighting(t_rtv *rtv, t_object *obj, t_vector normal ,t_vector hit, t_ray ray);
 t_vector		get_pxl(t_rtv *rtv, t_ray ray);
 
 /*
