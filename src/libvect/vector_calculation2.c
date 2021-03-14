@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:06:01 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/14 15:58:22 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/14 17:26:55 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ double			dot(t_vector v, t_vector b)
 double			min_ray(double t1, double t2)
 {
 	if (((t1 < t2 || t2 < 0.1) && t1 > 0.1))
-		return (t2);
+		return (t1);
 	else if (((t2 < t1 || t1 < 0.1) && t2 > 0.1))
 	{
-		return (t1);
+		return (t2);
 	}
 	return (0);
 }
