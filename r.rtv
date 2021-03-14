@@ -29,7 +29,7 @@ sphere:
   radius: 8
   color: 0 255 255
 camera:
-  origin: 50 60 100
+  origin: 35 60 100
   fov: 60
   look_at: 0 0 0
 #

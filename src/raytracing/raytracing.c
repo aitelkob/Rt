@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 09:49:04 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/12 17:17:03 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/14 17:22:00 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_vector			camera(t_camera *camera, int x, int y, t_vector up)
 	, multi(v_vector, p.y * p.z)), w_vector));
 }
 
-void				raytracing(t_rtv *rtv)
+void	stereoscopic_render(t_rtv *rtv)
 {
 	int				x;
 	int				y;
@@ -64,4 +64,36 @@ void				raytracing(t_rtv *rtv)
 			rtv->mlx.img[(WIN_H - 1 - y) * WIN_W + x] = rgb_to_int(color);
 		}
 	}
+}
+
+void			render(t_rtv *rtv)
+{
+	int				x;
+	int				y;
+	t_vector		color;
+	t_vector		up;
+	t_ray			ray2;
+
+	ray2.origin = rtv->camera->origin;
+	up = (t_vector){0, 1, 0};
+	x = -1;
+	while (++x < WIN_H)
+	{
+		y = -1;
+		while (++y < WIN_W)
+		{
+			ray2.direction = nrm(camera(rtv->camera, x, y, up));
+			color = get_pxl(rtv, ray2);
+			rtv->mlx.img[(WIN_H - 1 - y) * WIN_W + x] = rgb_to_int(color);
+		}
+	}
+}
+
+void				raytracing(t_rtv *rtv)
+{
+	int stereo = 0;
+	if (stereo)
+		stereoscopic_render(rtv);
+	else
+		render(rtv);
 }
