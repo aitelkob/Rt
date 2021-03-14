@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/14 17:24:41 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/14 18:46:52 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,39 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 	t_vector		hit_point;
 	t_vector		color;
 	t_object		*current;
+	double				random;
+	int i = 0;
+
 
 	obj = NULL;
 	current = NULL;
 	color = (t_vector){0, 0, 0};
 	if ((dst_min = get_dest(rtv, ray, &obj, current)) < 0)
 		return (color);
+	if (!(dst_min >= -200 && dst_min <=120)){
+		while (i < 100){
+		random = (float)rand()/((float)RAND_MAX/2);
+		if (random > 1)
+			random *= -1;
+		// printf("%f\n", random);
+		ray.direction = nrm(camera(rtv->camera, rtv->x+random, rtv->y-random, rtv->up));
+		if ((dst_min = get_dest(rtv, ray, &obj, current)) < 0)
+			color = add(color, multi(obj->color, 0.05));
+		hit_point = add(ray.origin, multi(ray.direction, dst_min));
+		if (dst_min > 0)
+			color = add(color, multi(obj->color, 0.05));
+		// if (rtv->light)
+			color = lighting(rtv, obj_norm(ray, obj, dst_min), hit_point, ray);
+		i++;
+		}
+	}
+	else{
 	hit_point = add(ray.origin, multi(ray.direction, dst_min));
 	if (dst_min > 0)
 		color = obj->color;
 	if (rtv->light)
 		color = lighting(rtv, obj_norm(ray, obj, dst_min), hit_point, ray);
+	}
 	//color = sepia(color);
 	return (color);
 }
