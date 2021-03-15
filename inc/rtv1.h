@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 18:01:37 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/14 12:00:18 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/15 16:45:02 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define FOV 30
 # define KEY_ESC 53
 # define PI 3.14159
-# define THREAD_NUMBER 6
+# define THREAD_NUMBER 4
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>

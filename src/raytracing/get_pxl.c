@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/15 12:59:02 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/15 18:55:40 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,29 @@ t_vector	obj_norm(t_ray ray, t_object *obj, double dst)
 	return (nrm(normal));
 }
 
+// t_vector			get_pxl(t_rtv *rtv, t_ray ray)
+// {
+// 	double			dst_min;
+// 	t_object		*obj;
+// 	t_vector		hit_point;
+// 	t_vector		color;
+// 	t_object		*current;
+
+// 	obj = NULL;
+// 	current = NULL;
+// 	color = (t_vector){0, 0, 0};
+// 	if ((dst_min = get_dest(rtv, ray, &obj, current)) < 0)
+// 		return (color);
+// 	hit_point = add(ray.origin, multi(ray.direction, dst_min));
+// 	if (dst_min > 0)
+// 		color = obj->color;
+// 	if (rtv->light)
+// 	{
+// 		color = lighting(rtv, obj, obj_norm(ray, obj, dst_min), hit_point, ray);
+// 	}
+// 	return (color);
+// }
+
 t_vector			get_pxl(t_rtv *rtv, t_ray ray, t_blur blur)
 {
 	double			dst_min;
@@ -77,61 +100,35 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray, t_blur blur)
 	t_vector		color;
 	t_vector		lastcolor;
 	t_object		*current;
-	double				random;
+	double			random[3];		
 	int i = 1;
 	int b = 0;
 
 	obj = NULL;
 	current = NULL;
 	color = (t_vector){0, 0, 0};
+	lastcolor = color;
 	if ((dst_min = get_dest(rtv, ray, &obj, current)) < 0)
 		return (color);
-	if (!(dst_min >= 0 && dst_min <=30)){
-		while (i < 15){
-		if (b == 4 || b == 0){
-			random = (float)rand()/((float)RAND_MAX/3);
-			b = 0;
-		}
-		// if (random > 10)
-		// 	random *= -1;
-		// printf("%f\n", random);
-		if (b == 0)
-			ray.direction = nrm(camera(rtv->camera, blur.x+random, blur.y, blur.up));
-		if (b == 2)
-		 	ray.direction = nrm(camera(rtv->camera, blur.x, blur.y+random, blur.up));
-		if (b == 1)
-			ray.direction = nrm(camera(rtv->camera, blur.x, blur.y-random, blur.up));
-		if (b == 3)
-		 	ray.direction = nrm(camera(rtv->camera, blur.x-random, blur.y, blur.up));
-		if ((dst_min = get_dest(rtv, ray, &obj, current)) < 0)
-			color = multi(color, 0.50);
+	if ((dst_min >= 100))
+		random[0] = dst_min/100;
+
+	else
+		random[0] = 1;
+	while (i < 50){
+			random[1] = (float)rand()/((float)RAND_MAX/random[0]);
+			random[2] = (float)rand()/((float)RAND_MAX/random[0]);
+		ray.direction = nrm(camera(rtv->camera, blur.x+random[1], blur.y+random[2], blur.up));
+		dst_min = get_dest(rtv, ray, &obj, current);
 		hit_point = add(ray.origin, multi(ray.direction, dst_min));
 		if (dst_min > 0)
-			color = add(color, multi(obj->color, 0.10));
+			lastcolor = add(color, multi(obj->color, 0.50));
 		if (rtv->light)
-			color = lighting(rtv, obj, obj_norm(ray, obj, dst_min), hit_point, ray);
+			lastcolor = lighting(rtv, obj, obj_norm(ray, obj, dst_min), hit_point, ray);
 		i++;
 		b++;
+		color = add(color, lastcolor);
 		}
-		color = multi(add(color, lastcolor), 0.5);
-		lastcolor = (multi(add(color, lastcolor), 0.5));
-	}
-	// else{
-	// hit_point = add(ray.origin, multi(ray.direction, dst_min));
-	// if (dst_min > 0){
-	// 	color = obj->color;
-	// 	if (rtv->light)
-	// 		color = lighting(rtv, obj_norm(ray, obj, dst_min), hit_point, ray);
-	// }
-	// rtv->mlx.img[(WIN_H - 1 - (int)rtv->y) * WIN_W + (int)rtv->x] = rgb_to_int(color);
-	// }
-	
-	// hit_point = add(ray.origin, multi(ray.direction, dst_min));
-	// if (dst_min > 0)
-	// 	color = obj->color;
-	// if (rtv->light)
-	// {
-	// 	color = lighting(rtv, obj, obj_norm(ray, obj, dst_min), hit_point, ray);
-	// }
-	// return (color);
+	color = multi(color, 0.015);
+	return(color);
 }

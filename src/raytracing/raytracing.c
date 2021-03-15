@@ -6,11 +6,19 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 09:49:04 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/15 12:49:07 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/15 18:55:57 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+void	fixexposure(t_vector *color)
+{
+	double exposure = -0.66;
+	color->x = (1.0 - expf(color->x * exposure));
+	color->y = (1.0 - expf(color->y * exposure));
+	color->z = (1.0 - expf(color->z * exposure));
+}
 
 t_vector			camera(t_camera *camera, int x, int y, t_vector up)
 {

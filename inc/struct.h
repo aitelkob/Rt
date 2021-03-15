@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/15 12:43:55 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/15 15:28:56 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ typedef	struct		s_rtv
 
 typedef struct 		s_blur
 {
-	int				x;
-	int 			y;
+	double			x;
+	double 			y;
 	t_vector		up;
 }					t_blur;
 
