@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 09:49:04 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/14 17:56:54 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/14 12:00:07 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,64 +30,58 @@ t_vector			camera(t_camera *camera, int x, int y, t_vector up)
 	p.x = map(x, -1, ((1.0 - (-1.0)) / (WIN_W - 0.0)));
 	p.y = map(y, 1, ((-1.0 - (1.0)) / (WIN_W - 0.0)));
 	return (add(add(multi(u_vector, p.x * p.z)
-	, multi(v_vector, p.y * p.z)), w_vector));
+					, multi(v_vector, p.y * p.z)), w_vector));
 }
 
-void	stereoscopic_render(t_rtv *rtv)
+void				raytracing1(t_thread *th)
 {
+	int				x;
+	int				y;
 	t_vector		color;
-	t_vector		color2;
+	t_vector		up;
 	t_ray			ray2;
+	t_rtv           *rtv;
+	rtv = th->rt;
 
 	ray2.origin = rtv->camera->origin;
-	rtv->up = (t_vector){0, 1, 0};
-	rtv->x = -1;
-	while (++rtv->x < WIN_H)
+	up = (t_vector){0, 1, 0};
+	x = (th->idthread * WIN_W / THREAD_NUMBER);
+	printf("this is %d --- %d \n",((th->ending) * WIN_W / THREAD_NUMBER),x);
+	while (x < ((th->ending) * WIN_W / THREAD_NUMBER))
 	{
-		rtv->y = -1;
-		while (++rtv->y < WIN_W)
+		y = -1;
+		while (++y < WIN_W)
 		{
-			ray2.direction = nrm(camera(rtv->camera, rtv->x-15, rtv->y, rtv->up));
+			ray2.direction = nrm(camera(rtv->camera, x, y, up));
 			color = get_pxl(rtv, ray2);
-			color.y = 0;
-			color.x += 60;
-			ray2.direction = nrm(camera(rtv->camera, rtv->x+15, rtv->y, rtv->up));
-			color2 = get_pxl(rtv, ray2);
-			color2.x = 0;
-			color2.y += 60;
-			color.x = (color.x + color2.x) / 2;
-			color.y = (color.y + color2.y) / 2;
-			color.z = (color.z + color2.z) / 2;
-			rtv->mlx.img[(WIN_H - 1 - (int)rtv->y) * WIN_W + (int)rtv->x] = rgb_to_int(color);
+			rtv->mlx.img[(WIN_H - 1 - y) * WIN_W + x] = rgb_to_int(color);
 		}
+		x++;
 	}
+	pthread_exit(NULL);
 }
 
-void			render(t_rtv *rtv)
+void			raytracing(t_rtv rtv)
 {
-	t_vector		color;
-	t_ray			ray2;
+	pthread_t		newthread[THREAD_NUMBER];
+	t_thread		th[THREAD_NUMBER];
 
-	ray2.origin = rtv->camera->origin;
-	rtv->up = (t_vector){0, 1, 0};
-	rtv->x = -1;
-	while (++rtv->x < WIN_H)
+	int  i = 0;
+	int t = 1;
+
+	while (i < THREAD_NUMBER)
 	{
-		rtv->y = -1;
-		while (++rtv->y < WIN_W)
-		{
-			ray2.direction = nrm(camera(rtv->camera, rtv->x, rtv->y, rtv->up));
-			color = get_pxl(rtv, ray2);
-			rtv->mlx.img[(WIN_H - 1 - (int)rtv->y) * WIN_W + (int)rtv->x] = rgb_to_int(color);
-		}
+		th[i].rt = &rtv;
+		th[i].idthread = i;
+		th[i].ending = t;
+		pthread_create(&newthread[i],NULL,(void*)raytracing1,(void*)&th[i]);
+		i++;
+		t++;
 	}
-}
 
-void				raytracing(t_rtv *rtv)
-{
-	int stereo = 0;
-	if (stereo)
-		stereoscopic_render(rtv);
-	else
-		render(rtv);
+	while (i)
+	{
+		pthread_join(newthread[i],NULL);
+		i--;
+	}
 }

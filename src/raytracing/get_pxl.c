@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_pxl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/14 18:46:52 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/14 11:50:44 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_object **close, t_object *current)
 	double			dst;
 
 	tmp = rtv->obj;
-	rtv->min = -1;
+	double min = -1;
 	while (tmp)
 	{
 		if (tmp->type == SPHERE)
@@ -30,19 +30,19 @@ t_object **close, t_object *current)
 			dst = intersection_cylinder(ray, *tmp);
 		else if (tmp->type == CONE)
 			dst = intersection_cone(ray, *tmp);
-		if (dst > 0 && (dst < rtv->min + 0.000001 || rtv->min == -1))
+		if (dst > 0 && (dst < min + 0.000001 || min == -1))
 		{
 			*close = tmp;
-			rtv->min = dst;
+			min = dst;
 		}
 		tmp = tmp->next;
 	}
 	if (current != NULL && *close == current)
 		return (-1);
-	return (rtv->min);
+	return (min);
 }
 
-t_object			*obj_norm(t_ray ray, t_object *obj, double dst)
+t_vector	obj_norm(t_ray ray, t_object *obj, double dst)
 {
 	double			m;
 	double			tk;
@@ -66,8 +66,7 @@ t_object			*obj_norm(t_ray ray, t_object *obj, double dst)
 		normal = sub(p_c, multi(obj->aim, tk * m));
 	if (dot(ray.direction, normal) > 0)
 		normal = multi(normal, -1);
-	obj->normal = nrm(normal);
-	return (obj);
+	return (nrm(normal));
 }
 
 t_vector			get_pxl(t_rtv *rtv, t_ray ray)
@@ -77,39 +76,18 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 	t_vector		hit_point;
 	t_vector		color;
 	t_object		*current;
-	double				random;
-	int i = 0;
-
 
 	obj = NULL;
 	current = NULL;
 	color = (t_vector){0, 0, 0};
 	if ((dst_min = get_dest(rtv, ray, &obj, current)) < 0)
 		return (color);
-	if (!(dst_min >= -200 && dst_min <=120)){
-		while (i < 100){
-		random = (float)rand()/((float)RAND_MAX/2);
-		if (random > 1)
-			random *= -1;
-		// printf("%f\n", random);
-		ray.direction = nrm(camera(rtv->camera, rtv->x+random, rtv->y-random, rtv->up));
-		if ((dst_min = get_dest(rtv, ray, &obj, current)) < 0)
-			color = add(color, multi(obj->color, 0.05));
-		hit_point = add(ray.origin, multi(ray.direction, dst_min));
-		if (dst_min > 0)
-			color = add(color, multi(obj->color, 0.05));
-		// if (rtv->light)
-			color = lighting(rtv, obj_norm(ray, obj, dst_min), hit_point, ray);
-		i++;
-		}
-	}
-	else{
 	hit_point = add(ray.origin, multi(ray.direction, dst_min));
 	if (dst_min > 0)
 		color = obj->color;
 	if (rtv->light)
-		color = lighting(rtv, obj_norm(ray, obj, dst_min), hit_point, ray);
+	{
+		color = lighting(rtv, obj, obj_norm(ray, obj, dst_min), hit_point, ray);
 	}
-	//color = sepia(color);
 	return (color);
 }
