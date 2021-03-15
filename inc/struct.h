@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/14 11:00:04 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/15 12:43:55 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,14 @@ typedef	struct		s_rtv
 	double			min;
 	t_ray			ray;
 }					t_rtv;
+
+typedef struct 		s_blur
+{
+	int				x;
+	int 			y;
+	t_vector		up;
+}					t_blur;
+
 
 typedef struct      s_thread
 {

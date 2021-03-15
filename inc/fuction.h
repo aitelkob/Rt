@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fuction.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/14 11:47:25 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/15 12:47:17 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,11 @@ t_object **close, t_object *current);
 /*
  ********************************** raytracing
 */
-
+t_vector		camera(t_camera *camera, int x, int y, t_vector up);
 void			raytracing(t_rtv rtv);
 t_vector		lighting(t_rtv *rtv, t_object *obj, t_vector normal ,t_vector hit, t_ray ray);
-t_vector		get_pxl(t_rtv *rtv, t_ray ray);
+// t_vector		get_pxl(t_rtv *rtv, t_ray ray);
+t_vector			get_pxl(t_rtv *rtv, t_ray ray, t_blur blur);
 
 /*
  ********************************** intersection

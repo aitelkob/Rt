@@ -15,6 +15,11 @@ plane:
   aim: 1 0 0
   color: 255 0 0
   rot: 0 0 0
+plane:
+  origin: 0 0 -200
+  aim: 0 0 1
+  color: 255 0 0
+  rot: 0 0 0
 sphere:
   origin: 0 20 0
   radius: 15

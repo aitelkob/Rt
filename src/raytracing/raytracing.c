@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 09:49:04 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/14 12:00:07 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/15 12:49:07 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ t_vector			camera(t_camera *camera, int x, int y, t_vector up)
 					, multi(v_vector, p.y * p.z)), w_vector));
 }
 
+void				blurinit(t_blur *blur, int x, int y, t_vector up)
+{
+	blur->x = x;
+	blur->y = y;
+	blur->up = up;
+}
+
 void				raytracing1(t_thread *th)
 {
 	int				x;
@@ -41,6 +48,7 @@ void				raytracing1(t_thread *th)
 	t_vector		up;
 	t_ray			ray2;
 	t_rtv           *rtv;
+	t_blur			blur;
 	rtv = th->rt;
 
 	ray2.origin = rtv->camera->origin;
@@ -53,7 +61,8 @@ void				raytracing1(t_thread *th)
 		while (++y < WIN_W)
 		{
 			ray2.direction = nrm(camera(rtv->camera, x, y, up));
-			color = get_pxl(rtv, ray2);
+			blurinit(&blur,x, y, up);
+			color = get_pxl(rtv, ray2, blur);
 			rtv->mlx.img[(WIN_H - 1 - y) * WIN_W + x] = rgb_to_int(color);
 		}
 		x++;
@@ -78,10 +87,10 @@ void			raytracing(t_rtv rtv)
 		i++;
 		t++;
 	}
-
-	while (i)
+	t = 0;
+	while (t < i)
 	{
-		pthread_join(newthread[i],NULL);
-		i--;
+		pthread_join(newthread[t],NULL);
+		t++;
 	}
 }
