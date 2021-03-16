@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 17:20:45 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/02/19 15:11:55 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/15 16:23:49 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_vector		nrm(t_vector vec)
 	return (divi(vec, (length(vec, vec))));
 }
 
-t_vector		ft_itvect(int x, int y, int z)
+t_vector		ft_itvect(double x, double  y, double z)
 {
 	t_vector	vex;
 

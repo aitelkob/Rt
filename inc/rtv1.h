@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 18:01:37 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/14 12:00:18 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/15 18:05:20 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define FOV 30
 # define KEY_ESC 53
 # define PI 3.14159
-# define THREAD_NUMBER 6
+# define THREAD_NUMBER 4
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
@@ -25,6 +25,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <pthread.h>
+# include "../library/qdbmp_1.0.0/qdbmp.h"
 # include "../library/mlx/mlx.h"
 # include "../library/Libft/include/libft.h"
 # include "struct.h"

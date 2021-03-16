@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/14 11:47:25 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/16 10:35:17 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_vector		divi(t_vector vec1, double t);
 double			length_squared(t_vector vec1, t_vector vec2);
 double			length(t_vector vec1, t_vector vec2);
 void			cord(t_vector *vec, double x, double y, double z);
-t_vector		ft_itvect(int x, int y, int z);
+t_vector		ft_itvect(double x, double y, double z);
 t_vector		vecto_subvec(t_vector v1, t_vector v2);
 double			dot(t_vector v, t_vector b);
 double			map(double x, double spw, double step);
@@ -71,10 +71,11 @@ double			min_ray(double t1, double t2);
 double			deg_to_rad(double angle);
 int				rgb_to_int(t_vector v);
 void			rot_trans(t_object *obj);
+int             color_nrm(double i);
 /*
  ********************************mlx stuff
 */
-
+void        create_bmp(int *img);
 void			display(t_rtv *rtv, t_mlix *mlx);
 int				key_hook(int keycode, t_rtv *rtv);
 void			setup_mlx(t_mlix *mlx);

@@ -6,7 +6,7 @@
 #    By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/23 16:25:47 by yait-el-          #+#    #+#              #
-#    Updated: 2021/03/07 08:14:51 by yait-el-         ###   ########.fr        #
+#    Updated: 2021/03/16 16:58:29 by yait-el-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ CHILDDIR    += mlx
 CHILDDIR    += libvect
 CHILDDIR    += raytracing
 CHILDDIR    += error
+CHILDDIR    += library/qdbmp_1.0.0/
 ####################INC
 
 INCS		:= inc/rtv1.h
@@ -56,6 +57,8 @@ INCS		+= library/mlx/mlx.h
 SRC			:=start/main.c
 SRC			+=start/freeing.c
 SRC			+=mlx/mlx_stuff.c
+SRC         +=parse/light_parse.c
+SRC         +=parse/tools_parse2.c
 SRC			+=parse/parse.c
 SRC			+=parse/objs_parse.c
 SRC			+=parse/check_obj.c
@@ -63,14 +66,15 @@ SRC			+=parse/tools_parse.c
 SRC			+=libvect/calc_vect.c
 SRC			+=libvect/vector_calculation.c
 SRC			+=libvect/vector_calculation2.c
-SRC			+=parse/light_parse.c
-SRC			+=parse/tools_parse2.c
 SRC			+=error/parse_error.c
 SRC			+=raytracing/raytracing.c
 SRC			+=raytracing/rotation.c
 SRC			+=raytracing/intersection.c
 SRC			+=raytracing/get_pxl.c
 SRC			+=raytracing/colors.c
+SRC			+=raytracing/saving.c
+#SRC			+=raytracing/color_palette.c
+SRC			+=../library/qdbmp_1.0.0/qdbmp.c
 
 #################### Libraries
 LIBS		:= -L$(MLXDIR) -lmlx

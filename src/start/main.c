@@ -6,16 +6,27 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 17:46:27 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/14 11:43:17 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/16 09:26:50 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
+
 int			main(int ac, char **av)
 {
 	t_rtv	rtv;
+/*	BMP*    bmp;
+    UCHAR   r, g, b;
+    UINT    width, height;
+    UINT    x, y;
 
+
+	bmp = BMP_ReadFile("./screenshot/1.bmp");
+	BMP_CHECK_ERROR( stderr, -1 );
+	width = BMP_GetWidth( bmp );
+    height = BMP_GetHeight( bmp );
+	printf("this is %lu and %lu \n",width, height);*/
 	if (ac == 2 && strncmp(ft_strrev(av[1]), "vtr.", 4) == 0)
 	{
 		parce(ft_strrev(av[1]), &rtv);

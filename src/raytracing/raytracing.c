@@ -6,13 +6,13 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 09:49:04 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/14 12:00:07 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/16 17:12:29 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_vector			camera(t_camera *camera, int x, int y, t_vector up)
+t_vector			camera(t_camera *camera, double x, double y, t_vector up,t_vector test)
 {
 	t_ray			ray;
 	t_vector		w_vector;
@@ -27,10 +27,68 @@ t_vector			camera(t_camera *camera, int x, int y, t_vector up)
 	u_vector = nrm(crossproduct(w_vector, up));
 	v_vector = crossproduct(w_vector, u_vector);
 	p.z = tan(deg_to_rad(camera->fov) / 2.0);
-	p.x = map(x, -1, ((1.0 - (-1.0)) / (WIN_W - 0.0)));
-	p.y = map(y, 1, ((-1.0 - (1.0)) / (WIN_W - 0.0)));
+	p.x = map(x+test.x, -1, ((1.0 - (-1.0)) / (WIN_W - 0.0)));
+	p.y = map(y+test.y, 1, ((-1.0 - (1.0)) / (WIN_W - 0.0)));
 	return (add(add(multi(u_vector, p.x * p.z)
 					, multi(v_vector, p.y * p.z)), w_vector));
+}
+
+t_vector 	sepia(t_vector color)
+{
+	t_vector	output;
+	double 		tr;
+	double		tg;
+	double		tb;
+	tr = (color.x * 0.393) + (color.y * 0.769) + (color.z * 0.189);
+	tg = (color.x * 0.349) + (color.y * 0.686) + (color.z * 0.168);
+	tb = (color.x * 0.272) + (color.y * 0.534) + (color.z * 0.131);
+	output.x = color_nrm(tr);
+	output.y = color_nrm(tg);
+	output.z = color_nrm(tb);
+	return (output);
+}
+
+t_vector    gray(t_vector color)
+{
+	t_vector    output;
+	double      tr;
+	double      tg;
+	double      tb;
+	tr = (color.x * 0.299) + (color.y * 0.587) + (color.z * 0.114);
+	tg = (color.x * 0.299) + (color.y * 0.587) + (color.z * 0.114);
+	tb = (color.x * 0.299) + (color.y * 0.587) + (color.z * 0.114);
+	output.x = color_nrm(tr);
+	output.y = color_nrm(tg);
+	output.z = color_nrm(tb);
+	return (output);
+}
+
+void				Antialiasing(t_rtv *rtv,double x, double y)
+{
+	int				i = 0;
+	t_ray           ray2;
+	t_vector		test;
+	double			r2 = 0;
+	t_vector		color;
+	t_vector		up;
+
+	up = (t_vector){0,1,0};
+	color = (t_vector){0,0,0};
+	ray2.origin = rtv->camera->origin;
+	test = (t_vector){0,0,0};
+
+	while (i < 10)
+	{
+		test.x = (rand() % 10) /10.0;
+		test.y = (rand() % 10) /10.0;
+		test.z =  0;
+		ray2.direction = nrm(camera(rtv->camera, x, y, up,test));
+		color = add(color,get_pxl(rtv, ray2));
+		i++;
+	}
+
+	color = divi(color,10.0);
+	rtv->mlx.img[(WIN_H - 1 - (int)y) * WIN_W + (int)x] = rgb_to_int(color);
 }
 
 void				raytracing1(t_thread *th)
@@ -41,27 +99,30 @@ void				raytracing1(t_thread *th)
 	t_vector		up;
 	t_ray			ray2;
 	t_rtv           *rtv;
+	t_vector		test;
 	rtv = th->rt;
 
+	test = (t_vector){0,0,0};
 	ray2.origin = rtv->camera->origin;
 	up = (t_vector){0, 1, 0};
 	x = (th->idthread * WIN_W / THREAD_NUMBER);
-	printf("this is %d --- %d \n",((th->ending) * WIN_W / THREAD_NUMBER),x);
 	while (x < ((th->ending) * WIN_W / THREAD_NUMBER))
 	{
-		y = -1;
-		while (++y < WIN_W)
+		y = 0;
+		while (y <= WIN_W)
 		{
-			ray2.direction = nrm(camera(rtv->camera, x, y, up));
+			//Antialiasing(rtv,(double)x,(double)y);
+			ray2.direction = nrm(camera(rtv->camera, x, y, up,test));
 			color = get_pxl(rtv, ray2);
-			rtv->mlx.img[(WIN_H - 1 - y) * WIN_W + x] = rgb_to_int(color);
+			rtv->mlx.img[(WIN_H - 1 - y) * WIN_W + x] = rgb_to_int(gray(color));
+			y++;
 		}
 		x++;
 	}
 	pthread_exit(NULL);
 }
 
-void			raytracing(t_rtv rtv)
+void				raytracing(t_rtv rtv)
 {
 	pthread_t		newthread[THREAD_NUMBER];
 	t_thread		th[THREAD_NUMBER];
@@ -78,10 +139,10 @@ void			raytracing(t_rtv rtv)
 		i++;
 		t++;
 	}
-
-	while (i)
+	t= 0;
+	while( t < i )
 	{
-		pthread_join(newthread[i],NULL);
-		i--;
+		pthread_join(newthread[t],NULL);
+		t++;
 	}
 }

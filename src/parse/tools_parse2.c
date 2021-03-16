@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 15:09:15 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/06 15:09:26 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/16 17:55:03 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void			rot_trans(t_object *obj)
 	obj->origin = add(obj->origin, obj->translation);
 }
 
-int				color_nrm(int i)
+int				color_nrm(double i)
 {
 	return (i > 255 ? 255 : i);
 }
@@ -48,5 +48,16 @@ int				rgb_to_int(t_vector v)
 	rgb = red;
 	rgb = (rgb << 8) + green;
 	rgb = (rgb << 8) + blue;
+	return (rgb);
+}
+
+t_vector		int_to_rgb(int img,int i)
+{
+	t_vector	rgb;
+
+	rgb.x = color_nrm(img[i] >> 16);
+	rgb.y = color_nrm(img[i] >> 8);
+	rgb.z = color_nrm(img[i]);
+
 	return (rgb);
 }
