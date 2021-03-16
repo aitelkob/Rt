@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/15 18:55:50 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/16 11:48:56 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,13 @@ t_vector		camera(t_camera *camera, int x, int y, t_vector up);
 void			raytracing(t_rtv rtv);
 t_vector		lighting(t_rtv *rtv, t_object *obj, t_vector normal ,t_vector hit, t_ray ray);
 // t_vector		get_pxl(t_rtv *rtv, t_ray ray);
-t_vector			get_pxl(t_rtv *rtv, t_ray ray, t_blur blur);
+t_vector		get_pxl(t_rtv *rtv, t_ray ray, t_getpx *getpx);
 
 /*
  ********************************** intersection
 */
 double			intersection_plane(t_ray ray, t_object plane);
+// int			plane_intersect(t_object *plane, t_ray *ray, float *tmin)
 double			intersection_cylinder(t_ray ray, t_object cylinder);
 double			intersection_cone(t_ray ray, t_object cone);
 double			intersection_sphere(t_ray ray, t_object sphere);

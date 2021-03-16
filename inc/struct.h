@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/15 15:28:56 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/16 09:20:01 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,25 @@ typedef	struct		s_rtv
 	t_ray			ray;
 }					t_rtv;
 
-typedef struct 		s_blur
+typedef struct 		s_getpx
 {
 	double			x;
 	double 			y;
+	int				i;
+	int				totali;
 	t_vector		up;
-}					t_blur;
+	int				refle;
+	int				refra;
+	int				var;
+	t_vector		color;
+}					t_getpx;
+
+typedef	struct 		s_hit
+{
+	t_vector		point;
+	double			dst;
+}					t_hit;
+
 
 
 typedef struct      s_thread

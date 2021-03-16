@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 09:49:04 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/15 18:55:57 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/16 11:34:06 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,15 @@ t_vector			camera(t_camera *camera, int x, int y, t_vector up)
 					, multi(v_vector, p.y * p.z)), w_vector));
 }
 
-void				blurinit(t_blur *blur, int x, int y, t_vector up)
+void				getpxinit(t_getpx *getpx, int x, int y, t_vector up)
 {
-	blur->x = x;
-	blur->y = y;
-	blur->up = up;
+	getpx->x = x;
+	getpx->y = y;
+	getpx->i = 5;
+	getpx->totali = 1;
+	getpx->refle = 1;
+	getpx->refra = 5;
+	getpx->up = up;
 }
 
 void				raytracing1(t_thread *th)
@@ -56,7 +60,8 @@ void				raytracing1(t_thread *th)
 	t_vector		up;
 	t_ray			ray2;
 	t_rtv           *rtv;
-	t_blur			blur;
+	t_getpx			getpx;
+
 	rtv = th->rt;
 
 	ray2.origin = rtv->camera->origin;
@@ -69,8 +74,8 @@ void				raytracing1(t_thread *th)
 		while (++y < WIN_W)
 		{
 			ray2.direction = nrm(camera(rtv->camera, x, y, up));
-			blurinit(&blur,x, y, up);
-			color = get_pxl(rtv, ray2, blur);
+			getpxinit(&getpx,x, y, up);
+			color = get_pxl(rtv, ray2, &getpx);
 			rtv->mlx.img[(WIN_H - 1 - y) * WIN_W + x] = rgb_to_int(color);
 		}
 		x++;
