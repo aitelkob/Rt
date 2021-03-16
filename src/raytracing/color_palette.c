@@ -67,24 +67,28 @@ t_vector		*color_fill()
 
 /*void			cartoon(double img);
 {
-	int i,j;
+	int i,j,copy;
 	t_vector save;
-
+  t_vector rgb;
+  t_vector *colors
 
 	while (i++ < W * H)
 	{
 		j = 0;
 		d = INFINITY;
 		rgb = int_to_rgb(img,i);
-		while (j++ < 50)
+		while (j++ < 10)
 		{
-			copy = sqrt(pow(rgb.x - colh[j].x, 2)
-				  	+ pow(rgb.y - colh[j].y, 2)
-					+ pow(rgb.z - colh[j].z, 2));
-			if (z.dd < z.d)
+			copy = sqrt(pow(rgb.x - colors[j].x, 2)
+				  	+ pow(rgb.y - colors[j].y, 2)
+					+ pow(rgb.z - colors[j].z, 2));
+            rgb.r += (img[i + cnt] >> 16);
+                  rgb.g += (img[i + cnt] >> 8) % 256;
+                        rgb.b += img[i + cnt] % 256;
+			if (copy < d)
 			{
-				save = (t_vector)colh[j];
-				z.d = z.dd;
+				save = (t_vector)color[j];
+			  d = copy;
 			}
 		}
 		img[i] = rgb_to_int(save);
