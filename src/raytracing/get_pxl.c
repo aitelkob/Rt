@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/17 10:39:45 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/17 19:29:16 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,52 +69,76 @@ t_vector	obj_norm(t_ray ray, t_object *obj, double dst)
 	return (nrm(normal));
 }
 
-void				reflect(t_ray *ray, t_object *obj, t_rtv *trv, t_hit *hit)
+t_vector			reflectandrefract(t_ray ray, t_object *obj, t_rtv *rtv, t_hit hit)
 {
 	t_vector	normal;
-	// if (obj->type == PLANE)
-	// 	normal = nrm(obj->aim);
-	// else
-		normal = nrm(obj_norm(*ray, obj, hit->dst));
-	hit->point = add(ray->origin, multi(ray->direction, hit->dst));
-	ray->direction = add(multi(multi(normal, dot(ray->direction, normal)), -2.0f), ray->direction);
-	// ray->direction = add(multi(multi(normal, dot(ray->direction, normal)), 0.3f), ray->direction);
-	ray->origin = hit->point;
+	t_vector	color;
+	
+	color = (t_vector){0,0,0};
+	ray.direction1 = ray.direction;
+	ray.direction2 = ray.direction;
+	normal = nrm(obj_norm(ray, obj, hit.dst));
+	hit.point = add(ray.origin, multi(ray.direction, hit.dst));
+	ray.direction1 = add(multi(multi(normal, dot(ray.direction1, normal)), -2.0f), ray.direction1);
+	ray.direction2 = add(multi(multi(normal, dot(ray.direction2, normal)), 0.3f), ray.direction2);
+	ray.origin = hit.point;
+	color = get_pxladv(rtv, ray, ray.direction1);
+	return(color);
 }
+
+t_vector			get_pxladv(t_rtv *rtv, t_ray ray, t_vector direction)
+{
+	t_hit			hit;
+	t_object		*obj;
+	t_object		*current;
+	t_vector		color;
+
+	obj = NULL;
+	current = NULL;
+	color = (t_vector){0, 0, 0};
+	ray.direction = direction;
+	//printf("thi is [%p] \n",getpx);
+	if ((hit.dst = get_dest(rtv, ray, &obj, current)) <= 0)
+		return (color);
+	hit.point = add(ray.origin, multi(direction, hit.dst));
+	if (hit.dst > 0)
+		color = obj->color;
+	if (rtv->light)
+		color = lighting(rtv, obj,\
+		obj_norm(ray, obj, hit.dst), hit.point, ray);
+	if ((obj->type == CONE || obj->type == CYLINDER || obj->type == SPHERE)){
+		// printf("refle is %d\n", getpx->refle);
+		color = reflectandrefract(ray, obj, rtv, hit);
+	}
+	return (color);
+}
+
+
 
 t_vector			get_pxl(t_rtv *rtv, t_ray ray, t_getpx *getpx)
 {
 	t_hit			hit;
 	t_object		*obj;
 	t_object		*current;
-	int				refle;
+	t_vector		color;
 
-	refle = getpx->refle;
 	obj = NULL;
 	current = NULL;
-	getpx->color = (t_vector){0, 0, 0};
+	color = (t_vector){0, 0, 0};
 	//printf("thi is [%p] \n",getpx);
 	if ((hit.dst = get_dest(rtv, ray, &obj, current)) <= 0)
-		return (getpx->color);
+		return (color);
 	hit.point = add(ray.origin, multi(ray.direction, hit.dst));
 	if (hit.dst > 0)
-		getpx->color = obj->color;
+		color = obj->color;
 	if (rtv->light)
-		getpx->color = lighting(rtv, obj,\
+		color = lighting(rtv, obj,\
 		obj_norm(ray, obj, hit.dst), hit.point, ray);
-	while ((obj->type == CONE || obj->type == CYLINDER || obj->type == SPHERE) && refle>0){
+	if ((obj->type == CONE || obj->type == CYLINDER || obj->type == SPHERE)){
 		// printf("refle is %d\n", getpx->refle);
-		reflect(&ray, obj, rtv, &hit);
-		getpx->color = get_pxl(rtv, ray, getpx);
-		refle--;
+		color = reflectandrefract(ray, obj, rtv, hit);
 	}
-	// while (obj->type == PLANE && refle>0){
-	// 	// printf("refle is %d\n", getpx->refle);
-	// 	reflect(&ray, obj, rtv, &hit);
-	// 	getpx->color = get_pxl(rtv, ray, getpx);
-	// 	refle--;
-	// }
-	return (getpx->color);
+	return (color);
 }
 
 // t_vector			get_pxl(t_rtv *rtv, t_ray ray, t_blur blur)

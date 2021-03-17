@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/16 09:20:01 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/17 19:07:39 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef	struct		s_ray
 {
 	t_vector		origin;
 	t_vector		direction;
+	t_vector		direction1;
+	t_vector		direction2;
 }					t_ray;
 
 typedef	struct		s_parse
