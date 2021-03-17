@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 09:49:04 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/16 11:34:06 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/17 10:39:20 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void				raytracing1(t_thread *th)
 	int				x;
 	int				y;
 	t_vector		color;
+	t_vector		color2;
 	t_vector		up;
 	t_ray			ray2;
 	t_rtv           *rtv;
@@ -73,10 +74,17 @@ void				raytracing1(t_thread *th)
 		y = -1;
 		while (++y < WIN_W)
 		{
-			ray2.direction = nrm(camera(rtv->camera, x, y, up));
-			getpxinit(&getpx,x, y, up);
+			ray2.direction = nrm(camera(rtv->camera, x+15, y, up));
+			getpxinit(&getpx,x+15, y, up);
 			color = get_pxl(rtv, ray2, &getpx);
-			rtv->mlx.img[(WIN_H - 1 - y) * WIN_W + x] = rgb_to_int(color);
+			color.x = 0;
+			color.y +=50;
+			ray2.direction = nrm(camera(rtv->camera, x-15, y, up));
+			getpxinit(&getpx,x-15, y, up);
+			color2 = get_pxl(rtv, ray2, &getpx);
+			color2.y = 0;
+			color2.x+=50;
+			rtv->mlx.img[(WIN_H - 1 - y) * WIN_W + x] = rgb_to_int(multi(add(color, color2),0.5));
 		}
 		x++;
 	}

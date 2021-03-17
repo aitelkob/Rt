@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/16 11:54:38 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/17 10:39:45 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void				reflect(t_ray *ray, t_object *obj, t_rtv *trv, t_hit *hit)
 	// else
 		normal = nrm(obj_norm(*ray, obj, hit->dst));
 	hit->point = add(ray->origin, multi(ray->direction, hit->dst));
-	// ray->direction = add(multi(multi(normal, dot(ray->direction, normal)), -2.0f), ray->direction);
-	ray->direction = add(multi(multi(normal, dot(ray->direction, normal)), 0.3f), ray->direction);
+	ray->direction = add(multi(multi(normal, dot(ray->direction, normal)), -2.0f), ray->direction);
+	// ray->direction = add(multi(multi(normal, dot(ray->direction, normal)), 0.3f), ray->direction);
 	ray->origin = hit->point;
 }
 
