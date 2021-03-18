@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/18 09:14:01 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/18 17:52:30 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void			first_light(t_rtv *rtv, t_light *light);
 void			first_obj(t_rtv *rtv, t_object *obj);
 t_vector		input_vector(t_rtv *rtv, char *data, int nbr, char *head);
 double			input_onearg(t_rtv *rtv, char *data, int nbr, char *head);
+int				input_material(t_rtv *rtv, char *data, int nbr, char *head);
 
 /*
  ******************************* vector lib
