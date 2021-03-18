@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/18 08:24:09 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/18 11:29:18 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,14 @@ enum				e_type
 	CYLINDER,
 	CONE
 };
-
+enum				e_material
+{
+	GLASS = 1,
+	MIRROR,
+	METAL,
+	WATER,
+	EMPTY
+}					t_material;
 typedef	struct		s_vector
 {
 	double			x;
@@ -88,6 +95,9 @@ typedef	struct		s_object
 	t_vector		direction;
 	t_vector		color;
 	t_vector		normal;
+	double			reflection;
+	double			refraction;
+	int				material;
 	struct s_object	*next;
 }					t_object;
 typedef struct		s_camera

@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/18 09:42:40 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/18 12:34:44 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,22 +73,36 @@ t_vector			reflectandrefract(t_ray ray, t_object *obj, t_rtv *rtv, t_hit hit, in
 {
 	t_vector	normal;
 	t_vector	color;
+	t_vector 	color2;
+	double			ratio[2];
 	
 	color = (t_vector){0,0,0};
+	color2 = (t_vector){0,0,0};
 	ray.direction1 = ray.direction;
 	ray.direction2 = ray.direction;
 	normal = nrm(obj_norm(ray, obj, hit.dst));
 	hit.point = add(ray.origin, multi(ray.direction, hit.dst));
 	ray.direction1 = add(multi(multi(normal, dot(ray.direction1, normal)), -2.0f), ray.direction1);
-	ray.direction2 = add(multi(multi(normal, dot(ray.direction2, normal)), 0.3f), ray.direction2);
+	ray.direction2 = add(multi(multi(normal, dot(ray.direction2, normal)), 0.5f), ray.direction2);
 	ray.origin = hit.point;
 	depth--;
-	// if (obj->type == PLANE)
-	// 	depth--;
-	// else
-	// 	depth+=3;
-	color = get_pxladv(rtv, ray, ray.direction1,depth);
-	return(color);
+	ratio[0] = obj->reflection+0.1;
+	ratio[1] = obj->refraction+0.1;
+	if (obj->reflection)
+		color = multi(get_pxladv(rtv, ray, ray.direction1,depth), ratio[0]);
+	// else{
+	// 	color = obj->color;
+	// 	ratio[0] = 0.5;
+	// }
+	if (obj->refraction)
+		color2 = multi(get_pxladv(rtv, ray, ray.direction2,depth), ratio[1]);
+	// else{
+	// 	color2 = obj->color;
+	// 	ratio[1] = 0.5;
+	// }
+	color = divi(color, ratio[0] + ratio[1]);
+	color2 = divi(color2, ratio[1] + ratio[0]);
+	return(add(color, color2));
 }
 
 t_vector			get_pxladv(t_rtv *rtv, t_ray ray, t_vector direction, int depth)
@@ -125,25 +139,30 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray, t_getpx *getpx)
 	t_object		*obj;
 	t_object		*current;
 	t_vector		color;
+	t_vector		colorini;
 	int				depth;
 
 	obj = NULL;
 	current = NULL;
-	depth = 3;
+	depth = 5;
 	color = (t_vector){0, 0, 0};
+	colorini = (t_vector){0, 0, 0};
 	//printf("thi is [%p] \n",getpx);
 	if ((hit.dst = get_dest(rtv, ray, &obj, current)) <= 0)
 		return (color);
 	hit.point = add(ray.origin, multi(ray.direction, hit.dst));
 	if (hit.dst > 0)
-		color = obj->color;
+		colorini = obj->color;
 	if (rtv->light)
-		color = lighting(rtv, obj,\
+		colorini = lighting(rtv, obj,\
 		obj_norm(ray, obj, hit.dst), hit.point, ray);
+	
 	if (depth > 0)
 	{
 		color = reflectandrefract(ray, obj, rtv, hit, depth);
 	}
+	colorini = add(colorini, color);
+	colorini = divi(colorini, 2);
 	return (color);
 }
 
