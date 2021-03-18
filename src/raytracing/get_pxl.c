@@ -6,11 +6,20 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/18 12:34:44 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/18 19:28:03 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+t_vector			finalcolor(t_vector color1, t_vector color2, double *ratio)
+{
+	t_vector	color;
+	color = (t_vector){0,0,0};
+	color1 = add(color1, multi(color1, (100-(ratio[0]+ratio[1]))/100));
+	color2 = add(color2, multi(color2, (ratio[0]+ratio[1])/100));
+	return(add(color1, color2));
+}
 
 double				get_dest(t_rtv *rtv, t_ray ray,
 t_object **close, t_object *current)
@@ -111,23 +120,29 @@ t_vector			get_pxladv(t_rtv *rtv, t_ray ray, t_vector direction, int depth)
 	t_object		*obj;
 	t_object		*current;
 	t_vector		color;
+	t_vector		colorini;
+	double			ratio[2];
 
 	obj = NULL;
 	current = NULL;
 	color = (t_vector){0, 0, 0};
+	colorini = (t_vector){0, 0, 0};
 	ray.direction = direction;
 	//printf("thi is [%p] \n",getpx);
 	if ((hit.dst = get_dest(rtv, ray, &obj, current)) <= 0)
 		return (color);
 	hit.point = add(ray.origin, multi(direction, hit.dst));
 	if (hit.dst > 0)
-		color = obj->color;
+		colorini = obj->color;
+	ratio[0] = obj->reflection+0.2;
+	ratio[1] = obj->refraction+0.2;
 	if (rtv->light)
-		color = lighting(rtv, obj,\
+		colorini = lighting(rtv, obj,\
 		obj_norm(ray, obj, hit.dst), hit.point, ray);
 		// printf("refle is %d\n", getpx->refle);
 	if (depth > 0)
 		color = reflectandrefract(ray, obj, rtv, hit, depth);
+	color = divi(finalcolor(colorini, color, ratio), 2);
 	return (color);
 }
 
@@ -141,28 +156,30 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray, t_getpx *getpx)
 	t_vector		color;
 	t_vector		colorini;
 	int				depth;
+	double			ratio[2];
 
 	obj = NULL;
 	current = NULL;
 	depth = 5;
 	color = (t_vector){0, 0, 0};
 	colorini = (t_vector){0, 0, 0};
-	//printf("thi is [%p] \n",getpx);
-	if ((hit.dst = get_dest(rtv, ray, &obj, current)) <= 0)
+	if ((hit.dst = get_dest(rtv, ray, &obj, NULL)) <= 0)
 		return (color);
 	hit.point = add(ray.origin, multi(ray.direction, hit.dst));
 	if (hit.dst > 0)
 		colorini = obj->color;
+	ratio[0] = obj->reflection+0.2;
+	ratio[1] = obj->refraction+0.2;
 	if (rtv->light)
 		colorini = lighting(rtv, obj,\
 		obj_norm(ray, obj, hit.dst), hit.point, ray);
-	
 	if (depth > 0)
 	{
 		color = reflectandrefract(ray, obj, rtv, hit, depth);
 	}
-	colorini = add(colorini, color);
-	colorini = divi(colorini, 2);
-	return (color);
+	// if (obj->refraction == 100)
+	// 	return(color);
+	color = divi(finalcolor(colorini, color, ratio), depth);
+	return(color);
 }
 

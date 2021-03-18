@@ -42,8 +42,8 @@ sphere:
   origin: 0 200 0
   radius: 150
   color: 0 255 0
-  refraction: 100
-  reflection: 25
+  refraction: 50
+  reflection: 20
 sphere:
   origin: 250 250 200
   radius: 80
