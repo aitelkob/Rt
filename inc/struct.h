@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/14 11:00:04 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/18 19:05:06 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ enum				e_type
 	PLANE = 1,
 	SPHERE,
 	CYLINDER,
-	CONE
+	CONE,
+	TRIANGLE
 };
 
 typedef	struct		s_vector
@@ -79,6 +80,8 @@ typedef	struct		s_object
 	int				type;
 	double			radius;
 	t_vector		origin;
+	t_vector		c1;
+	t_vector		c2;
 	t_vector		rot;
 	t_vector		aim;
 	t_vector		translation;

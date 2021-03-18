@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 17:07:15 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/02/28 11:52:43 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/18 19:09:40 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,26 @@ void	plan_checker(char *data, char *arg, t_object *plan, t_rtv *rtv)
 	{
 		free(data);
 		unknown_setting(rtv, "plan", rtv->parse.nb_line);
+	}
+	free(data);
+}
+
+void	triangle_checker(char *data, char *arg, t_object *triangle, t_rtv *rtv)
+{
+	if (!ft_strcmp("origin", data))
+		triangle->origin = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("c1", data))
+		triangle->c1 = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("color", data))
+		triangle->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("translation", data))
+		triangle->translation = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("rot", data))
+		triangle->c2= input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else
+	{
+		free(data);
+		unknown_setting(rtv, "triangle", rtv->parse.nb_line);
 	}
 	free(data);
 }
