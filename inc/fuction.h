@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/17 19:25:24 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/18 09:14:01 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void			raytracing(t_rtv rtv);
 t_vector		lighting(t_rtv *rtv, t_object *obj, t_vector normal ,t_vector hit, t_ray ray);
 // t_vector		get_pxl(t_rtv *rtv, t_ray ray);
 t_vector		get_pxl(t_rtv *rtv, t_ray ray, t_getpx *getpx);
-t_vector		get_pxladv(t_rtv *rtv, t_ray ray, t_vector direction);
+t_vector		get_pxladv(t_rtv *rtv, t_ray ray, t_vector direction, int depth);
 
 /*
  ********************************** intersection
