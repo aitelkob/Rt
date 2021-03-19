@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/16 10:12:22 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/18 12:07:21 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,9 @@ typedef	struct		s_mlix
 	void			*img_ptr2;
 	int				w;
 	int				h;
-	int				*img;
 	int				*d;
+	int				*img;
+	t_vector		*colors;
 	int				bits_per_pixel;
 	int				size_line;
 	int				endian;

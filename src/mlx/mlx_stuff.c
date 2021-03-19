@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:18:27 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/16 16:44:51 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/19 10:35:42 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,19 @@ void			setup_mlx(t_mlix *mlx)
 	//mlx->img_ptr2 = mlx_png_file_to_image(mlx->win_ptr,"./images/img.png", &mlx->w, &mlx->h);
 	mlx->img_ptr = mlx_new_image(mlx->mlx_ptr, WIN_W, WIN_H);
 	mlx->img = (int*)mlx_get_data_addr(mlx->img_ptr,&mlx->bits_per_pixel, &mlx->size_line, &mlx->endian);
+	mlx->colors = (t_vector*)malloc(sizeof(t_vector) * (WIN_W * WIN_H)+1);
 	//mlx_put_image_to_window(mlx, mlx->win_ptr, mlx->img_ptr2, 0, 0);
 }
 
 int				key_hook(int keycode, t_rtv *rtv)
 {
 	if (keycode == KEY_ESC)
-		exiting_program(rtv);
+	{
+		//exiting_program(rtv);
+		blur(&rtv->mlx);
+		display(rtv, &rtv->mlx);
+
+	}
 	 	//create_bmp(rtv->mlx.img);
 	return (1);
 }

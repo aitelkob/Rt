@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 17:46:27 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/16 09:26:50 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/19 10:46:15 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 int			main(int ac, char **av)
 {
 	t_rtv	rtv;
+	t_vector *colors;
+	int img;
 /*	BMP*    bmp;
     UCHAR   r, g, b;
     UINT    width, height;
     UINT    x, y;
-
 
 	bmp = BMP_ReadFile("./screenshot/1.bmp");
 	BMP_CHECK_ERROR( stderr, -1 );
@@ -34,6 +35,9 @@ int			main(int ac, char **av)
 			syntax_error(&rtv, ".", "camera parce plz  ", rtv.parse.nb_line);
 		setup_mlx(&rtv.mlx);
 		raytracing(rtv);
+		stereoscopy(&rtv.mlx);
+		//blur(&rtv.mlx);
+		//cartoon(&rtv.mlx,colors);
 		display(&rtv, &rtv.mlx);
 	}
 	else

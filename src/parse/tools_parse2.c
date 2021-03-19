@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 15:09:15 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/16 17:55:03 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/18 17:41:16 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int				rgb_to_int(t_vector v)
 	int			blue;
 	int			rgb;
 
-	red = color_nrm((int)v.x);
+	red = color_nrm((int)(v.x));
 	green = color_nrm((int)v.y);
 	blue = color_nrm((int)v.z);
 	rgb = red;
@@ -51,13 +51,21 @@ int				rgb_to_int(t_vector v)
 	return (rgb);
 }
 
-t_vector		int_to_rgb(int img,int i)
+t_vector		int_to_rgb(int color)
 {
+	int         red;
+	int         green;
+	int         blue;
 	t_vector	rgb;
 
-	rgb.x = color_nrm(img[i] >> 16);
-	rgb.y = color_nrm(img[i] >> 8);
-	rgb.z = color_nrm(img[i]);
+	red = 0;
+	red = color >> 16;
+	green = color >> 8;
+	blue = color;
+
+	rgb.x = color_nrm((int)red);
+ 	rgb.y = color_nrm((int)green);
+ 	rgb.z = color_nrm((int)blue);
 
 	return (rgb);
 }

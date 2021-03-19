@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 09:49:04 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/16 17:12:29 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/19 10:34:47 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_vector 	sepia(t_vector color)
 	return (output);
 }
 
-t_vector    gray(t_vector color)
+t_vector    grey(t_vector color)
 {
 	t_vector    output;
 	double      tr;
@@ -77,17 +77,17 @@ void				Antialiasing(t_rtv *rtv,double x, double y)
 	ray2.origin = rtv->camera->origin;
 	test = (t_vector){0,0,0};
 
-	while (i < 10)
+	while (i < 20)
 	{
-		test.x = (rand() % 10) /10.0;
-		test.y = (rand() % 10) /10.0;
+		test.x = (rand() % 3) /10.0;
+		test.y = (rand() % 3) /10.0;
 		test.z =  0;
 		ray2.direction = nrm(camera(rtv->camera, x, y, up,test));
 		color = add(color,get_pxl(rtv, ray2));
 		i++;
 	}
 
-	color = divi(color,10.0);
+	color = divi(color,20.0);
 	rtv->mlx.img[(WIN_H - 1 - (int)y) * WIN_W + (int)x] = rgb_to_int(color);
 }
 
@@ -95,30 +95,37 @@ void				raytracing1(t_thread *th)
 {
 	int				x;
 	int				y;
+	int				l;
 	t_vector		color;
 	t_vector		up;
 	t_ray			ray2;
 	t_rtv           *rtv;
 	t_vector		test;
+	t_vector		*colors;
 	rtv = th->rt;
 
+	l=0;
 	test = (t_vector){0,0,0};
 	ray2.origin = rtv->camera->origin;
 	up = (t_vector){0, 1, 0};
 	x = (th->idthread * WIN_W / THREAD_NUMBER);
+
+	y = 0;
 	while (x < ((th->ending) * WIN_W / THREAD_NUMBER))
 	{
 		y = 0;
-		while (y <= WIN_W)
+		while (y < WIN_W)
 		{
 			//Antialiasing(rtv,(double)x,(double)y);
 			ray2.direction = nrm(camera(rtv->camera, x, y, up,test));
 			color = get_pxl(rtv, ray2);
-			rtv->mlx.img[(WIN_H - 1 - y) * WIN_W + x] = rgb_to_int(gray(color));
+			rtv->mlx.colors[(WIN_H - 1 - y) * WIN_W + x] = color;
+			rtv->mlx.img[(WIN_H - 1 - y) * WIN_W + x] = rgb_to_int(color);
 			y++;
 		}
 		x++;
 	}
+	printf("this is %d -- \n",(WIN_H - 1 - x) * WIN_W + y);
 	pthread_exit(NULL);
 }
 
@@ -126,7 +133,7 @@ void				raytracing(t_rtv rtv)
 {
 	pthread_t		newthread[THREAD_NUMBER];
 	t_thread		th[THREAD_NUMBER];
-
+	t_vector 	colors;
 	int  i = 0;
 	int t = 1;
 
@@ -145,4 +152,5 @@ void				raytracing(t_rtv rtv)
 		pthread_join(newthread[t],NULL);
 		t++;
 	}
+	//cartoon(rtv.mlx.img,&colors);
 }

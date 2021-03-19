@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/16 10:35:17 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/19 10:45:18 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,13 @@ double			deg_to_rad(double angle);
 int				rgb_to_int(t_vector v);
 void			rot_trans(t_object *obj);
 int             color_nrm(double i);
+t_vector        int_to_rgb(int colors);
+void            cartoon(t_mlix *mlix,t_vector *colors);
+t_vector            *color_fill();
 /*
  ********************************mlx stuff
 */
-void        create_bmp(int *img);
+void			create_bmp(int *img);
 void			display(t_rtv *rtv, t_mlix *mlx);
 int				key_hook(int keycode, t_rtv *rtv);
 void			setup_mlx(t_mlix *mlx);
@@ -90,7 +93,8 @@ t_object **close, t_object *current);
 void			raytracing(t_rtv rtv);
 t_vector		lighting(t_rtv *rtv, t_object *obj, t_vector normal ,t_vector hit, t_ray ray);
 t_vector		get_pxl(t_rtv *rtv, t_ray ray);
-
+void			blur(t_mlix *mlx);
+void            stereoscopy(t_mlix *mlx);
 /*
  ********************************** intersection
 */

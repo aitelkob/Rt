@@ -6,7 +6,7 @@
 #    By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/23 16:25:47 by yait-el-          #+#    #+#              #
-#    Updated: 2021/03/16 16:58:29 by yait-el-         ###   ########.fr        #
+#    Updated: 2021/03/19 10:45:54 by yait-el-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,9 @@ SRC			+=raytracing/intersection.c
 SRC			+=raytracing/get_pxl.c
 SRC			+=raytracing/colors.c
 SRC			+=raytracing/saving.c
-#SRC			+=raytracing/color_palette.c
+SRC			+=raytracing/color_palette.c
+SRC			+=raytracing/blur.c
+SRC			+=raytracing/stereoscopy.c
 SRC			+=../library/qdbmp_1.0.0/qdbmp.c
 
 #################### Libraries
