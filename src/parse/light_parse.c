@@ -16,7 +16,7 @@ void						light_check(char *data, char *arg,
 t_light *light, t_rtv *rtv)
 {
 	if (!ft_strcmp("origin", data))
-		light->origin = input_vector(rtv, arg, rtv->parse.nb_line, data);
+		light->origin = multi(input_vector(rtv, arg, rtv->parse.nb_line, data), 1);
 	else if (!ft_strcmp("intensity", data))
 		light->intensity = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else
@@ -31,11 +31,11 @@ void						camera_check(char *data, char *arg,
 t_camera *camera, t_rtv *rtv)
 {
 	if (!ft_strcmp("origin", data))
-		camera->origin = input_vector(rtv, arg, rtv->parse.nb_line, data);
+		camera->origin = multi(input_vector(rtv, arg, rtv->parse.nb_line, data), 1);
 	else if (!ft_strcmp("fov", data))
 		camera->fov = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("look_at", data))
-		camera->look_at = input_vector(rtv, arg, rtv->parse.nb_line, data);
+		camera->look_at = multi(input_vector(rtv, arg, rtv->parse.nb_line, data), 1);
 	else
 	{
 		free(data);

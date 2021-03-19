@@ -84,6 +84,7 @@ typedef	struct		s_object
 	t_vector		translation;
 	double			angle;
 	t_vector		direction;
+	int				negative;
 	t_vector		color;
 	t_vector		normal;
 	struct s_object	*next;
@@ -106,4 +107,10 @@ typedef	struct		s_rtv
 	t_ray			ray;
 }					t_rtv;
 
+typedef	struct		s_quadratic
+{
+	double t1;
+	double t0;
+	double isHit;
+}					t_quadratic;
 #endif

@@ -32,7 +32,7 @@ t_vector		nrm(t_vector vec)
 	return (divi(vec, (length(vec, vec))));
 }
 
-t_vector		ft_itvect(int x, int y, int z)
+t_vector		ft_itvect(double x, double y, double z)
 {
 	t_vector	vex;
 

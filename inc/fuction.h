@@ -60,7 +60,7 @@ t_vector		divi(t_vector vec1, double t);
 double			length_squared(t_vector vec1, t_vector vec2);
 double			length(t_vector vec1, t_vector vec2);
 void			cord(t_vector *vec, double x, double y, double z);
-t_vector		ft_itvect(int x, int y, int z);
+t_vector		ft_itvect(double x, double y, double z);
 t_vector		vecto_subvec(t_vector v1, t_vector v2);
 double			dot(t_vector v, t_vector b);
 double			map(double x, double spw, double step);
@@ -87,16 +87,23 @@ t_object **close, t_object *current);
 */
 
 void			raytracing(t_rtv *rtv);
-t_vector		lighting(t_rtv *rtv, t_object *obj, t_vector hit, t_ray ray);
+void			*raytracingt(void *value);
+void			*raytracingt0(void *value);
+void			*raytracingt1(void *value);
+void			*raytracingt2(void *value);
+t_vector		lighting(t_rtv *rtv, t_object *obj,t_vector normal, t_vector hit, t_ray ray);
 t_vector		get_pxl(t_rtv *rtv, t_ray ray);
-
 /*
  ********************************** intersection
 */
 double			intersection_plane(t_ray ray, t_object plane);
-double			intersection_cylinder(t_ray ray, t_object cylinder);
-double			intersection_cone(t_ray ray, t_object cone);
-double			intersection_sphere(t_ray ray, t_object sphere);
+t_quadratic			intersection_cylinder(t_ray ray, t_object cylinder);
+t_quadratic			intersection_cone(t_ray ray, t_object cone);
+t_quadratic			intersection_sphere(t_ray ray, t_object sphere);
+
+t_quadratic		intersection_cylinder_test(t_ray ray, t_object cylinder);
+double					intersection_triangle(t_ray ray, t_object triangle);
+
 
 /*
  ********************************** error management

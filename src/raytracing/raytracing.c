@@ -52,6 +52,111 @@ void				raytracing(t_rtv *rtv)
 			ray2.direction = nrm(camera(rtv->camera, x, y, up));
 			color = get_pxl(rtv, ray2);
 			rtv->mlx.img[(WIN_H - 1 - y) * WIN_W + x] = rgb_to_int(color);
+
 		}
 	}
+}
+
+void				*raytracingt(void *value)
+{
+	int				x;
+	int				y;
+	t_vector		color;
+	t_vector		up;
+	t_ray			ray2;
+	t_rtv			*rtv = (t_rtv *) value;
+
+	ray2.origin = rtv->camera->origin;
+	up = (t_vector){0, 1, 0};
+	x = -1;
+	while (++x < WIN_H / 2)
+	{
+		y = -1;
+		while (++y < WIN_W / 2)
+		{
+			ray2.direction = nrm(camera(rtv->camera, x, y, up));
+			color = get_pxl(rtv, ray2);
+			rtv->mlx.img[(WIN_H - 1 - y) * WIN_W + x] =  rgb_to_int(color);
+
+		}
+	}
+	return NULL; 
+}
+
+void				*raytracingt0(void *value)
+{
+	int				x;
+	int				y;
+	t_vector		color;
+	t_vector		up;
+	t_ray			ray2;
+	t_rtv			*rtv = (t_rtv *) value;
+
+	ray2.origin = rtv->camera->origin;
+	up = (t_vector){0, 1, 0};
+	x = WIN_H/2 - 1;
+	while (++x < WIN_H)
+	{
+		y = - 1;
+		while (++y < WIN_W / 2)
+		{
+			ray2.direction = nrm(camera(rtv->camera, x, y, up));
+			color = get_pxl(rtv, ray2);
+			rtv->mlx.img[(WIN_H - 1 - y) * WIN_W + x] = rgb_to_int(color);
+
+		}
+	}
+	return NULL; 
+}
+
+void				*raytracingt1(void *value)
+{
+	int				x;
+	int				y;
+	t_vector		color;
+	t_vector		up;
+	t_ray			ray2;
+	t_rtv			*rtv = (t_rtv *) value;
+
+	ray2.origin = rtv->camera->origin;
+	up = (t_vector){0, 1, 0};
+	x = WIN_H / 2 -1;
+	while (++x < WIN_H)
+	{
+		y = WIN_W / 2 -1;
+		while (++y < WIN_W)
+		{
+			ray2.direction = nrm(camera(rtv->camera, x, y, up));
+			color = get_pxl(rtv, ray2);
+			rtv->mlx.img[(WIN_H - 1 - y) * WIN_W + x] =  rgb_to_int(color);
+
+		}
+	}
+	return NULL; 
+}
+
+void				*raytracingt2(void *value)
+{
+	int				x;
+	int				y;
+	t_vector		color;
+	t_vector		up;
+	t_ray			ray2;
+	t_rtv			*rtv = (t_rtv *) value;
+
+	ray2.origin = rtv->camera->origin;
+	up = (t_vector){0, 1, 0};
+	x = - 1;
+	while (++x < WIN_H/2)
+	{
+		y = WIN_W/2 - 1;
+		while (++y < WIN_W)
+		{
+			ray2.direction = nrm(camera(rtv->camera, x, y, up));
+			color = get_pxl(rtv, ray2);
+			rtv->mlx.img[(WIN_H - 1 - y) * WIN_W + x] = rgb_to_int(color);
+
+		}
+	}
+	return NULL; 
 }

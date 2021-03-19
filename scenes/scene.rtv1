@@ -1,30 +1,23 @@
 light:
-  origin: 0 50 -200
-  intensity: 100
-sphere:
   origin: 50 50 50
-  radius: 20
-  color: 255 0 0
-plane:
-  origin: 20 20 -10
-  aim: 0 1 0
-  color: 0 0 0
-  rot: 0 0 0
-cone:
-  origin: 0 0 0
-  aim: 0 0 0
-  radius: 0
-  rot: 0 0 0
-  color: 0 0 0
+  intensity: 100
 cylinder:
   origin: 0 0 0
-  aim: 0 0 0
-  rot: 0 0 0
-  translation: 0 0 0
-  radius: 0
-  color: 0 0 0
-camera:
+  aim: 0 1 0
+  rot: 0 0 90
+  radius: 20
+  color: 200 10 60
+sphere:
   origin: 0 0 0
+  radius: 40
+  color: 20 100 60
+plane:
+  origin: 0 0 0
+  aim: 0 -1 0
+  color: 200 200 200
+  rot: 0 0 0
+camera:
+  origin: 50 50 50
   fov: 60
-  look_at: 50 50 50
-# 
+  look_at: 0 0 0
+#
