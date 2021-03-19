@@ -6,7 +6,7 @@
 #    By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/23 16:25:47 by yait-el-          #+#    #+#              #
-#    Updated: 2021/03/12 16:33:26 by babdelka         ###   ########.fr        #
+#    Updated: 2021/03/19 17:38:32 by babdelka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,7 @@ SRC			+=raytracing/rotation.c
 SRC			+=raytracing/intersection.c
 SRC			+=raytracing/get_pxl.c
 SRC			+=raytracing/colors.c
+SRC			+=raytracing/reflectionandrefraction.c
 SRC			+=effects/sepia.c
 
 #################### Libraries

@@ -6,28 +6,18 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/19 10:31:44 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/19 17:54:55 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_vector		finalcolor(t_vector color1, t_vector color2, double *ratio)
-{
-	t_vector	color;
-
-	color = (t_vector){0, 0, 0};
-	color1 = add(color1, multi(color1, (100 - (ratio[0] + ratio[1])) / 100));
-	color2 = add(color2, multi(color2, (ratio[0] + ratio[1]) / 100));
-	return (add(color1, color2));
-}
-
-double			get_dest(t_rtv *rtv, t_ray ray,
+double				get_dest(t_rtv *rtv, t_ray ray,
 t_object **close, t_object *current)
 {
-	t_object	*tmp;
-	double		dst;
-	double		min;
+	t_object		*tmp;
+	double			dst;
+	double			min;
 
 	min = -1;
 	tmp = rtv->obj;
@@ -53,13 +43,13 @@ t_object **close, t_object *current)
 	return (min);
 }
 
-t_vector		obj_norm(t_ray ray, t_object *obj, double dst)
+t_vector			obj_norm(t_ray ray, t_object *obj, double dst)
 {
-	double		m;
-	double		tk;
-	t_vector	normal;
-	t_vector	p_c;
-	t_vector	xvec;
+	double			m;
+	double			tk;
+	t_vector		normal;
+	t_vector		p_c;
+	t_vector		xvec;
 
 	xvec = sub(ray.origin, obj->origin);
 	if (obj->type != PLANE && obj->type != SPHERE)
@@ -80,80 +70,22 @@ t_vector		obj_norm(t_ray ray, t_object *obj, double dst)
 	return (nrm(normal));
 }
 
-t_vector		reflectandrefract(t_ray ray, t_object *obj,\
-t_rtv *rtv, t_hit hit, int depth)
-{
-	t_vector	normal;
-	t_vector	color;
-	t_vector 	color2;
-	double		ratio[2];
-	
-	color = (t_vector){0, 0, 0};
-	color2 = (t_vector){0, 0, 0};
-	ray.direction1 = ray.direction;
-	ray.direction2 = ray.direction;
-	normal = nrm(obj_norm(ray, obj, hit.dst));
-	hit.point = add(ray.origin, multi(ray.direction, hit.dst));
-	ray.direction1 = add(multi(multi(normal, dot(ray.direction1, normal)), -2.0f), ray.direction1);
-	ray.direction2 = add(multi(multi(normal, dot(ray.direction2, normal)), obj->refractionratio), ray.direction2);
-	ray.origin = hit.point;
-	depth--;
-	ratio[0] = obj->reflection+0.1;
-	ratio[1] = obj->refraction+0.1;
-	if (obj->reflection)
-		color = multi(get_pxladv(rtv, ray, ray.direction1,depth), ratio[0]);
-	if (obj->refraction)
-		color2 = multi(get_pxladv(rtv, ray, ray.direction2,depth), ratio[1]);
-	color = divi(color, ratio[0] + ratio[1]);
-	color2 = divi(color2, ratio[1] + ratio[0]);
-	return(add(color, color2));
-}
-
-void			initgp(t_object	*obj, t_vector color, t_vector colorini)
+void				initgp(t_object *obj, t_vector color, t_vector colorini)
 {
 	obj = NULL;
 	color = (t_vector){0, 0, 0};
 	colorini = (t_vector){0, 0, 0};
 }
 
-t_vector		get_pxladv(t_rtv *rtv, t_ray ray, t_vector direction, int depth)
-{
-	t_hit		hit;
-	t_object	*obj;
-	t_vector	color;
-	t_vector	colorini;
-	double		ratio[2];
-
-	initgp(obj, color, colorini);
-	ray.direction = direction;
-	if ((hit.dst = get_dest(rtv, ray, &obj, NULL)) <= 0)
-		return (color);
-	hit.point = add(ray.origin, multi(direction, hit.dst));
-	if (hit.dst > 0)
-		colorini = obj->color;
-	ratio[0] = obj->reflection + 0.2;
-	ratio[1] = obj->refraction + 0.2;
-	if (rtv->light)
-		colorini = lighting(rtv, obj,\
-		obj_norm(ray, obj, hit.dst), hit.point, ray);
-	if (depth > 0)
-		color = reflectandrefract(ray, obj, rtv, hit, depth);
-	color = divi(finalcolor(colorini, color, ratio), 2);
-	return (color);
-}
-
-
-
-t_vector			get_pxl(t_rtv *rtv, t_ray ray, t_getpx *getpx)
+t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 {
 	t_hit			hit;
 	t_object		*obj;
 	t_vector		color;
 	t_vector		colorini;
-	int				depth;
 	double			ratio[2];
 
-	depth = 5;
+	hit.depth = 30;
 	initgp(obj, color, colorini);
 	if ((hit.dst = get_dest(rtv, ray, &obj, NULL)) <= 0)
 		return (color);
@@ -163,10 +95,9 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray, t_getpx *getpx)
 	ratio[0] = obj->reflection + 0.2;
 	ratio[1] = obj->refraction + 0.2;
 	if (rtv->light)
-		colorini = lighting(rtv, obj,\
-		obj_norm(ray, obj, hit.dst), hit.point, ray);
-	if (depth > 0)
-		color = reflectandrefract(ray, obj, rtv, hit, depth);
+		colorini = lighting(rtv, obj, hit, ray);
+	if (hit.depth > 0)
+		color = reflectandrefract(ray, obj, rtv, hit);
 	color = divi(finalcolor(colorini, color, ratio), 5);
-	return(color);
+	return (color);
 }

@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 16:20:45 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/18 09:40:17 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/19 17:56:35 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,6 @@ double					intersection_plane(t_ray ray, t_object plane)
 		return (dist);
 	return (-1);
 }
-
-// int			plane_intersect(t_object *plane, t_ray *ray, float *tmin)
-// {
-// 	t_vector	x;
-// 	float	a;
-// 	float	b;
-// 	float	t;
-
-// 	x = ft_vectorsub(ray->source, plane->pos);
-// 	a = -1.0 * ft_dotproduct(x, plane->normal);
-// 	b = ft_dotproduct(ray->direction, plane->normal);
-// 	if (fabs(b) <= 1e-6)
-// 		return (0);
-// 	t = a / b;
-// 	if (t > 1e-2 && t < *tmin)
-// 	{
-// 		*tmin = t;
-// 		return (1);
-// 	}
-// 	return (0);
-// }
 
 double					intersection_cylinder(t_ray ray, t_object cylinder)
 {

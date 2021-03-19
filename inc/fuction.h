@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/18 17:52:30 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/19 17:49:54 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ double			min_ray(double t1, double t2);
 double			deg_to_rad(double angle);
 int				rgb_to_int(t_vector v);
 void			rot_trans(t_object *obj);
+t_vector		obj_norm(t_ray ray, t_object *obj, double dst);
 /*
  ********************************mlx stuff
 */
@@ -88,10 +89,14 @@ t_object **close, t_object *current);
 */
 t_vector		camera(t_camera *camera, int x, int y, t_vector up);
 void			raytracing(t_rtv rtv);
-t_vector		lighting(t_rtv *rtv, t_object *obj, t_vector normal ,t_vector hit, t_ray ray);
+t_vector		lighting(t_rtv *rtv, t_object *obj,t_hit hit, t_ray ray);
 // t_vector		get_pxl(t_rtv *rtv, t_ray ray);
-t_vector		get_pxl(t_rtv *rtv, t_ray ray, t_getpx *getpx);
-t_vector		get_pxladv(t_rtv *rtv, t_ray ray, t_vector direction, int depth);
+t_vector		get_pxl(t_rtv *rtv, t_ray ray);
+t_vector		gpxadv(t_rtv *rtv, t_ray ray, t_vector direction, int depth);
+t_vector		finalcolor(t_vector color1, t_vector color2, double *ratio);
+t_vector		reflectandrefract(t_ray ray, t_object *obj,\
+t_rtv *rtv, t_hit hit);
+void			initgp(t_object	*obj, t_vector color, t_vector colorini);
 
 /*
  ********************************** intersection

@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/19 09:23:29 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/19 17:43:30 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ typedef	struct 		s_hit
 {
 	t_vector		point;
 	double			dst;
+	int				depth;
+	t_vector		normal;
 }					t_hit;
 
 
