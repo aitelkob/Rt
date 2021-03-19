@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   objs_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:05:31 by yait-el-          #+#    #+#             */
 /*   Updated: 2021/03/18 19:09:21 by yait-el-         ###   ########.fr       */
@@ -11,6 +11,35 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+void					convertmaterial(t_object *obj)
+{
+	if (obj->material == MIRROR)
+	{
+		obj->reflection = 100;
+		obj->refraction = 0;
+		obj->color = (t_vector){0,0,0};
+	}
+	if (obj->material == GLASS)
+	{
+		obj->refraction = 100;
+		obj->reflection = 0;
+		obj->refractionratio = 1;
+		obj->color = (t_vector){0,0,0};
+	}
+	if (obj->material == RAWMETAL)
+	{
+		obj->reflection = 0;
+		obj->refraction = 0;
+	}
+	if (obj->material == WATER)
+	{
+		obj->reflection = 0;
+		obj->refraction = 100;
+		obj->refractionratio = 0.62;
+		obj->color = (t_vector){100,100,200};
+	}
+}
 
 void					plan_parce(t_rtv *rtv)
 {
@@ -30,6 +59,7 @@ void					plan_parce(t_rtv *rtv)
 	{
 		data = settings_cut(rtv, data, &arg);
 		plan_checker(data, arg, plan, rtv);
+		convertmaterial(plan);
 		plan_parce(rtv);
 	}
 	else
@@ -88,6 +118,7 @@ void					sphere_parce(t_rtv *rtv)
 	{
 		data = settings_cut(rtv, data, &arg);
 		sphere_checker(data, arg, sphere, rtv);
+		convertmaterial(sphere);
 		sphere_parce(rtv);
 	}
 	else
@@ -117,6 +148,7 @@ void					cylinder_parce(t_rtv *rtv)
 	{
 		data = settings_cut(rtv, data, &arg);
 		cylinder_checker(data, arg, cylinder, rtv);
+		convertmaterial(cylinder);
 		cylinder_parce(rtv);
 	}
 	else
@@ -146,6 +178,7 @@ void					cone_parce(t_rtv *rtv)
 	{
 		data = settings_cut(rtv, data, &arg);
 		cone_checker(data, arg, cone, rtv);
+		convertmaterial(cone);
 		cone_parce(rtv);
 	}
 	else

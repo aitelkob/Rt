@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   get_pxl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
 /*   Updated: 2021/03/14 11:50:44 by yait-el-         ###   ########.fr       */
@@ -17,7 +17,9 @@ t_object **close, t_object *current)
 {
 	t_object		*tmp;
 	double			dst;
+	double			min;
 
+	min = -1;
 	tmp = rtv->obj;
 	double min = -1;
 	while (tmp)
@@ -50,7 +52,7 @@ t_vector	obj_norm(t_ray ray, t_object *obj, double dst)
 	t_vector		p_c;
 	t_vector		xvec;
 
-	xvec = vecto_subvec(ray.origin, obj->origin);
+	xvec = sub(ray.origin, obj->origin);
 	if (obj->type != PLANE && obj->type != SPHERE)
 		m = dot(ray.direction, obj->aim) * dst + dot(xvec, obj->aim);
 	if (obj->type != PLANE)
@@ -71,20 +73,21 @@ t_vector	obj_norm(t_ray ray, t_object *obj, double dst)
 
 t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 {
-	double			dst_min;
+	t_hit			hit;
 	t_object		*obj;
-	t_vector		hit_point;
 	t_vector		color;
-	t_object		*current;
+	t_vector		colorini;
+	double			ratio[2];
 
-	obj = NULL;
-	current = NULL;
-	color = (t_vector){0, 0, 0};
-	if ((dst_min = get_dest(rtv, ray, &obj, current)) < 0)
+	hit.depth = 30;
+	initgp(obj, color, colorini);
+	if ((hit.dst = get_dest(rtv, ray, &obj, NULL)) <= 0)
 		return (color);
-	hit_point = add(ray.origin, multi(ray.direction, dst_min));
-	if (dst_min > 0)
-		color = obj->color;
+	hit.point = add(ray.origin, multi(ray.direction, hit.dst));
+	if (hit.dst > 0)
+		colorini = obj->color;
+	ratio[0] = obj->reflection + 0.2;
+	ratio[1] = obj->refraction + 0.2;
 	if (rtv->light)
 	{
 		color = lighting(rtv, obj, obj_norm(ray, obj, dst_min), hit_point, ray);

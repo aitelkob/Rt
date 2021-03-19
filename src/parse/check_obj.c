@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   check_obj.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 17:07:15 by yait-el-          #+#    #+#             */
 /*   Updated: 2021/03/18 19:09:40 by yait-el-         ###   ########.fr       */
@@ -20,10 +20,16 @@ void	plan_checker(char *data, char *arg, t_object *plan, t_rtv *rtv)
 		plan->aim = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("color", data))
 		plan->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("reflection", data))
+		plan->reflection = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("refraction", data))
+		plan->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("translation", data))
 		plan->translation = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("rot", data))
 		plan->rot = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("material", data))
+		plan->material = input_material(rtv, arg, rtv->parse.nb_line, data);
 	else
 	{
 		free(data);
@@ -58,10 +64,16 @@ void	sphere_checker(char *data, char *arg, t_object *sphere, t_rtv *rtv)
 		sphere->origin = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("radius", data))
 		sphere->radius = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("reflection", data))
+		sphere->reflection = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("refraction", data))
+		sphere->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("color", data))
 		sphere->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("translation", data))
 		sphere->translation = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("material", data))
+		sphere->material = input_material(rtv, arg, rtv->parse.nb_line, data);
 	else
 	{
 		free(data);
@@ -80,11 +92,17 @@ void	cylinder_checker(char *data, char *arg, t_object *cylinder, t_rtv *rtv)
 		cylinder->radius = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("rot", data))
 		cylinder->rot = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("reflection", data))
+		cylinder->reflection = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("refraction", data))
+		cylinder->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("color", data))
 		cylinder->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("translation", data))
 		cylinder->translation = input_vector(rtv, arg,
 		rtv->parse.nb_line, data);
+	else if (!ft_strcmp("material", data))
+		cylinder->material = input_material(rtv, arg, rtv->parse.nb_line, data);
 	else
 	{
 		free(data);
@@ -101,6 +119,10 @@ void	cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv)
 		cone->aim = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("radius", data))
 		cone->radius = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("reflection", data))
+		cone->reflection = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("refraction", data))
+		cone->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("angle", data))
 		cone->angle = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("rot", data))
@@ -109,6 +131,8 @@ void	cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv)
 		cone->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("translation", data))
 		cone->translation = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("material", data))
+		cone->material = input_material(rtv, arg, rtv->parse.nb_line, data);
 	else
 	{
 		free(data);

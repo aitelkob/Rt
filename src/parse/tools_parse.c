@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:26:32 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/01 11:52:52 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/19 09:27:55 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ void				init_obj(t_object *obj)
 	obj->aim = v;
 	obj->direction = v;
 	obj->color = v;
+	obj->reflection = 0.0000001;
+	obj->refraction = 0;
+	obj->refractionratio = 0.5;
+	obj->material = EMPTY;
 }
 
 void				first_obj(t_rtv *rtv, t_object *obj)
@@ -60,6 +64,33 @@ double				input_onearg(t_rtv *rtv, char *data, int nbr, char *head)
 	}
 	free(data);
 	ret = ft_atoi(lines[0]);
+	free_splited(lines);
+	return (ret);
+}
+
+int			input_material(t_rtv *rtv, char *data, int nbr, char *head)
+{
+	char			**lines;
+	int				ret;
+	char			*tmp;
+
+	lines = ft_strsplit(data, ' ');
+	if (ft_lentab(lines) != 1)
+	{
+		free(data);
+		free(head);
+		syntax_error(rtv, data, head, nbr);
+	}
+	free(data);
+	if (!ft_strcmp("glass", lines[0])){
+		printf("glass\n");
+		ret = GLASS;}
+	if (!ft_strcmp("mirror", lines[0]))
+		ret = MIRROR;
+	if (!ft_strcmp("rawmetal", lines[0]))
+		ret = RAWMETAL;
+	if (!ft_strcmp("water", lines[0]))
+		ret = WATER;
 	free_splited(lines);
 	return (ret);
 }

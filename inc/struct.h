@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
 /*   Updated: 2021/03/18 19:05:06 by yait-el-         ###   ########.fr       */
@@ -22,7 +22,14 @@ enum				e_type
 	CONE,
 	TRIANGLE
 };
-
+enum				e_material
+{
+	GLASS = 1,
+	MIRROR,
+	RAWMETAL,
+	WATER,
+	EMPTY
+}					t_material;
 typedef	struct		s_vector
 {
 	double			x;
@@ -34,6 +41,8 @@ typedef	struct		s_ray
 {
 	t_vector		origin;
 	t_vector		direction;
+	t_vector		direction1;
+	t_vector		direction2;
 }					t_ray;
 
 typedef	struct		s_parse
@@ -89,6 +98,10 @@ typedef	struct		s_object
 	t_vector		direction;
 	t_vector		color;
 	t_vector		normal;
+	double			reflection;
+	double			refraction;
+	double			refractionratio;
+	int				material;
 	struct s_object	*next;
 }					t_object;
 typedef struct		s_camera
@@ -107,6 +120,7 @@ typedef	struct		s_rtv
 	t_light			*light;
 	double			min;
 	t_ray			ray;
+	int				depth;
 }					t_rtv;
 
 typedef struct      s_thread

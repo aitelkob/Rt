@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 19:15:32 by yait-el-          #+#    #+#             */
 /*   Updated: 2021/03/14 11:50:39 by yait-el-         ###   ########.fr       */
@@ -59,9 +59,10 @@ t_vector			lighting(t_rtv *rtv, t_object *obj, t_vector normal ,t_vector hit, t_
 
 	tmp = rtv->light;
 	color = (t_vector) {0, 0, 0};
+	hit.normal = nrm(obj_norm(ray, obj, hit.dst));
 	while (tmp)
 	{
-		light_dir = sub(tmp->origin, hit);
+		light_dir = sub(tmp->origin, hit.point);
 		dst = shadow(tmp, light_dir, rtv, obj);
 		spec = specular(sub(ray.origin, hit), light_dir, dst,normal);
 		color = coloring(color, diffuse(light_dir, dst, normal) \

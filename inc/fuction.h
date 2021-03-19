@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   fuction.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
 /*   Updated: 2021/03/14 11:47:25 by yait-el-         ###   ########.fr       */
@@ -46,6 +46,7 @@ void			first_light(t_rtv *rtv, t_light *light);
 void			first_obj(t_rtv *rtv, t_object *obj);
 t_vector		input_vector(t_rtv *rtv, char *data, int nbr, char *head);
 double			input_onearg(t_rtv *rtv, char *data, int nbr, char *head);
+int				input_material(t_rtv *rtv, char *data, int nbr, char *head);
 
 /*
  ******************************* vector lib
@@ -71,6 +72,7 @@ double			min_ray(double t1, double t2);
 double			deg_to_rad(double angle);
 int				rgb_to_int(t_vector v);
 void			rot_trans(t_object *obj);
+t_vector		obj_norm(t_ray ray, t_object *obj, double dst);
 /*
  ********************************mlx stuff
 */
@@ -89,11 +91,17 @@ t_object **close, t_object *current);
 void			raytracing(t_rtv rtv);
 t_vector		lighting(t_rtv *rtv, t_object *obj, t_vector normal ,t_vector hit, t_ray ray);
 t_vector		get_pxl(t_rtv *rtv, t_ray ray);
+t_vector		gpxadv(t_rtv *rtv, t_ray ray, t_vector direction, int depth);
+t_vector		finalcolor(t_vector color1, t_vector color2, double *ratio);
+t_vector		reflectandrefract(t_ray ray, t_object *obj,\
+t_rtv *rtv, t_hit hit);
+void			initgp(t_object	*obj, t_vector color, t_vector colorini);
 
 /*
  ********************************** intersection
 */
 double			intersection_plane(t_ray ray, t_object plane);
+// int			plane_intersect(t_object *plane, t_ray *ray, float *tmin)
 double			intersection_cylinder(t_ray ray, t_object cylinder);
 double			intersection_cone(t_ray ray, t_object cone);
 double			intersection_sphere(t_ray ray, t_object sphere);

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 09:49:04 by yait-el-          #+#    #+#             */
 /*   Updated: 2021/03/14 12:00:07 by yait-el-         ###   ########.fr       */
@@ -11,6 +11,16 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+void				fixexposure(t_vector *color)
+{
+	double			exposure;
+
+	exposure = -0.66;
+	color->x = (1.0 - expf(color->x * exposure));
+	color->y = (1.0 - expf(color->y * exposure));
+	color->z = (1.0 - expf(color->z * exposure));
+}
 
 t_vector			camera(t_camera *camera, int x, int y, t_vector up)
 {
@@ -38,11 +48,13 @@ void				raytracing1(t_thread *th)
 	int				x;
 	int				y;
 	t_vector		color;
+	t_vector		color2;
 	t_vector		up;
 	t_ray			ray2;
 	t_rtv           *rtv;
 	rtv = th->rt;
 
+	rtv = th->rt;
 	ray2.origin = rtv->camera->origin;
 	up = (t_vector){0, 1, 0};
 	x = (th->idthread * WIN_W / THREAD_NUMBER);
@@ -52,6 +64,7 @@ void				raytracing1(t_thread *th)
 		y = -1;
 		while (++y < WIN_W)
 		{
+			rtv->depth = 1;
 			ray2.direction = nrm(camera(rtv->camera, x, y, up));
 			color = get_pxl(rtv, ray2);
 			rtv->mlx.img[(WIN_H - 1 - y) * WIN_W + x] = rgb_to_int(color);
