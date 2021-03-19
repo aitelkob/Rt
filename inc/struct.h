@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/18 19:05:06 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:26:58 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,14 @@ typedef	struct		s_rtv
 	t_ray			ray;
 	int				depth;
 }					t_rtv;
+
+typedef	struct 		s_hit
+{
+	t_vector		point;
+	double			dst;
+	int				depth;
+	t_vector		normal;
+}					t_hit;
 
 typedef struct      s_thread
 {

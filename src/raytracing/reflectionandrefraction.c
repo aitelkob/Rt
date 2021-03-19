@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:39:56 by babdelka          #+#    #+#             */
-/*   Updated: 2021/03/19 17:51:47 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:33:03 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ t_vector		finalcolor(t_vector color1, t_vector color2, double *ratio)
 	color1 = add(color1, multi(color1, (100 - (ratio[0] + ratio[1])) / 100));
 	color2 = add(color2, multi(color2, (ratio[0] + ratio[1]) / 100));
 	return (add(color1, color2));
+}
+
+void				initgp(t_object *obj, t_vector color, t_vector colorini)
+{
+	obj = NULL;
+	color = (t_vector){0, 0, 0};
+	colorini = (t_vector){0, 0, 0};
 }
 
 t_vector		reflectandrefract(t_ray ray, t_object *obj,\

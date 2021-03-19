@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/14 11:47:25 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:31:09 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_object **close, t_object *current);
 */
 
 void			raytracing(t_rtv rtv);
-t_vector		lighting(t_rtv *rtv, t_object *obj, t_vector normal ,t_vector hit, t_ray ray);
+t_vector		lighting(t_rtv *rtv, t_object *obj,t_hit hit, t_ray ray);
 t_vector		get_pxl(t_rtv *rtv, t_ray ray);
 t_vector		gpxadv(t_rtv *rtv, t_ray ray, t_vector direction, int depth);
 t_vector		finalcolor(t_vector color1, t_vector color2, double *ratio);

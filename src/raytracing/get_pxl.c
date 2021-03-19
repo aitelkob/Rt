@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/14 11:50:44 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:30:28 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,30 @@ double				get_dest(t_rtv *rtv, t_ray ray,
 t_object **close, t_object *current)
 {
 	t_object		*tmp;
-	double			dst;
-	double			min;
+	double			dst[2];
 
-	min = -1;
+	dst[0] = -1;
 	tmp = rtv->obj;
-	double min = -1;
 	while (tmp)
 	{
 		if (tmp->type == SPHERE)
-			dst = intersection_sphere(ray, *tmp);
+			dst[1] = intersection_sphere(ray, *tmp);
 		else if (tmp->type == PLANE)
-			dst = intersection_plane(ray, *tmp);
+			dst[1] = intersection_plane(ray, *tmp);
 		else if (tmp->type == CYLINDER)
-			dst = intersection_cylinder(ray, *tmp);
+			dst[1] = intersection_cylinder(ray, *tmp);
 		else if (tmp->type == CONE)
-			dst = intersection_cone(ray, *tmp);
-		if (dst > 0 && (dst < min + 0.000001 || min == -1))
+			dst[1] = intersection_cone(ray, *tmp);
+		if (dst[1] > 0 && (dst[1] < dst[0] + 0.1 || dst[0] == -1))
 		{
 			*close = tmp;
-			min = dst;
+			dst[0] = dst[1];
 		}
 		tmp = tmp->next;
 	}
 	if (current != NULL && *close == current)
 		return (-1);
-	return (min);
+	return (dst[0]);
 }
 
 t_vector	obj_norm(t_ray ray, t_object *obj, double dst)
@@ -89,8 +87,9 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 	ratio[0] = obj->reflection + 0.2;
 	ratio[1] = obj->refraction + 0.2;
 	if (rtv->light)
-	{
-		color = lighting(rtv, obj, obj_norm(ray, obj, dst_min), hit_point, ray);
-	}
+		colorini = lighting(rtv, obj, hit, ray);
+	if (hit.depth > 0)
+		color = reflectandrefract(ray, obj, rtv, hit);
+	color = divi(finalcolor(colorini, color, ratio), 5);
 	return (color);
 }
