@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/18 11:29:18 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/19 09:23:29 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ enum				e_material
 {
 	GLASS = 1,
 	MIRROR,
-	METAL,
+	RAWMETAL,
 	WATER,
 	EMPTY
 }					t_material;
@@ -97,6 +97,7 @@ typedef	struct		s_object
 	t_vector		normal;
 	double			reflection;
 	double			refraction;
+	double			refractionratio;
 	int				material;
 	struct s_object	*next;
 }					t_object;

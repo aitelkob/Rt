@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 17:07:15 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/18 18:29:03 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/19 08:57:53 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	plan_checker(char *data, char *arg, t_object *plan, t_rtv *rtv)
 		plan->translation = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("rot", data))
 		plan->rot = input_vector(rtv, arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("matetiral", data))
+	else if (!ft_strcmp("material", data))
 		plan->material = input_material(rtv, arg, rtv->parse.nb_line, data);
 	else
 	{
@@ -52,7 +52,7 @@ void	sphere_checker(char *data, char *arg, t_object *sphere, t_rtv *rtv)
 		sphere->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("translation", data))
 		sphere->translation = input_vector(rtv, arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("matetiral", data))
+	else if (!ft_strcmp("material", data))
 		sphere->material = input_material(rtv, arg, rtv->parse.nb_line, data);
 	else
 	{
@@ -81,7 +81,7 @@ void	cylinder_checker(char *data, char *arg, t_object *cylinder, t_rtv *rtv)
 	else if (!ft_strcmp("translation", data))
 		cylinder->translation = input_vector(rtv, arg,
 		rtv->parse.nb_line, data);
-	else if (!ft_strcmp("matetiral", data))
+	else if (!ft_strcmp("material", data))
 		cylinder->material = input_material(rtv, arg, rtv->parse.nb_line, data);
 	else
 	{
@@ -111,7 +111,7 @@ void	cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv)
 		cone->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("translation", data))
 		cone->translation = input_vector(rtv, arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("matetiral", data))
+	else if (!ft_strcmp("material", data))
 		cone->material = input_material(rtv, arg, rtv->parse.nb_line, data);
 	else
 	{

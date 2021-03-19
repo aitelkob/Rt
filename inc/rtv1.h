@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 18:01:37 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/18 19:25:19 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/19 09:16:58 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define FOV 30
 # define KEY_ESC 53
 # define PI 3.14159
-# define THREAD_NUMBER 4
+# define THREAD_NUMBER 6
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>

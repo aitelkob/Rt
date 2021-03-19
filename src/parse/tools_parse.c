@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:26:32 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/18 18:31:33 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/19 09:27:55 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ void				init_obj(t_object *obj)
 	obj->aim = v;
 	obj->direction = v;
 	obj->color = v;
-	obj->reflection = 1;
+	obj->reflection = 0.0000001;
 	obj->refraction = 0;
+	obj->refractionratio = 0.5;
 	obj->material = EMPTY;
 }
 
@@ -81,14 +82,14 @@ int			input_material(t_rtv *rtv, char *data, int nbr, char *head)
 		syntax_error(rtv, data, head, nbr);
 	}
 	free(data);
-	if (ft_strcmp("glass", lines[0])){
+	if (!ft_strcmp("glass", lines[0])){
 		printf("glass\n");
 		ret = GLASS;}
-	if (ft_strcmp("mirror", lines[0]))
+	if (!ft_strcmp("mirror", lines[0]))
 		ret = MIRROR;
-	if (ft_strcmp("metal", lines[0]))
-		ret = METAL;
-	if (ft_strcmp("water", lines[0]))
+	if (!ft_strcmp("rawmetal", lines[0]))
+		ret = RAWMETAL;
+	if (!ft_strcmp("water", lines[0]))
 		ret = WATER;
 	free_splited(lines);
 	return (ret);

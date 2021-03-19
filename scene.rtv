@@ -6,36 +6,26 @@ plane:
   aim: 0 1 0
   color: 255 255 255
   rot: 0 0 0
-  refraction: 0
-  reflection: 10
 plane:
   origin: 0 150 0
   aim: 0 -1 0
   color: 255 255 255
   rot: 0 0 0
-  refraction: 0
-  reflection: 10
 plane:
   origin: 0 0 -100
   aim: 0 0 1
   color: 2 100 0
   rot: 0 0 0
-  refraction: 0
-  reflection: 10
 plane:
   origin: 0 0 200
   aim: 0 0 -1
   color: 2 100 0
   rot: 0 0 0
-  refraction: 0
-  reflection: 10
 plane:
   origin: -150 0 0
   aim: 1 0 0
   color: 2 100 0
   rot: 0 0 0
-  refraction: 0
-  reflection: 10
 plane:
   origin: 150 0 0
   aim: -1 0 0
@@ -44,11 +34,10 @@ plane:
   refraction: 0
   reflection: 0
 sphere:
-  origin:  0 20  0
+  origin:  0 20 0
   radius: 20
   color: 255 0 0
-  refraction: 100
-  reflection: 10
+  material: mirror
 cone:
   origin: 20 40 0
   aim: 0 1 0
@@ -60,6 +49,7 @@ cylinder:
   rot: 0 0 -30
   radius: 20
   color: 0 0 250
+  material: glass
 camera:
   origin: 80 120 190
   fov: 60
