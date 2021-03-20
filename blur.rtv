@@ -42,7 +42,7 @@ plane:
 sphere:
   origin: 0 200 0
   radius: 150
-  color: 0 0 0
+  color: 0 0 255
   refraction: 100
 sphere:
   origin: 250 250 200
