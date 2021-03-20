@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/20 15:17:30 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/20 17:36:19 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ typedef	struct		s_object
 	double			reflection;
 	double			refraction;
 	double			refractionratio;
+	double			negative;
 	int				material;
 	struct s_object	*next;
 }					t_object;
