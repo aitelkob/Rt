@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 09:49:04 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/14 12:00:07 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/20 15:53:53 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,53 +48,51 @@ void				raytracing1(t_thread *th)
 	int				x;
 	int				y;
 	t_vector		color;
-	t_vector		color2;
-	t_vector		up;
 	t_ray			ray2;
-	t_rtv           *rtv;
-	rtv = th->rt;
+	t_rtv			*rtv;
 
 	rtv = th->rt;
 	ray2.origin = rtv->camera->origin;
-	up = (t_vector){0, 1, 0};
 	x = (th->idthread * WIN_W / THREAD_NUMBER);
-	printf("this is %d --- %d \n",((th->ending) * WIN_W / THREAD_NUMBER),x);
 	while (x < ((th->ending) * WIN_W / THREAD_NUMBER))
 	{
-		y = -1;
-		while (++y < WIN_W)
+		y = 0;
+		while (y < WIN_W)
 		{
-			rtv->depth = 1;
-			ray2.direction = nrm(camera(rtv->camera, x, y, up));
+			color = (t_vector){0, 0, 0};
+			ray2.direction = nrm(camera(rtv->camera, x, y,\
+			(t_vector){0, 1, 0}));
 			color = get_pxl(rtv, ray2);
 			rtv->mlx.img[(WIN_H - 1 - y) * WIN_W + x] = rgb_to_int(color);
+			y++;
 		}
 		x++;
 	}
 	pthread_exit(NULL);
 }
 
-void			raytracing(t_rtv rtv)
+void				raytracing(t_rtv rtv)
 {
 	pthread_t		newthread[THREAD_NUMBER];
 	t_thread		th[THREAD_NUMBER];
+	int				i;
+	int				t;
 
-	int  i = 0;
-	int t = 1;
-
+	i = 0;
+	t = 1;
 	while (i < THREAD_NUMBER)
 	{
 		th[i].rt = &rtv;
 		th[i].idthread = i;
 		th[i].ending = t;
-		pthread_create(&newthread[i],NULL,(void*)raytracing1,(void*)&th[i]);
+		pthread_create(&newthread[i], NULL, (void*)raytracing1, (void*)&th[i]);
 		i++;
 		t++;
 	}
-
-	while (i)
+	t = 0;
+	while (t < i)
 	{
-		pthread_join(newthread[i],NULL);
-		i--;
+		pthread_join(newthread[t], NULL);
+		t++;
 	}
 }

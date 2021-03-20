@@ -6,7 +6,7 @@
 #    By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/23 16:25:47 by yait-el-          #+#    #+#              #
-#    Updated: 2021/03/19 17:38:32 by babdelka         ###   ########.fr        #
+#    Updated: 2021/03/20 15:49:58 by babdelka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ SRC			+=parse/parse.c
 SRC			+=parse/objs_parse.c
 SRC			+=parse/check_obj.c
 SRC			+=parse/tools_parse.c
+SRC			+=parse/extra.c
 SRC			+=libvect/calc_vect.c
 SRC			+=libvect/vector_calculation.c
 SRC			+=libvect/vector_calculation2.c
