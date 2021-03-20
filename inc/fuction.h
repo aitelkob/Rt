@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/19 18:31:09 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/20 11:12:50 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void			sphere_checker(char *data, char *arg,
 void			cylinder_parce(t_rtv *rtv);
 void			cylinder_checker(char *data, char *arg,
 				t_object *cylinder, t_rtv *rtv);
+void			triangle_checker(char *data, char *arg, t_object *triangle, t_rtv *rtv);
 void			cone_parce(t_rtv *rtv);
 void			cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv);
 void			light_parce(t_rtv *rtv);
@@ -96,12 +97,13 @@ t_vector		finalcolor(t_vector color1, t_vector color2, double *ratio);
 t_vector		reflectandrefract(t_ray ray, t_object *obj,\
 t_rtv *rtv, t_hit hit);
 void			initgp(t_object	*obj, t_vector color, t_vector colorini);
+void			darkcheck(t_vector *c, double ref);
 
 /*
  ********************************** intersection
 */
 double			intersection_plane(t_ray ray, t_object plane);
-// int			plane_intersect(t_object *plane, t_ray *ray, float *tmin)
+//double			plane_intersect(t_object *plane, t_ray *ray, float *tmin);
 double			intersection_cylinder(t_ray ray, t_object cylinder);
 double			intersection_cone(t_ray ray, t_object cone);
 double			intersection_sphere(t_ray ray, t_object sphere);

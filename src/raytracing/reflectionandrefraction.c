@@ -6,11 +6,21 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:39:56 by babdelka          #+#    #+#             */
-/*   Updated: 2021/03/19 18:33:03 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/20 11:16:31 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rtv1.h>
+
+void			darkcheck(t_vector *c, double ref)
+{
+	if (c->x < 20 && c->y < 20 && c->z < 20 && ref > 95)
+	{
+		c->x = 255;
+		c->y = 255;
+		c->z = 255;
+	}
+}
 
 t_vector		finalcolor(t_vector color1, t_vector color2, double *ratio)
 {
@@ -22,7 +32,7 @@ t_vector		finalcolor(t_vector color1, t_vector color2, double *ratio)
 	return (add(color1, color2));
 }
 
-void				initgp(t_object *obj, t_vector color, t_vector colorini)
+void			initgp(t_object *obj, t_vector color, t_vector colorini)
 {
 	obj = NULL;
 	color = (t_vector){0, 0, 0};

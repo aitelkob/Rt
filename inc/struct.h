@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/19 18:26:58 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/20 10:19:38 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,13 @@ typedef	struct		s_parse
 	char			**agv;
 	char			*obj_name;
 }					t_parse;
+
+typedef struct 		s_shadowadv
+{
+	t_vector		light_dir;
+	t_vector		color;
+	double			refra;
+}					t_shadowadv;
 
 typedef	struct		s_light
 {

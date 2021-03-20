@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/19 18:30:28 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/20 11:14:53 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_object **close, t_object *current)
 	return (dst[0]);
 }
 
-t_vector	obj_norm(t_ray ray, t_object *obj, double dst)
+t_vector			obj_norm(t_ray ray, t_object *obj, double dst)
 {
 	double			m;
 	double			tk;
@@ -77,7 +77,7 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 	t_vector		colorini;
 	double			ratio[2];
 
-	hit.depth = 30;
+	hit.depth = 24;
 	initgp(obj, color, colorini);
 	if ((hit.dst = get_dest(rtv, ray, &obj, NULL)) <= 0)
 		return (color);
