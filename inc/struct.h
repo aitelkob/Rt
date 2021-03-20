@@ -111,11 +111,16 @@ typedef	struct		s_inters
 	double			a;
 	double			b;
 	double			c;
-	double			t0;
-	double			t1;
 	double			tmp;
 	t_vector		x;
 }					t_inters;
+
+typedef	struct		s_quadratic
+{
+	double 			t0;
+	double			t1;
+}					t_quadratic;
+
 
 typedef	struct		s_object
 {

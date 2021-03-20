@@ -12,22 +12,25 @@
 
 #include "rtv1.h"
 
-static	double			quadratic(double a, double b, double c)
+static	t_quadratic			quadratic(double a, double b, double c)
 {
 	double				determinant;
-	double				t0;
-	double				t1;
-
+	t_quadratic			q;
 	determinant = b * b - 4 * a * c;
 	if (determinant < 0)
-		return (-1);
+		q.t0 = -1;
 	if (determinant == 0)
-		return (-b / (2 * a));
-	t0 = (-b + sqrt(determinant)) / (2 * a);
-	t1 = (-b - sqrt(determinant)) / (2 * a);
-	return (min_ray(t1, t0));
+	{
+		q.t0 = -b / (2.0 * a);
+		q.t1 = -b / (2.0 * a);
+	}
+	else {
+		q.t1 = (-b - sqrtf(determinant)) / (2.0 * a);
+		q.t0 = min_ray((-b + sqrtf(determinant)) / (2.0 * a), q.t1);
+		q.t1 = q.t0 == q.t1 ? (-b + sqrtf(determinant)) / (2.0 * a) : q.t1;
+	}
+	return q;
 }
-
 double					intersection_plane(t_ray ray, t_object plane)
 {
 	double				d;
@@ -42,7 +45,7 @@ double					intersection_plane(t_ray ray, t_object plane)
 	return (-1);
 }
 
-double					intersection_cylinder(t_ray ray, t_object cylinder)
+t_quadratic					intersection_cylinder(t_ray ray, t_object cylinder)
 {
 	t_inters			inter;
 
@@ -56,7 +59,7 @@ double					intersection_cylinder(t_ray ray, t_object cylinder)
 	return (quadratic(inter.a, inter.b, inter.c));
 }
 
-double					intersection_cone(t_ray ray, t_object cone)
+t_quadratic					intersection_cone(t_ray ray, t_object cone)
 {
 	double				alpha;
 	double				tk;
@@ -77,7 +80,7 @@ double					intersection_cone(t_ray ray, t_object cone)
 	return (quadratic(inter.a, inter.b, inter.c));
 }
 
-double					intersection_sphere(t_ray ray, t_object sphere)
+t_quadratic					intersection_sphere(t_ray ray, t_object sphere)
 {
 	t_inters			inter;
 

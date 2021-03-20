@@ -42,9 +42,10 @@ plane:
   color: 255 0 0
   rot: 0 0 0
 sphere:
-  origin: 0 200 0
+  origin: 0 0 0
   radius: 150
   color: 0 0 255
+  negative: 1
 sphere:
   origin: 0 200 700
   radius: 50

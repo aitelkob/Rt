@@ -12,34 +12,69 @@
 
 #include "rtv1.h"
 
+t_quadratic intersection(t_ray ray,t_object tmp)
+{
+	t_quadratic		q;
+
+	if (tmp.type == SPHERE)
+		q = intersection_sphere(ray, tmp);
+	else if (tmp.type == PLANE) 
+		q.t0 = intersection_plane(ray, tmp);
+	else if (tmp.type == CYLINDER)
+		q = intersection_cylinder(ray, tmp);
+	else if (tmp.type == CONE)
+		q = intersection_cone(ray, tmp);
+	return q;
+}
+
+int isnegativeobj(t_rtv *rtv, t_ray ray, double dst)
+{
+	t_object		*tmp;
+	t_quadratic		q;
+
+	tmp = rtv->obj;
+	while (tmp)
+	{	
+		if(tmp->negative == 1)
+		{
+			q = intersection(ray, *tmp); 
+			if((dst > q.t0 && dst < q.t1))
+				return 0;
+		}
+		tmp = tmp->next;
+	}
+	return 1;
+}
+
+
 double				get_dest(t_rtv *rtv, t_ray ray,
 t_object **close, t_object *current)
 {
 	t_object		*tmp;
-	double			dst[2];
+	double			min;
+	t_quadratic		q;
 
-	dst[0] = -1;
+	min = -1;
 	tmp = rtv->obj;
 	while (tmp)
 	{
-		if (tmp->type == SPHERE)
-			dst[1] = intersection_sphere(ray, *tmp);
-		else if (tmp->type == PLANE)
-			dst[1] = intersection_plane(ray, *tmp);
-		else if (tmp->type == CYLINDER)
-			dst[1] = intersection_cylinder(ray, *tmp);
-		else if (tmp->type == CONE)
-			dst[1] = intersection_cone(ray, *tmp);
-		if (dst[1] > 0 && (dst[1] < dst[0] + 0.1 || dst[0] == -1))
+		q = intersection(ray, *tmp); 
+		if (q.t0 > 0 && (q.t0 < min + 0.000000001 || min == -1) && tmp->negative != 1)
 		{
-			*close = tmp;
-			dst[0] = dst[1];
+			if((isnegativeobj(rtv, ray, q.t0) || (isnegativeobj(rtv, ray, q.t1) && tmp->type != PLANE)))
+			{
+				if(isnegativeobj(rtv, ray, q.t0))
+					min = q.t0;
+				else
+					min = q.t1;
+				*close = tmp;
+			}
 		}
 		tmp = tmp->next;
 	}
 	if (current != NULL && *close == current)
 		return (-1);
-	return (dst[0]);
+	return (min);
 }
 
 t_vector			obj_norm(t_ray ray, t_object *obj, double dst)

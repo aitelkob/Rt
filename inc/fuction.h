@@ -111,10 +111,9 @@ void			darkcheck(t_vector *c, double ref);
  ********************************** intersection
 */
 double			intersection_plane(t_ray ray, t_object plane);
-//double			plane_intersect(t_object *plane, t_ray *ray, float *tmin);
-double			intersection_cylinder(t_ray ray, t_object cylinder);
-double			intersection_cone(t_ray ray, t_object cone);
-double			intersection_sphere(t_ray ray, t_object sphere);
+t_quadratic			intersection_cylinder(t_ray ray, t_object cylinder);
+t_quadratic			intersection_cone(t_ray ray, t_object cone);
+t_quadratic			intersection_sphere(t_ray ray, t_object sphere);
 
 /*
  ********************************** filtters
