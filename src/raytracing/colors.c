@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 19:15:32 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/20 11:13:41 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/20 15:53:20 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ t_hit hit, t_ray ray)
 		shadv.light_dir = sub(tmp->origin, hit.point);
 		dst = shadow(tmp, &shadv, rtv, obj);
 		if (--shadv.refra > 0 && dst > 2)
-			color = add(color, multi(shadv.color, (shadv.refra) / 150));
+			color = add(color, multi(shadv.color, (shadv.refra) * (0.00001\
+			* tmp->intensity)));
 		spec = specular(sub(ray.origin, hit.point), shadv.light_dir, dst,\
 		hit.normal);
 		color = coloring(color, diffuse(shadv.light_dir, dst, hit.normal) \

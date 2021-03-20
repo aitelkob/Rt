@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/20 10:19:38 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/20 15:17:30 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ typedef struct		s_camera
 	double			fov;
 	t_vector		look_at;
 	int				check;
+	double			depth;
 }					t_camera;
 typedef	struct		s_rtv
 {

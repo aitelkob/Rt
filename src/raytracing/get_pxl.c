@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/20 11:14:53 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/20 15:13:13 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,23 +73,23 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 {
 	t_hit			hit;
 	t_object		*obj;
-	t_vector		color;
-	t_vector		colorini;
+	t_vector		color[2];
 	double			ratio[2];
 
-	hit.depth = 24;
-	initgp(obj, color, colorini);
+	hit.depth = 5;
+	color[0] = (t_vector){0, 0, 0};
+	color[1] = (t_vector){0, 0, 0};
 	if ((hit.dst = get_dest(rtv, ray, &obj, NULL)) <= 0)
-		return (color);
+		return (color[0]);
 	hit.point = add(ray.origin, multi(ray.direction, hit.dst));
 	if (hit.dst > 0)
-		colorini = obj->color;
+		color[0] = obj->color;
 	ratio[0] = obj->reflection + 0.2;
 	ratio[1] = obj->refraction + 0.2;
 	if (rtv->light)
-		colorini = lighting(rtv, obj, hit, ray);
+		color[0] = lighting(rtv, obj, hit, ray);
 	if (hit.depth > 0)
-		color = reflectandrefract(ray, obj, rtv, hit);
-	color = divi(finalcolor(colorini, color, ratio), 5);
-	return (color);
+		color[1] = reflectandrefract(ray, obj, rtv, hit);
+	color[1] = divi(finalcolor(color[0], color[1], ratio), 5);
+	return (color[1]);
 }

@@ -24,6 +24,7 @@ plane:
   aim: 1 0 0
   color: 0 255 0
   rot: 0 0 0
+  material: mirror
 plane:
   origin: -500 0 0
   aim: -1 0 0
@@ -34,6 +35,7 @@ plane:
   aim: 0 0 1
   color: 255 0 0
   rot: 0 0 0
+  material: mirror
 plane:
   origin: 0 0 2000
   aim: 0 0 -1
@@ -43,19 +45,13 @@ sphere:
   origin: 0 200 0
   radius: 150
   color: 0 0 255
-  refraction: 100
-sphere:
-  origin: 250 250 200
-  radius: 80
-  color: 0 255 255
-  reflection: 90
 sphere:
   origin: 0 200 700
   radius: 50
   color: 0 255 0
   material: mirror
 camera:
-  origin: 150 200 1499
+  origin: 150 350 1000
   fov: 60
   look_at: 0 0 0
 #

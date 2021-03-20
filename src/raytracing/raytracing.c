@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 09:49:04 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/20 10:14:45 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/20 15:53:53 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void				raytracing1(t_thread *th)
 		y = 0;
 		while (y < WIN_W)
 		{
-			rtv->depth = 1;
+			color = (t_vector){0, 0, 0};
 			ray2.direction = nrm(camera(rtv->camera, x, y,\
 			(t_vector){0, 1, 0}));
 			color = get_pxl(rtv, ray2);
