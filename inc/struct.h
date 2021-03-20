@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
 /*   Updated: 2021/03/20 17:13:28 by yait-el-         ###   ########.fr       */
@@ -31,7 +31,6 @@ enum				e_material
 	WATER,
 	EMPTY
 }					t_material;
-
 typedef	struct		s_vector
 {
 	double			x;
@@ -63,6 +62,8 @@ typedef	struct		s_ray
 {
 	t_vector		origin;
 	t_vector		direction;
+	t_vector		direction1;
+	t_vector		direction2;
 }					t_ray;
 
 typedef	struct		s_parse
@@ -73,6 +74,13 @@ typedef	struct		s_parse
 	char			**agv;
 	char			*obj_name;
 }					t_parse;
+
+typedef struct 		s_shadowadv
+{
+	t_vector		light_dir;
+	t_vector		color;
+	double			refra;
+}					t_shadowadv;
 
 typedef	struct		s_light
 {
@@ -114,10 +122,10 @@ typedef	struct		s_object
 	int				type;
 	double			radius;
 	t_vector		origin;
-	t_vector		rot;
-	t_vector		aim;
 	t_vector		c1;
 	t_vector		c2;
+	t_vector		rot;
+	t_vector		aim;
 	t_vector		translation;
 	double			angle;
 	t_vector		direction;
@@ -136,6 +144,7 @@ typedef struct		s_camera
 	double			fov;
 	t_vector		look_at;
 	int				check;
+	double			depth;
 }					t_camera;
 typedef	struct		s_rtv
 {
@@ -149,7 +158,16 @@ typedef	struct		s_rtv
 	int				filter;
 	int				loding;
 	t_ray			ray;
+	int				depth;
 }					t_rtv;
+
+typedef	struct 		s_hit
+{
+	t_vector		point;
+	double			dst;
+	int				depth;
+	t_vector		normal;
+}					t_hit;
 
 typedef struct      s_thread
 {

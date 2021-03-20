@@ -1,0 +1,57 @@
+light:
+  origin: 0 500 1500
+  intensity: 100
+light:
+  origin: 0 500 -1990
+  intensity: 100
+camera:
+  origin: 0 500 1000
+  fov: 60
+  look_at: 0 0 0
+plane:
+  origin: 0 0 0
+  aim: 0 1 0
+  color: 255 255 255
+  rot: 0 0 0
+  reflection: 0
+plane:
+  origin: 0 2000 0
+  aim: 0 -1 0
+  color: 200 0 200
+  rot: 0 0 0
+plane:
+  origin: 500 0 0
+  aim: 1 0 0
+  color: 0 255 0
+  rot: 0 0 0
+  material: mirror
+plane:
+  origin: -500 0 0
+  aim: -1 0 0
+  color: 0 0 255
+  rot: 0 0 0
+plane:
+  origin: 0 0 -2000
+  aim: 0 0 1
+  color: 255 0 0
+  rot: 0 0 0
+  material: mirror
+plane:
+  origin: 0 0 2000
+  aim: 0 0 -1
+  color: 255 0 0
+  rot: 0 0 0
+sphere:
+  origin: 0 200 0
+  radius: 150
+  color: 0 0 255
+sphere:
+  origin: 0 200 700
+  radius: 50
+  color: 0 255 0
+  material: mirror
+camera:
+  origin: 150 350 1000
+  fov: 60
+  look_at: 0 0 0
+#

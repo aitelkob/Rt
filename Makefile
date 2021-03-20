@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/23 16:25:47 by yait-el-          #+#    #+#              #
 #    Updated: 2021/03/20 12:53:52 by yait-el-         ###   ########.fr        #
@@ -22,7 +22,7 @@ WHITE           := $(shell tput -Txterm setaf 7)
 RESET           := $(shell tput -Txterm setaf 9)
 ####################### Project Name
 
-NAME = RTv1
+NAME = RT
 
 ######################Executable / Libraries
 
@@ -80,7 +80,7 @@ SRC			+=raytracing/blur.c
 SRC			+=raytracing/reloading.c
 SRC			+=raytracing/stereoscopy.c
 SRC			+=raytracing/sepia_grey.c
-SRC			+=../library/qdbmp_1.0.0/qdbmp.c
+SRC			+=raytracing/reflectionandrefraction.c
 
 #################### Libraries
 LIBS		:= -L$(MLXDIR) -lmlx

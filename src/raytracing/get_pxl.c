@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_pxl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/14 11:50:44 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/20 15:13:13 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,33 @@ double				get_dest(t_rtv *rtv, t_ray ray,
 t_object **close, t_object *current)
 {
 	t_object		*tmp;
-	double			dst;
+	double			dst[2];
 
+	dst[0] = -1;
 	tmp = rtv->obj;
-	double min = -1;
 	while (tmp)
 	{
 		if (tmp->type == SPHERE)
-			dst = intersection_sphere(ray, *tmp);
+			dst[1] = intersection_sphere(ray, *tmp);
 		else if (tmp->type == PLANE)
-			dst = intersection_plane(ray, *tmp);
+			dst[1] = intersection_plane(ray, *tmp);
 		else if (tmp->type == CYLINDER)
-			dst = intersection_cylinder(ray, *tmp);
+			dst[1] = intersection_cylinder(ray, *tmp);
 		else if (tmp->type == CONE)
-			dst = intersection_cone(ray, *tmp);
-		if (dst > 0 && (dst < min + 0.000001 || min == -1))
+			dst[1] = intersection_cone(ray, *tmp);
+		if (dst[1] > 0 && (dst[1] < dst[0] + 0.1 || dst[0] == -1))
 		{
 			*close = tmp;
-			min = dst;
+			dst[0] = dst[1];
 		}
 		tmp = tmp->next;
 	}
 	if (current != NULL && *close == current)
 		return (-1);
-	return (min);
+	return (dst[0]);
 }
 
-t_vector	obj_norm(t_ray ray, t_object *obj, double dst)
+t_vector			obj_norm(t_ray ray, t_object *obj, double dst)
 {
 	double			m;
 	double			tk;
@@ -50,7 +50,7 @@ t_vector	obj_norm(t_ray ray, t_object *obj, double dst)
 	t_vector		p_c;
 	t_vector		xvec;
 
-	xvec = vecto_subvec(ray.origin, obj->origin);
+	xvec = sub(ray.origin, obj->origin);
 	if (obj->type != PLANE && obj->type != SPHERE)
 		m = dot(ray.direction, obj->aim) * dst + dot(xvec, obj->aim);
 	if (obj->type != PLANE)
@@ -71,23 +71,25 @@ t_vector	obj_norm(t_ray ray, t_object *obj, double dst)
 
 t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 {
-	double			dst_min;
+	t_hit			hit;
 	t_object		*obj;
-	t_vector		hit_point;
-	t_vector		color;
-	t_object		*current;
+	t_vector		color[2];
+	double			ratio[2];
 
-	obj = NULL;
-	current = NULL;
-	color = (t_vector){0, 0, 0};
-	if ((dst_min = get_dest(rtv, ray, &obj, current)) < 0)
-		return (color);
-	hit_point = add(ray.origin, multi(ray.direction, dst_min));
-	if (dst_min > 0)
-		color = obj->color;
+	hit.depth = 5;
+	color[0] = (t_vector){0, 0, 0};
+	color[1] = (t_vector){0, 0, 0};
+	if ((hit.dst = get_dest(rtv, ray, &obj, NULL)) <= 0)
+		return (color[0]);
+	hit.point = add(ray.origin, multi(ray.direction, hit.dst));
+	if (hit.dst > 0)
+		color[0] = obj->color;
+	ratio[0] = obj->reflection + 0.2;
+	ratio[1] = obj->refraction + 0.2;
 	if (rtv->light)
-	{
-		color = lighting(rtv, obj, obj_norm(ray, obj, dst_min), hit_point, ray);
-	}
-	return (color);
+		color[0] = lighting(rtv, obj, hit, ray);
+	if (hit.depth > 0)
+		color[1] = reflectandrefract(ray, obj, rtv, hit);
+	color[1] = divi(finalcolor(color[0], color[1], ratio), 5);
+	return (color[1]);
 }

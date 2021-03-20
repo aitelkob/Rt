@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   fuction.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
 /*   Updated: 2021/03/20 17:46:09 by yait-el-         ###   ########.fr       */
@@ -29,6 +29,7 @@ void			sphere_checker(char *data, char *arg,
 void			cylinder_parce(t_rtv *rtv);
 void			cylinder_checker(char *data, char *arg,
 				t_object *cylinder, t_rtv *rtv);
+void			triangle_checker(char *data, char *arg, t_object *triangle, t_rtv *rtv);
 void			cone_parce(t_rtv *rtv);
 void			cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv);
 void			triangle_checker(char *data, char *arg, t_object *cone, t_rtv *rtv);
@@ -78,6 +79,7 @@ int             color_nrm(int i);
 t_vector        int_to_rgb(int colors);
 void            cartoon(t_mlix *mlix,t_vector *colors);
 t_vector            *color_fill();
+t_vector		obj_norm(t_ray ray, t_object *obj, double dst);
 /*
  ********************************mlx stuff
 */
@@ -94,14 +96,22 @@ t_object **close, t_object *current);
 */
 
 void			raytracing(t_rtv rtv);
-t_vector		lighting(t_rtv *rtv, t_object *obj, t_vector normal ,t_vector hit, t_ray ray);
+t_vector		lighting(t_rtv *rtv, t_object *obj,t_hit hit, t_ray ray);
 t_vector		get_pxl(t_rtv *rtv, t_ray ray);
 void			blur(t_mlix *mlx);
 t_vector        camera(t_camera *camera, double x, double y, t_vector up,t_vector test);
+t_vector		gpxadv(t_rtv *rtv, t_ray ray, t_vector direction, int depth);
+t_vector		finalcolor(t_vector color1, t_vector color2, double *ratio);
+t_vector		reflectandrefract(t_ray ray, t_object *obj,\
+t_rtv *rtv, t_hit hit);
+t_vector		*initgp(t_object	*obj);
+void			darkcheck(t_vector *c, double ref);
+
 /*
  ********************************** intersection
 */
 double			intersection_plane(t_ray ray, t_object plane);
+//double			plane_intersect(t_object *plane, t_ray *ray, float *tmin);
 double			intersection_cylinder(t_ray ray, t_object cylinder);
 double			intersection_cone(t_ray ray, t_object cone);
 double			intersection_sphere(t_ray ray, t_object sphere);
