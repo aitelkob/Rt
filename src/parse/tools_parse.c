@@ -6,11 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:26:32 by yait-el-          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/03/20 17:52:08 by babdelka         ###   ########.fr       */
-=======
-/*   Updated: 2021/03/19 09:27:55 by babdelka         ###   ########.fr       */
->>>>>>> refs/remotes/origin/master
+/*   Updated: 2021/03/20 18:44:31 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +82,8 @@ int			input_material(t_rtv *rtv, char *data, int nbr, char *head)
 		syntax_error(rtv, data, head, nbr);
 	}
 	free(data);
-	if (!ft_strcmp("glass", lines[0])){
-		printf("glass\n");
-		ret = GLASS;}
+	if (!ft_strcmp("glass", lines[0]))
+		ret = GLASS;
 	if (!ft_strcmp("mirror", lines[0]))
 		ret = MIRROR;
 	if (!ft_strcmp("rawmetal", lines[0]))
