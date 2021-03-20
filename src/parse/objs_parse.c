@@ -6,11 +6,40 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:05:31 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/20 15:48:57 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/18 19:09:21 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+void					convertmaterial(t_object *obj)
+{
+	if (obj->material == MIRROR)
+	{
+		obj->reflection = 100;
+		obj->refraction = 0;
+		obj->color = (t_vector){0,0,0};
+	}
+	if (obj->material == GLASS)
+	{
+		obj->refraction = 100;
+		obj->reflection = 0;
+		obj->refractionratio = 1;
+		obj->color = (t_vector){0,0,0};
+	}
+	if (obj->material == RAWMETAL)
+	{
+		obj->reflection = 0;
+		obj->refraction = 0;
+	}
+	if (obj->material == WATER)
+	{
+		obj->reflection = 0;
+		obj->refraction = 100;
+		obj->refractionratio = 0.62;
+		obj->color = (t_vector){100,100,200};
+	}
+}
 
 void					plan_parce(t_rtv *rtv)
 {

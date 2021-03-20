@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   light_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:22:50 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/20 15:46:40 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/02/28 11:51:46 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-void				init_cam(t_camera *cam)
-{
-	cam->fov = 60;
-	cam->depth = 5;
-	cam->look_at = (t_vector){0, 0, 0};
-}
 
 void						light_check(char *data, char *arg,
 t_light *light, t_rtv *rtv)
@@ -43,8 +36,6 @@ t_camera *camera, t_rtv *rtv)
 		camera->fov = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("look_at", data))
 		camera->look_at = input_vector(rtv, arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("depth", data))
-		camera->depth = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else
 	{
 		free(data);
@@ -84,11 +75,8 @@ void						camera_parce(t_rtv *rtv)
 	char					*arg;
 
 	if (!camera)
-	{
 		if (!(camera = (t_camera *)malloc(sizeof(t_camera))))
 			error("obj error allocat", "just alloct");
-		init_cam(camera);
-	}
 	rtv->parse.nb_line++;
 	if (get_next_line(rtv->parse.fd, &data) == 1 && data[0] == ' ')
 	{
