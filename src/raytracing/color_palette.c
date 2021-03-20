@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 09:59:39 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/19 10:44:50 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/19 16:20:04 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,5 @@ void			cartoon(t_mlix *mlx,t_vector *colors)
 		mlx->img[i] = rgb_to_int(save);
 		i++;
 	}
-		printf("this is i == %d",i);
 }
 

@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 09:27:27 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/15 17:52:05 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/20 09:22:57 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,24 @@ void			bmp_put(int *img, int fd)
   free(buf);
 }
 
-void		create_bmp(int *img)
+void		create_bmp(int *img,char l,int i)
 {
-	int	fd;
-    t_bmp bmp;
-	fd = open("./screenshot/test.bmp",O_RDWR | O_CREAT, 777);
-    fill_data(&bmp);
-    bmp_header(&bmp,fd);
-    bmp_put(img,fd);
+	int     fd;
+    t_bmp   bmp;
+    char    t;
+    char   local[] = "./screenshot/test.bmp";
+
+	fd = open(local,O_CREAT | O_WRONLY | O_EXCL, S_IRUSR | S_IWUSR);
+    if (fd < 0)
+      if (errno == EEXIST)
+      {
+        t =  ('A' + (random() % 26));
+        if (local[13] == t)
+          t =('a' + (random() % 26)); 
+        local[13]= t;
+        fd = open(local,O_CREAT | O_WRONLY | O_EXCL, S_IRUSR | S_IWUSR);
+      }
+  fill_data(&bmp);
+  bmp_header(&bmp,fd);
+  bmp_put(img,fd);
 }

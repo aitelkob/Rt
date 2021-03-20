@@ -6,35 +6,34 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:34:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/19 10:44:44 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/20 13:56:58 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void			stereoscopy(t_mlix *mlx)
+void			stereoscopy(t_rtv *rtv,double x, double y,t_ray ray2)
 {
-	int			i;
-	int			j;
-	t_vector	rgb;
-	t_vector	rgb2;
-	t_vector	save;
-	i = 0;
+	int             i = 0;
+	t_vector        test;
+	t_vector        color,color2;
+	t_vector        up;
 
-	rgb = (t_vector){0, 0, 0};
-	while (i <  (WIN_W * WIN_H))
-	{
-		rgb = mlx->colors[i];
-		rgb.x = 0;
-		rgb.y = 50;
-		rgb2 = mlx->colors[i];
-		rgb2.y = 0;
-		rgb2.x = 50;
-		save = add(rgb,rgb2);
+	up = (t_vector){0,1,0};
+	color = (t_vector){0,0,0};
+	color2 = (t_vector){0,0,0};
+	test = (t_vector){0,0,0};
 
-		save= divi(save,2);
-		mlx->img[i] = rgb_to_int(rgb);
-		i++;
-	}
+	ray2.direction = nrm(camera(rtv->camera, x+15, y, up,test));
+	color = add(color,get_pxl(rtv, ray2));
+	color.x = 0;
+	color.y += 50;
+	ray2.direction = nrm(camera(rtv->camera, x-15, y, up,test));
+	color2 = add(color,get_pxl(rtv, ray2));
+	color2.x += 50;
+	color2.y = 0;
+	color = multi(add(color, color2),0.5);
+	rtv->mlx.img[(WIN_H - 1 - (int)y) * WIN_W + (int)x] = rgb_to_int(color);
 }
-	
+
+

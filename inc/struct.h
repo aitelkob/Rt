@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/18 12:07:21 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/20 17:13:28 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,18 @@ enum				e_type
 	PLANE = 1,
 	SPHERE,
 	CYLINDER,
+	TRIANGLE,
 	CONE
 };
+
+enum				e_material
+{
+	GLASS = 1,
+	MIRROR,
+	RAWMETAL,
+	WATER,
+	EMPTY
+}					t_material;
 
 typedef	struct		s_vector
 {
@@ -76,6 +86,7 @@ typedef	struct		s_mlix
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*img_ptr;
+	void			*img_ptr3;
 	void			*img_ptr2;
 	int				w;
 	int				h;
@@ -105,11 +116,18 @@ typedef	struct		s_object
 	t_vector		origin;
 	t_vector		rot;
 	t_vector		aim;
+	t_vector		c1;
+	t_vector		c2;
 	t_vector		translation;
 	double			angle;
 	t_vector		direction;
 	t_vector		color;
 	t_vector		normal;
+	double			reflection;
+	double			refraction;
+	double			refractionratio;
+	double			negative;
+	int				material;
 	struct s_object	*next;
 }					t_object;
 typedef struct		s_camera
@@ -127,6 +145,9 @@ typedef	struct		s_rtv
 	t_camera		*camera;
 	t_light			*light;
 	double			min;
+	clock_t			tic;
+	int				filter;
+	int				loding;
 	t_ray			ray;
 }					t_rtv;
 

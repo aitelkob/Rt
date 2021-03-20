@@ -6,7 +6,7 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/19 10:45:18 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/20 17:46:09 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void			cylinder_checker(char *data, char *arg,
 				t_object *cylinder, t_rtv *rtv);
 void			cone_parce(t_rtv *rtv);
 void			cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv);
+void			triangle_checker(char *data, char *arg, t_object *cone, t_rtv *rtv);
 void			light_parce(t_rtv *rtv);
 void			init_obj(t_object *obj);
 void			camera_parce(t_rtv *rtv);
@@ -46,6 +47,8 @@ void			first_light(t_rtv *rtv, t_light *light);
 void			first_obj(t_rtv *rtv, t_object *obj);
 t_vector		input_vector(t_rtv *rtv, char *data, int nbr, char *head);
 double			input_onearg(t_rtv *rtv, char *data, int nbr, char *head);
+int				input_material(t_rtv *rtv, char *data, int nbr, char *head);
+void			convertmaterial(t_object *obj);
 
 /*
  ******************************* vector lib
@@ -71,14 +74,14 @@ double			min_ray(double t1, double t2);
 double			deg_to_rad(double angle);
 int				rgb_to_int(t_vector v);
 void			rot_trans(t_object *obj);
-int             color_nrm(double i);
+int             color_nrm(int i);
 t_vector        int_to_rgb(int colors);
 void            cartoon(t_mlix *mlix,t_vector *colors);
 t_vector            *color_fill();
 /*
  ********************************mlx stuff
 */
-void			create_bmp(int *img);
+void			create_bmp(int *img,char l,int i);
 void			display(t_rtv *rtv, t_mlix *mlx);
 int				key_hook(int keycode, t_rtv *rtv);
 void			setup_mlx(t_mlix *mlx);
@@ -94,7 +97,7 @@ void			raytracing(t_rtv rtv);
 t_vector		lighting(t_rtv *rtv, t_object *obj, t_vector normal ,t_vector hit, t_ray ray);
 t_vector		get_pxl(t_rtv *rtv, t_ray ray);
 void			blur(t_mlix *mlx);
-void            stereoscopy(t_mlix *mlx);
+t_vector        camera(t_camera *camera, double x, double y, t_vector up,t_vector test);
 /*
  ********************************** intersection
 */
@@ -103,6 +106,15 @@ double			intersection_cylinder(t_ray ray, t_object cylinder);
 double			intersection_cone(t_ray ray, t_object cone);
 double			intersection_sphere(t_ray ray, t_object sphere);
 
+/*
+ ********************************** filtters
+*/
+void			antialiasing(t_rtv *rtv,double x, double y,t_ray ray2);
+t_vector		grey(t_vector color);
+t_vector		sepia(t_vector color);
+void            stereoscopy(t_rtv *rtv,double x, double y,t_ray ray2);
+void			reload(t_mlix *mlx);
+void        filter_main(t_mlix *mlx,int filter);
 /*
  ********************************** error management
 */

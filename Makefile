@@ -6,7 +6,7 @@
 #    By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/23 16:25:47 by yait-el-          #+#    #+#              #
-#    Updated: 2021/03/19 10:45:54 by yait-el-         ###   ########.fr        #
+#    Updated: 2021/03/20 12:53:52 by yait-el-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRC			+=mlx/mlx_stuff.c
 SRC         +=parse/light_parse.c
 SRC         +=parse/tools_parse2.c
 SRC			+=parse/parse.c
+SRC			+=parse/extra.c
 SRC			+=parse/objs_parse.c
 SRC			+=parse/check_obj.c
 SRC			+=parse/tools_parse.c
@@ -74,8 +75,11 @@ SRC			+=raytracing/get_pxl.c
 SRC			+=raytracing/colors.c
 SRC			+=raytracing/saving.c
 SRC			+=raytracing/color_palette.c
+SRC			+=raytracing/antialiasing.c
 SRC			+=raytracing/blur.c
+SRC			+=raytracing/reloading.c
 SRC			+=raytracing/stereoscopy.c
+SRC			+=raytracing/sepia_grey.c
 SRC			+=../library/qdbmp_1.0.0/qdbmp.c
 
 #################### Libraries

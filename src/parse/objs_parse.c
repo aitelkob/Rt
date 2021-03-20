@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   objs_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:05:31 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/17 10:31:46 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/18 19:09:21 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
 
 void					plan_parce(t_rtv *rtv)
 {
@@ -30,6 +31,7 @@ void					plan_parce(t_rtv *rtv)
 	{
 		data = settings_cut(rtv, data, &arg);
 		plan_checker(data, arg, plan, rtv);
+		convertmaterial(plan);
 		plan_parce(rtv);
 	}
 	else
@@ -37,6 +39,35 @@ void					plan_parce(t_rtv *rtv)
 		rot_trans(plan);
 		first_obj(rtv, plan);
 		plan = NULL;
+		forward(rtv, data);
+	}
+}
+
+void					triangle_parce(t_rtv *rtv)
+{
+	static	t_object	*triangle;
+	char				*arg;
+	char				*data;
+
+	if (!triangle)
+	{
+		if (!(triangle = (t_object *)malloc(sizeof(t_object))))
+			error("obj error allocat", "just alloct");
+		init_obj(triangle);
+	}
+	triangle->type = TRIANGLE;
+	rtv->parse.nb_line++;
+	if (get_next_line(rtv->parse.fd, &data) == 1 && data[0] == ' ')
+	{
+		data = settings_cut(rtv, data, &arg);
+		triangle_checker(data, arg, triangle, rtv);
+		triangle_parce(rtv);
+	}
+	else
+	{
+		rot_trans(triangle);
+		first_obj(rtv, triangle);
+		triangle = NULL;
 		forward(rtv, data);
 	}
 }
@@ -59,6 +90,7 @@ void					sphere_parce(t_rtv *rtv)
 	{
 		data = settings_cut(rtv, data, &arg);
 		sphere_checker(data, arg, sphere, rtv);
+		convertmaterial(sphere);
 		sphere_parce(rtv);
 	}
 	else
@@ -88,6 +120,7 @@ void					cylinder_parce(t_rtv *rtv)
 	{
 		data = settings_cut(rtv, data, &arg);
 		cylinder_checker(data, arg, cylinder, rtv);
+		convertmaterial(cylinder);
 		cylinder_parce(rtv);
 	}
 	else
@@ -117,6 +150,7 @@ void					cone_parce(t_rtv *rtv)
 	{
 		data = settings_cut(rtv, data, &arg);
 		cone_checker(data, arg, cone, rtv);
+		convertmaterial(cone);
 		cone_parce(rtv);
 	}
 	else
