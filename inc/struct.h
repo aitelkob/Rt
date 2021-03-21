@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/21 11:54:32 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/21 16:18:35 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ typedef	struct		s_mlix
 	void			*img_ptr;
 	void			*img_ptr3;
 	void			*img_ptr2;
+	void			*img_ptr4;
 	int				w;
 	int				h;
 	int				*d;

@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 18:01:37 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/20 16:57:03 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/21 16:11:11 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define KEY_ESC 53
 # define SS 1
 # define SCREEN 50
+# define SPACE 49
 # define CC 8
 # define NN 45
 # define QQ 0

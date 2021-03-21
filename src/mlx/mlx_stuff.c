@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:18:27 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/21 12:29:24 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/21 16:41:54 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,64 +22,17 @@ void			ft_destroy(t_mlix *mlx)
 void			setup_mlx(t_mlix *mlx)
 {
 	mlx->mlx_ptr = mlx_init();
-	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, (WIN_W+290), WIN_H, "RTv1");
-	mlx->img_ptr2 = mlx_png_file_to_image(mlx->mlx_ptr,"./images/cartoon.png", &mlx->w, &mlx->h);
-	mlx->img_ptr3 = mlx_png_file_to_image(mlx->mlx_ptr,"./images/cartoon1.png", &mlx->w, &mlx->h);
+	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, (WIN_W + 290), WIN_H, "RT");
+	mlx->img_ptr2 = mlx_png_file_to_image(mlx->mlx_ptr,\
+	"./images/cartoon.png", &mlx->w, &mlx->h);
+	mlx->img_ptr3 = mlx_png_file_to_image(mlx->mlx_ptr,\
+	"./images/cartoon1.png", &mlx->w, &mlx->h);
+	mlx->img_ptr4 = mlx_png_file_to_image(mlx->mlx_ptr,\
+	"./images/white.png", &mlx->w, &mlx->h);
 	mlx->img_ptr = mlx_new_image(mlx->mlx_ptr, WIN_W, WIN_H);
-	mlx->img = (int*)mlx_get_data_addr(mlx->img_ptr,&mlx->bits_per_pixel, &mlx->size_line, &mlx->endian);
-	mlx->colors = (t_vector*)malloc(sizeof(t_vector) * (WIN_W * WIN_H)+1);
-}
-
-
-
-
-int				key_hook(int keycode, t_rtv *rtv)
-{
-	t_vector *colors;
-	char	l;
-
-	if (keycode == KEY_ESC)
-		exiting_program(rtv);
-	if (keycode == NN)
-	{
-		reload(&rtv->mlx);
-		display(rtv, &rtv->mlx);
-	}
-	if (keycode == QQ)
-	{
-		filter_main(&rtv->mlx,0);
-		display(rtv, &rtv->mlx);
-	}
-	if (keycode == one)
-	{
-		filter_main(&rtv->mlx,1);
-		display(rtv, &rtv->mlx);
-	}
-	if (keycode == two)
-	{
-		filter_main(&rtv->mlx,2);
-		display(rtv, &rtv->mlx);
-	}
-	if (keycode == KEY_D)
-	{
-		rtv->filter = 1;
-		raytracing(*rtv);
-		display(rtv, &rtv->mlx);
-	}
-	if (keycode == KEY_W)
-	{
-		rtv->filter = 2;
-		raytracing(*rtv);
-		display(rtv, &rtv->mlx);
-	}
-	if (keycode == KEY_C)
-	{
-		cartoon(&rtv->mlx,colors);
-		display(rtv, &rtv->mlx);
-	}
-	if (keycode == SCREEN)
-	 	create_bmp(rtv->mlx.img,l,0);
-	return (1);
+	mlx->img = (int*)mlx_get_data_addr(mlx->img_ptr, &mlx->bits_per_pixel,\
+	&mlx->size_line, &mlx->endian);
+	mlx->colors = (t_vector*)malloc(sizeof(t_vector) * (WIN_W * WIN_H) + 1);
 }
 
 int				red_button(t_rtv *rtv)
@@ -90,10 +43,18 @@ int				red_button(t_rtv *rtv)
 
 void			display(t_rtv *rtv, t_mlix *mlx)
 {
-	mlx_put_image_to_window(mlx, mlx->win_ptr, mlx->img_ptr2, 20,0);
+	mlx_put_image_to_window(mlx, mlx->win_ptr, mlx->img_ptr2, 20, 0);
 	mlx_put_image_to_window(mlx, mlx->win_ptr, mlx->img_ptr, 0, 0);
 	mlx_hook(mlx->win_ptr, 2, 0, key_hook, mlx);
 	mlx_hook(mlx->win_ptr, 4, 0, mouse_press, mlx);
- 	mlx_hook(mlx->win_ptr, 17, 0, red_button, rtv);
+	mlx_hook(mlx->win_ptr, 17, 0, red_button, rtv);
 	mlx_loop(mlx->mlx_ptr);
+}
+
+int				displayloading(t_rtv *rtv, t_mlix *mlx)
+{
+	mlx_put_image_to_window(mlx, mlx->win_ptr, mlx->img_ptr3, 20, 0);
+	mlx_put_image_to_window(mlx, mlx->win_ptr, mlx->img_ptr, 0, 0);
+	mlx_do_sync(mlx->mlx_ptr);
+	return (0);
 }
