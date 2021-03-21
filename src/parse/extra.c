@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 15:49:11 by babdelka          #+#    #+#             */
-/*   Updated: 2021/03/20 18:39:15 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/21 09:36:52 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void					convertmaterialnext(t_object *obj)
 	{
 		obj->reflection = 5;
 		obj->refraction = 100;
-		obj->refractionratio = 0.62;
+		obj->refractionratio = 1.33;
 		obj->color = (t_vector){100,100,200};
 	}
 	else if (obj->material == THINGLASS)
@@ -41,7 +41,9 @@ void					convertmaterial(t_object *obj)
 	{
 		obj->refraction = 100;
 		obj->reflection = 0;
-		obj->refractionratio = 1;
+		obj->refractionratio = 1.0;
+		if (obj->type == SPHERE)
+			obj->refractionratio = 10.00;
 		obj->color = (t_vector){0,0,0};
 	}
 	else if (obj->material == RAWMETAL)
