@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/20 17:46:09 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/21 10:32:38 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_vector		divi(t_vector vec1, double t);
 double			length_squared(t_vector vec1, t_vector vec2);
 double			length(t_vector vec1, t_vector vec2);
 void			cord(t_vector *vec, double x, double y, double z);
-t_vector		ft_itvect(double x, double y, double z);
+t_vector		ft_itvect(int x, int y, int z);
 t_vector		vecto_subvec(t_vector v1, t_vector v2);
 double			dot(t_vector v, t_vector b);
 double			map(double x, double spw, double step);

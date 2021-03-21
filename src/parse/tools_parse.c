@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:26:32 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/20 18:44:31 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/21 10:29:58 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int			input_material(t_rtv *rtv, char *data, int nbr, char *head)
 	}
 	free(data);
 	if (!ft_strcmp("glass", lines[0])){
-		printf("glass\n");
 		ret = GLASS;}
 	if (!ft_strcmp("mirror", lines[0]))
 		ret = MIRROR;
