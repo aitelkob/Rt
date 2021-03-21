@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_palette.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 09:59:39 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/19 16:20:04 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/21 17:46:07 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void			color_fill2(t_vector *colors)
 {
-
 	colors[20] = ft_itvect(217, 136, 128);
 	colors[21] = ft_itvect(241, 148, 138);
 	colors[22] = ft_itvect(195, 155, 211);
@@ -37,14 +36,13 @@ void			color_fill2(t_vector *colors)
 	colors[39] = ft_itvect(23, 32, 42);
 }
 
-t_vector			*color_fill()
+t_vector		*color_fill(void)
 {
 	t_vector	*colors;
 
-	colors =(t_vector*)malloc(sizeof(t_vector) * 40);
-
-	colors[0] = ft_itvect(192,57,43);
-	colors[1] = ft_itvect(231, 76, 60 );
+	colors = (t_vector*)malloc(sizeof(t_vector) * 40);
+	colors[0] = ft_itvect(192, 57, 43);
+	colors[1] = ft_itvect(231, 76, 60);
 	colors[2] = ft_itvect(155, 89, 182);
 	colors[3] = ft_itvect(142, 68, 173);
 	colors[4] = ft_itvect(41, 128, 185);
@@ -67,41 +65,35 @@ t_vector			*color_fill()
 	return (colors);
 }
 
-void			cartoon(t_mlix *mlx,t_vector *colors)
+void			cartoon(t_mlix *mlx, t_vector *colors)
 {
-	int			i,j;
+	int			i;
+	int			j;
 	double		copy;
 	int			d;
 	t_vector	save;
 	t_vector	rgb;
-	int			*img2;
 
-	
 	colors = color_fill();
-	i = 0;
-	save = (t_vector){0,0,0};
-	copy = 0;
-
-	while (i < WIN_W * WIN_H)
+	i = -1;
+	save = (t_vector){0, 0, 0};
+	while (++i < WIN_W * WIN_H)
 	{
-		j = 0;
+		j = -1;
 		d = INFINITY;
 		rgb = mlx->colors[i];
-		while (j < 40)
+		while (++j < 40)
 		{
 			copy = sqrt(pow(rgb.z - colors[j].x, 2)+
 						pow(rgb.y - colors[j].y, 2)+
 						pow(rgb.x - colors[j].z, 2));
-		if (copy < d)
-		{
-				save = colors[j];
-				d = copy;
+			if (copy < d)
+			{
+					save = colors[j];
+					d = copy;
+			}
 		}
-			j++;
-		}
-
 		mlx->img[i] = rgb_to_int(save);
-		i++;
 	}
 }
 

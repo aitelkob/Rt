@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 17:07:15 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/20 18:42:02 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:01:56 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ void	triangle_checker(char *data, char *arg, t_object *triangle, t_rtv *rtv)
 	else if (!ft_strcmp("negative", data))
 		triangle->negative = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("translation", data))
-		triangle->translation = input_vector(rtv, arg, rtv->parse.nb_line, data);
+		triangle->translation = input_vector(rtv, arg, rtv->parse.nb_line,\
+		data);
 	else if (!ft_strcmp("rot", data))
-		triangle->c2= input_vector(rtv, arg, rtv->parse.nb_line, data);
+		triangle->c2 = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else
 	{
 		free(data);

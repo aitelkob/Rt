@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:26:32 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/21 10:29:58 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:02:53 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ double				input_onearg(t_rtv *rtv, char *data, int nbr, char *head)
 	return (ret);
 }
 
-int			input_material(t_rtv *rtv, char *data, int nbr, char *head)
+int					input_material(t_rtv *rtv, char *data, int nbr, char *head)
 {
 	char			**lines;
 	int				ret;
@@ -82,8 +82,8 @@ int			input_material(t_rtv *rtv, char *data, int nbr, char *head)
 		syntax_error(rtv, data, head, nbr);
 	}
 	free(data);
-	if (!ft_strcmp("glass", lines[0])){
-		ret = GLASS;}
+	if (!ft_strcmp("glass", lines[0]))
+		ret = GLASS;
 	if (!ft_strcmp("mirror", lines[0]))
 		ret = MIRROR;
 	if (!ft_strcmp("rawmetal", lines[0]))

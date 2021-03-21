@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/21 16:46:02 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/21 17:16:45 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void			cone_parce(t_rtv *rtv);
 void			cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv);
 void			triangle_checker(char *data, char *arg, t_object *cone, t_rtv *rtv);
 void			light_parce(t_rtv *rtv);
+void			ambient_parce(t_rtv *rtv);
 void			init_obj(t_object *obj);
 void			camera_parce(t_rtv *rtv);
 char			*settings_cut(t_rtv *rtv, char *variable, char **data);

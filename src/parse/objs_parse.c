@@ -6,12 +6,11 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 17:05:31 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/18 19:09:21 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/21 18:00:38 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
 
 void					plan_parce(t_rtv *rtv)
 {
