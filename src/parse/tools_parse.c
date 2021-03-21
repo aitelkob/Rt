@@ -82,8 +82,9 @@ int			input_material(t_rtv *rtv, char *data, int nbr, char *head)
 		syntax_error(rtv, data, head, nbr);
 	}
 	free(data);
-	if (!ft_strcmp("glass", lines[0]))
-		ret = GLASS;
+	if (!ft_strcmp("glass", lines[0])){
+		printf("glass\n");
+		ret = GLASS;}
 	if (!ft_strcmp("mirror", lines[0]))
 		ret = MIRROR;
 	if (!ft_strcmp("rawmetal", lines[0]))

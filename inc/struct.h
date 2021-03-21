@@ -19,9 +19,10 @@ enum				e_type
 	PLANE = 1,
 	SPHERE,
 	CYLINDER,
-	CONE,
-	TRIANGLE
+	TRIANGLE,
+	CONE
 };
+
 enum				e_material
 {
 	GLASS = 1,
@@ -37,6 +38,26 @@ typedef	struct		s_vector
 	double			y;
 	double			z;
 }					t_vector;
+
+typedef struct		s_bmp
+{             // Total: 54 bytes
+  uint16_t			type;             // Magic identifier: 0x4d42
+  uint32_t			size;             // File size in bytes
+  uint16_t			reserved1;        // Not used
+  uint16_t			reserved2;        // Not used
+  uint32_t			offset;// Offset to image data in bytes from beginning of file (54 bytes)
+  uint32_t			header_size;  // DIB Header size in bytes (40 bytes)
+  int32_t			width_px;         // Width of the image
+  int32_t			height_px;        // Height of image
+  uint16_t			num_planes;       // Number of color planes
+  uint16_t			bits_per_pixel;   // Bits per pixel
+  uint32_t			compression;      // Compression type
+  uint32_t			image_size_bytes; // Image size in bytes
+  int32_t			x_resolution_ppm; // Pixels per meter
+  int32_t			y_resolution_ppm; // Pixels per meter
+  uint32_t			num_colors;       // Number of colors  
+  uint32_t			important_colors; // Important colors 
+} 					t_bmp;
 
 typedef	struct		s_ray
 {
@@ -74,8 +95,13 @@ typedef	struct		s_mlix
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*img_ptr;
-	int				*img;
+	void			*img_ptr3;
+	void			*img_ptr2;
+	int				w;
+	int				h;
 	int				*d;
+	int				*img;
+	t_vector		*colors;
 	int				bits_per_pixel;
 	int				size_line;
 	int				endian;
@@ -86,11 +112,16 @@ typedef	struct		s_inters
 	double			a;
 	double			b;
 	double			c;
-	double			t0;
-	double			t1;
 	double			tmp;
 	t_vector		x;
 }					t_inters;
+
+typedef	struct		s_quadratic
+{
+	double 			t0;
+	double			t1;
+}					t_quadratic;
+
 
 typedef	struct		s_object
 {
@@ -109,6 +140,7 @@ typedef	struct		s_object
 	double			reflection;
 	double			refraction;
 	double			refractionratio;
+	double			negative;
 	int				material;
 	struct s_object	*next;
 }					t_object;
@@ -128,6 +160,9 @@ typedef	struct		s_rtv
 	t_camera		*camera;
 	t_light			*light;
 	double			min;
+	clock_t			tic;
+	int				filter;
+	int				loding;
 	t_ray			ray;
 	int				depth;
 }					t_rtv;

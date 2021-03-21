@@ -6,7 +6,7 @@
 #    By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/23 16:25:47 by yait-el-          #+#    #+#              #
-#    Updated: 2021/03/20 15:49:58 by babdelka         ###   ########.fr        #
+#    Updated: 2021/03/20 12:53:52 by yait-el-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ CHILDDIR    += mlx
 CHILDDIR    += libvect
 CHILDDIR    += raytracing
 CHILDDIR    += error
-CHILDDIR    += effects
+CHILDDIR    += library/qdbmp_1.0.0/
 ####################INC
 
 INCS		:= inc/rtv1.h
@@ -57,24 +57,30 @@ INCS		+= library/mlx/mlx.h
 SRC			:=start/main.c
 SRC			+=start/freeing.c
 SRC			+=mlx/mlx_stuff.c
+SRC         +=parse/light_parse.c
+SRC         +=parse/tools_parse2.c
 SRC			+=parse/parse.c
+SRC			+=parse/extra.c
 SRC			+=parse/objs_parse.c
 SRC			+=parse/check_obj.c
 SRC			+=parse/tools_parse.c
-SRC			+=parse/extra.c
 SRC			+=libvect/calc_vect.c
 SRC			+=libvect/vector_calculation.c
 SRC			+=libvect/vector_calculation2.c
-SRC			+=parse/light_parse.c
-SRC			+=parse/tools_parse2.c
 SRC			+=error/parse_error.c
 SRC			+=raytracing/raytracing.c
 SRC			+=raytracing/rotation.c
 SRC			+=raytracing/intersection.c
 SRC			+=raytracing/get_pxl.c
 SRC			+=raytracing/colors.c
+SRC			+=raytracing/saving.c
+SRC			+=raytracing/color_palette.c
+SRC			+=raytracing/antialiasing.c
+SRC			+=raytracing/blur.c
+SRC			+=raytracing/reloading.c
+SRC			+=raytracing/stereoscopy.c
+SRC			+=raytracing/sepia_grey.c
 SRC			+=raytracing/reflectionandrefraction.c
-SRC			+=effects/sepia.c
 
 #################### Libraries
 LIBS		:= -L$(MLXDIR) -lmlx

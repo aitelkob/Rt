@@ -22,6 +22,8 @@ void	plan_checker(char *data, char *arg, t_object *plan, t_rtv *rtv)
 		plan->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("reflection", data))
 		plan->reflection = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("negative", data))
+		plan->negative = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("refraction", data))
 		plan->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("refraction_index", data))
@@ -48,6 +50,8 @@ void	triangle_checker(char *data, char *arg, t_object *triangle, t_rtv *rtv)
 		triangle->c1 = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("color", data))
 		triangle->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("negative", data))
+		triangle->negative = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("translation", data))
 		triangle->translation = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("rot", data))
@@ -72,6 +76,8 @@ void	sphere_checker(char *data, char *arg, t_object *sphere, t_rtv *rtv)
 		sphere->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("refraction_index", data))
 		sphere->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("negative", data))
+		sphere->negative = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("color", data))
 		sphere->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("translation", data))
@@ -102,6 +108,8 @@ void	cylinder_checker(char *data, char *arg, t_object *cylinder, t_rtv *rtv)
 		cylinder->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("refraction_index", data))
 		cylinder->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("negative", data))
+		cylinder->negative = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("color", data))
 		cylinder->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("translation", data))
@@ -135,6 +143,8 @@ void	cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv)
 		cone->angle = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("rot", data))
 		cone->rot = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("negative", data))
+		cone->negative = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("color", data))
 		cone->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("translation", data))

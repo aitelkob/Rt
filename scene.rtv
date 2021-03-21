@@ -37,12 +37,11 @@ sphere:
   origin:  0 20 0
   radius: 20
   color: 255 0 0
-  material: mirror
-cone:
-  origin: 20 40 0
-  aim: 0 1 0
-  rot: 0 0 30
-  color: 255 255 0
+#cone:
+# origin: 20 40 0
+# aim: 0 1 0
+# rot: 0 0 30
+# color: 255 255 0
 cylinder:
   origin: -60 0 0
   aim: 0 1 0
@@ -54,4 +53,4 @@ camera:
   origin: 80 120 190
   fov: 60
   look_at: 0 0 0
-#
+

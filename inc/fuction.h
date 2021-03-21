@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/20 15:49:46 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/20 17:46:09 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void			cylinder_checker(char *data, char *arg,
 void			triangle_checker(char *data, char *arg, t_object *triangle, t_rtv *rtv);
 void			cone_parce(t_rtv *rtv);
 void			cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv);
+void			triangle_checker(char *data, char *arg, t_object *cone, t_rtv *rtv);
 void			light_parce(t_rtv *rtv);
 void			init_obj(t_object *obj);
 void			camera_parce(t_rtv *rtv);
@@ -63,7 +64,7 @@ t_vector		divi(t_vector vec1, double t);
 double			length_squared(t_vector vec1, t_vector vec2);
 double			length(t_vector vec1, t_vector vec2);
 void			cord(t_vector *vec, double x, double y, double z);
-t_vector		ft_itvect(int x, int y, int z);
+t_vector		ft_itvect(double x, double y, double z);
 t_vector		vecto_subvec(t_vector v1, t_vector v2);
 double			dot(t_vector v, t_vector b);
 double			map(double x, double spw, double step);
@@ -74,11 +75,15 @@ double			min_ray(double t1, double t2);
 double			deg_to_rad(double angle);
 int				rgb_to_int(t_vector v);
 void			rot_trans(t_object *obj);
+int             color_nrm(int i);
+t_vector        int_to_rgb(int colors);
+void            cartoon(t_mlix *mlix,t_vector *colors);
+t_vector            *color_fill();
 t_vector		obj_norm(t_ray ray, t_object *obj, double dst);
 /*
  ********************************mlx stuff
 */
-
+void			create_bmp(int *img,char l,int i);
 void			display(t_rtv *rtv, t_mlix *mlx);
 int				key_hook(int keycode, t_rtv *rtv);
 void			setup_mlx(t_mlix *mlx);
@@ -93,6 +98,8 @@ t_object **close, t_object *current);
 void			raytracing(t_rtv rtv);
 t_vector		lighting(t_rtv *rtv, t_object *obj,t_hit hit, t_ray ray);
 t_vector		get_pxl(t_rtv *rtv, t_ray ray);
+void			blur(t_mlix *mlx);
+t_vector        camera(t_camera *camera, double x, double y, t_vector up,t_vector test);
 t_vector		gpxadv(t_rtv *rtv, t_ray ray, t_vector direction, int depth);
 t_vector		finalcolor(t_vector color1, t_vector color2, double *ratio);
 t_vector		reflectandrefract(t_ray ray, t_object *obj,\
@@ -104,11 +111,19 @@ void			darkcheck(t_vector *c, double ref);
  ********************************** intersection
 */
 double			intersection_plane(t_ray ray, t_object plane);
-//double			plane_intersect(t_object *plane, t_ray *ray, float *tmin);
-double			intersection_cylinder(t_ray ray, t_object cylinder);
-double			intersection_cone(t_ray ray, t_object cone);
-double			intersection_sphere(t_ray ray, t_object sphere);
+t_quadratic			intersection_cylinder(t_ray ray, t_object cylinder);
+t_quadratic			intersection_cone(t_ray ray, t_object cone);
+t_quadratic			intersection_sphere(t_ray ray, t_object sphere);
 
+/*
+ ********************************** filtters
+*/
+void			antialiasing(t_rtv *rtv,double x, double y,t_ray ray2);
+t_vector		grey(t_vector color);
+t_vector		sepia(t_vector color);
+void            stereoscopy(t_rtv *rtv,double x, double y,t_ray ray2);
+void			reload(t_mlix *mlx);
+void        filter_main(t_mlix *mlx,int filter);
 /*
  ********************************** error management
 */
