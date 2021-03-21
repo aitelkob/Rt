@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/20 17:13:28 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/21 09:35:39 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ enum				e_material
 	MIRROR,
 	RAWMETAL,
 	WATER,
+	THINGLASS,
 	EMPTY
 }					t_material;
 typedef	struct		s_vector

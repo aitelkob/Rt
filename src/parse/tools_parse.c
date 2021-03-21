@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:26:32 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/19 09:27:55 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/20 18:44:31 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int			input_material(t_rtv *rtv, char *data, int nbr, char *head)
 		ret = RAWMETAL;
 	if (!ft_strcmp("water", lines[0]))
 		ret = WATER;
+	if (!ft_strcmp("thinglass", lines[0]))
+		ret = THINGLASS;
 	free_splited(lines);
 	return (ret);
 }

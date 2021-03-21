@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 17:07:15 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/18 19:09:40 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/20 18:42:02 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	plan_checker(char *data, char *arg, t_object *plan, t_rtv *rtv)
 	else if (!ft_strcmp("negative", data))
 		plan->negative = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("refraction", data))
+		plan->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("refraction_index", data))
 		plan->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("translation", data))
 		plan->translation = input_vector(rtv, arg, rtv->parse.nb_line, data);
@@ -72,6 +74,8 @@ void	sphere_checker(char *data, char *arg, t_object *sphere, t_rtv *rtv)
 		sphere->reflection = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("refraction", data))
 		sphere->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("refraction_index", data))
+		sphere->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("negative", data))
 		sphere->negative = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("color", data))
@@ -102,6 +106,8 @@ void	cylinder_checker(char *data, char *arg, t_object *cylinder, t_rtv *rtv)
 		cylinder->reflection = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("refraction", data))
 		cylinder->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("refraction_index", data))
+		cylinder->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("negative", data))
 		cylinder->negative = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("color", data))
@@ -130,6 +136,8 @@ void	cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv)
 	else if (!ft_strcmp("reflection", data))
 		cone->reflection = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("refraction", data))
+		cone->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("refraction_index", data))
 		cone->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("angle", data))
 		cone->angle = input_onearg(rtv, arg, rtv->parse.nb_line, data);

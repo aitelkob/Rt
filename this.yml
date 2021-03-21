@@ -40,7 +40,7 @@ plane:
   color: 255 0 0
   rot: 0 0 0
 cylinder:
-  origin: -100 0 -100
+  origin: -100 0 -490
   aim: 0 1 0
   rot: 0 0 -30
   radius: 20
@@ -55,19 +55,13 @@ sphere:
   origin: 250 250 200
   radius: 80
   color: 0 255 255
+    material: thinglass
 sphere:
   origin: 0 200 700
   radius: 50
   color: 0 255 0
   material: mirror
-plane:
-  origin: 0 90 0
-  aim: 0 1 0
-  color: 255 255 255
-  rot: 0 0 0
-  material: water
 camera:
   origin: 150 200 1000
   look_at: 0 0 0
-  depth: 30
 #
