@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/21 10:32:38 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/21 12:30:35 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void			ft_destroy(t_mlix *mlx);
 void			ft_put_pixel(t_mlix *mlx, int x, int y, int color);
 double			get_dest(t_rtv *rtv, t_ray ray,
 t_object **close, t_object *current);
+int				mouse_press(int key, int x, int y, t_rtv *rtv);
 /*
  ********************************** raytracing
 */

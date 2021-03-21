@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/21 09:35:39 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/21 11:54:32 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,25 @@ typedef	struct		s_light
 	struct s_light	*next;
 }					t_light;
 
+typedef struct			s_key
+{
+	double				zoom;
+	double				zoom_rn;
+	double				zoom_rx;
+	double				zoom_in;
+	double				zoom_ix;
+	int					position_x;
+	double				altitude;
+	int					position_y;
+	unsigned int		parallel;
+	double				retation_x;
+	double				retation_y;
+	double				color_h;
+	double				color_l;
+	int					menu;
+	int					left_button;
+}						t_key;
+
 typedef	struct		s_mlix
 {
 	void			*mlx_ptr;
@@ -105,6 +124,9 @@ typedef	struct		s_mlix
 	int				bits_per_pixel;
 	int				size_line;
 	int				endian;
+	double			mouse_x;
+	double			mouse_y;
+	t_key			key;
 }					t_mlix;
 
 typedef	struct		s_inters

@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 09:49:04 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/20 16:31:27 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/21 12:23:28 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void				raytracing1(t_thread *th)
 			if (rtv->filter == 1)
 				stereoscopy(rtv,(double)x,(double)y,ray2);
 			if (rtv->filter == 2)
-				 antialiasing(rtv,(double)x,(double)y,ray2);
+				antialiasing(rtv,(double)x,(double)y,ray2);
 
 			y++;
 		}

@@ -6,7 +6,7 @@
 #    By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/23 16:25:47 by yait-el-          #+#    #+#              #
-#    Updated: 2021/03/20 12:53:52 by yait-el-         ###   ########.fr        #
+#    Updated: 2021/03/21 12:30:54 by babdelka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ INCS		+= library/mlx/mlx.h
 SRC			:=start/main.c
 SRC			+=start/freeing.c
 SRC			+=mlx/mlx_stuff.c
+SRC			+=mlx/mouse.c
 SRC         +=parse/light_parse.c
 SRC         +=parse/tools_parse2.c
 SRC			+=parse/parse.c

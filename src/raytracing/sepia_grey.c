@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sepia_grey.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:36:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/20 15:20:25 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/21 12:16:57 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void        filter_main(t_mlix *mlx,int filter)
             mlx->img[i] = rgb_to_int(grey(rgb));
         if (filter == 2)
             mlx->img[i] = rgb_to_int(sepia(rgb));
+        
         i++;
     }
     if (filter == 0)
