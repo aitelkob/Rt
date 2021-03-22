@@ -1,7 +1,5 @@
 light:
-  origin: 0 150 0
-light:
-  origin: 0 150 200
+  origin: 0 150 300
 plane:
   origin: 0 0 0
   aim: 0 1 0
