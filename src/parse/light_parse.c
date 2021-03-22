@@ -23,9 +23,9 @@ void				init_cam(t_camera *cam)
 void						light_check(char *data, char *arg,
 t_light *light, t_rtv *rtv)
 {
-	if (!ft_strcmp("origin", data))
+	if (!ft_strcmp("-origin", data))
 		light->origin = input_vector(rtv, arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("intensity", data))
+	else if (!ft_strcmp("-intensity", data))
 		light->intensity = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else
 	{
@@ -38,9 +38,9 @@ t_light *light, t_rtv *rtv)
 void						slice_check(char *data, char *arg,
 t_slice *slice, t_rtv *rtv)
 {
-	if (!ft_strcmp("origin", data))
+	if (!ft_strcmp("-origin", data))
 		slice->origin = input_vector(rtv, arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("vec", data))
+	else if (!ft_strcmp("-vec", data))
 		slice->vec = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else
 	{
@@ -53,15 +53,15 @@ t_slice *slice, t_rtv *rtv)
 void						camera_check(char *data, char *arg,
 t_camera *camera, t_rtv *rtv)
 {
-	if (!ft_strcmp("origin", data))
+	if (!ft_strcmp("-origin", data))
 		camera->origin = input_vector(rtv, arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("fov", data))
+	else if (!ft_strcmp("-fov", data))
 		camera->fov = input_onearg(rtv, arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("look_at", data))
+	else if (!ft_strcmp("-look_at", data))
 		camera->look_at = input_vector(rtv, arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("depth", data))
+	else if (!ft_strcmp("-depth", data))
 		camera->depth = input_onearg(rtv, arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("ambient_light", data))
+	else if (!ft_strcmp("-ambient_light", data))
 		camera->amblgt = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else
 	{

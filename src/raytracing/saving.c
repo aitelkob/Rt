@@ -74,7 +74,7 @@ void			bmp_put(int *img, int fd)
 
   x = WIN_H;
   buf = malloc((WIN_W * WIN_H * 4) + 54);
-  while (x >= 0)
+  while (x > 0)
   {
     col = 0;
     while (col < WIN_W)

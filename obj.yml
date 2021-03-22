@@ -1,32 +1,32 @@
 light:
-  origin: 0 150 300
+  -origin: 0 150 300
 plane:
-  origin: 0 0 0
-  aim: 0 1 0
-  color: 255 255 255
+  -origin: 0 0 0
+  -aim: 0 1 0
+  -color: 255 255 255
 plane:
-  origin: 100 0 0
-  aim: -1 0 0
-  color: 255 0 0
+  -origin: 100 0 0
+  -aim: -1 0 0
+  -color: 255 0 0
 plane:
-  origin: -100 0 0
-  aim: 1 0 0
-  color: 255 0 0
+  -origin: -100 0 0
+  -aim: 1 0 0
+  -color: 255 0 0
 plane:
-  origin: 0 300 0
-  aim: 0 -1 0
-  color: 255 255 255
+  -origin: 0 300 0
+  -aim: 0 -1 0
+  -color: 255 255 255
 plane:
-  origin: 0 0 -550
-  aim: 0 0 1
-  color: 255 0 0
+  -origin: 0 0 -550
+  -aim: 0 0 1
+  -color: 255 0 0
 plane:
-  origin: 0 0 500
-  aim: 0 0 -1
-  color: 255 0 0
+  -origin: 0 0 500
+  -aim: 0 0 -1
+  -color: 255 0 0
 cylinder:
-  origin: 0 0 0
-  aim: 0 1 0
-  radius: 35
-  material: glass
+ -origin: 0 0 0
+ -aim: 0 1 0
+ -radius: 35
+ -material: glass
 
