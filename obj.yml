@@ -29,4 +29,5 @@ cylinder:
  -aim: 0 1 0
  -radius: 35
  -material: glass
-
+camera:
+  -origin: 50 50 -400

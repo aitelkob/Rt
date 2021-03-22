@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 17:46:27 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 16:15:28 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 16:51:06 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_camera		*cam_init(void)
 
 void			start(t_rtv *rtv)
 {
-	rtv->camera = cam_init();
 	setup_mlx(&rtv->mlx);
 	rtv->tic = clock();
 	rtv->filter = 0;
@@ -46,6 +45,7 @@ int				main(int ac, char **av)
 	int			ok;
 
 	ok = 0;
+	rtv.camera = cam_init();
 	if (ac == 2 && strncmp(ft_strrev(av[1]), "lmy.", 4) == 0)
 	{
 		parce(ft_strrev(av[1]), &rtv);
