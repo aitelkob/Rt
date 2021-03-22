@@ -1,3 +1,6 @@
+light:
+  origin: 0 500 900
+  intensity: 100
 plane:
   origin: 0 0 0
   aim: 0 1 0

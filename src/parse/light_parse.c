@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:22:50 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 11:23:14 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 13:01:33 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,11 @@ void						light_parce(t_rtv *rtv)
 	char					*arg;
 
 	if (!light)
+	{
 		if (!(light = (t_light *)malloc(sizeof(t_light))))
 			error("obj error allocat", "just alloct");
+		light->intensity = 100;
+	}
 	rtv->parse.nb_line++;
 	if (get_next_line(rtv->parse.fd, &data) == 1 && data[0] == ' ')
 	{
