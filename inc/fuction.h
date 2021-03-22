@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 08:48:53 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 11:24:22 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void			error(char *str, char *where);
 void			first_camera(t_rtv *rtv, t_camera *camera);
 void			first_light(t_rtv *rtv, t_light *light);
 void			first_obj(t_rtv *rtv, t_object *obj);
+void			first_slice(t_rtv *rtv, t_slice *slice);
 t_vector		input_vector(t_rtv *rtv, char *data, int nbr, char *head);
 double			input_onearg(t_rtv *rtv, char *data, int nbr, char *head);
 int				input_material(t_rtv *rtv, char *data, int nbr, char *head);

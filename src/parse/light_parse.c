@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:22:50 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 10:34:02 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 11:23:14 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,21 @@ t_light *light, t_rtv *rtv)
 	free(data);
 }
 
+void						slice_check(char *data, char *arg,
+t_slice *slice, t_rtv *rtv)
+{
+	if (!ft_strcmp("origin", data))
+		slice->origin = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("vec", data))
+		slice->vec = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else
+	{
+		free(data);
+		unknown_setting(rtv, "slice", rtv->parse.nb_line);
+	}
+	free(data);
+}
+
 void						camera_check(char *data, char *arg,
 t_camera *camera, t_rtv *rtv)
 {
@@ -54,6 +69,30 @@ t_camera *camera, t_rtv *rtv)
 		unknown_setting(rtv, "camera", rtv->parse.nb_line);
 	}
 	free(data);
+}
+
+void						slice_parce(t_rtv *rtv)
+{
+	static	t_slice			*slice;
+	char					*data;
+	char					*arg;
+
+	if (!slice)
+		if (!(slice = (t_slice *)malloc(sizeof(t_slice))))
+			error("obj error allocat", "just alloct");
+	rtv->parse.nb_line++;
+	if (get_next_line(rtv->parse.fd, &data) == 1 && data[0] == ' ')
+	{
+		data = settings_cut(rtv, data, &arg);
+		slice_check(data, arg, slice, rtv);
+		slice_parce(rtv);
+	}
+	else
+	{
+		first_slice(rtv, slice);
+		slice = NULL;
+		forward(rtv, data);
+	}
 }
 
 void						light_parce(t_rtv *rtv)

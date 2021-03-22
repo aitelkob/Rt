@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:43:51 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 09:57:21 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 10:59:14 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void			forward(t_rtv *rtv, char *line)
 	if (!ft_strcmp(obj_name, "camera"))
 		camera_parce(rtv);
 	else if (!ft_strcmp(obj_name, "light"))
+		light_parce(rtv);
+	else if (!ft_strcmp(obj_name, "slice"))
 		light_parce(rtv);
 	else if (!ft_strcmp(obj_name, "plane"))
 		plan_parce(rtv);

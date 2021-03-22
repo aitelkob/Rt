@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:26:32 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 09:15:46 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 11:21:53 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@ void				first_obj(t_rtv *rtv, t_object *obj)
 	tmp = obj;
 	tmp->next = rtv->obj;
 	rtv->obj = tmp;
+}
+
+void				first_slice(t_rtv *rtv, t_slice *slice)
+{
+	t_slice			*tmp;
+
+	tmp = slice;
+	tmp->next = rtv->slice;
+	rtv->slice = tmp;
 }
 
 void				first_light(t_rtv *rtv, t_light *light)
