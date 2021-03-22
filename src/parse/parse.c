@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:43:51 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 10:59:14 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 11:35:35 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void			forward(t_rtv *rtv, char *line)
 	else if (!ft_strcmp(obj_name, "light"))
 		light_parce(rtv);
 	else if (!ft_strcmp(obj_name, "slice"))
-		light_parce(rtv);
+		slice_parce(rtv);
 	else if (!ft_strcmp(obj_name, "plane"))
 		plan_parce(rtv);
 	else if (!ft_strcmp(obj_name, "sphere"))
@@ -86,6 +86,7 @@ void			parce(char *av, t_rtv *rtv)
 	rtv->parse.nb_line = 0;
 	rtv->obj = NULL;
 	rtv->light = NULL;
+	rtv->slice = NULL;
 	while (get_next_line(rtv->parse.fd, &rtv->parse.line))
 	{
 		rtv->parse.nb_line++;

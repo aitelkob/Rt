@@ -1,6 +1,15 @@
 light:
   origin: 0 500 1500
   intensity: 100
+slice:
+  origin: 0 0 0
+  vec: 0 0 0
+slice:
+  origin: 1 0 0
+  vec: 0 0 0
+slice:
+  origin: 3 0 0
+  vec: 0 0 0
 light:
   origin: 0 500 -1990
   intensity: 100
