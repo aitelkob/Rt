@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 17:46:27 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 15:43:18 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 16:15:28 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,39 @@ t_camera		*cam_init(void)
 	return (camera);
 }
 
+void			start(t_rtv *rtv)
+{
+	rtv->camera = cam_init();
+	setup_mlx(&rtv->mlx);
+	rtv->tic = clock();
+	rtv->filter = 0;
+	rtv->loding = 0;
+	raytracing(*rtv);
+	display(rtv, &rtv->mlx);
+}
+
 int				main(int ac, char **av)
 {
 	t_rtv		rtv;
 	t_vector	*colors;
 	int			img;
 	double		time;
+	int			ok;
 
+	ok = 0;
 	if (ac == 2 && strncmp(ft_strrev(av[1]), "lmy.", 4) == 0)
 	{
 		parce(ft_strrev(av[1]), &rtv);
-		// if (rtv.camera->check != 1)
-		// 	syntax_error(&rtv, ".", "camera parce plz  ", rtv.parse.nb_line);
-		rtv.camera = cam_init();
-		setup_mlx(&rtv.mlx);
-		rtv.tic = clock();
-		rtv.filter = 0;
-		rtv.loding = 0;
-		raytracing(rtv);
-		display(&rtv, &rtv.mlx);
+		ok++;
 	}
+	else if (ac == 2 && strncmp(ft_strrev(av[1]), "jbo.", 4) == 0)
+	{
+		parce(ft_strrev(av[1]), &rtv);
+		ok++;
+	}
+	printf("ok is %d\n", ok);
+	if (ok)
+		start(&rtv);
 	else
 		syntax_error(&rtv, ".", "please parse file next time ", 0);
 	return (0);
