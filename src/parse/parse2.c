@@ -6,126 +6,103 @@
 /*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:43:51 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 15:15:14 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/22 18:08:18 by yait-el-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-t_vector			input_vector_obj(t_rtv *rtv, char *data, int nbr);
-void				stock_point(t_rtv *rtv,char *av);
 
-
-t_vector            input_vector_obj(t_rtv *rtv, char *data, int nbr)
+t_vector				input_vector_obj(t_rtv *rtv, char *data, int nbr)
 {
-    char            **lines;
-    t_vector        vec;
-	char			*head;
+	char				**lines;
+	t_vector			vec;
+	char				*head;
 
 	head = "tringle ";
-    lines = ft_strsplit(data+1, ' ');
+	lines = ft_strsplit(data + 1, ' ');
 	if (ft_lentab(lines) != 3)
 	{
-   	  free(data);
-   	  syntax_error(rtv, data, head, nbr);
+		free(data);
+		syntax_error(rtv, data, head, nbr);
 	}
-	vec = (t_vector){0,0,0};
-    vec.x = ft_atof(lines[0]);
-    vec.y = ft_atof(lines[1]);
-    vec.z = ft_atof(lines[2]);
+	vec = (t_vector){0, 0, 0};
+	vec.x = ft_atof(lines[0]);
+	vec.y = ft_atof(lines[1]);
+	vec.z = ft_atof(lines[2]);
 	free_splited(lines);
-    return (vec);
+	return (vec);
 }
 
-void                    triangle_obj(t_rtv *rtv,t_vector *tab)
+void					triangle_obj(t_rtv *rtv, t_vector *tab)
 {
-    static  t_object    *triangle;
-    char                *arg;
-    char                *data;
+	static	t_object	*triangle;
+	char				*arg;
+	char				*data;
 	t_vector			face;
 
-    if (!triangle)
-    {
-        if (!(triangle = (t_object *)malloc(sizeof(t_object))))
-            error("obj error allocat", "just alloct");
-        init_obj(triangle);
-    }
-    triangle->type = TRIANGLE;
-    if (get_next_line(rtv->parse.fd, &data) == 1)
-    {
-		face = input_vector_obj(rtv, data,rtv->parse.nb_line);
-		triangle->origin = tab[((int)face.x)-1];
-		triangle->c1 = tab[(int)face.y-1];
-		triangle->c2 = tab[(int)face.z-1];
-		triangle->color = (t_vector) {rand()%250, rand()%250,rand()%250};
+	if (!triangle)
+	{
+		if (!(triangle = (t_object *)malloc(sizeof(t_object))))
+			error("obj error allocat", "just alloct");
+		init_obj(triangle);
+	}
+	triangle->type = TRIANGLE;
+	if (get_next_line(rtv->parse.fd, &data) == 1)
+	{
+		face = input_vector_obj(rtv, data, rtv->parse.nb_line);
+		triangle->origin = tab[((int)face.x) - 1];
+		triangle->c1 = tab[(int)face.y - 1];
+		triangle->c2 = tab[(int)face.z - 1];
+		triangle->color = (t_vector) {rand() % 250, rand() % 250, rand() % 250};
 		first_obj(rtv, triangle);
- 		triangle = NULL;
+		triangle = NULL;
 		free(data);
-		triangle_obj(rtv,tab);
-    }
+		triangle_obj(rtv, tab);
+	}
 }
 
-void			stock_point(t_rtv *rtv,char *av)
+void					stock_point(t_rtv *rtv, char *av)
 {
-	static  t_object    *triangle;
-	t_vector 	tab[rtv->parse.nb_line];
-	t_vector	face;
-	int			index_v;
-	char  		*data;
-	char		*data2;
-	int			i;
-    
+	static	t_object	*triangle;
+	t_vector			tab[rtv->parse.nb_line];
+	int					index_v;
+	char				*data;
+	int					i;
+
 	index_v = 0;
-	face = (t_vector){0,0,0};
 	if (!(rtv->parse.fd = open(av, O_RDONLY)))
-    	error("this is fd error !", "fd ");
+		error("this is fd error !", "fd ");
 	while (get_next_line(rtv->parse.fd, &data))
 	{
 		if (data[0] == 'v' && data[1] == ' ')
 		{
-			tab[index_v] = input_vector_obj(rtv, data,rtv->parse.nb_line);
+			tab[index_v] = input_vector_obj(rtv, data, rtv->parse.nb_line);
 			index_v++;
 		}
 		if (data[0] == 's')
-			triangle_obj(rtv,tab);
+			triangle_obj(rtv, tab);
 		free(data);
 	}
 	free(data);
-	  if (rtv->parse.fd == -1)
-      error("fd matsedche \n", "fd matsedch");
+	if (rtv->parse.fd == -1)
+		error("fd matsedche \n", "fd matsedch");
 }
 
-void        loop_print(t_rtv *rtv)
-{
-    t_object *current = rtv->obj;
-    int i = 0;
-    while (current)
-    {
-        printf("\ntriangle %d ----->",i);
-        print_vect(current->origin,"this is  -----------> ");
-        print_vect(current->c1,"this is  -----------> ");
-        print_vect(current->c2,"this is  -----------> ");
-    i++;
-        current = current->next;
-    }
-}
-
-void			parce_obj(char *av, t_rtv *rtv)
+void					parce_obj(char *av, t_rtv *rtv)
 {
 	if (!(rtv->parse.fd = open(av, O_RDONLY)))
 		error("this is fd error !", "fd ");
-
 	rtv->parse.nb_line = 0;
 	rtv->light = NULL;
 	rtv->obj = NULL;
 	while (get_next_line(rtv->parse.fd, &rtv->parse.line))
 	{
 		if (rtv->parse.line[0] == 'v')
-			rtv->parse.nb_line++; 
+			rtv->parse.nb_line++;
 		free(rtv->parse.line);
 	}
 	free(rtv->parse.line);
 	if (rtv->parse.fd == -1)
 		error("fd matsedche \n", "fd matsedch");
-	stock_point(rtv,av);
-	loop_print(rtv);
+	stock_point(rtv, av);
 }

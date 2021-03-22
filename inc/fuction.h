@@ -55,6 +55,8 @@ int				input_material(t_rtv *rtv, char *data, int nbr, char *head);
 void			convertmaterial(t_object *obj);
 void			ambient_parce(t_rtv *rtv);
 void			slice_parce(t_rtv *rtv);
+void			init_cam(t_camera *cam);
+void				light_check(char *data, char *arg,t_light *light, t_rtv *rtv);
 /*
  ******************************* vector lib
 */

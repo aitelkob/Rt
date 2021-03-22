@@ -12,29 +12,6 @@
 
 #include "rtv1.h"
 
-void				init_cam(t_camera *cam)
-{
-	cam->fov = 60;
-	cam->depth = 5;
-	cam->look_at = (t_vector){0, 0, 0};
-	cam->amblgt = 25;
-}
-
-void						light_check(char *data, char *arg,
-t_light *light, t_rtv *rtv)
-{
-	if (!ft_strcmp("-origin", data))
-		light->origin = input_vector(rtv, arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("-intensity", data))
-		light->intensity = input_onearg(rtv, arg, rtv->parse.nb_line, data);
-	else
-	{
-		free(data);
-		unknown_setting(rtv, "light", rtv->parse.nb_line);
-	}
-	free(data);
-}
-
 void						slice_check(char *data, char *arg,
 t_slice *slice, t_rtv *rtv)
 {

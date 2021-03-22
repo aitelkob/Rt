@@ -31,33 +31,6 @@ void				init_obj(t_object *obj)
 	obj->material = EMPTY;
 }
 
-void				first_obj(t_rtv *rtv, t_object *obj)
-{
-	t_object		*tmp;
-
-	tmp = obj;
-	tmp->next = rtv->obj;
-	rtv->obj = tmp;
-}
-
-void				first_slice(t_rtv *rtv, t_slice *slice)
-{
-	t_slice			*tmp;
-
-	tmp = slice;
-	tmp->next = rtv->slice;
-	rtv->slice = tmp;
-}
-
-void				first_light(t_rtv *rtv, t_light *light)
-{
-	t_light			*tmp;
-
-	tmp = light;
-	tmp->next = rtv->light;
-	rtv->light = tmp;
-}
-
 double				input_onearg(t_rtv *rtv, char *data, int nbr, char *head)
 {
 	char			**lines;

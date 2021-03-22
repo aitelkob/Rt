@@ -30,7 +30,6 @@ void					plan_parce(t_rtv *rtv)
 	{
 		data = settings_cut(rtv, data, &arg);
 		plan_checker(data, arg, plan, rtv);
-		convertmaterial(plan);
 		plan_parce(rtv);
 	}
 	else
@@ -89,7 +88,6 @@ void					sphere_parce(t_rtv *rtv)
 	{
 		data = settings_cut(rtv, data, &arg);
 		sphere_checker(data, arg, sphere, rtv);
-		convertmaterial(sphere);
 		sphere_parce(rtv);
 	}
 	else
@@ -119,7 +117,6 @@ void					cylinder_parce(t_rtv *rtv)
 	{
 		data = settings_cut(rtv, data, &arg);
 		cylinder_checker(data, arg, cylinder, rtv);
-		convertmaterial(cylinder);
 		cylinder_parce(rtv);
 	}
 	else
@@ -149,7 +146,6 @@ void					cone_parce(t_rtv *rtv)
 	{
 		data = settings_cut(rtv, data, &arg);
 		cone_checker(data, arg, cone, rtv);
-		convertmaterial(cone);
 		cone_parce(rtv);
 	}
 	else
