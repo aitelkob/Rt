@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/21 16:18:35 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 10:24:58 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,15 @@ typedef struct		s_camera
 	t_vector		look_at;
 	int				check;
 	double			depth;
+	double			amblgt;
 }					t_camera;
+
+typedef	struct		s_ambient
+{
+	double			intensity;
+}					t_ambient;
+
+
 typedef	struct		s_rtv
 {
 	t_mlix			mlx;
@@ -182,12 +190,12 @@ typedef	struct		s_rtv
 	t_parse			parse;
 	t_camera		*camera;
 	t_light			*light;
+	t_ambient		*ambient;
 	double			min;
 	clock_t			tic;
 	int				filter;
 	int				loding;
 	t_ray			ray;
-	int				depth;
 }					t_rtv;
 
 typedef	struct 		s_hit

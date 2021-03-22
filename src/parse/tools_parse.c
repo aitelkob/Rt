@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:26:32 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/21 18:02:53 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 09:15:46 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ double				input_onearg(t_rtv *rtv, char *data, int nbr, char *head)
 {
 	char			**lines;
 	double			ret;
-	char			*tmp;
 
 	lines = ft_strsplit(data, ' ');
 	if (ft_lentab(lines) != 1)
@@ -72,7 +71,6 @@ int					input_material(t_rtv *rtv, char *data, int nbr, char *head)
 {
 	char			**lines;
 	int				ret;
-	char			*tmp;
 
 	lines = ft_strsplit(data, ' ');
 	if (ft_lentab(lines) != 1)

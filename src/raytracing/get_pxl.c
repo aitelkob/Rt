@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/21 17:20:53 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 10:33:49 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,14 +111,14 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 	t_vector		color[2];
 	double			ratio[2];
 
-	hit.depth = 5;
+	hit.depth = rtv->camera->depth;
 	color[0] = (t_vector){0, 0, 0};
 	color[1] = (t_vector){0, 0, 0};
 	if ((hit.dst = get_dest(rtv, ray, &obj, NULL)) <= 0)
 		return (color[0]);
 	hit.point = add(ray.origin, multi(ray.direction, hit.dst));
 	if (hit.dst > 0)
-		color[0] = obj->color;
+		color[0] = multi(divi(obj->color,100), rtv->camera->amblgt);
 	ratio[0] = obj->reflection + 0.2;
 	ratio[1] = obj->refraction + 0.2;
 	if (rtv->light)

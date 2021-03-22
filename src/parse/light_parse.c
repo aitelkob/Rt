@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:22:50 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/21 17:57:44 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 10:34:02 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void				init_cam(t_camera *cam)
 	cam->fov = 60;
 	cam->depth = 5;
 	cam->look_at = (t_vector){0, 0, 0};
+	cam->amblgt = 25;
 }
 
 void						light_check(char *data, char *arg,
@@ -45,6 +46,8 @@ t_camera *camera, t_rtv *rtv)
 		camera->look_at = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("depth", data))
 		camera->depth = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("ambient_light", data))
+		camera->amblgt = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else
 	{
 		free(data);

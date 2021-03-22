@@ -1,13 +1,3 @@
-light:
-  origin: 0 800 0
-  intensity: 100
-light:
-  origin: 0 500 -1000
-  intensity: 100
-camera:
-  origin: 0 500 1000
-  fov: 60
-  look_at: 0 0 0
 plane:
   origin: 0 0 0
   aim: 0 1 0
@@ -24,6 +14,7 @@ plane:
   aim: 1 0 0
   color: 0 255 0
   rot: 0 0 0
+  material: mirror
 plane:
   origin: -500 0 0
   aim: -1 0 0
@@ -32,7 +23,7 @@ plane:
 plane:
   origin: 0 0 -2000
   aim: 0 0 1
-  color: 255 0 0
+  color: 255 255 255
   rot: 0 0 0
 plane:
   origin: 0 0 2000
@@ -64,5 +55,5 @@ sphere:
 camera:
   origin: 150 200 1000
   look_at: 0 0 0
-  depth: 25
+  depth: 5
 #

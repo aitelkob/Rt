@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/21 17:16:45 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 08:48:53 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_vector		input_vector(t_rtv *rtv, char *data, int nbr, char *head);
 double			input_onearg(t_rtv *rtv, char *data, int nbr, char *head);
 int				input_material(t_rtv *rtv, char *data, int nbr, char *head);
 void			convertmaterial(t_object *obj);
+void			ambient_parce(t_rtv *rtv);
 
 /*
  ******************************* vector lib
