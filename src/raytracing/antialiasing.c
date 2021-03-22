@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:34:28 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/21 17:34:57 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 17:55:50 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void				antialiasing(t_rtv *rtv, double x, double y, t_ray ray2)
 		test.x = (rand() % 10) / 10.0;
 		test.y = (rand() % 10) / 10.0;
 		test.z = 0;
-		ray2.direction = nrm(camera(rtv->camera, x, y, up, test));
+		ray2.direction = nrm(camera(rtv->camera, x, y, test));
 		color = add(color, get_pxl(rtv, ray2));
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 09:59:39 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/21 17:46:07 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 17:45:11 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,33 +67,29 @@ t_vector		*color_fill(void)
 
 void			cartoon(t_mlix *mlx, t_vector *colors)
 {
-	int			i;
-	int			j;
+	int			i[2];
 	double		copy;
-	int			d;
-	t_vector	save;
 	t_vector	rgb;
 
 	colors = color_fill();
-	i = -1;
-	save = (t_vector){0, 0, 0};
-	while (++i < WIN_W * WIN_H)
+	i[0] = -1;
+	mlx->tempvec = (t_vector){0, 0, 0};
+	while (++i[0] < WIN_W * WIN_H)
 	{
-		j = -1;
-		d = INFINITY;
-		rgb = mlx->colors[i];
-		while (++j < 40)
+		i[1] = -1;
+		mlx->tempcount = INFINITY;
+		rgb = mlx->colors[i[0]];
+		while (++i[1] < 40)
 		{
-			copy = sqrt(pow(rgb.z - colors[j].x, 2)+
-						pow(rgb.y - colors[j].y, 2)+
-						pow(rgb.x - colors[j].z, 2));
-			if (copy < d)
+			copy = sqrt(pow(rgb.z - colors[i[1]].x, 2) +
+						pow(rgb.y - colors[i[1]].y, 2) +
+						pow(rgb.x - colors[i[1]].z, 2));
+			if (copy < mlx->tempcount)
 			{
-					save = colors[j];
-					d = copy;
+				mlx->tempvec = colors[i[1]];
+				mlx->tempcount = copy;
 			}
 		}
-		mlx->img[i] = rgb_to_int(save);
+		mlx->img[i[0]] = rgb_to_int(mlx->tempvec);
 	}
 }
-
