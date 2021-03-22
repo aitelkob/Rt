@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 11:22:33 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 17:44:53 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,8 @@ typedef	struct		s_mlix
 	double			mouse_x;
 	double			mouse_y;
 	t_key			key;
+	double			tempcount;
+	t_vector		tempvec;
 }					t_mlix;
 
 typedef	struct		s_inters

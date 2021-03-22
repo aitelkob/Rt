@@ -6,46 +6,45 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 10:33:49 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 17:49:53 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_quadratic intersection(t_ray ray,t_object tmp)
+t_quadratic			intersection(t_ray ray, t_object tmp)
 {
 	t_quadratic		q;
 
 	if (tmp.type == SPHERE)
 		q = intersection_sphere(ray, tmp);
-	else if (tmp.type == PLANE) 
+	else if (tmp.type == PLANE)
 		q.t0 = intersection_plane(ray, tmp);
 	else if (tmp.type == CYLINDER)
 		q = intersection_cylinder(ray, tmp);
 	else if (tmp.type == CONE)
 		q = intersection_cone(ray, tmp);
-	return q;
+	return (q);
 }
 
-int isnegativeobj(t_rtv *rtv, t_ray ray, double dst)
+int					isnegativeobj(t_rtv *rtv, t_ray ray, double dst)
 {
 	t_object		*tmp;
 	t_quadratic		q;
 
 	tmp = rtv->obj;
 	while (tmp)
-	{	
-		if(tmp->negative == 1)
+	{
+		if (tmp->negative == 1)
 		{
-			q = intersection(ray, *tmp); 
-			if((dst > q.t0 && dst < q.t1))
-				return 0;
+			q = intersection(ray, *tmp);
+			if ((dst > q.t0 && dst < q.t1))
+				return (0);
 		}
 		tmp = tmp->next;
 	}
-	return 1;
+	return (1);
 }
-
 
 double				get_dest(t_rtv *rtv, t_ray ray,
 t_object **close, t_object *current)
@@ -58,18 +57,18 @@ t_object **close, t_object *current)
 	tmp = rtv->obj;
 	while (tmp)
 	{
-		q = intersection(ray, *tmp); 
-		if (q.t0 > 0 && (q.t0 < min + 0.000000001 || min == -1) && tmp->negative != 1)
-		{
-			if((isnegativeobj(rtv, ray, q.t0) || (isnegativeobj(rtv, ray, q.t1) && tmp->type != PLANE)))
+		q = intersection(ray, *tmp);
+		if (q.t0 > 0 && (q.t0 < min + 0.000000001 ||\
+		min == -1) && tmp->negative != 1)
+			if ((isnegativeobj(rtv, ray, q.t0) ||\
+			(isnegativeobj(rtv, ray, q.t1) && tmp->type != PLANE)))
 			{
-				if(isnegativeobj(rtv, ray, q.t0))
+				if (isnegativeobj(rtv, ray, q.t0))
 					min = q.t0;
 				else
 					min = q.t1;
 				*close = tmp;
 			}
-		}
 		tmp = tmp->next;
 	}
 	if (current != NULL && *close == current)
@@ -118,7 +117,7 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 		return (color[0]);
 	hit.point = add(ray.origin, multi(ray.direction, hit.dst));
 	if (hit.dst > 0)
-		color[0] = multi(divi(obj->color,100), rtv->camera->amblgt);
+		color[0] = multi(divi(obj->color, 100), rtv->camera->amblgt);
 	ratio[0] = obj->reflection + 0.2;
 	ratio[1] = obj->refraction + 0.2;
 	if (rtv->light)

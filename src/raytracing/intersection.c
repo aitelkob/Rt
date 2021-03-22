@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 16:20:45 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/19 17:56:35 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 17:51:48 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 static	t_quadratic			quadratic(double a, double b, double c)
 {
-	double				determinant;
-	t_quadratic			q;
+	double					determinant;
+	t_quadratic				q;
+
 	determinant = b * b - 4 * a * c;
 	if (determinant < 0)
 		q.t0 = -1;
@@ -24,18 +25,20 @@ static	t_quadratic			quadratic(double a, double b, double c)
 		q.t0 = -b / (2.0 * a);
 		q.t1 = -b / (2.0 * a);
 	}
-	else {
+	else
+	{
 		q.t1 = (-b - sqrtf(determinant)) / (2.0 * a);
 		q.t0 = min_ray((-b + sqrtf(determinant)) / (2.0 * a), q.t1);
 		q.t1 = q.t0 == q.t1 ? (-b + sqrtf(determinant)) / (2.0 * a) : q.t1;
 	}
-	return q;
+	return (q);
 }
-double					intersection_plane(t_ray ray, t_object plane)
+
+double						intersection_plane(t_ray ray, t_object plane)
 {
-	double				d;
-	double				dist;
-	t_vector			vector_distance;
+	double					d;
+	double					dist;
+	t_vector				vector_distance;
 
 	d = dot(plane.aim, ray.direction);
 	vector_distance = vecto_subvec(plane.origin, ray.origin);

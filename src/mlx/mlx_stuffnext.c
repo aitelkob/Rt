@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 12:29:39 by babdelka          #+#    #+#             */
-/*   Updated: 2021/03/22 15:30:33 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 17:29:28 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int				key_hook(int keycode, t_rtv *rtv)
 int				mouse_pressnext(int key, int x, int y, t_rtv *rtv)
 {
 	char		l;
-	
+
 	if (key == 1 && x >= 1034 && x <= 1286 && y >= 363 && y <= 452)
 	{
 		displayloading(rtv, &rtv->mlx);

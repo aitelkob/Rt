@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:39:56 by babdelka          #+#    #+#             */
-/*   Updated: 2021/03/22 10:25:55 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 18:03:04 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_vector		gpxadv(t_rtv *rtv, t_ray ray, t_vector direction, int depth)
 		return (color[0]);
 	hit.point = add(ray.origin, multi(direction, hit.dst));
 	if (hit.dst > 0)
-		color[0] = multi(divi(obj->color,100), rtv->camera->amblgt);
+		color[0] = multi(divi(obj->color, 100), rtv->camera->amblgt);
 	ratio[0] = obj->reflection + 0.2;
 	ratio[1] = obj->refraction + 0.2;
 	if (rtv->light)

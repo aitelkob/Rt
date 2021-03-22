@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 11:30:02 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 17:55:25 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void			raytracing(t_rtv rtv);
 t_vector		lighting(t_rtv *rtv, t_object *obj,t_hit hit, t_ray ray);
 t_vector		get_pxl(t_rtv *rtv, t_ray ray);
 void			blur(t_mlix *mlx);
-t_vector        camera(t_camera *camera, double x, double y, t_vector up,t_vector test);
+t_vector        camera(t_camera *camera, double x, double y,t_vector test);
 t_vector		gpxadv(t_rtv *rtv, t_ray ray, t_vector direction, int depth);
 t_vector		finalcolor(t_vector color1, t_vector color2, double *ratio);
 t_vector		reflectandrefract(t_ray ray, t_object *obj,\
