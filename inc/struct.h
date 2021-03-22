@@ -89,17 +89,27 @@ typedef	struct		s_light
 	struct s_light	*next;
 }					t_light;
 
+typedef struct	mlx_img_list_s
+{
+  int			width;
+  int			height;
+  char			*buffer;
+  struct mlx_img_list_s	*next;
+} mlx_img_list_t;
+
 typedef	struct		s_mlix
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*img_ptr;
-	void			*img_ptr3;
-	void			*img_ptr2;
+	int			*img_ptr3;
+	int			*img_ptr2;
+	//int			*img_ptr6;
+	mlx_img_list_t			*img_ptr6;
 	int				w;
 	int				h;
 	int				*d;
-	int				*img;
+	char *img;
 	t_vector		*colors;
 	int				bits_per_pixel;
 	int				size_line;
@@ -119,6 +129,8 @@ typedef	struct		s_quadratic
 {
 	double 			t0;
 	double			t1;
+	double			u;
+	double			v;
 }					t_quadratic;
 
 
@@ -181,4 +193,15 @@ typedef struct      s_thread
     int             ending;
 }                   t_thread;
 
+typedef struct 		s_cl_obj
+{
+	t_object		*obj;
+	t_vector		color;
+}					t_cl_obj;
+
+typedef struct 		s_min_obj
+{
+	double		min;
+	t_quadratic	q;
+}					t_min_obj;
 #endif

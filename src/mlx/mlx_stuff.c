@@ -23,10 +23,11 @@ void			setup_mlx(t_mlix *mlx)
 {
 	mlx->mlx_ptr = mlx_init();
 	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, (WIN_W+290), WIN_H, "RTv1");
-	mlx->img_ptr2 = mlx_png_file_to_image(mlx->mlx_ptr,"./images/cartoon.png", &mlx->w, &mlx->h);
-	mlx->img_ptr3 = mlx_png_file_to_image(mlx->mlx_ptr,"./images/cartoon1.png", &mlx->w, &mlx->h);
+	//mlx->img_ptr2 = mlx_png_file_to_image(mlx->mlx_ptr,"./images/cartoon.png", &mlx->w, &mlx->h);
+	mlx->img_ptr6 = mlx_png_file_to_image(mlx->mlx_ptr,"./images/me2.png", &mlx->w, &mlx->h);
+	//mlx->img_ptr3 = mlx_png_file_to_image(mlx->mlx_ptr,"./images/cartoon1.png", &mlx->w, &mlx->h);
 	mlx->img_ptr = mlx_new_image(mlx->mlx_ptr, WIN_W, WIN_H);
-	mlx->img = (int*)mlx_get_data_addr(mlx->img_ptr,&mlx->bits_per_pixel, &mlx->size_line, &mlx->endian);
+	mlx->img = mlx_get_data_addr(mlx->img_ptr,&mlx->bits_per_pixel, &mlx->size_line, &mlx->endian);
 	mlx->colors = (t_vector*)malloc(sizeof(t_vector) * (WIN_W * WIN_H)+1);
 }
 
@@ -68,8 +69,8 @@ int				key_hook(int keycode, t_rtv *rtv)
 		rtv->filter = 2;
 		raytracing(*rtv);
 	}
-	if (keycode == SCREEN)
-	 	create_bmp(rtv->mlx.img,l,0);
+	// if (keycode == SCREEN)
+	//  	create_bmp(rtv->mlx.img,l,0);
 	return (1);
 }
 
@@ -81,7 +82,26 @@ int				red_button(t_rtv *rtv)
 
 void			display(t_rtv *rtv, t_mlix *mlx)
 {
-	mlx_put_image_to_window(mlx, mlx->win_ptr, mlx->img_ptr2, 20,0);
+	//mlx_put_image_to_window(mlx, mlx->win_ptr, mlx->img_ptr2, 20,0);
+	char * ibuf;
+	char * tmp;
+	int x = 0;
+	int y = 0;
+	// int ipos = 0;
+	//  while (x < 1000)
+    // {
+	// 	y = 0;
+	// 	while (y < 1000)
+    // 	{	
+	// 		ipos = 4 * 1000 * y + x * 4;
+ 	// 		rtv->mlx.img[ipos] = rtv->mlx.img_ptr6->buffer[ipos];//rtv->mlx.img_ptr6->buffer[ipos];
+    //   		rtv->mlx.img[ipos+1] = rtv->mlx.img_ptr6->buffer[ipos+1];
+    //   		rtv->mlx.img[ipos+2] = rtv->mlx.img_ptr6->buffer[ipos+2];
+    //   		ipos += 4;
+	// 		y++;
+	// 	}
+	// 	x++;
+    // }
 	mlx_put_image_to_window(mlx, mlx->win_ptr, mlx->img_ptr, 0, 0);
 	mlx_hook(mlx->win_ptr, 2, 0, key_hook, mlx);
  	mlx_hook(mlx->win_ptr, 17, 0, red_button, rtv);

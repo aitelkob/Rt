@@ -33,18 +33,35 @@ t_vector			camera(t_camera *camera, double x, double y, t_vector up,t_vector tes
 					, multi(v_vector, p.y * p.z)), w_vector));
 }
 
-void				start_draw(t_rtv *rtv,double x, double y,t_ray ray2)
+void				start_draw(t_rtv *rtv,double x, double y,t_ray ray2,t_vector colors)
 {
 	t_vector        up;
 	t_vector        color;
 	t_vector		test;
+	t_cl_obj		clr;
 
 	test = (t_vector){0,0,0};
 	up = (t_vector){0,1,0};
 	ray2.direction = nrm(camera(rtv->camera, x, y, up,test));
-	color = get_pxl(rtv, ray2);
+	//color =  get_pxl(rtv, ray2);
+	clr =  get_pxl_obj(rtv, ray2);
+	color = clr.color;
 	rtv->mlx.colors[(WIN_H - 1 -(int)y) * WIN_W + (int)x] = color;
-	rtv->mlx.img[(WIN_H - 1 - (int)y) * WIN_W + (int)x] = rgb_to_int(color);
+	int ipos = 0;
+	ipos = 4 * 1000 * y + x * 4;
+	if(!(color.x ==  0 && color.y ==  0 && color.z ==  0))
+	{
+		if(clr.obj->type == 50)
+		{
+			color.x = color_nrm(rtv->mlx.img_ptr6->buffer[ipos]);
+			rtv->mlx.img[ipos + 1] = color_nrm(rtv->mlx.img_ptr6->buffer[ipos + 1]);
+			rtv->mlx.img[ipos + 2] = color_nrm(rtv->mlx.img_ptr6->buffer[ipos + 2]);
+		}
+		rtv->mlx.img[ipos] = color_nrm(color.z);
+		rtv->mlx.img[ipos + 1] = color_nrm(color.y);
+		rtv->mlx.img[ipos + 2] = color_nrm(color.x);
+	}
+	//rtv->mlx.img[(WIN_H - 1 - (int)y) * WIN_W + (int)x] = rgb_to_int(color);
 }
 
 void				raytracing1(t_thread *th)
@@ -56,6 +73,7 @@ void				raytracing1(t_thread *th)
 	t_rtv           *rtv;
 	t_vector		test;
 	t_vector		*colors;
+	//char *ibuf = (char *) rtv->mlx.img_ptr6->buffer;
 	rtv = th->rt;
 
 	test = (t_vector){0,0,0};
@@ -66,8 +84,9 @@ void				raytracing1(t_thread *th)
 		y = 0;
 		while (y < WIN_W)
 		{
+			unsigned char * ibuf;
 			if (rtv->filter == 0)
-				start_draw(rtv,(double)x,(double)y,ray2);
+				start_draw(rtv,(double)x,(double)y,ray2 ,(t_vector) {5, 5 , 5});
 			if (rtv->filter == 1)
 				stereoscopy(rtv,(double)x,(double)y,ray2);
 			if (rtv->filter == 2)

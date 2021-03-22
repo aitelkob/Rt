@@ -45,12 +45,19 @@ double				diffuse(t_vector light_dir, double dst, t_vector normal)
 	return ((!(dst != -1 || alpha < 0)) * alpha);
 }
 
+t_vector				color_nrm_vec(t_vector i)
+{
+	i.x = i.x > 255 ? 255 : i.x;
+	i.y = i.y > 255 ? 255 : i.y;
+	i.z = i.z > 255 ? 255 : i.z;
+	return i;
+}
 t_vector			coloring(t_vector color, double diffuse,
 double specular, t_vector obj_color)
 {
-	color = add(color, multi(obj_color, 0.1 + diffuse));
-	color = add(color, multi((t_vector) {1, 1, 1},
-	diffuse * 255 * powf(specular < 0 ? 0 : specular, 100)));
+	color = color_nrm_vec(add(color, multi(obj_color, 0.1 + diffuse)));
+	color = color_nrm_vec(add(color, multi((t_vector) {1, 1, 1},
+	diffuse * 255 * powf(specular < 0 ? 0 : specular, 100))));
 	return (color);
 }
 
@@ -76,7 +83,36 @@ t_hit hit, t_ray ray)
 		spec = specular(sub(ray.origin, hit.point), shadv.light_dir, dst,\
 		hit.normal);
 		color = coloring(color, diffuse(shadv.light_dir, dst, hit.normal) \
-		* (tmp->intensity / 100.0), spec, obj->color);
+		* (tmp->intensity / 100.0), spec,obj->color);
+		tmp = tmp->next;
+	}
+	return (color);
+}
+
+
+t_vector			lightings(t_vector colors,t_rtv *rtv, t_object *obj,\
+t_hit hit, t_ray ray)
+{
+	t_light			*tmp;
+	t_shadowadv		shadv;
+	t_vector		color;
+	double			dst;
+	double			spec;
+
+	tmp = rtv->light;
+	color = (t_vector) {0, 0, 0};
+	hit.normal = nrm(obj_norm(ray, obj, hit.dst));
+	while (tmp)
+	{
+		shadv.light_dir = sub(tmp->origin, hit.point);
+		dst = shadow(tmp, &shadv, rtv, obj);
+		if (--shadv.refra > 0 && dst > 2)
+			color = add(color, multi(shadv.color, (shadv.refra) * (0.00001\
+			* tmp->intensity)));
+		spec = specular(sub(ray.origin, hit.point), shadv.light_dir, dst,\
+		hit.normal);
+		color = coloring(color, diffuse(shadv.light_dir, dst, hit.normal) \
+		* (tmp->intensity / 100.0), spec, colors);
 		tmp = tmp->next;
 	}
 	return (color);

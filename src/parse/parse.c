@@ -36,12 +36,14 @@ char			*name_cut(t_rtv *rtv, char *line)
 {
 	char		*strtrim;
 
-	if (!line || line[0] == '\0' || line[0] == '#')
+	if (!line || line[0] == '\0' )
 	{
 		free(line);
 		return ("\0");
 	}
 	strtrim = ft_strtrim(line);
+	if (strtrim[0] == '#')
+	return (strtrim);
 	if (strtrim[ft_strlen(strtrim) - 1] != ':' &&
 			strtrim[ft_strlen(strtrim) - 1] != '1' &&
 			strtrim[ft_strlen(strtrim) - 1] != '0')
@@ -63,6 +65,8 @@ void			forward(t_rtv *rtv, char *line)
 		light_parce(rtv);
 	else if (!ft_strcmp(obj_name, "plane"))
 		plan_parce(rtv);
+	else if (!ft_strcmp(obj_name, "triangle"))
+		triangle_parce(rtv);
 	else if (!ft_strcmp(obj_name, "sphere"))
 		sphere_parce(rtv);
 	else if (!ft_strcmp(obj_name, "cylinder"))

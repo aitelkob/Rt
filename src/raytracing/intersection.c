@@ -31,6 +31,7 @@ static	t_quadratic			quadratic(double a, double b, double c)
 	}
 	return q;
 }
+
 double					intersection_plane(t_ray ray, t_object plane)
 {
 	double				d;
@@ -43,6 +44,62 @@ double					intersection_plane(t_ray ray, t_object plane)
 	if (dist > 0)
 		return (dist);
 	return (-1);
+}
+
+double triangle_side(t_vector v1, t_vector v0, t_vector p, t_vector normal)
+{
+	t_vector edge0 =sub(v1, v0); 
+    t_vector vp0 = sub(p, v0); 
+    t_vector C = crossproduct(sub(v1, v0), sub(p, v0));
+
+	edge0 =sub(v1, v0); 
+    vp0 = sub(p, v0); 
+    C = crossproduct(sub(v1, v0), sub(p, v0));
+	return dot(normal, C);
+}
+
+t_quadratic					intersection_triangle(t_ray ray, t_object triangle)
+{
+	double				d;
+	double				dist;
+	t_vector			vector_distance;
+	t_vector			normal;
+	t_vector			P;
+	t_vector		xvec;
+	t_vector		p_c;
+	double			u;
+	double			v;
+	double			api = 1;			
+	t_vector v0 = triangle.origin;
+	t_vector v1 = triangle.c1;
+	t_vector v2 = triangle.c2;
+	t_quadratic			q;
+	
+	t_vector v0v1 = sub(v1,v0); 
+    t_vector v0v2 = sub(v2, v0);
+	normal = crossproduct(v0v1, v0v2);
+	// if (dot(ray.direction, normal) < 0)
+	// 	normal = multi(normal, -1);
+
+	q.u = 0;
+	q.v = 0;
+	float denom = dot(normal, normal);
+	d = dot(normal, ray.direction);
+	vector_distance = vecto_subvec(triangle.origin, ray.origin);
+	dist = dot(vector_distance, normal) / d;
+	t_vector p = add(ray.origin, multi(ray.direction, dist));
+	q .t0= -1;
+	if (   triangle_side(v1, v0, p, normal) < 0
+		|| (u = triangle_side(v2, v1, p, normal)) < 0
+		|| (v = triangle_side(v0, v2, p, normal)) < 0 ) return q;
+
+	u /= denom;
+    v /= denom;
+	q.u = u;
+	q.v = v;
+	if (dist > 0)
+		q.t0 = dist;
+	return q;
 }
 
 t_quadratic					intersection_cylinder(t_ray ray, t_object cylinder)

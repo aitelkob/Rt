@@ -23,6 +23,7 @@ void			parce(char *av, t_rtv *rtv);
 void			plan_parce(t_rtv *rtv);
 void			plan_checker(char *data, char *arg,
 				t_object *plan, t_rtv *rtv);
+void					triangle_parce(t_rtv *rtv);
 void			sphere_parce(t_rtv *rtv);
 void			sphere_checker(char *data, char *arg,
 				t_object *sphere, t_rtv *rtv);
@@ -83,7 +84,7 @@ t_vector		obj_norm(t_ray ray, t_object *obj, double dst);
 /*
  ********************************mlx stuff
 */
-void			create_bmp(int *img,char l,int i);
+//void			create_bmp(int *img,char l,int i);
 void			display(t_rtv *rtv, t_mlix *mlx);
 int				key_hook(int keycode, t_rtv *rtv);
 void			setup_mlx(t_mlix *mlx);
@@ -97,7 +98,11 @@ t_object **close, t_object *current);
 
 void			raytracing(t_rtv rtv);
 t_vector		lighting(t_rtv *rtv, t_object *obj,t_hit hit, t_ray ray);
+t_vector		lightings(t_vector colors, t_rtv *rtv, t_object *obj,t_hit hit, t_ray ray);
 t_vector		get_pxl(t_rtv *rtv, t_ray ray);
+t_cl_obj			get_pxl_obj(t_rtv *rtv, t_ray ray);
+t_min_obj				get_dest_obj(t_rtv *rtv, t_ray ray,
+t_object **close, t_object *current);
 void			blur(t_mlix *mlx);
 t_vector        camera(t_camera *camera, double x, double y, t_vector up,t_vector test);
 t_vector		gpxadv(t_rtv *rtv, t_ray ray, t_vector direction, int depth);
@@ -110,10 +115,12 @@ void			darkcheck(t_vector *c, double ref);
 /*
  ********************************** intersection
 */
-double			intersection_plane(t_ray ray, t_object plane);
+double				intersection_plane(t_ray ray, t_object plane);
 t_quadratic			intersection_cylinder(t_ray ray, t_object cylinder);
 t_quadratic			intersection_cone(t_ray ray, t_object cone);
 t_quadratic			intersection_sphere(t_ray ray, t_object sphere);
+t_quadratic			intersection_triangle(t_ray ray, t_object triangle);
+
 
 /*
  ********************************** filtters

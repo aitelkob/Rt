@@ -154,6 +154,7 @@ int	mipng_fill_img(mlx_img_list_t *img, unsigned char *buf, png_info_t *pi)
       ibuf[ipos+3] = 0xFF - ibuf[ipos+3];
       ipos += UNIQ_BPP;
     }
+  printf("ipos == %d", ipos);
   return (0);
 }
 

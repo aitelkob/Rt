@@ -46,6 +46,8 @@ void	triangle_checker(char *data, char *arg, t_object *triangle, t_rtv *rtv)
 		triangle->origin = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("c1", data))
 		triangle->c1 = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("c2", data))
+		triangle->c2 = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("color", data))
 		triangle->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("negative", data))

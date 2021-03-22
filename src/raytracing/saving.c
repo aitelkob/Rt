@@ -94,24 +94,24 @@ void			bmp_put(int *img, int fd)
   free(buf);
 }
 
-void		create_bmp(int *img,char l,int i)
-{
-	int     fd;
-    t_bmp   bmp;
-    char    t;
-    char   local[] = "./screenshot/test.bmp";
+// void		create_bmp(int *img,char l,int i)
+// {
+// 	int     fd;
+//     t_bmp   bmp;
+//     char    t;
+//     char   local[] = "./screenshot/test.bmp";
 
-	fd = open(local,O_CREAT | O_WRONLY | O_EXCL, S_IRUSR | S_IWUSR);
-    if (fd < 0)
-      if (errno == EEXIST)
-      {
-        t =  ('A' + (random() % 26));
-        if (local[13] == t)
-          t =('a' + (random() % 26)); 
-        local[13]= t;
-        fd = open(local,O_CREAT | O_WRONLY | O_EXCL, S_IRUSR | S_IWUSR);
-      }
-  fill_data(&bmp);
-  bmp_header(&bmp,fd);
-  bmp_put(img,fd);
-}
+// 	fd = open(local,O_CREAT | O_WRONLY | O_EXCL, S_IRUSR | S_IWUSR);
+//     if (fd < 0)
+//       if (errno == EEXIST)
+//       {
+//         t =  ('A' + (random() % 26));
+//         if (local[13] == t)
+//           t =('a' + (random() % 26)); 
+//         local[13]= t;
+//         fd = open(local,O_CREAT | O_WRONLY | O_EXCL, S_IRUSR | S_IWUSR);
+//       }
+//   fill_data(&bmp);
+//   bmp_header(&bmp,fd);
+//   bmp_put(img,fd);
+// }

@@ -1,0 +1,16 @@
+light:
+  origin: 0 -8 -50
+  intensity: 100
+plane:
+  origin: 0 90 0
+  aim: 0 1 0
+  color: 55 25 255
+sphere:
+  origin: 0 0 -1
+  radius: 5
+  color: 205 10 60
+  negative: 0
+camera:
+  origin: 0 -20 0
+  fov: 60
+  look_at: 0 0 0
