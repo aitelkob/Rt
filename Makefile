@@ -61,6 +61,7 @@ SRC			+=mlx/mlx_stuffnext.c
 SRC         +=parse/light_parse.c
 SRC         +=parse/tools_parse2.c
 SRC			+=parse/parse.c
+SRC			+=parse/parse2.c
 SRC			+=parse/extra.c
 SRC			+=parse/objs_parse.c
 SRC			+=parse/check_obj.c

@@ -20,6 +20,7 @@
 */
 
 void			parce(char *av, t_rtv *rtv);
+void			parce_obj(char *av, t_rtv *rtv);
 void			plan_parce(t_rtv *rtv);
 void			plan_checker(char *data, char *arg,
 				t_object *plan, t_rtv *rtv);

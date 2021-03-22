@@ -25,14 +25,11 @@ int			main(int ac, char **av)
 		parce(ft_strrev(av[1]), &rtv);
 		if (rtv.camera->check != 1)
 			syntax_error(&rtv, ".", "camera parce plz  ", rtv.parse.nb_line);
-		printf("Parsing over in %f seconds \n", (double)(clock() - rtv.tic) / CLOCKS_PER_SEC);
 		setup_mlx(&rtv.mlx);
 		rtv.tic = clock();
 		rtv.filter = 0;
 		rtv.loding = 0;
 		raytracing(rtv);
-		time = (double)(clock() - rtv.tic) / CLOCKS_PER_SEC;
-		printf("Rendering over in %f seconds \n", time/6);
 		display(&rtv, &rtv.mlx);
 	}
 	else
