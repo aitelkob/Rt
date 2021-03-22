@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 18:01:37 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/21 16:11:11 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 19:21:21 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define KEY_Y 16
 # define KEY_T 17
 # define PI 3.14159
-# define THREAD_NUMBER 6 
+# define THREAD_NUMBER 6
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>

@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 09:27:27 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 18:10:18 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/22 19:43:30 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void				create_bmp(int *img, char l, int i)
 	t_bmp			bmp;
 	char			t;
 	char			*local;
-
-	local = "./screenshot/test.bmp";
+	
+	local = ft_strdup("./screenshot/test.bmp");
 	fd = open(local, O_CREAT | O_WRONLY | O_EXCL, S_IRUSR | S_IWUSR);
 	if (fd < 0)
 		if (errno == EEXIST)
@@ -96,4 +96,5 @@ void				create_bmp(int *img, char l, int i)
 	fill_data(&bmp);
 	bmp_header(&bmp, fd);
 	bmp_put(img, fd);
+	free(local);
 }
