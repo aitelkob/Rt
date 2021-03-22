@@ -22,7 +22,7 @@ t_camera		*cam_init(void)
 	camera->fov = 60;
 	camera->depth = 5;
 	camera->look_at = (t_vector){0, 0, 0};
-	camera->amblgt = 25;
+	camera->amblgt = 100;
 	return (camera);
 }
 

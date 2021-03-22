@@ -94,6 +94,21 @@ void			stock_point(t_rtv *rtv,char *av)
       error("fd matsedche \n", "fd matsedch");
 }
 
+void        loop_print(t_rtv *rtv)
+{
+    t_object *current = rtv->obj;
+    int i = 0;
+    while (current)
+    {
+        printf("\ntriangle %d ----->",i);
+        print_vect(current->origin,"this is  -----------> ");
+        print_vect(current->c1,"this is  -----------> ");
+        print_vect(current->c2,"this is  -----------> ");
+    i++;
+        current = current->next;
+    }
+}
+
 void			parce_obj(char *av, t_rtv *rtv)
 {
 	if (!(rtv->parse.fd = open(av, O_RDONLY)))
@@ -111,5 +126,6 @@ void			parce_obj(char *av, t_rtv *rtv)
 	free(rtv->parse.line);
 	if (rtv->parse.fd == -1)
 		error("fd matsedche \n", "fd matsedch");
-	//stock_point(rtv,av);
+	stock_point(rtv,av);
+	loop_print(rtv);
 }
