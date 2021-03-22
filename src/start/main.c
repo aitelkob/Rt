@@ -18,7 +18,7 @@ t_camera		*cam_init(void)
 	t_camera	*camera;
 
 	camera = (t_camera *)malloc(sizeof(t_camera));
-	camera->origin = (t_vector){50, 40, -400};
+	camera->origin = (t_vector){100, 100, 500};
 	camera->fov = 60;
 	camera->depth = 5;
 	camera->look_at = (t_vector){0, 0, 0};
@@ -51,9 +51,9 @@ int				main(int ac, char **av)
 		parce(ft_strrev(av[1]), &rtv);
 		ok++;
 	}
-	else if (ac == 2 && strncmp(ft_strrev(av[1]), "jbo.", 4) == 0)
+	else if (ac == 2 && strncmp((av[1]), "jbo.", 4) == 0)
 	{
-		parce(ft_strrev(av[1]), &rtv);
+		parce_obj(ft_strrev(av[1]), &rtv);
 		ok++;
 	}
 	printf("ok is %d\n", ok);

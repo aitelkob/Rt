@@ -111,5 +111,5 @@ void			parce_obj(char *av, t_rtv *rtv)
 	free(rtv->parse.line);
 	if (rtv->parse.fd == -1)
 		error("fd matsedche \n", "fd matsedch");
-	stock_point(rtv,av);
+	//stock_point(rtv,av);
 }
