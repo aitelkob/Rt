@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 17:49:53 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/23 14:29:27 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ t_vector			obj_norm(t_ray ray, t_object *obj, double dst)
 	else if (obj && obj->type == CONE)
 		normal = sub(p_c, multi(obj->aim, tk * m));
 	else if (obj && obj->type == TRIANGLE)
-		normal = crossproduct(sub(obj->c1,obj->origin), sub(obj->c2,obj->origin));
+		normal = crossproduct(sub(obj->c1, obj->origin), sub(obj->c2, obj->origin));
 	if (dot(ray.direction, normal) > 0)
 		normal = multi(normal, -1);
 	return (nrm(normal));

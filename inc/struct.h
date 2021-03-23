@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 19:17:37 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/23 14:19:11 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,16 @@ typedef	struct		s_quadratic
 	double			t1;
 }					t_quadratic;
 
+typedef	struct		s_tritemp
+{
+	t_vector v0;
+	t_vector v1;
+	t_vector v2;
+	t_vector v0v1;
+    t_vector v0v2;
+}					t_tritemp;
+
+
 typedef	struct		s_object
 {
 	int				type;
@@ -167,6 +177,7 @@ typedef	struct		s_object
 	double			refractionratio;
 	double			negative;
 	int				material;
+	t_tritemp		temp;
 	struct s_object	*next;
 }					t_object;
 typedef struct		s_camera

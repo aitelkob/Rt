@@ -6,7 +6,7 @@
 #    By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/23 16:25:47 by yait-el-          #+#    #+#              #
-#    Updated: 2021/03/22 17:51:44 by yait-el-         ###   ########.fr        #
+#    Updated: 2021/03/23 14:27:06 by babdelka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ SRC			+=error/parse_error.c
 SRC			+=raytracing/raytracing.c
 SRC			+=raytracing/rotation.c
 SRC			+=raytracing/intersection.c
+SRC			+=raytracing/intersectiontri.c
 SRC			+=raytracing/get_pxl.c
 SRC			+=raytracing/colors.c
 SRC			+=raytracing/saving.c
