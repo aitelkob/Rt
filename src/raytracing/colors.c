@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 19:15:32 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/21 17:55:49 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/23 18:20:36 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ t_rtv *rtv, t_object *obj)
 	ray_light.origin = tmp_light->origin;
 	ray_light.direction = nrm(multi(shadv->light_dir, -1));
 	dst = get_dest(rtv, ray_light, &tmp_obj, obj);
-	shadv->color = tmp_obj->color;
-	shadv->refra = tmp_obj->refraction;
-	darkcheck(&shadv->color, shadv->refra);
+	if(dst > 0)
+	{
+		shadv->color = tmp_obj->color;
+		shadv->refra = tmp_obj->refraction;
+		darkcheck(&shadv->color, shadv->refra);
+	}
 	return (dst);
 }
 
