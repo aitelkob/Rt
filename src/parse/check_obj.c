@@ -29,7 +29,6 @@ void	plan_checker_he(char *data, char *arg, t_object *plan, t_rtv *rtv)
 		free(data);
 		unknown_setting(rtv, data, rtv->parse.nb_line);
 	}
-	free(data);
 }
 
 void	plan_checker(char *data, char *arg, t_object *plan, t_rtv *rtv)
@@ -47,6 +46,7 @@ void	plan_checker(char *data, char *arg, t_object *plan, t_rtv *rtv)
 	else
 		plan_checker_he(data, arg, plan, rtv);
 	convertmaterial(plan);
+	free(data);
 }
 
 void	triangle_checker(char *data, char *arg, t_object *triangle, t_rtv *rtv)
@@ -69,6 +69,7 @@ void	triangle_checker(char *data, char *arg, t_object *triangle, t_rtv *rtv)
 		free(data);
 		unknown_setting(rtv, "triangle", rtv->parse.nb_line);
 	}
+	convertmaterial(triangle);
 	free(data);
 }
 

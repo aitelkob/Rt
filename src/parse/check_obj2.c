@@ -30,8 +30,6 @@ void		cylinder_help(char *data, char *arg, t_object *cylinder, t_rtv *rtv)
 		free(data);
 		unknown_setting(rtv, "cylinder", rtv->parse.nb_line);
 	}
-	convertmaterial(cylinder);
-	free(data);
 }
 
 void		cylinder_checker(char *data, char *arg,
@@ -51,6 +49,8 @@ t_object *cylinder, t_rtv *rtv)
 		cylinder->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else
 		cylinder_help(data, arg, cylinder, rtv);
+	convertmaterial(cylinder);
+	free(data);
 }
 
 void		cone_checker_help(char *data, char *arg, t_object *cone, t_rtv *rtv)

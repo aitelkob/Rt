@@ -43,6 +43,7 @@
 # define KEY_R 15
 # define KEY_Y 16
 # define KEY_T 17
+# define SCENES 1
 # define PI 3.14159
 # define THREAD_NUMBER 6
 # include <unistd.h>
