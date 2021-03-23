@@ -20,6 +20,8 @@ t_quadratic			intersection(t_ray ray, t_object tmp)
 		q = intersection_sphere(ray, tmp);
 	else if (tmp.type == PLANE)
 		q.t0 = intersection_plane(ray, tmp);
+	else if (tmp.type == TRIANGLE)
+		q.t0 = intersection_triangle(ray, tmp);
 	else if (tmp.type == CYLINDER)
 		q = intersection_cylinder(ray, tmp);
 	else if (tmp.type == CONE)
@@ -98,6 +100,8 @@ t_vector			obj_norm(t_ray ray, t_object *obj, double dst)
 		normal = sub(p_c, multi(obj->aim, m));
 	else if (obj && obj->type == CONE)
 		normal = sub(p_c, multi(obj->aim, tk * m));
+	else if (obj && obj->type == TRIANGLE)
+		normal = crossproduct(sub(obj->c1,obj->origin), sub(obj->c2,obj->origin));
 	if (dot(ray.direction, normal) > 0)
 		normal = multi(normal, -1);
 	return (nrm(normal));

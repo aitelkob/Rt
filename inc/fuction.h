@@ -27,6 +27,7 @@ void			plan_checker(char *data, char *arg,
 void			sphere_parce(t_rtv *rtv);
 void			sphere_checker(char *data, char *arg,
 				t_object *sphere, t_rtv *rtv);
+double			intersection_triangle(t_ray ray, t_object triangle);
 void			cylinder_parce(t_rtv *rtv);
 void			cylinder_checker(char *data, char *arg,
 				t_object *cylinder, t_rtv *rtv);
