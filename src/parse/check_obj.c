@@ -20,6 +20,8 @@ void	plan_checker_he(char *data, char *arg, t_object *plan, t_rtv *rtv)
 		plan->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-translation", data))
 		plan->translation = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-slice", data))
+		plan->slicing = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-rot", data))
 		plan->rot = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-material", data))
@@ -59,6 +61,8 @@ void	triangle_checker(char *data, char *arg, t_object *triangle, t_rtv *rtv)
 		triangle->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-negative", data))
 		triangle->negative = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-slice", data))
+		triangle->slicing = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-translation", data))
 		triangle->translation = input_vector(rtv, arg, rtv->parse.nb_line,\
 				data);
@@ -87,6 +91,8 @@ void	sphere_checker(char *data, char *arg, t_object *sphere, t_rtv *rtv)
 		sphere->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-negative", data))
 		sphere->negative = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-slice", data))
+		sphere->slicing = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-color", data))
 		sphere->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-translation", data))

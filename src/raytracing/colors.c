@@ -22,9 +22,12 @@ t_rtv *rtv, t_object *obj)
 	ray_light.origin = tmp_light->origin;
 	ray_light.direction = nrm(multi(shadv->light_dir, -1));
 	dst = get_dest(rtv, ray_light, &tmp_obj, obj);
-	shadv->color = tmp_obj->color;
-	shadv->refra = tmp_obj->refraction;
-	darkcheck(&shadv->color, shadv->refra);
+	if(dst != -1)
+	{
+		shadv->color = tmp_obj->color;
+		shadv->refra = tmp_obj->refraction;
+		darkcheck(&shadv->color, shadv->refra);
+	}
 	return (dst);
 }
 

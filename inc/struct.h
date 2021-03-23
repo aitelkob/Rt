@@ -177,6 +177,7 @@ typedef	struct		s_object
 	double			refractionratio;
 	double			negative;
 	int				material;
+	int				slicing;
 	t_tritemp		temp;
 	struct s_object	*next;
 }					t_object;
@@ -199,6 +200,7 @@ typedef struct		s_slice
 {
 	t_vector		origin;
 	t_vector		vec;
+	int				shape;
 	struct s_slice	*next;
 }					t_slice;
 

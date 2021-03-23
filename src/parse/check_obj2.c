@@ -20,6 +20,8 @@ void		cylinder_help(char *data, char *arg, t_object *cylinder, t_rtv *rtv)
 		cylinder->negative = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-color", data))
 		cylinder->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-slice", data))
+		cylinder->slicing = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-translation", data))
 		cylinder->translation = input_vector(rtv, arg,
 				rtv->parse.nb_line, data);
@@ -86,6 +88,8 @@ void		cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv)
 		cone->radius = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-reflection", data))
 		cone->reflection = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-slice", data))
+		cone->slicing = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-refraction", data))
 		cone->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-refraction_index", data))

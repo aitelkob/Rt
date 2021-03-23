@@ -12,6 +12,34 @@
 
 #include "rtv1.h"
 
+double slice(t_ray ray, t_quadratic q, t_slice *slice, t_object *obj)
+{
+	t_vector		xvec;
+	t_vector		p_c;
+	double		is_sliced;
+	t_slice 	*tmp;
+
+	tmp = slice;
+	is_sliced = q.t0;
+	while (tmp)
+	{
+		if (tmp->shape == obj->slicing)
+		{
+			xvec = sub(ray.origin, tmp->origin);
+			p_c = add(xvec, multi(ray.direction, q.t0));
+			is_sliced = dot(p_c, tmp->vec) > 0 ? q.t0 : -1;
+			if(is_sliced < 0)
+			{
+				p_c = add(xvec, multi(ray.direction, q.t1));
+				is_sliced = dot(p_c, tmp->vec) > 0 ? q.t1 : -1;;
+			}
+		}
+		tmp = tmp->next;
+	}
+	
+	return is_sliced;
+}
+
 t_quadratic			intersection(t_ray ray, t_object tmp)
 {
 	t_quadratic		q;
@@ -60,6 +88,7 @@ t_object **close, t_object *current)
 	while (tmp)
 	{
 		q = intersection(ray, *tmp);
+		q.t0 = slice(ray, q, rtv->slice, tmp);
 		if (q.t0 > 0 && (q.t0 < min + 0.000000001 ||\
 		min == -1) && tmp->negative != 1)
 			if ((isnegativeobj(rtv, ray, q.t0) ||\
