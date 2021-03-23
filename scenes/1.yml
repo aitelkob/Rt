@@ -1,0 +1,61 @@
+light:
+ -origin: 0 500 -900
+ -intensity: 100
+plane:
+ -origin: 0 0 0
+ -aim: 0 1 0
+ -color: 255 255 255
+ -rot: 0 0 0
+ -reflection: 0
+plane:
+ -origin: 0 2000 0
+ -aim: 0 -1 0
+ -color: 200 0 200
+ -rot: 0 0 0
+plane:
+ -origin: 500 0 0
+ -aim: 1 0 0
+ -color: 0 255 0
+ -rot: 0 0 0
+plane:
+ -origin: -500 0 0
+ -aim: -1 0 0
+ -color: 0 255 0
+ -rot: 0 0 0
+ -material: mirror
+plane:
+ -origin: 0 0 -2000
+ -aim: 0 0 1
+ -color: 255 255 255
+ -rot: 0 0 0
+plane:
+ -origin: 0 0 2000
+ -aim: 0 0 -1
+ -color: 255 0 0
+ -rot: 0 0 0
+cylinder:
+ -origin: -100 0 -490
+ -aim: 0 1 0
+ -rot: 0 0 -30
+ -radius: 20
+ -color: 0 0 250
+ -material: glass
+sphere:
+ -origin: 0 200 0
+ -radius: 150
+ -color: 0 0 255
+ -material: mirror
+sphere:
+ -origin: 250 250 200
+ -radius: 80
+ -color: 0 255 255
+ -material: thinglass
+sphere:
+ -origin: 0 200 700
+ -radius: 50
+ -color: 0 255 0
+ -material: mirror
+camera:
+ -origin: 0 200 -1000
+ -look_at: 0 0 0
+ -depth: 30
