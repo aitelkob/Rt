@@ -90,15 +90,20 @@ void					stock_point(t_rtv *rtv, char *av)
 
 void					parce_obj(char *av, t_rtv *rtv)
 {
+	int					i;
 	if (!(rtv->parse.fd = open(av, O_RDONLY)))
 		error("this is fd error !", "fd ");
 	rtv->parse.nb_line = 0;
 	rtv->light = NULL;
 	rtv->obj = NULL;
+	i = 0;
 	while (get_next_line(rtv->parse.fd, &rtv->parse.line))
 	{
+		if (i == 1 && (ft_strcmp(rtv->parse.line, "# www.blender.org") != 0))
+			syntax_error(rtv, "name of obj", "note good", rtv->parse.nb_line);
 		if (rtv->parse.line[0] == 'v')
 			rtv->parse.nb_line++;
+		i++;
 		free(rtv->parse.line);
 	}
 	free(rtv->parse.line);
