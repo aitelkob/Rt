@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:22:50 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 13:01:33 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 13:02:15 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,15 @@ void						light_parce(t_rtv *rtv)
 	}
 }
 
+void				first_cam(t_rtv *rtv, t_camera *camera)
+{
+	t_camera		*tmp;
+
+	tmp = camera;
+	tmp->next = rtv->camera;
+	rtv->camera = tmp;
+}
+
 void						camera_parce(t_rtv *rtv)
 {
 	static	t_camera		*camera;
@@ -120,7 +129,7 @@ void						camera_parce(t_rtv *rtv)
 	}
 	else
 	{
-		rtv->camera = camera;
+		first_cam(rtv, camera);
 		rtv->camera->check = 1;
 		camera = NULL;
 		forward(rtv, data);
