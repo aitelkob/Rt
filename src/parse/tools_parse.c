@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:26:32 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 10:52:14 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:11:48 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ int					input_material(t_rtv *rtv, char *data, int nbr, char *head)
 		ret = GLASS;
 	else if (!ft_strcmp("mirror", lines[0]))
 		ret = MIRROR;
-	else if (!ft_strcmp("rawmetal", lines[0]))
-		ret = RAWMETAL;
+	else if (!ft_strcmp("rawmaterial", lines[0]))
+		ret = RAWMATERIAL;
 	else if (!ft_strcmp("water", lines[0]))
 		ret = WATER;
 	else if (!ft_strcmp("thinglass", lines[0]))

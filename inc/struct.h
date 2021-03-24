@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 14:34:15 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:11:40 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ enum				e_material
 {
 	GLASS = 1,
 	MIRROR,
-	RAWMETAL,
+	RAWMATERIAL,
 	WATER,
 	THINGLASS,
 	EMPTY

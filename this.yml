@@ -54,7 +54,7 @@ sphere:
  -origin: 0 200 700
  -radius: 50
  -color: 0 255 0
- -material: mirror
+ -material: rawmaterial
 camera:
  -origin: 150 200 1000
  -look_at: 0 0 0

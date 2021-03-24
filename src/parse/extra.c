@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 15:49:11 by babdelka          #+#    #+#             */
-/*   Updated: 2021/03/24 10:51:48 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:11:54 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void					convertmaterial(t_object *obj)
 			obj->refraratio = 10.00;
 		obj->color = (t_vector){0, 0, 0};
 	}
-	else if (obj->material == RAWMETAL)
+	else if (obj->material == RAWMATERIAL)
 	{
 		obj->reflection = 0;
 		obj->refraction = 0;
