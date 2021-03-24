@@ -45,7 +45,7 @@ int				main(int ac, char **av)
 	int			ok;
 
 	ok = 0;
-	rtv.camera = cam_init();
+	//rtv.camera = cam_init();
 	if (ac == 2 && strncmp(ft_strrev(av[1]), "lmy.", 4) == 0)
 	{
 		parce(ft_strrev(av[1]), &rtv);
@@ -54,6 +54,7 @@ int				main(int ac, char **av)
 	else if (ac == 2 && strncmp((av[1]), "jbo.", 4) == 0)
 	{
 		parce_obj(ft_strrev(av[1]), &rtv);
+			while(1);
 		ok++;
 	}
 	if (ok)
