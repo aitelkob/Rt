@@ -41,8 +41,12 @@ void	plan_checker(char *data, char *arg, t_object *plan, t_rtv *rtv)
 		plan->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-reflection", data))
 		plan->reflection = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-texture", data))
+		plan->texture = input_texture(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-negative", data))
 		plan->negative = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-disrup", data))
+		plan->disruptions = input_noise(rtv, arg, rtv->parse.nb_line, data);
 	else
 		plan_checker_he(data, arg, plan, rtv);
 	convertmaterial(plan);
@@ -58,6 +62,10 @@ t_rtv *rtv)
 		triangle->reflection = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-refraction_index", data))
 		triangle->refraratio = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-texture", data))
+		triangle->texture = input_texture(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-disrup", data))
+		triangle->disruptions = input_noise(rtv, arg, rtv->parse.nb_line, data);
 	else
 	{
 		free(data);
@@ -98,6 +106,8 @@ void	sphere_checker_help(char *data, char *arg, t_object *sphere, t_rtv *rtv)
 		sphere->translation = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-material", data))
 		sphere->material = input_material(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-disrup", data))
+		sphere->disruptions = input_noise(rtv, arg, rtv->parse.nb_line, data);
 	else
 	{
 		free(data);
@@ -112,7 +122,7 @@ void	sphere_checker(char *data, char *arg, t_object *sphere, t_rtv *rtv)
 	else if (!ft_strcmp("-radius", data))
 		sphere->radius = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-texture", data))
-		sphere->radius = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+		sphere->texture = input_texture(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-reflection", data))
 		sphere->reflection = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-refraction", data))

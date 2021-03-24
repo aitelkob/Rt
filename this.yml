@@ -40,16 +40,20 @@ cylinder:
  -radius: 20
  -color: 0 0 250
  -material: glass
+ -disrup: normal
 sphere:
  -origin: 0 200 0
  -radius: 150
  -color: 0 0 255
  -material: glass
+ -texture: /images/tv.png
+ -disrup: check
 sphere:
  -origin: 250 250 200
  -radius: 80
  -color: 0 255 255
  -material: thinglass
+ -disrup : perlin
 sphere:
  -origin: 0 200 700
  -radius: 50
