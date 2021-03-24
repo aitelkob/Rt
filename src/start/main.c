@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 17:46:27 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 16:51:06 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 10:06:02 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int				main(int ac, char **av)
 		parce_obj(ft_strrev(av[1]), &rtv);
 		ok++;
 	}
-	printf("ok is %d\n", ok);
 	if (ok)
 		start(&rtv);
 	else

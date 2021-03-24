@@ -1,0 +1,13 @@
+camera:
+  -origin: 0 10 50
+light:
+  -origin: 0 1 50
+  -intensity: 100
+plane:
+  -origin: 0 0 0
+  -aim: 0 1 0
+  -color: 255 255 255
+sphere:
+  -origin: 0 0 0
+  -radius: 10
+  -color: 255 0 0

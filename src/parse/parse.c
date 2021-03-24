@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:43:51 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 11:35:35 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 10:00:36 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,5 @@ void			parce(char *av, t_rtv *rtv)
 		forward(rtv, rtv->parse.line);
 	}
 	if (rtv->parse.fd == -1)
-		error("fd matsedche \n", "fd matsedch");
+		error("File not found ", av);
 }
