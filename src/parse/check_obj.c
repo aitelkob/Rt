@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 17:07:15 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 18:06:24 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/24 10:43:29 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	plan_checker_he(char *data, char *arg, t_object *plan, t_rtv *rtv)
 	if (!ft_strcmp("-refraction", data))
 		plan->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-refraction_index", data))
-		plan->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+		plan->refraratio = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-translation", data))
 		plan->translation = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-rot", data))
@@ -49,6 +49,22 @@ void	plan_checker(char *data, char *arg, t_object *plan, t_rtv *rtv)
 	free(data);
 }
 
+void	triangle_checker_help(char *data, char *arg, t_object *triangle,\
+t_rtv *rtv)
+{
+	if (!ft_strcmp("-refraction", data))
+		triangle->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-reflection", data))
+		triangle->reflection = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-refraction_index", data))
+		triangle->refraratio = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else
+	{
+		free(data);
+		unknown_setting(rtv, "triangle", rtv->parse.nb_line);
+	}
+}
+
 void	triangle_checker(char *data, char *arg, t_object *triangle, t_rtv *rtv)
 {
 	if (!ft_strcmp("-origin", data))
@@ -64,30 +80,17 @@ void	triangle_checker(char *data, char *arg, t_object *triangle, t_rtv *rtv)
 				data);
 	else if (!ft_strcmp("-rot", data))
 		triangle->c2 = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-material", data))
+		triangle->material = input_material(rtv, arg, rtv->parse.nb_line, data);
 	else
-	{
-		free(data);
-		unknown_setting(rtv, "triangle", rtv->parse.nb_line);
-	}
+		triangle_checker_help(data, arg, triangle, rtv);
 	convertmaterial(triangle);
 	free(data);
 }
 
-void	sphere_checker(char *data, char *arg, t_object *sphere, t_rtv *rtv)
+void	sphere_checker_help(char *data, char *arg, t_object *sphere, t_rtv *rtv)
 {
-	if (!ft_strcmp("-origin", data))
-		sphere->origin = input_vector(rtv, arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("-radius", data))
-		sphere->radius = input_onearg(rtv, arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("-radius", data))
-		sphere->radius = input_onearg(rtv, arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("-texture", data))
-		sphere->radius = input_onearg(rtv, arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("-refraction", data))
-		sphere->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("-refraction_index", data))
-		sphere->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("-negative", data))
+	if (!ft_strcmp("-negative", data))
 		sphere->negative = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-color", data))
 		sphere->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
@@ -100,6 +103,24 @@ void	sphere_checker(char *data, char *arg, t_object *sphere, t_rtv *rtv)
 		free(data);
 		unknown_setting(rtv, "sphere", rtv->parse.nb_line);
 	}
+}
+
+void	sphere_checker(char *data, char *arg, t_object *sphere, t_rtv *rtv)
+{
+	if (!ft_strcmp("-origin", data))
+		sphere->origin = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-radius", data))
+		sphere->radius = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-texture", data))
+		sphere->radius = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-reflection", data))
+		sphere->reflection = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-refraction", data))
+		sphere->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-refraction_index", data))
+		sphere->refraratio = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else
+		sphere_checker_help(data, arg, sphere, rtv);
 	convertmaterial(sphere);
 	free(data);
 }

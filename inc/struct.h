@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/23 14:19:11 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 10:35:33 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ typedef	struct		s_object
 	t_vector		normal;
 	double			reflection;
 	double			refraction;
-	double			refractionratio;
+	double			refraratio;
 	char			*texture;
 	double			negative;
 	int				material;

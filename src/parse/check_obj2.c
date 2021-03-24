@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_obj2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 17:49:08 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 18:03:12 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/24 10:38:01 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void		cylinder_help(char *data, char *arg, t_object *cylinder, t_rtv *rtv)
 {
 	if (!ft_strcmp("-refraction_index", data))
-		cylinder->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+		cylinder->refraratio = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-negative", data))
 		cylinder->negative = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-color", data))
@@ -89,7 +89,7 @@ void		cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv)
 	else if (!ft_strcmp("-refraction", data))
 		cone->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-refraction_index", data))
-		cone->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+		cone->refraratio = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else
 		cone_checker_help(data, arg, cone, rtv);
 }
