@@ -44,6 +44,7 @@ void			ambient_parce(t_rtv *rtv);
 void			init_obj(t_object *obj);
 void			camera_parce(t_rtv *rtv);
 char			*settings_cut(t_rtv *rtv, char *variable, char **data);
+char			*input_texture(t_rtv *rtv, char *data, int nbr, char *head);
 char			*name_cut(t_rtv *rtv, char *line);
 void			forward(t_rtv *rtv, char *line);
 void			syntax_error(t_rtv *rtv, char *line,

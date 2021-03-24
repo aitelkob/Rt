@@ -112,7 +112,7 @@ void	sphere_checker(char *data, char *arg, t_object *sphere, t_rtv *rtv)
 	else if (!ft_strcmp("-radius", data))
 		sphere->radius = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-texture", data))
-		sphere->radius = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+		sphere->texture = input_texture(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-reflection", data))
 		sphere->reflection = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-refraction", data))

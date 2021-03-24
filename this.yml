@@ -45,6 +45,7 @@ sphere:
  -radius: 150
  -color: 0 0 255
  -material: glass
+ -texture: /images/tv.png
 sphere:
  -origin: 250 250 200
  -radius: 80
