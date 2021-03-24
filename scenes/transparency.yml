@@ -1,15 +1,6 @@
 light:
  -origin: 0 500 1500
  -intensity: 100
-slice:
- -origin: 0 0 0
- -vec: 0 0 0
-slice:
- -origin: 1 0 0
- -vec: 0 0 0
-slice:
- -origin: 3 0 0
- -vec: 0 0 0
 light:
  -origin: 0 500 -1990
  -intensity: 100
@@ -58,12 +49,12 @@ sphere:
  -origin: 0 200 0
  -radius: 150
  -color: 0 0 255
- -refraction: 100
+ -material: thinglass
 sphere:
  -origin: 250 250 200
  -radius: 80
  -color: 0 255 255
- -reflection: 100
+ -material: glass
 sphere:
  -origin: 0 200 700
  -radius: 50

@@ -3,23 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   tools_parse2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 15:09:15 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/06 15:09:26 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/24 10:07:38 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void			print_vect(t_vector vec, char *str)
-{
-	printf("%s->x=%0.2f,%0.2f,%0.2f\n", str, vec.x, vec.y, vec.z);
-}
+// void			print_vect(t_vector vec, char *str)
+// {
+// 	printf("%s->x=%0.2f,%0.2f,%0.2f\n", str, vec.x, vec.y, vec.z);
+// }
 
 void			error(char *str, char *where)
 {
-	printf("%s in ===(%s)\n", str, where);
+	int i;
+
+	i = -1;
+	while (str[++i])
+		write(1, &str[i], 1);
+	i = -1;
+	while (where[++i])
+		write(1, &where[i], 1);
+	write(1, "\n", 1);
 	exit(0);
 }
 
