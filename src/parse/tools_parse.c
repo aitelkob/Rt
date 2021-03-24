@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:26:32 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 13:35:46 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 10:52:14 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void				init_obj(t_object *obj)
 	obj->color = v;
 	obj->reflection = 0;
 	obj->refraction = 0;
-	obj->refractionratio = 0.5;
+	obj->refraratio = 0.5;
 	obj->material = EMPTY;
 }
 

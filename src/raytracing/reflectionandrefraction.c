@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:39:56 by babdelka          #+#    #+#             */
-/*   Updated: 2021/03/22 18:03:04 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 10:52:29 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_rtv *rtv, t_hit hit)
 	ray.direction1 = add(multi(multi(normal, dot(ray.direction1, normal)),\
 	-2.0f), ray.direction1);
 	ray.direction2 = add(multi(multi(normal, dot(ray.direction2, normal)),\
-	obj->refractionratio), ray.direction2);
+	obj->refraratio), ray.direction2);
 	ray.origin = hit.point;
 	hit.depth--;
 	ratio[0] = obj->reflection + 0.1;
