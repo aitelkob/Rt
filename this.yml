@@ -60,14 +60,14 @@ camera:
  -look_at: 0 0 0
  -depth: 5
 camera:
- -origin: 150 200 1000
+ -origin: 150 300 1000
  -look_at: 0 0 0
  -depth: 5
 camera:
- -origin: 150 200 1000
+ -origin: 150 400 1000
  -look_at: 0 0 0
  -depth: 5
 camera:
- -origin: 150 200 1000
+ -origin: 0 200 1000
  -look_at: 0 0 0
  -depth: 5

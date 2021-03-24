@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_rt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 18:13:58 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 18:14:25 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/24 14:34:43 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void				init_cam(t_camera *cam)
 	cam->depth = 5;
 	cam->look_at = (t_vector){0, 0, 0};
 	cam->amblgt = 25;
+	cam->next = NULL;
+	cam->prev = NULL;
 }
 
 void				light_check(char *data, char *arg,

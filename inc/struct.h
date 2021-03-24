@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 13:00:39 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 14:34:15 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ typedef struct		s_camera
 	double			depth;
 	double			amblgt;
 	struct s_camera	*next;
+	struct s_camera	*prev;
 }					t_camera;
 
 typedef	struct		s_ambient

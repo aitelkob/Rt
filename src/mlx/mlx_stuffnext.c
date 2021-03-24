@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 12:29:39 by babdelka          #+#    #+#             */
-/*   Updated: 2021/03/22 19:36:36 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 14:47:24 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,14 @@ int				mouse_pressnext(int key, int x, int y, t_rtv *rtv)
 
 int				mouse_press(int key, int x, int y, t_rtv *rtv)
 {
+	if (key == 1)
+	{
+		displayloading(rtv, &rtv->mlx);
+		if (rtv->camera->next)
+			rtv->camera = rtv->camera->next;
+		raytracing(*rtv);
+		display(rtv, &rtv->mlx);
+	}
 	if (key == 1 && x >= 1034 && x <= 1286 && y >= 12 && y <= 104)
 	{
 		displayloading(rtv, &rtv->mlx);

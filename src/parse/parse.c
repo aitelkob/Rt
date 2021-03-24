@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:43:51 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 12:09:45 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 14:24:22 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void			parce(char *av, t_rtv *rtv)
 	rtv->obj = NULL;
 	rtv->light = NULL;
 	rtv->slice = NULL;
+	rtv->camera = NULL;
 	while (get_next_line(rtv->parse.fd, &rtv->parse.line) == 1)
 	{
 		rtv->parse.nb_line++;

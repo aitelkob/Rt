@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:22:50 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 13:02:15 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 13:57:09 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,8 +130,8 @@ void						camera_parce(t_rtv *rtv)
 	else
 	{
 		first_cam(rtv, camera);
-		rtv->camera->check = 1;
 		camera = NULL;
+		rtv->camera->check = 1;
 		forward(rtv, data);
 	}
 }

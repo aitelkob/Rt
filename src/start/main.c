@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 17:46:27 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 12:50:03 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 14:00:19 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_camera		*cam_init(void)
 	camera->depth = 5;
 	camera->look_at = (t_vector){0, 0, 0};
 	camera->amblgt = 100;
+	camera->next = NULL;
 	return (camera);
 }
 
@@ -45,7 +46,7 @@ int				main(int ac, char **av)
 	int			ok;
 
 	ok = 0;
-	// rtv.camera = cam_init();
+	rtv.camera = cam_init();
 	if (ac == 2 && strncmp(ft_strrev(av[1]), "lmy.", 4) == 0)
 	{
 		// free(rtv.camera);
