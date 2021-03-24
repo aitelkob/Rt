@@ -19,6 +19,8 @@ t_slice *slice, t_rtv *rtv)
 		slice->origin = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-vec", data))
 		slice->vec = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-shape", data))
+		slice->shape = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else
 	{
 		free(data);

@@ -1,0 +1,33 @@
+light:
+  -origin: 10 35 60
+  -intensity: 100
+plane:
+  -origin: 0 -20 0
+  -aim: 0 1 0
+  -color: 255 255 255
+  -rot: 0 0 0
+  -reflection: 0
+  -slice: -1
+sphere:
+  -origin: 0 0 0
+  -radius: 15
+  -color: 0 0 255
+  -negative: 0
+  -slice: 1
+camera:
+  -origin: 20 35 60
+  -fov: 60
+  -look_at: 0 0 0
+slice:
+  -origin: 0 8 0
+  -vec: 0 -1 0
+  -shape: 1
+slice:
+  -origin: 10 0 0
+  -vec: -1 0 0
+  -shape: 0
+slice:
+  -origin: 0 0 0
+  -vec: 0 -1 0
+  -shape: 1
+#

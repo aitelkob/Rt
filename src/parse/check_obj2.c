@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 17:49:08 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 10:38:01 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 16:10:06 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void		cylinder_help(char *data, char *arg, t_object *cylinder, t_rtv *rtv)
 		cylinder->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-texture", data))
 		cylinder->texture = input_texture(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-slice", data))
+		cylinder->slicing = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-translation", data))
 		cylinder->translation = input_vector(rtv, arg,
 				rtv->parse.nb_line, data);
@@ -92,6 +94,8 @@ void		cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv)
 		cone->radius = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-reflection", data))
 		cone->reflection = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-slice", data))
+		cone->slicing = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-refraction", data))
 		cone->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-texture", data))
