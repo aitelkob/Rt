@@ -176,6 +176,7 @@ typedef	struct		s_rtv
 	int				loding;
 	t_ray			ray;
 	int				depth;
+	double 			scale;
 }					t_rtv;
 
 typedef	struct 		s_hit

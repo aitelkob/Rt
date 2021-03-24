@@ -75,6 +75,8 @@ t_vector		rotation(t_vector v, t_vector angle);
 double			min_ray(double t1, double t2);
 double			deg_to_rad(double angle);
 int				rgb_to_int(t_vector v);
+void			rgb_to_mlx(t_mlix *mlx, t_vector color,int idx);
+
 void			rot_trans(t_object *obj);
 int             color_nrm(int i);
 t_vector        int_to_rgb(int colors);

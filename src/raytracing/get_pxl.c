@@ -50,6 +50,42 @@ int isnegativeobj(t_rtv *rtv, t_ray ray, double dst)
 	return 1;
 }
 
+t_vector texture(t_rtv *rtv, t_object *obj, t_vector point)
+{
+	int x;
+	int y;
+	int ipos = 0;
+	double scale = rtv->scale;
+	int cond = obj->type == PLANE ? point.z > 0  + obj->origin.z - scale / 2.0
+	    && point.z < scale / 2.0 + obj->origin.z : point.y > 0  + obj->origin.y - scale / 2.0
+	    && point.y < scale / 2.0 + obj->origin.y;
+	if(obj->type == PLANE)
+	{	
+		x = fmod((obj->origin.x - scale / 2.0 + point.x )/ scale,1) * 1000;
+		y = fmod((obj->origin.z - scale / 2.0 + point.z )/ scale,1) * 1000;
+	}
+	else if(obj->type == SPHERE)
+	{	
+		x = (1 - ((atan2(obj->origin.x - point.x, obj->origin.z - point.z) / (2.0 * PI)))) * 1000;
+		y = (1 - (acos((obj->origin.y - point.y) / ((obj->radius)))) / PI) * 1000;
+	}
+	else if(obj->type == CYLINDER)
+	{	
+		x = (1 - (atan2(-obj->origin.x + point.x, -obj->origin.z + point.z)) / (2.0 * PI)) * 1000;
+		y = fmod(-obj->origin.y + point.y, 1) * 1000;
+	}
+	x = x < 0 ? 1000 - abs(x) : x;
+	y = y < 0 ? 1000 - abs(y) : y;
+	ipos = 4 * 1000 * y + x * 4;
+	if(	   point.x > 0  + obj->origin.x - scale / 2.0 
+		&& point.x < scale / 2.0 + obj->origin.x
+	    && cond)
+		return (t_vector) {
+			rtv->mlx.img_ptr6->buffer[ipos+2] < 0 ? 255 + rtv->mlx.img_ptr6->buffer[ipos+2] : rtv->mlx.img_ptr6->buffer[ipos+2],
+			rtv->mlx.img_ptr6->buffer[ipos+1] < 0 ? 255 + rtv->mlx.img_ptr6->buffer[ipos+1] : rtv->mlx.img_ptr6->buffer[ipos+1],
+			rtv->mlx.img_ptr6->buffer[ipos]   < 0 ? 255 + rtv->mlx.img_ptr6->buffer[ipos+2] : rtv->mlx.img_ptr6->buffer[ipos]};
+	return obj->type == PLANE ?  obj->color : (t_vector) {-1,0,0};
+}
 
 double				get_dest(t_rtv *rtv, t_ray ray,
 t_object **close, t_object *current)
@@ -71,6 +107,7 @@ t_object **close, t_object *current)
 					min = q.t0;
 				else
 					min = q.t1;
+				min = texture(rtv, tmp, add(ray.origin, multi(ray.direction, min))).x == -1 ? -1 : min;
 				*close = tmp;
 			}
 		}
@@ -93,6 +130,7 @@ t_object **close, t_object *current)
 	tmp = rtv->obj;
 	while (tmp)
 	{
+		
 		q = intersection(rtv, ray, *tmp); 
 		if (q.t0 > 0 && (q.t0 < min + 0.000000001 || min == -1) && tmp->negative != 1)
 		{
@@ -103,7 +141,10 @@ t_object **close, t_object *current)
 				else
 					min = q.t1;
 				*close = tmp;
+				mq.min = min;
 				mq.q = q;
+				min = texture(rtv, tmp, add(ray.origin, multi(ray.direction, q.t0))).x == -1 ? -1 : q.t0;
+				//min = texture(rtv, tmp, add(ray.origin, multi(ray.direction, q.t1))).x == -1 ? -1 : q.t1;
 			}
 		}
 		tmp = tmp->next;
@@ -178,6 +219,7 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 // 	return 1.0255 / ;
 // }
 
+
 t_cl_obj			get_pxl_obj(t_rtv *rtv, t_ray ray)
 {
 	t_hit			hit;
@@ -205,39 +247,18 @@ t_cl_obj			get_pxl_obj(t_rtv *rtv, t_ray ray)
 		color[0] = obj->color;
 	ratio[0] = obj->reflection + 0.2;
 	ratio[1] = obj->refraction + 0.2;
-	int x = floor(fmod(hit.point.z,1) * 2);
-	int y = floor(fmod(hit.point.x,1) * 2);
-	//printf("x == %f, y == %f \n",x , y);
-	//int ipos = 0;
-	//ipos = 4 * 1000 * y + x * 4;
-	
-	if(obj->type == 4)
-	{ 
-		if(fmod(x + y, 2) == 0)
-			color[0] = (t_vector){0, 0, 0};
-		else
-			color[0] = (t_vector){255, 255, 255};
-	}
-	else if (obj->type == SPHERE)
-	{
-		u = 1 - (atan2(hit.point.x, hit.point.z)) / (2.0 * PI);
-		v = 1 - (acos(hit.point.y / obj->radius)) / PI;
-		x = u * 1000;
-		y = v * 1000;
-		int ipos = 0;
-		ipos = 4 * 1000 * y + x * 4;
-		color[0] = (t_vector) {rtv->mlx.img_ptr6->buffer[ipos+2] < 0 ? 255 + rtv->mlx.img_ptr6->buffer[ipos+2] : rtv->mlx.img_ptr6->buffer[ipos+2],
-		rtv->mlx.img_ptr6->buffer[ipos+1] < 0 ? 255 + rtv->mlx.img_ptr6->buffer[ipos+1] : rtv->mlx.img_ptr6->buffer[ipos+1],
-		rtv->mlx.img_ptr6->buffer[ipos] < 0 ? 255 + rtv->mlx.img_ptr6->buffer[ipos+2] : rtv->mlx.img_ptr6->buffer[ipos]};
-		//color[0] = (t_vector){0, 0, 0};
-		//print_vect(color[0], "color");
-		// x = floor(u * 50);
-		// y = floor(v * 50);
-		// if(fmod(x + y, 2) == 0)
-		// 	color[0] = (t_vector){1, 1, 1};
-		// else
-		// 	color[0] = (t_vector){255, 255, 255};
-	}
+
+	color[0] = texture(rtv, obj, hit.point);
+	if(color[0].x == -1)
+		return (clr);
+
+	// 	// x = floor(u * 40);
+	// 	// y = floor(v * 5);
+	// 	// if(fmod(x + y, 2) == 0)
+	// 	// 	color[0] = (t_vector){1, 1, 1};
+	// 	// else
+	// 	// 	color[0] = (t_vector){255, 255, 255};
+	// }
 	if (rtv->light)
 	 	color[0] = lightings(color[0] ,rtv, obj, hit, ray);
 	

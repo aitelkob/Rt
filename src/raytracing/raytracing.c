@@ -24,7 +24,7 @@ t_vector			camera(t_camera *camera, double x, double y, t_vector up,t_vector tes
 	ray.direction = camera->look_at;
 	ray.origin.x += 0.000000001;
 	w_vector = nrm(sub(ray.direction, ray.origin));
-	u_vector = nrm(crossproduct(w_vector, up));
+	u_vector = nrm(crossproduct(w_vector,up));
 	v_vector = crossproduct(w_vector, u_vector);
 	p.z = tan(deg_to_rad(camera->fov) / 2.0);
 	p.x = map(x+test.x, -1, ((1.0 - (-1.0)) / (WIN_W - 0.0)));
@@ -47,21 +47,7 @@ void				start_draw(t_rtv *rtv,double x, double y,t_ray ray2,t_vector colors)
 	clr =  get_pxl_obj(rtv, ray2);
 	color = clr.color;
 	rtv->mlx.colors[(WIN_H - 1 -(int)y) * WIN_W + (int)x] = color;
-	int ipos = 0;
-	ipos = 4 * 1000 * y + x * 4;
-	if(!(color.x ==  0 && color.y ==  0 && color.z ==  0))
-	{
-		if(clr.obj->type == 50)
-		{
-			color.x = color_nrm(rtv->mlx.img_ptr6->buffer[ipos]);
-			rtv->mlx.img[ipos + 1] = color_nrm(rtv->mlx.img_ptr6->buffer[ipos + 1]);
-			rtv->mlx.img[ipos + 2] = color_nrm(rtv->mlx.img_ptr6->buffer[ipos + 2]);
-		}
-		rtv->mlx.img[ipos] = color_nrm(color.z);
-		rtv->mlx.img[ipos + 1] = color_nrm(color.y);
-		rtv->mlx.img[ipos + 2] = color_nrm(color.x);
-	}
-	//rtv->mlx.img[(WIN_H - 1 - (int)y) * WIN_W + (int)x] = rgb_to_int(color);
+	rgb_to_mlx(&rtv->mlx, color, 4 * (WIN_H - 1 - (int)y) * WIN_W + 4 * (int)x);
 }
 
 void				raytracing1(t_thread *th)
@@ -73,7 +59,6 @@ void				raytracing1(t_thread *th)
 	t_rtv           *rtv;
 	t_vector		test;
 	t_vector		*colors;
-	//char *ibuf = (char *) rtv->mlx.img_ptr6->buffer;
 	rtv = th->rt;
 
 	test = (t_vector){0,0,0};

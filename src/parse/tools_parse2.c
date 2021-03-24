@@ -50,3 +50,13 @@ int				rgb_to_int(t_vector v)
 	rgb = (rgb << 8) + blue;
 	return (rgb);
 }
+
+
+void				rgb_to_mlx(t_mlix *mlx, t_vector color,int idx)
+{
+
+	mlx->img[idx] = color_nrm(color.z);
+	mlx->img[idx + 1] = color_nrm(color.y);
+	mlx->img[idx + 2] = color_nrm(color.x);
+
+}

@@ -69,6 +69,21 @@ int				key_hook(int keycode, t_rtv *rtv)
 		rtv->filter = 2;
 		raytracing(*rtv);
 	}
+	if (keycode == KEY_B)
+	{
+			rtv->scale *= 1.2;
+			raytracing(*rtv);
+			display(rtv, &rtv->mlx);
+	}
+	if (keycode == KEY_S)
+	{
+		if(rtv->scale > 2)
+		{
+			rtv->scale /= 1.2;
+			raytracing(*rtv);
+			display(rtv, &rtv->mlx);
+		}
+	}
 	// if (keycode == SCREEN)
 	//  	create_bmp(rtv->mlx.img,l,0);
 	return (1);
@@ -82,26 +97,10 @@ int				red_button(t_rtv *rtv)
 
 void			display(t_rtv *rtv, t_mlix *mlx)
 {
-	//mlx_put_image_to_window(mlx, mlx->win_ptr, mlx->img_ptr2, 20,0);
 	char * ibuf;
 	char * tmp;
 	int x = 0;
 	int y = 0;
-	// int ipos = 0;
-	//  while (x < 1000)
-    // {
-	// 	y = 0;
-	// 	while (y < 1000)
-    // 	{	
-	// 		ipos = 4 * 1000 * y + x * 4;
- 	// 		rtv->mlx.img[ipos] = rtv->mlx.img_ptr6->buffer[ipos];//rtv->mlx.img_ptr6->buffer[ipos];
-    //   		rtv->mlx.img[ipos+1] = rtv->mlx.img_ptr6->buffer[ipos+1];
-    //   		rtv->mlx.img[ipos+2] = rtv->mlx.img_ptr6->buffer[ipos+2];
-    //   		ipos += 4;
-	// 		y++;
-	// 	}
-	// 	x++;
-    // }
 	mlx_put_image_to_window(mlx, mlx->win_ptr, mlx->img_ptr, 0, 0);
 	mlx_hook(mlx->win_ptr, 2, 0, key_hook, mlx);
  	mlx_hook(mlx->win_ptr, 17, 0, red_button, rtv);

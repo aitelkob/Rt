@@ -30,6 +30,7 @@ int			main(int ac, char **av)
 		rtv.tic = clock();
 		rtv.filter = 0;
 		rtv.loding = 0;
+		rtv.scale = 20;
 		raytracing(rtv);
 		time = (double)(clock() - rtv.tic) / CLOCKS_PER_SEC;
 		printf("Rendering over in %f seconds \n", time/6);
