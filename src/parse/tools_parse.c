@@ -61,17 +61,23 @@ int					input_material(t_rtv *rtv, char *data, int nbr, char *head)
 		free(head);
 		syntax_error(rtv, data, head, nbr);
 	}
-	free(data);
 	if (!ft_strcmp("glass", lines[0]))
 		ret = GLASS;
-	if (!ft_strcmp("mirror", lines[0]))
+	else if (!ft_strcmp("mirror", lines[0]))
 		ret = MIRROR;
-	if (!ft_strcmp("rawmetal", lines[0]))
+	else if (!ft_strcmp("rawmetal", lines[0]))
 		ret = RAWMETAL;
-	if (!ft_strcmp("water", lines[0]))
+	else if (!ft_strcmp("water", lines[0]))
 		ret = WATER;
-	if (!ft_strcmp("thinglass", lines[0]))
+	else if (!ft_strcmp("thinglass", lines[0]))
 		ret = THINGLASS;
+	else
+	{
+		free(data);
+		free(head);
+		syntax_error(rtv, data, head, nbr);
+	}
+	free(data);
 	free_splited(lines);
 	return (ret);
 }

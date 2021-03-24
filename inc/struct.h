@@ -175,6 +175,7 @@ typedef	struct		s_object
 	double			reflection;
 	double			refraction;
 	double			refractionratio;
+	char			*texture;
 	double			negative;
 	int				material;
 	t_tritemp		temp;
