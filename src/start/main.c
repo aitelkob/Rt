@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 17:46:27 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 10:06:02 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 12:50:03 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,22 @@ int				main(int ac, char **av)
 	rtv.camera = cam_init();
 	if (ac == 2 && strncmp(ft_strrev(av[1]), "lmy.", 4) == 0)
 	{
+		// free(rtv.camera);
 		parce(ft_strrev(av[1]), &rtv);
 		ok++;
 	}
 	else if (ac == 2 && strncmp((av[1]), "jbo.", 4) == 0)
 	{
+
 		parce_obj(ft_strrev(av[1]), &rtv);
 		ok++;
 	}
 	if (ok)
 		start(&rtv);
 	else
+	{
+		// free(rtv.camera);
 		syntax_error(&rtv, ".", "please parse file next time ", 0);
+	}
 	return (0);
 }

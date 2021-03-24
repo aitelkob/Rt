@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 10:35:33 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 13:00:39 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ typedef	struct		s_object
 	t_tritemp		temp;
 	struct s_object	*next;
 }					t_object;
+
 typedef struct		s_camera
 {
 	t_vector		origin;
@@ -197,6 +198,7 @@ typedef struct		s_camera
 	int				check;
 	double			depth;
 	double			amblgt;
+	struct s_camera	*next;
 }					t_camera;
 
 typedef	struct		s_ambient
