@@ -24,6 +24,7 @@ void			parce_obj(char *av, t_rtv *rtv);
 void			plan_parce(t_rtv *rtv);
 void			plan_checker(char *data, char *arg,
 				t_object *plan, t_rtv *rtv);
+int				input_noise(t_rtv *rtv, char *data, int nbr, char *head);
 void			sphere_parce(t_rtv *rtv);
 void			sphere_checker(char *data, char *arg,
 				t_object *sphere, t_rtv *rtv);

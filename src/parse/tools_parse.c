@@ -64,11 +64,7 @@ char				*input_texture(t_rtv *rtv, char *data, int nbr, char *head)
 	}
 	free(data);
 	ret = lines[0];
-	printf("this is ret %s \n",lines[0]);
-	//free_splited(lines);
-	printf("this is ret %s \n",ret);
-	if ((fd = open(lines[0], O_RDONLY)) == -1)
-		syntax_error(rtv, data, head, fd);
+	free_splited(lines);
 	return (ret);
 }
 
@@ -105,7 +101,7 @@ int					input_material(t_rtv *rtv, char *data, int nbr, char *head)
 	return (ret);
 }
 
-int					input_noise(t_rtv *rtv, char *data, int nbr, char *head)
+int					 input_noise(t_rtv *rtv, char *data, int nbr, char *head)
 {
 	char			**lines;
 	int				ret;
