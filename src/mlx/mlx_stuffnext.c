@@ -6,11 +6,49 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 12:29:39 by babdelka          #+#    #+#             */
-/*   Updated: 2021/03/24 15:03:55 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 15:16:29 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rtv1.h>
+
+void			cammouve_help(int keycode, t_rtv *rtv)
+{
+	if (keycode == 126)
+	{
+		displayloading(rtv, &rtv->mlx);
+		rtv->camera->origin.y += 10;
+		raytracing(*rtv);
+		display(rtv, &rtv->mlx);
+	}
+	if (keycode == 125)
+	{
+		displayloading(rtv, &rtv->mlx);
+		rtv->camera->origin.y -= 10;
+		raytracing(*rtv);
+		display(rtv, &rtv->mlx);
+	}
+	camfocal(keycode, rtv);
+}
+
+void			cammouve(int keycode, t_rtv *rtv)
+{
+	if (keycode == 124)
+	{
+		displayloading(rtv, &rtv->mlx);
+		rtv->camera->origin.x += 10;
+		raytracing(*rtv);
+		display(rtv, &rtv->mlx);
+	}
+	if (keycode == 123)
+	{
+		displayloading(rtv, &rtv->mlx);
+		rtv->camera->origin.x -= 10;
+		raytracing(*rtv);
+		display(rtv, &rtv->mlx);
+	}
+	cammouve_help(keycode, rtv);
+}
 
 int				key_hook(int keycode, t_rtv *rtv)
 {
@@ -25,6 +63,15 @@ int				key_hook(int keycode, t_rtv *rtv)
 		reload(&rtv->mlx);
 		display(rtv, &rtv->mlx);
 	}
+	if (keycode == KEY_C)
+	{
+		displayloading(rtv, &rtv->mlx);
+		if (rtv->camera->next)
+			rtv->camera = rtv->camera->next;
+		raytracing(*rtv);
+		display(rtv, &rtv->mlx);
+	}
+	cammouve(keycode, rtv);
 	if (keycode == SCREEN)
 		create_bmp(rtv->mlx.img, l, 0);
 	return (1);
@@ -59,14 +106,6 @@ int				mouse_pressnext(int key, int x, int y, t_rtv *rtv)
 
 int				mouse_press(int key, int x, int y, t_rtv *rtv)
 {
-	if (key == 1)
-	{
-		displayloading(rtv, &rtv->mlx);
-		if (rtv->camera->next)
-			rtv->camera = rtv->camera->next;
-		raytracing(*rtv);
-		display(rtv, &rtv->mlx);
-	}
 	if (key == 1 && x >= 1034 && x <= 1286 && y >= 12 && y <= 104)
 	{
 		displayloading(rtv, &rtv->mlx);

@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 10:07:28 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 15:21:52 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ double			get_dest(t_rtv *rtv, t_ray ray,
 t_object **close, t_object *current);
 int				mouse_press(int key, int x, int y, t_rtv *rtv);
 int				key_hook(int keycode, t_rtv *rtv);
+void			camfocal(int keycode, t_rtv *rtv);
 /*
  ********************************** raytracing
 */
