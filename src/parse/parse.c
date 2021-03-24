@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:43:51 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 10:00:36 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 12:09:45 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char			*settings_cut(t_rtv *rtv, char *variable, char **data)
 	if (ft_lentab(line) != 2)
 	{
 		free(variable);
-		free(*data);
 		syntax_error(rtv, "variable", "somthing wrong with  file",
 		rtv->parse.nb_line);
 	}
