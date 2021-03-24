@@ -91,11 +91,13 @@ void					stock_point(t_rtv *rtv, char *av)
 void					parce_obj(char *av, t_rtv *rtv)
 {
 	int					i;
+
+	parce(OBJ6,rtv);
 	if (!(rtv->parse.fd = open(av, O_RDONLY)))
 		error("this is fd error !", "fd ");
 	rtv->parse.nb_line = 0;
-	rtv->light = NULL;
-	rtv->obj = NULL;
+	/*rtv->light = NULL;
+	rtv->obj = NULL;*/
 	i = 0;
 	while (get_next_line(rtv->parse.fd, &rtv->parse.line))
 	{

@@ -33,6 +33,8 @@ void			cylinder_checker(char *data, char *arg,
 				t_object *cylinder, t_rtv *rtv);
 void			triangle_checker(char *data, char *arg, t_object *triangle,\
 t_rtv *rtv);
+void			free_objects(t_rtv *rtv);
+void			free_lights(t_rtv *rtv);
 void			cone_parce(t_rtv *rtv);
 void			cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv);
 void			triangle_checker(char *data, char *arg, t_object *cone,\

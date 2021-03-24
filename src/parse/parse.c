@@ -87,7 +87,7 @@ void			parce(char *av, t_rtv *rtv)
 	rtv->obj = NULL;
 	rtv->light = NULL;
 	rtv->slice = NULL;
-	while (get_next_line(rtv->parse.fd, &rtv->parse.line))
+	while (get_next_line(rtv->parse.fd, &rtv->parse.line) == 1)
 	{
 		rtv->parse.nb_line++;
 		forward(rtv, rtv->parse.line);

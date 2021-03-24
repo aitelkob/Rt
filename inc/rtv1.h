@@ -22,8 +22,8 @@
 # define CC 8
 # define NN 45
 # define QQ 0
-# define one 83
-# define two 84
+# define ONE 83
+# define TWO 84
 # define DD 85
 # define LL 86
 # define KEY_A 0
@@ -46,6 +46,7 @@
 # define SCENES 1
 # define PI 3.14159
 # define THREAD_NUMBER 6
+# define OBJ6 "scenes/objback.yml"
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>

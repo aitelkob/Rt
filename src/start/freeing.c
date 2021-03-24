@@ -12,7 +12,7 @@
 
 #include "rtv1.h"
 
-static	void			free_objects(t_rtv *rtv)
+void			free_objects(t_rtv *rtv)
 {
 	t_object			*next;
 
@@ -24,7 +24,7 @@ static	void			free_objects(t_rtv *rtv)
 	}
 }
 
-static	void			free_lights(t_rtv *rtv)
+void			free_lights(t_rtv *rtv)
 {
 	t_light				*next;
 
