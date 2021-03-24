@@ -45,7 +45,7 @@ int				main(int ac, char **av)
 	int			ok;
 
 	ok = 0;
-	// rtv.camera = cam_init();
+	rtv.camera = cam_init();
 	if (ac == 2 && strncmp(ft_strrev(av[1]), "lmy.", 4) == 0)
 	{
 		// free(rtv.camera);

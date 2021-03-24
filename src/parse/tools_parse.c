@@ -49,6 +49,25 @@ double				input_onearg(t_rtv *rtv, char *data, int nbr, char *head)
 	return (ret);
 }
 
+char				*input_texture(t_rtv *rtv, char *data, int nbr, char *head)
+{
+	char			**lines;
+	char			*ret;
+	int				fd;
+
+	lines = ft_strsplit(data, ' ');
+	if (ft_lentab(lines) != 1)
+	{
+		free(data);
+		free(head);
+		syntax_error(rtv, data, head, nbr);
+	}
+	free(data);
+	ret = lines[0];
+	free_splited(lines);
+	return (ret);
+}
+
 int					input_material(t_rtv *rtv, char *data, int nbr, char *head)
 {
 	char			**lines;
@@ -71,6 +90,37 @@ int					input_material(t_rtv *rtv, char *data, int nbr, char *head)
 		ret = WATER;
 	else if (!ft_strcmp("thinglass", lines[0]))
 		ret = THINGLASS;
+	else
+	{
+		free(data);
+		free(head);
+		syntax_error(rtv, data, head, nbr);
+	}
+	free(data);
+	free_splited(lines);
+	return (ret);
+}
+
+int					 input_noise(t_rtv *rtv, char *data, int nbr, char *head)
+{
+	char			**lines;
+	int				ret;
+
+	lines = ft_strsplit(data, ' ');
+	if (ft_lentab(lines) != 1)
+	{
+		free(data);
+		free(head);
+		syntax_error(rtv, data, head, nbr);
+	}
+	if (!ft_strcmp("normal", lines[0]))
+		ret = NORMAL;
+	else if (!ft_strcmp("check", lines[0]))
+		ret = CHECK;
+	else if (!ft_strcmp("disrupt", lines[0]))
+		ret = DISRUPT;
+	else if (!ft_strcmp("perlin", lines[0]))
+		ret = PERLIN;
 	else
 	{
 		free(data);

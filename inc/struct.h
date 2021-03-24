@@ -33,6 +33,14 @@ enum				e_material
 	EMPTY
 }					t_material;
 
+enum				e_disruptions
+{
+	NORMAL = 1,
+	CHECK,
+	DISRUPT,
+	PERLIN
+}					t_disruptions;
+
 typedef	struct		s_vector
 {
 	double			x;
@@ -150,13 +158,12 @@ typedef	struct		s_quadratic
 
 typedef	struct		s_tritemp
 {
-	t_vector v0;
-	t_vector v1;
-	t_vector v2;
-	t_vector v0v1;
-    t_vector v0v2;
+	t_vector		v0;
+	t_vector		v1;
+	t_vector		v2;
+	t_vector		v0v1;
+    t_vector		v0v2;
 }					t_tritemp;
-
 
 typedef	struct		s_object
 {
@@ -176,6 +183,7 @@ typedef	struct		s_object
 	double			refraction;
 	double			refraratio;
 	char			*texture;
+	int				disruptions;
 	double			negative;
 	int				material;
 	t_tritemp		temp;

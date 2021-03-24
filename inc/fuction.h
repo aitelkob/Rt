@@ -24,6 +24,7 @@ void			parce_obj(char *av, t_rtv *rtv);
 void			plan_parce(t_rtv *rtv);
 void			plan_checker(char *data, char *arg,
 				t_object *plan, t_rtv *rtv);
+int				input_noise(t_rtv *rtv, char *data, int nbr, char *head);
 void			sphere_parce(t_rtv *rtv);
 void			sphere_checker(char *data, char *arg,
 				t_object *sphere, t_rtv *rtv);
@@ -44,6 +45,7 @@ void			ambient_parce(t_rtv *rtv);
 void			init_obj(t_object *obj);
 void			camera_parce(t_rtv *rtv);
 char			*settings_cut(t_rtv *rtv, char *variable, char **data);
+char			*input_texture(t_rtv *rtv, char *data, int nbr, char *head);
 char			*name_cut(t_rtv *rtv, char *line);
 void			forward(t_rtv *rtv, char *line);
 void			syntax_error(t_rtv *rtv, char *line,

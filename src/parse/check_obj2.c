@@ -20,6 +20,8 @@ void		cylinder_help(char *data, char *arg, t_object *cylinder, t_rtv *rtv)
 		cylinder->negative = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-color", data))
 		cylinder->color = input_vector(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-texture", data))
+		cylinder->texture = input_texture(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-translation", data))
 		cylinder->translation = input_vector(rtv, arg,
 				rtv->parse.nb_line, data);
@@ -47,6 +49,8 @@ t_object *cylinder, t_rtv *rtv)
 		cylinder->reflection = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-refraction", data))
 		cylinder->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-disrup", data))
+		cylinder->disruptions = input_noise(rtv, arg, rtv->parse.nb_line, data);
 	else
 		cylinder_help(data, arg, cylinder, rtv);
 	convertmaterial(cylinder);
@@ -67,6 +71,8 @@ void		cone_checker_help(char *data, char *arg, t_object *cone, t_rtv *rtv)
 		cone->translation = input_vector(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-material", data))
 		cone->material = input_material(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-disrup", data))
+		cone->disruptions = input_noise(rtv, arg, rtv->parse.nb_line, data);
 	else
 	{
 		free(data);
@@ -88,6 +94,8 @@ void		cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv)
 		cone->reflection = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-refraction", data))
 		cone->refraction = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-texture", data))
+		cone->texture = input_texture(rtv, arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-refraction_index", data))
 		cone->refraratio = input_onearg(rtv, arg, rtv->parse.nb_line, data);
 	else
