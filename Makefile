@@ -6,7 +6,7 @@
 #    By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/23 16:25:47 by yait-el-          #+#    #+#              #
-#    Updated: 2021/03/24 15:22:22 by babdelka         ###   ########.fr        #
+#    Updated: 2021/03/24 18:39:07 by babdelka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,7 +104,7 @@ C_OBJS		= $(addprefix $(D_OBJS),  $(SRC:.c=.o))
 C_INCS		= $(foreach include, $(INCSDIR), -I$(include))
 C_CHILDDIR	= $(foreach dir, $(CHILDDIR),$(D_OBJS)$(dir))
 ################# Compilation flags
-CC    		= gcc
+CC    		= gcc -Wall -Werror -Wextra
 RM    		= rm -rf
 CFLAGS		= $(C_INCS) 
 

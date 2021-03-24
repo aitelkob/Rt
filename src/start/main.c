@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 17:46:27 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 15:02:35 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:48:28 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,6 @@ void			start(t_rtv *rtv)
 int				main(int ac, char **av)
 {
 	t_rtv		rtv;
-	t_vector	*colors;
-	int			img;
-	double		time;
 	int			ok;
 
 	ok = 0;
@@ -66,7 +63,7 @@ int				main(int ac, char **av)
 	else
 	{
 		free(rtv.camera);
-		syntax_error(&rtv, ".", "please parse file next time ", 0);
+		syntax_error(".", "please parse file next time ", 0);
 	}
 	return (0);
 }

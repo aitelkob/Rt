@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:43:51 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 14:24:22 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:49:31 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char			*settings_cut(t_rtv *rtv, char *variable, char **data)
 	if (ft_lentab(line) != 2)
 	{
 		free(variable);
-		syntax_error(rtv, "variable", "somthing wrong with  file",
+		syntax_error( "variable", "somthing wrong with  file",
 		rtv->parse.nb_line);
 	}
 	free(variable);
@@ -44,7 +44,7 @@ char			*name_cut(t_rtv *rtv, char *line)
 	if (strtrim[ft_strlen(strtrim) - 1] != ':' &&
 			strtrim[ft_strlen(strtrim) - 1] != '1' &&
 			strtrim[ft_strlen(strtrim) - 1] != '0')
-		syntax_error(rtv, strtrim, "somthing wrong with file ",
+		syntax_error( strtrim, "somthing wrong with file ",
 		rtv->parse.nb_line);
 	strtrim[ft_strlen(strtrim) - 1] = '\0';
 	free(line);
@@ -74,7 +74,7 @@ void			forward(t_rtv *rtv, char *line)
 	obj_name[0] == '\n' || obj_name[0] == '#')
 		return ;
 	else
-		syntax_error(rtv, "name of obj", "note good", rtv->parse.nb_line);
+		syntax_error( "name of obj", "note good", rtv->parse.nb_line);
 	free(obj_name);
 }
 

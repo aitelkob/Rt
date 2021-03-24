@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:22:50 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 13:57:09 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:56:07 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ void						slice_check(char *data, char *arg,
 t_slice *slice, t_rtv *rtv)
 {
 	if (!ft_strcmp("-origin", data))
-		slice->origin = input_vector(rtv, arg, rtv->parse.nb_line, data);
+		slice->origin = input_vector(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-vec", data))
-		slice->vec = input_vector(rtv, arg, rtv->parse.nb_line, data);
+		slice->vec = input_vector(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-shape", data))
-		slice->shape = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+		slice->shape = input_onearg(arg, rtv->parse.nb_line, data);
 	else
 	{
 		free(data);
-		unknown_setting(rtv, "slice", rtv->parse.nb_line);
+		unknown_setting("slice", rtv->parse.nb_line);
 	}
 	free(data);
 }
@@ -33,19 +33,19 @@ void						camera_check(char *data, char *arg,
 t_camera *camera, t_rtv *rtv)
 {
 	if (!ft_strcmp("-origin", data))
-		camera->origin = input_vector(rtv, arg, rtv->parse.nb_line, data);
+		camera->origin = input_vector(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-fov", data))
-		camera->fov = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+		camera->fov = input_onearg(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-look_at", data))
-		camera->look_at = input_vector(rtv, arg, rtv->parse.nb_line, data);
+		camera->look_at = input_vector(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-depth", data))
-		camera->depth = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+		camera->depth = input_onearg(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-ambient_light", data))
-		camera->amblgt = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+		camera->amblgt = input_onearg(arg, rtv->parse.nb_line, data);
 	else
 	{
 		free(data);
-		unknown_setting(rtv, "camera", rtv->parse.nb_line);
+		unknown_setting("camera", rtv->parse.nb_line);
 	}
 	free(data);
 }

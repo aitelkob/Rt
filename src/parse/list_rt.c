@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 18:13:58 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 14:34:43 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 19:12:04 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ void				light_check(char *data, char *arg,
 t_light *light, t_rtv *rtv)
 {
 	if (!ft_strcmp("-origin", data))
-		light->origin = input_vector(rtv, arg, rtv->parse.nb_line, data);
+		light->origin = input_vector(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-intensity", data))
-		light->intensity = input_onearg(rtv, arg, rtv->parse.nb_line, data);
+		light->intensity = input_onearg(arg, rtv->parse.nb_line, data);
 	else
 	{
 		free(data);
-		unknown_setting(rtv, "light", rtv->parse.nb_line);
+		unknown_setting("light", rtv->parse.nb_line);
 	}
 	free(data);
 }

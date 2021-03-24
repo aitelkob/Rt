@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 09:49:04 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 18:02:38 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 19:12:25 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void				raytracing1(t_thread *th)
 {
 	int				x;
 	int				y;
-	t_vector		color;
 	t_ray			ray2;
 	t_rtv			*rtv;
 
@@ -85,7 +84,7 @@ void				raytracing(t_rtv rtv)
 
 	i = 0;
 	t = 1;
-	displayloading(&rtv, &rtv.mlx); 
+	displayloading(&rtv.mlx); 
 	while (i < THREAD_NUMBER)
 	{
 		th[i].rt = &rtv;

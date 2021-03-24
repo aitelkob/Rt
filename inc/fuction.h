@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 15:21:52 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 19:16:40 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void			parce_obj(char *av, t_rtv *rtv);
 void			plan_parce(t_rtv *rtv);
 void			plan_checker(char *data, char *arg,
 				t_object *plan, t_rtv *rtv);
-int				input_noise(t_rtv *rtv, char *data, int nbr, char *head);
+int				input_noise(char *data, int nbr, char *head);
 void			sphere_parce(t_rtv *rtv);
 void			sphere_checker(char *data, char *arg,
 				t_object *sphere, t_rtv *rtv);
@@ -45,20 +45,19 @@ void			ambient_parce(t_rtv *rtv);
 void			init_obj(t_object *obj);
 void			camera_parce(t_rtv *rtv);
 char			*settings_cut(t_rtv *rtv, char *variable, char **data);
-char			*input_texture(t_rtv *rtv, char *data, int nbr, char *head);
+char			*input_texture(char *data, int nbr, char *head);
 char			*name_cut(t_rtv *rtv, char *line);
 void			forward(t_rtv *rtv, char *line);
-void			syntax_error(t_rtv *rtv, char *line,
-char *reasoning, int nbline);
-void			unknown_setting(t_rtv *rtv, char *line, int nbline);
+void			syntax_error(char *line, char *reasoning, int nbline);
+void			unknown_setting(char *line, int nbline);
 void			error(char *str, char *where);
 void			first_camera(t_rtv *rtv, t_camera *camera);
 void			first_light(t_rtv *rtv, t_light *light);
 void			first_obj(t_rtv *rtv, t_object *obj);
 void			first_slice(t_rtv *rtv, t_slice *slice);
-t_vector		input_vector(t_rtv *rtv, char *data, int nbr, char *head);
-double			input_onearg(t_rtv *rtv, char *data, int nbr, char *head);
-int				input_material(t_rtv *rtv, char *data, int nbr, char *head);
+t_vector		input_vector(char *data, int nbr, char *head);
+double			input_onearg(char *data, int nbr, char *head);
+int				input_material(char *data, int nbr, char *head);
 void			convertmaterial(t_object *obj);
 void			ambient_parce(t_rtv *rtv);
 void			slice_parce(t_rtv *rtv);
@@ -96,9 +95,9 @@ t_vector		obj_norm(t_ray ray, t_object *obj, double dst);
 /*
  ********************************mlx stuff
 */
-void			create_bmp(int *img, char l, int i);
+void			create_bmp(int *img);
 void			display(t_rtv *rtv, t_mlix *mlx);
-int				displayloading(t_rtv *rtv, t_mlix *mlx);
+int				displayloading(t_mlix *mlx);
 int				key_hook(int keycode, t_rtv *rtv);
 void			setup_mlx(t_mlix *mlx);
 void			ft_destroy(t_mlix *mlx);

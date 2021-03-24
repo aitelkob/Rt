@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:18:27 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/21 16:41:54 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:40:01 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void			display(t_rtv *rtv, t_mlix *mlx)
 	mlx_loop(mlx->mlx_ptr);
 }
 
-int				displayloading(t_rtv *rtv, t_mlix *mlx)
+int				displayloading(t_mlix *mlx)
 {
 	mlx_put_image_to_window(mlx, mlx->win_ptr, mlx->img_ptr3, 20, 0);
 	mlx_put_image_to_window(mlx, mlx->win_ptr, mlx->img_ptr, 0, 0);

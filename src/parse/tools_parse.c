@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:26:32 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 18:11:48 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:53:14 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void				init_obj(t_object *obj)
 	obj->material = EMPTY;
 }
 
-double				input_onearg(t_rtv *rtv, char *data, int nbr, char *head)
+double				input_onearg(char *data, int nbr, char *head)
 {
 	char			**lines;
 	double			ret;
@@ -41,7 +41,7 @@ double				input_onearg(t_rtv *rtv, char *data, int nbr, char *head)
 	{
 		free(data);
 		free(head);
-		syntax_error(rtv, data, head, nbr);
+		syntax_error( data, head, nbr);
 	}
 	free(data);
 	ret = ft_atoi(lines[0]);
@@ -49,18 +49,17 @@ double				input_onearg(t_rtv *rtv, char *data, int nbr, char *head)
 	return (ret);
 }
 
-char				*input_texture(t_rtv *rtv, char *data, int nbr, char *head)
+char				*input_texture(char *data, int nbr, char *head)
 {
 	char			**lines;
 	char			*ret;
-	int				fd;
 
 	lines = ft_strsplit(data, ' ');
 	if (ft_lentab(lines) != 1)
 	{
 		free(data);
 		free(head);
-		syntax_error(rtv, data, head, nbr);
+		syntax_error( data, head, nbr);
 	}
 	free(data);
 	ret = lines[0];
@@ -68,17 +67,18 @@ char				*input_texture(t_rtv *rtv, char *data, int nbr, char *head)
 	return (ret);
 }
 
-int					input_material(t_rtv *rtv, char *data, int nbr, char *head)
+int					input_material(char *data, int nbr, char *head)
 {
 	char			**lines;
 	int				ret;
 
+	ret = 0;
 	lines = ft_strsplit(data, ' ');
 	if (ft_lentab(lines) != 1)
 	{
 		free(data);
 		free(head);
-		syntax_error(rtv, data, head, nbr);
+		syntax_error( data, head, nbr);
 	}
 	if (!ft_strcmp("glass", lines[0]))
 		ret = GLASS;
@@ -94,24 +94,25 @@ int					input_material(t_rtv *rtv, char *data, int nbr, char *head)
 	{
 		free(data);
 		free(head);
-		syntax_error(rtv, data, head, nbr);
+		syntax_error( data, head, nbr);
 	}
 	free(data);
 	free_splited(lines);
 	return (ret);
 }
 
-int					 input_noise(t_rtv *rtv, char *data, int nbr, char *head)
+int					 input_noise(char *data, int nbr, char *head)
 {
 	char			**lines;
 	int				ret;
 
+	ret = 0;
 	lines = ft_strsplit(data, ' ');
 	if (ft_lentab(lines) != 1)
 	{
 		free(data);
 		free(head);
-		syntax_error(rtv, data, head, nbr);
+		syntax_error( data, head, nbr);
 	}
 	if (!ft_strcmp("normal", lines[0]))
 		ret = NORMAL;
@@ -125,14 +126,14 @@ int					 input_noise(t_rtv *rtv, char *data, int nbr, char *head)
 	{
 		free(data);
 		free(head);
-		syntax_error(rtv, data, head, nbr);
+		syntax_error( data, head, nbr);
 	}
 	free(data);
 	free_splited(lines);
 	return (ret);
 }
 
-t_vector			input_vector(t_rtv *rtv, char *data, int nbr, char *head)
+t_vector			input_vector(char *data, int nbr, char *head)
 {
 	char			**lines;
 	t_vector		vec;
@@ -142,7 +143,7 @@ t_vector			input_vector(t_rtv *rtv, char *data, int nbr, char *head)
 	{
 		free(data);
 		free(head);
-		syntax_error(rtv, "reasing", "parameters wrong in", nbr);
+		syntax_error( "reasing", "parameters wrong in", nbr);
 	}
 	free(data);
 	vec.x = ft_atof(lines[0]);

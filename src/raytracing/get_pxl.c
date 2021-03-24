@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/23 14:29:27 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 19:15:59 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_quadratic			intersection(t_ray ray, t_object tmp)
 {
 	t_quadratic		q;
 
+	q.t0 = 0;
 	if (tmp.type == SPHERE)
 		q = intersection_sphere(ray, tmp);
 	else if (tmp.type == PLANE)
@@ -84,7 +85,7 @@ t_object **close, t_object *current)
 	t_quadratic		q;
 
 	min = -1;
-	tmp = rtv->obj;
+tmp = rtv->obj;
 	while (tmp)
 	{
 		q = intersection(ray, *tmp);
@@ -115,6 +116,7 @@ t_vector			obj_norm(t_ray ray, t_object *obj, double dst)
 	t_vector		p_c;
 	t_vector		xvec;
 
+	normal = (t_vector){0, 0, 0};
 	xvec = sub(ray.origin, obj->origin);
 	if (obj->type != PLANE && obj->type != SPHERE)
 		m = dot(ray.direction, obj->aim) * dst + dot(xvec, obj->aim);

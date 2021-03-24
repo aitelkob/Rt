@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 11:01:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/02/20 16:58:50 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:47:25 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void		syntax_error(t_rtv *rtv, char *line, char *reasoning, int nbline)
+void		syntax_error(char *line, char *reasoning, int nbline)
 {
 	ft_putstr("\033[0;35m");
 	ft_putstr("Syntax Error : ");
@@ -31,7 +31,7 @@ void		syntax_error(t_rtv *rtv, char *line, char *reasoning, int nbline)
 	exit(0);
 }
 
-void		unknown_setting(t_rtv *rtv, char *line, int nbline)
+void		unknown_setting(char *line, int nbline)
 {
 	ft_putstr("\033[0;35m");
 	ft_putstr("Unknown setting ");

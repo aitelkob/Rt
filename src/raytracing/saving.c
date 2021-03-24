@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 09:27:27 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/23 13:43:14 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/24 19:16:19 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void				bmp_put(int *img, int fd)
 	free(buf);
 }
 
-void				create_bmp(int *img, char l, int i)
+void				create_bmp(int *img)
 {
 	int				fd;
 	t_bmp			bmp;

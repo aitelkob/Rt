@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:43:51 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/22 18:08:18 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:50:52 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_vector				input_vector_obj(t_rtv *rtv, char *data, int nbr)
+t_vector				input_vector_obj(char *data, int nbr)
 {
 	char				**lines;
 	t_vector			vec;
@@ -23,7 +23,7 @@ t_vector				input_vector_obj(t_rtv *rtv, char *data, int nbr)
 	if (ft_lentab(lines) != 3)
 	{
 		free(data);
-		syntax_error(rtv, data, head, nbr);
+		syntax_error( data, head, nbr);
 	}
 	vec = (t_vector){0, 0, 0};
 	vec.x = ft_atof(lines[0]);
@@ -36,7 +36,6 @@ t_vector				input_vector_obj(t_rtv *rtv, char *data, int nbr)
 void					triangle_obj(t_rtv *rtv, t_vector *tab)
 {
 	static	t_object	*triangle;
-	char				*arg;
 	char				*data;
 	t_vector			face;
 
@@ -49,7 +48,7 @@ void					triangle_obj(t_rtv *rtv, t_vector *tab)
 	triangle->type = TRIANGLE;
 	if (get_next_line(rtv->parse.fd, &data) == 1)
 	{
-		face = input_vector_obj(rtv, data, rtv->parse.nb_line);
+		face = input_vector_obj(data, rtv->parse.nb_line);
 		triangle->origin = tab[((int)face.x) - 1];
 		triangle->c1 = tab[(int)face.y - 1];
 		triangle->c2 = tab[(int)face.z - 1];
@@ -63,11 +62,9 @@ void					triangle_obj(t_rtv *rtv, t_vector *tab)
 
 void					stock_point(t_rtv *rtv, char *av)
 {
-	static	t_object	*triangle;
 	t_vector			tab[rtv->parse.nb_line];
 	int					index_v;
 	char				*data;
-	int					i;
 
 	index_v = 0;
 	if (!(rtv->parse.fd = open(av, O_RDONLY)))
@@ -76,7 +73,7 @@ void					stock_point(t_rtv *rtv, char *av)
 	{
 		if (data[0] == 'v' && data[1] == ' ')
 		{
-			tab[index_v] = input_vector_obj(rtv, data, rtv->parse.nb_line);
+			tab[index_v] = input_vector_obj(data, rtv->parse.nb_line);
 			index_v++;
 		}
 		if (data[0] == 's')
@@ -103,7 +100,7 @@ void					parce_obj(char *av, t_rtv *rtv)
 	while (get_next_line(rtv->parse.fd, &rtv->parse.line))
 	{
 		if (i == 1 && (ft_strcmp(rtv->parse.line, "# www.blender.org") != 0))
-			syntax_error(rtv, "name of obj", "note good", rtv->parse.nb_line);
+			syntax_error( "name of obj", "note good", rtv->parse.nb_line);
 		if (rtv->parse.line[0] == 'v')
 			rtv->parse.nb_line++;
 		i++;
