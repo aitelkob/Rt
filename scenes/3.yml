@@ -29,5 +29,5 @@ slice:
 slice:
   -origin: 0 0 0
   -vec: 0 -1 0
-  -shape: 1
+  -shape: -1
 #

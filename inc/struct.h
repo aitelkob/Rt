@@ -227,6 +227,7 @@ typedef	struct		s_rtv
 	double			min;
 	clock_t			tic;
 	int				filter;
+	int				start;
 	int				loding;
 	t_ray			ray;
 }					t_rtv;

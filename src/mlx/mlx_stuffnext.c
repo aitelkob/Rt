@@ -72,7 +72,7 @@ int				key_hook(int keycode, t_rtv *rtv)
 		display(rtv, &rtv->mlx);
 	}
 	cammouve(keycode, rtv);
-	if (keycode == SCREEN)
+	if (keycode == SCREEN && rtv->start == 1)
 		create_bmp(rtv->mlx.img, l, 0);
 	return (1);
 }

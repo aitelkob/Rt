@@ -85,7 +85,7 @@ void				raytracing(t_rtv rtv)
 
 	i = 0;
 	t = 1;
-	displayloading(&rtv, &rtv.mlx);
+	displayloading(&rtv, &rtv.mlx); 
 	while (i < THREAD_NUMBER)
 	{
 		th[i].rt = &rtv;
