@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:43:51 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 18:50:52 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/25 11:49:18 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_vector				input_vector_obj(char *data, int nbr)
 	if (ft_lentab(lines) != 3)
 	{
 		free(data);
+		free_splited(lines); ////////// add
 		syntax_error( data, head, nbr);
 	}
 	vec = (t_vector){0, 0, 0};
@@ -46,18 +47,24 @@ void					triangle_obj(t_rtv *rtv, t_vector *tab)
 		init_obj(triangle);
 	}
 	triangle->type = TRIANGLE;
-	if (get_next_line(rtv->parse.fd, &data) == 1)
+	if (get_next_line(rtv->parse.fd, &data))
 	{
-		face = input_vector_obj(data, rtv->parse.nb_line);
-		triangle->origin = tab[((int)face.x) - 1];
-		triangle->c1 = tab[(int)face.y - 1];
-		triangle->c2 = tab[(int)face.z - 1];
-		triangle->color = (t_vector) {rand() % 250, rand() % 250, rand() % 250};
-		first_obj(rtv, triangle);
-		triangle = NULL;
-		free(data);
-		triangle_obj(rtv, tab);
+		if (data[0] != '\0')
+		{
+			face = input_vector_obj(data, rtv->parse.nb_line);
+			free(data);
+			data = NULL; 
+			triangle->origin = tab[((int)face.x) - 1];
+			triangle->c1 = tab[(int)face.y - 1];
+			triangle->c2 = tab[(int)face.z - 1];
+			triangle->color = (t_vector) {rand() % 250, rand() % 250, rand() % 250};
+			first_obj(rtv, triangle);
+			triangle = NULL;
+			triangle_obj(rtv, tab);
+		}
 	}
+	else
+		free(data);
 }
 
 void					stock_point(t_rtv *rtv, char *av)
@@ -67,23 +74,27 @@ void					stock_point(t_rtv *rtv, char *av)
 	char				*data;
 
 	index_v = 0;
+	int ifree = 0;
 	if (!(rtv->parse.fd = open(av, O_RDONLY)))
 		error("this is fd error !", "fd ");
 	while (get_next_line(rtv->parse.fd, &data))
 	{
 		if (data[0] == 'v' && data[1] == ' ')
 		{
+			free(data);
 			tab[index_v] = input_vector_obj(data, rtv->parse.nb_line);
 			index_v++;
 		}
-		if (data[0] == 's')
+		else if (data[0] == 's')
 		{
-			printf("this is %p == [s]",data);
 			triangle_obj(rtv, tab);
+			free(data);
 		}
-		free(data);
+		else
+			free(data);
 	}
 	free(data);
+
 	if (rtv->parse.fd == -1)
 		error("fd matsedche \n", "fd matsedch");
 }
@@ -92,7 +103,8 @@ void					parce_obj(char *av, t_rtv *rtv)
 {
 	int					i;
 
-	//parce(OBJ6, rtv);
+	parce(OBJ6, rtv);
+	free(rtv->parse.line);
 	if (!(rtv->parse.fd = open(av, O_RDONLY)))
 		error("this is fd error !", "fd ");
 	rtv->parse.nb_line = 0;
@@ -100,7 +112,9 @@ void					parce_obj(char *av, t_rtv *rtv)
 	while (get_next_line(rtv->parse.fd, &rtv->parse.line))
 	{
 		if (i == 1 && (ft_strcmp(rtv->parse.line, "# www.blender.org") != 0))
+		{
 			syntax_error( "name of obj", "note good", rtv->parse.nb_line);
+		}
 		if (rtv->parse.line[0] == 'v')
 			rtv->parse.nb_line++;
 		i++;

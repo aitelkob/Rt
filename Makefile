@@ -6,7 +6,7 @@
 #    By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/23 16:25:47 by yait-el-          #+#    #+#              #
-#    Updated: 2021/03/24 18:39:07 by babdelka         ###   ########.fr        #
+#    Updated: 2021/03/25 09:56:34 by babdelka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,7 +106,7 @@ C_CHILDDIR	= $(foreach dir, $(CHILDDIR),$(D_OBJS)$(dir))
 ################# Compilation flags
 CC    		= gcc
 RM    		= rm -rf
-CFLAGS		= $(C_INCS) -Wall -Werror -Wextra
+CFLAGS		= $(C_INCS) #-Wall -Werror -Wextra
 
 #----------------->>>>>>>>>>>>>>>>START<<<<<<<<<<<<<-------------------#
 $(D_OBJS)%.o: $(D_SRCS)%.c $(INCS)
