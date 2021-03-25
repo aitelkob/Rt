@@ -104,9 +104,9 @@ C_OBJS		= $(addprefix $(D_OBJS),  $(SRC:.c=.o))
 C_INCS		= $(foreach include, $(INCSDIR), -I$(include))
 C_CHILDDIR	= $(foreach dir, $(CHILDDIR),$(D_OBJS)$(dir))
 ################# Compilation flags
-CC    		= gcc -Wall -Werror -Wextra
+CC    		= gcc
 RM    		= rm -rf
-CFLAGS		= $(C_INCS) 
+CFLAGS		= $(C_INCS) -Wall -Werror -Wextra
 
 #----------------->>>>>>>>>>>>>>>>START<<<<<<<<<<<<<-------------------#
 $(D_OBJS)%.o: $(D_SRCS)%.c $(INCS)
