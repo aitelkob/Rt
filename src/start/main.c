@@ -29,7 +29,7 @@ t_camera		*cam_init(void)
 
 void			start(t_rtv *rtv)
 {
-	setup_mlx(&rtv->mlx);
+	setup_mlx(&rtv->mlx,rtv);
 	rtv->tic = clock();
 	rtv->filter = 0;
 	rtv->loding = 0;

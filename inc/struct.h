@@ -188,10 +188,13 @@ typedef	struct		s_object
 	t_vector		direction;
 	t_vector		color;
 	t_vector		normal;
+	int				w;
+	int				h;
 	double			reflection;
 	double			refraction;
 	double			refraratio;
 	char			*texture;
+	mlx_img_list_t	*img_texture;
 	int				disruptions;
 	double			negative;
 	int				material;
