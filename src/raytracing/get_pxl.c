@@ -144,6 +144,7 @@ t_vector texture(t_rtv *rtv, t_object *obj, t_vector point)
 	int y = 0;
 	int ipos = 0;
 	double scale = 40;
+	(void)rtv;
 	int cond = obj->type == PLANE ? point.z > 0  + obj->origin.z - scale / 2.0
 	    && point.z < scale / 2.0 + obj->origin.z: point.y > 0  + obj->origin.y - scale / 2.0
 	    && point.y < scale / 2.0 + obj->origin.y;
@@ -169,9 +170,9 @@ t_vector texture(t_rtv *rtv, t_object *obj, t_vector point)
 		&& point.x < scale / 2.0 + obj->origin.x
 	    && cond)
 		return (t_vector) {
-			rtv->mlx.img_texture->buffer[ipos+2] < 0 ? 255 + rtv->mlx.img_texture->buffer[ipos+2] : rtv->mlx.img_texture->buffer[ipos+2],
-			rtv->mlx.img_texture->buffer[ipos+1] < 0 ? 255 + rtv->mlx.img_texture->buffer[ipos+1] : rtv->mlx.img_texture->buffer[ipos+1],
-			rtv->mlx.img_texture->buffer[ipos]   < 0 ? 255 + rtv->mlx.img_texture->buffer[ipos+2] : rtv->mlx.img_texture->buffer[ipos]};
+			obj->img_texture->buffer[ipos+2] < 0 ? 255 + obj->img_texture->buffer[ipos+2] : obj->img_texture->buffer[ipos+2],
+			obj->img_texture->buffer[ipos+1] < 0 ? 255 + obj->img_texture->buffer[ipos+1] : obj->img_texture->buffer[ipos+1],
+			obj->img_texture->buffer[ipos]   < 0 ? 255 + obj->img_texture->buffer[ipos+2] : obj->img_texture->buffer[ipos]};
 	return obj->color;
 }
 
@@ -188,7 +189,10 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 	if ((hit.dst = get_dest(rtv, ray, &obj, NULL)) <= 0)
 		return (color[0]);
 	hit.point = add(ray.origin, multi(ray.direction, hit.dst));
-	hit.color = texture(rtv, obj, hit.point);
+	hit.color = obj->color;
+	if (obj->w == 1000 && obj->h == 1000)
+		hit.color = texture(rtv, obj, hit.point);
+	
 	if (hit.dst > 0 && rtv->light->intensity == 0)
 		color[0] = multi(divi(hit.color, 100), rtv->camera->amblgt);
 	ratio[0] = obj->reflection + 0.2;

@@ -1,16 +1,13 @@
 light:
  -origin: 100 0 50
  -intensity: 100
-light:
- -origin: -100 0 50
- -intensity: 100
 sphere:
  -origin: 0 0 0
  -radius: 20
  -translation: 0 0 0
  -color: 255 0 0
- -reflection: 2
  -slice: 3
+ -texture: ./images/me2.png
 plane:
  -origin: 50 -30 20
  -aim: 0 1 0
@@ -21,6 +18,7 @@ cylinder:
  -aim: 0 1 0
  -rot: 0 0 0
  -radius: 10
+ -texture: ./images/me2.png
  -color: 0 0 250
  -slice: 1
 cone:

@@ -28,6 +28,9 @@ void				init_obj(t_object *obj)
 	obj->reflection = 0;
 	obj->refraction = 0;
 	obj->refraratio = 0.5;
+	obj->texture = ft_strdup("");
+	obj->h = -1;
+	obj->w = -1;
 	obj->material = EMPTY;
 }
 
@@ -62,8 +65,9 @@ char				*input_texture(char *data, int nbr, char *head)
 		syntax_error( data, head, nbr);
 	}
 	free(data);
-	ret = lines[0];
-	free_splited(lines);
+	ret = ft_strdup(lines[0]);
+	//free_splited(lines);
+	printf("this is %s \n",ret);
 	return (ret);
 }
 
