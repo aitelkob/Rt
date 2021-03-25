@@ -40,7 +40,7 @@ t_camera *camera, t_rtv *rtv)
 		camera->look_at = input_vector(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-depth", data))
 		camera->depth = input_onearg(arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("-ambient_light", data))
+	else if (!ft_strcmp("-ambient", data))
 		camera->amblgt = input_onearg(arg, rtv->parse.nb_line, data);
 	else
 	{

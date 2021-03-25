@@ -79,7 +79,7 @@ t_hit hit, t_ray ray)
 		spec = specular(sub(ray.origin, hit.point), shadv.light_dir, dst,\
 		hit.normal);
 		color = coloring(color, diffuse(shadv.light_dir, dst, hit.normal) \
-		* (tmp->intensity / 100.0), spec, obj->color);
+		* (tmp->intensity / 100.0), spec, hit.color);
 		tmp = tmp->next;
 	}
 	return (color);

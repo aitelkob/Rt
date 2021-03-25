@@ -29,6 +29,8 @@ void			setup_mlx(t_mlix *mlx)
 	"./images/cartoon1.png", &mlx->w, &mlx->h);
 	mlx->img_ptr4 = mlx_png_file_to_image(mlx->mlx_ptr,\
 	"./images/white.png", &mlx->w, &mlx->h);
+	mlx->img_texture = mlx_png_file_to_image(mlx->mlx_ptr,\
+	"./images/me2.png", &mlx->w, &mlx->h);
 	mlx->img_ptr = mlx_new_image(mlx->mlx_ptr, WIN_W, WIN_H);
 	mlx->img = (int*)mlx_get_data_addr(mlx->img_ptr, &mlx->bits_per_pixel,\
 	&mlx->size_line, &mlx->endian);
