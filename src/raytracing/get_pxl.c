@@ -6,18 +6,19 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 19:15:59 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/25 12:28:26 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-double slice(t_ray ray, t_quadratic q, t_slice *slice, t_object *obj)
+double				slice(t_ray ray, t_quadratic q, t_slice *slice,\
+t_object *obj)
 {
 	t_vector		xvec;
 	t_vector		p_c;
-	double		is_sliced;
-	t_slice 	*tmp;
+	double			is_sliced;
+	t_slice			*tmp;
 
 	tmp = slice;
 	is_sliced = q.t0;
@@ -28,7 +29,7 @@ double slice(t_ray ray, t_quadratic q, t_slice *slice, t_object *obj)
 			xvec = sub(ray.origin, tmp->origin);
 			p_c = add(xvec, multi(ray.direction, q.t0));
 			is_sliced = dot(p_c, tmp->vec) > 0 ? q.t0 : -1;
-			if(is_sliced < 0)
+			if (is_sliced < 0)
 			{
 				p_c = add(xvec, multi(ray.direction, q.t1));
 				is_sliced = dot(p_c, tmp->vec) > 0 ? q.t1 : -1;;
@@ -36,7 +37,6 @@ double slice(t_ray ray, t_quadratic q, t_slice *slice, t_object *obj)
 		}
 		tmp = tmp->next;
 	}
-	
 	return is_sliced;
 }
 
@@ -143,43 +143,67 @@ double maptex(double x)
 {
 	return fmod(x ,1000);
 }
-t_vector texture(t_rtv *rtv, t_object *obj, t_vector point)
-{
-	double x = 0;
-	double y = 0;
-	int ipos = 0;
-	double scale =50;
 
-	int cond = obj->type == PLANE ? point.z > 0  + obj->origin.z - scale / 2.0
-	    && point.z < scale / 2.0 + obj->origin.z: point.y > 0  + obj->origin.y - scale / 2.0
-	    && point.y < scale / 2.0 + obj->origin.y;
+void				txtinit(t_txtemp *txt)
+{
+	txt->x = 0;
+	txt->y = 0;
+	txt->ipos = 0;
+	txt->scale =50;
+}
+
+void			texture_help(t_rtv *rtv, t_object *obj, t_vector point,\
+t_txtemp *txt)
+{
 	if(obj->type == PLANE)
 	{	
-		x = fmod((obj->origin.x - scale / 2.0 + point.x)/ scale,1);
-		y = fmod((obj->origin.z - scale / 2.0 + point.z)/ scale,1);
+		txt->x = fmod((obj->origin.x - txt->scale / 2.0 + point.x)/\
+		txt->scale,1);
+		txt->y = fmod((obj->origin.z - txt->scale / 2.0 + point.z)/\
+		txt->scale,1);
 	}
 	else if(obj->type == SPHERE)
 	{	
-		x = (1 - ((atan2((obj->origin.x - point.x), obj->origin.z - point.z) / (2.0 * PI))));
-		y = ((1 - (acos((((obj->origin.y - point.y))/ (obj->radius)))) / PI));
+		txt->x = (1 - ((atan2((obj->origin.x - point.x), obj->origin.z -\
+		point.z) / (2.0 * PI))));
+		txt->y = ((1 - (acos((((obj->origin.y - point.y))/\
+		(obj->radius)))) / PI));
 	}
 	else if(obj->type == CYLINDER || obj->type == CONE)
 	{	
-		x = (1 - (atan2(-obj->origin.x + point.x, -obj->origin.z + point.z)) / (2.0 * PI));
-		y = fmod((-obj->origin.y + point.y)/scale, 1);
+		txt->x = (1 - (atan2(-obj->origin.x + point.x, -obj->origin.z +\
+		point.z)) / (2.0 * PI));
+		txt->y = fmod((-obj->origin.y + point.y) / txt->scale, 1);
 	}
+	txt->x = (txt->x < 0 ? fabs(txt->x) : txt->x) * (1000);
+	txt->y = (txt->y < 0 ? fabs(txt->y) : txt->y) * (1000);
+	txt->ipos = 4 * 1000 * (int) txt->y + (int) txt->x  * 4;
+}
 
-	x = (x < 0 ? fabs(x) : x) * (1000);
-	y = (y < 0 ? fabs(y) : y) * (1000);
+t_vector			texture(t_rtv *rtv, t_object *obj, t_vector point)
+{
+	t_txtemp txt;
 
-	ipos = 4 * 1000 * (int) y + (int) x  * 4;
-	if(	   point.x > 0  + obj->origin.x - scale / 2.0 
-		&& point.x < scale / 2.0 + obj->origin.x
+	txtinit(&txt);
+	int cond = obj->type == PLANE ? point.z > 0  + obj->origin.z -\
+	txt.scale / 2.0
+	    && point.z < txt.scale / 2.0 + obj->origin.z: point.y > 0 +\
+		obj->origin.y - txt.scale / 2.0
+	    && point.y < txt.scale / 2.0 + obj->origin.y;
+	texture_help(rtv, obj, point, &txt);
+	if(	   point.x > 0  + obj->origin.x - txt.scale / 2.0 
+		&& point.x < txt.scale / 2.0 + obj->origin.x
 	    && cond)
 		return (t_vector) {
-			obj->img_texture->buffer[ipos+2] < 0 ? 255 + obj->img_texture->buffer[ipos+2] : obj->img_texture->buffer[ipos+2],
-			obj->img_texture->buffer[ipos+1] < 0 ? 255 + obj->img_texture->buffer[ipos+1] : obj->img_texture->buffer[ipos+1],
-			obj->img_texture->buffer[ipos]   < 0 ? 255 + obj->img_texture->buffer[ipos+2] : obj->img_texture->buffer[ipos]};
+			obj->img_texture->buffer[txt.ipos + 2] < 0 ? 255 +\
+			obj->img_texture->buffer[txt.ipos + 2] :\
+			obj->img_texture->buffer[txt.ipos+2],
+			obj->img_texture->buffer[txt.ipos + 1] < 0 ? 255 +\
+			obj->img_texture->buffer[txt.ipos + 1] :\
+			obj->img_texture->buffer[txt.ipos+1],
+			obj->img_texture->buffer[txt.ipos]   < 0 ? 255 +\
+			obj->img_texture->buffer[txt.ipos + 2] :\
+			obj->img_texture->buffer[txt.ipos]};
 	return obj->color;
 }
 

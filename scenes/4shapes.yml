@@ -13,6 +13,7 @@ plane:
  -aim: 0 1 0
  -color: 100 50 100
  -rot: 0 0 0
+ -material: mirror
 cylinder:
  -origin: 30 0 0
  -aim: 0 1 0
