@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 16:43:51 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/25 11:54:51 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/25 12:00:02 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void			parce(char *av, t_rtv *rtv)
 	rtv->light = NULL;
 	rtv->slice = NULL;
 	rtv->camera = NULL;
-	printf("this is adresse [%p] = \n",rtv);
 	while (get_next_line(rtv->parse.fd, &rtv->parse.line) == 1)
 	{
 		rtv->parse.nb_line++;
