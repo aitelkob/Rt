@@ -9,10 +9,11 @@ sphere:
  -slice: 3
  -texture: ./images/me2.png
 plane:
- -origin: 50 -30 20
+ -origin: 0 -30 60
  -aim: 0 1 0
  -color: 100 50 100
  -rot: 0 0 0
+ -material: mirror
 cylinder:
  -origin: 30 0 0
  -aim: 0 1 0
@@ -33,7 +34,7 @@ slice:
   -vec: 0 -1 0
   -shape: 0
 camera:
- -origin: 0 0 170
+ -origin: 0 70 70
  -fov: 60
  -look_at: 0 0 0
  -ambient: 10

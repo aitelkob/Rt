@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 18:11:40 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/25 12:13:06 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,15 @@ typedef	struct		s_tritemp
     t_vector		v0v2;
 }					t_tritemp;
 
+typedef struct		s_txtemp
+{
+	double			x;
+	double			y;
+	int				ipos;
+	double			scale;
+}					t_txtemp;
+
+
 typedef	struct		s_object
 {
 	int				type;
@@ -200,6 +209,7 @@ typedef	struct		s_object
 	int				material;
 	int				slicing;
 	t_tritemp		temp;
+	t_txtemp		txt;
 	struct s_object	*next;
 }					t_object;
 
