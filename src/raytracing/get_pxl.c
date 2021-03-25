@@ -149,7 +149,6 @@ void				txtinit(t_txtemp *txt)
 	txt->x = 0;
 	txt->y = 0;
 	txt->ipos = 0;
-	txt->scale =50;
 }
 
 void			texture_help(t_rtv *rtv, t_object *obj, t_vector point,\
@@ -157,10 +156,10 @@ t_txtemp *txt)
 {
 	if(obj->type == PLANE)
 	{	
-		txt->x = fmod((obj->origin.x - txt->scale / 2.0 + point.x)/\
-		txt->scale,1);
-		txt->y = fmod((obj->origin.z - txt->scale / 2.0 + point.z)/\
-		txt->scale,1);
+		txt->x = fmod((obj->origin.x - rtv->scale / 2.0 + point.x)/\
+		rtv->scale,1);
+		txt->y = fmod((obj->origin.z - rtv->scale / 2.0 + point.z)/\
+		rtv->scale,1);
 	}
 	else if(obj->type == SPHERE)
 	{	
@@ -173,7 +172,7 @@ t_txtemp *txt)
 	{	
 		txt->x = (1 - (atan2(-obj->origin.x + point.x, -obj->origin.z +\
 		point.z)) / (2.0 * PI));
-		txt->y = fmod((-obj->origin.y + point.y) / txt->scale, 1);
+		txt->y = fmod((-obj->origin.y + point.y) / rtv->scale, 1);
 	}
 	txt->x = (txt->x < 0 ? fabs(txt->x) : txt->x) * (1000);
 	txt->y = (txt->y < 0 ? fabs(txt->y) : txt->y) * (1000);
@@ -186,13 +185,13 @@ t_vector			texture(t_rtv *rtv, t_object *obj, t_vector point)
 
 	txtinit(&txt);
 	int cond = obj->type == PLANE ? point.z > 0  + obj->origin.z -\
-	txt.scale / 2.0
-	    && point.z < txt.scale / 2.0 + obj->origin.z: point.y > 0 +\
-		obj->origin.y - txt.scale / 2.0
-	    && point.y < txt.scale / 2.0 + obj->origin.y;
+	rtv->scale / 2.0
+	    && point.z < rtv->scale / 2.0 + obj->origin.z: point.y > 0 +\
+		obj->origin.y - rtv->scale / 2.0
+	    && point.y < rtv->scale / 2.0 + obj->origin.y;
 	texture_help(rtv, obj, point, &txt);
-	if(	   point.x > 0  + obj->origin.x - txt.scale / 2.0 
-		&& point.x < txt.scale / 2.0 + obj->origin.x
+	if(	   point.x > 0  + obj->origin.x - rtv->scale / 2.0 
+		&& point.x < rtv->scale / 2.0 + obj->origin.x
 	    && cond)
 		return (t_vector) {
 			obj->img_texture->buffer[txt.ipos + 2] < 0 ? 255 +\
