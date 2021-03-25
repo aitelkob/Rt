@@ -138,33 +138,41 @@ t_vector			obj_norm(t_ray ray, t_object *obj, double dst)
 	return (nrm(normal));
 }
 
+
+double maptex(double x)
+{
+	return fmod(x ,1000);
+}
 t_vector texture(t_rtv *rtv, t_object *obj, t_vector point)
 {
-	int x = 0;
-	int y = 0;
+	double x = 0;
+	double y = 0;
 	int ipos = 0;
-	double scale = 40;
+	double scale =50;
+
 	int cond = obj->type == PLANE ? point.z > 0  + obj->origin.z - scale / 2.0
 	    && point.z < scale / 2.0 + obj->origin.z: point.y > 0  + obj->origin.y - scale / 2.0
 	    && point.y < scale / 2.0 + obj->origin.y;
 	if(obj->type == PLANE)
 	{	
-		x = fmod((obj->origin.x - scale / 2.0 + point.x )/ scale,1) * 1000;
-		y = fmod((obj->origin.z - scale / 2.0 + point.z )/ scale,1) * 1000;
+		x = fmod((obj->origin.x - scale / 2.0 + point.x)/ scale,1);
+		y = fmod((obj->origin.z - scale / 2.0 + point.z)/ scale,1);
 	}
 	else if(obj->type == SPHERE)
 	{	
-		x = (1 - ((atan2(obj->origin.x - point.x, obj->origin.z - point.z) / (2.0 * PI)))) * 1000;
-		y = (1 - (acos((obj->origin.y - point.y) / ((obj->radius)))) / PI) * 1000;
+		x = (1 - ((atan2((obj->origin.x - point.x), obj->origin.z - point.z) / (2.0 * PI))));
+		y = ((1 - (acos((((obj->origin.y - point.y))/ (obj->radius)))) / PI));
 	}
 	else if(obj->type == CYLINDER || obj->type == CONE)
 	{	
-		x = (1 - (atan2(-obj->origin.x + point.x, -obj->origin.z + point.z)) / (2.0 * PI)) * 1000;
-		y = fmod(-obj->origin.y + point.y, 1) * 1000;
+		x = (1 - (atan2(-obj->origin.x + point.x, -obj->origin.z + point.z)) / (2.0 * PI));
+		y = fmod((-obj->origin.y + point.y)/scale, 1);
 	}
-	x = x < 0 ? 1000 - abs(x) : x;
-	y = y < 0 ? 1000 - abs(y) : y;
-	ipos = 4 * 1000 * y + x * 4;
+
+	x = (x < 0 ? fabs(x) : x) * (1000);
+	y = (y < 0 ? fabs(y) : y) * (1000);
+
+	ipos = 4 * 1000 * (int) y + (int) x  * 4;
 	if(	   point.x > 0  + obj->origin.x - scale / 2.0 
 		&& point.x < scale / 2.0 + obj->origin.x
 	    && cond)
