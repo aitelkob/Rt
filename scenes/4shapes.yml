@@ -1,6 +1,6 @@
 light:
  -origin: 100 0 50
- -intensity: 50
+ -intensity: 100
 light:
  -origin: -100 0 50
  -intensity: 100
