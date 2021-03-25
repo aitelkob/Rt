@@ -138,6 +138,51 @@ t_vector			obj_norm(t_ray ray, t_object *obj, double dst)
 	return (nrm(normal));
 }
 
+
+double maptex(double x)
+{
+	return fmod(x ,1000);
+}
+t_vector texture(t_rtv *rtv, t_object *obj, t_vector point)
+{
+	double x = 0;
+	double y = 0;
+	int ipos = 0;
+	double scale =50;
+
+	int cond = obj->type == PLANE ? point.z > 0  + obj->origin.z - scale / 2.0
+	    && point.z < scale / 2.0 + obj->origin.z: point.y > 0  + obj->origin.y - scale / 2.0
+	    && point.y < scale / 2.0 + obj->origin.y;
+	if(obj->type == PLANE)
+	{	
+		x = fmod((obj->origin.x - scale / 2.0 + point.x)/ scale,1);
+		y = fmod((obj->origin.z - scale / 2.0 + point.z)/ scale,1);
+	}
+	else if(obj->type == SPHERE)
+	{	
+		x = (1 - ((atan2((obj->origin.x - point.x), obj->origin.z - point.z) / (2.0 * PI))));
+		y = ((1 - (acos((((obj->origin.y - point.y))/ (obj->radius)))) / PI));
+	}
+	else if(obj->type == CYLINDER || obj->type == CONE)
+	{	
+		x = (1 - (atan2(-obj->origin.x + point.x, -obj->origin.z + point.z)) / (2.0 * PI));
+		y = fmod((-obj->origin.y + point.y)/scale, 1);
+	}
+
+	x = (x < 0 ? fabs(x) : x) * (1000);
+	y = (y < 0 ? fabs(y) : y) * (1000);
+
+	ipos = 4 * 1000 * (int) y + (int) x  * 4;
+	if(	   point.x > 0  + obj->origin.x - scale / 2.0 
+		&& point.x < scale / 2.0 + obj->origin.x
+	    && cond)
+		return (t_vector) {
+			obj->img_texture->buffer[ipos+2] < 0 ? 255 + obj->img_texture->buffer[ipos+2] : obj->img_texture->buffer[ipos+2],
+			obj->img_texture->buffer[ipos+1] < 0 ? 255 + obj->img_texture->buffer[ipos+1] : obj->img_texture->buffer[ipos+1],
+			obj->img_texture->buffer[ipos]   < 0 ? 255 + obj->img_texture->buffer[ipos+2] : obj->img_texture->buffer[ipos]};
+	return obj->color;
+}
+
 t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 {
 	t_hit			hit;
@@ -151,14 +196,22 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 	if ((hit.dst = get_dest(rtv, ray, &obj, NULL)) <= 0)
 		return (color[0]);
 	hit.point = add(ray.origin, multi(ray.direction, hit.dst));
-	if (hit.dst > 0)
-		color[0] = multi(divi(obj->color, 100), rtv->camera->amblgt);
+	hit.color = obj->color;
+	if (obj->w == 1000 && obj->h == 1000)
+		hit.color = texture(rtv, obj, hit.point);
+	
+	if (hit.dst > 0 && rtv->light->intensity == 0)
+		color[0] = multi(divi(hit.color, 100), rtv->camera->amblgt);
 	ratio[0] = obj->reflection + 0.2;
 	ratio[1] = obj->refraction + 0.2;
-	if (rtv->light)
+	if (rtv->light && rtv->light->intensity != 0)
+	{	
 		color[0] = lighting(rtv, obj, hit, ray);
-	if (hit.depth > 0)
-		color[1] = reflectandrefract(ray, obj, rtv, hit);
-	color[1] = divi(finalcolor(color[0], color[1], ratio), 5);
+		if (hit.depth > 0)
+			color[1] = reflectandrefract(ray, obj, rtv, hit);
+		color[1] = divi(finalcolor(color[0], color[1], ratio), 5);
+	}
+	else
+		return (color[0]);
 	return (color[1]);
 }

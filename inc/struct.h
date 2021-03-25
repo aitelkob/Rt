@@ -118,6 +118,14 @@ typedef struct		s_key
 	int				left_button;
 }					t_key;
 
+typedef struct	mlx_img_list_s
+{
+  int			width;
+  int			height;
+  char			*buffer;
+  struct mlx_img_list_s	*next;
+} mlx_img_list_t;
+
 typedef	struct		s_mlix
 {
 	void			*mlx_ptr;
@@ -126,6 +134,7 @@ typedef	struct		s_mlix
 	void			*img_ptr3;
 	void			*img_ptr2;
 	void			*img_ptr4;
+	mlx_img_list_t	*img_texture;
 	int				w;
 	int				h;
 	int				*d;
@@ -179,10 +188,13 @@ typedef	struct		s_object
 	t_vector		direction;
 	t_vector		color;
 	t_vector		normal;
+	int				w;
+	int				h;
 	double			reflection;
 	double			refraction;
 	double			refraratio;
 	char			*texture;
+	mlx_img_list_t	*img_texture;
 	int				disruptions;
 	double			negative;
 	int				material;
@@ -238,6 +250,7 @@ typedef	struct		s_hit
 	double			dst;
 	int				depth;
 	t_vector		normal;
+	t_vector		color;
 }					t_hit;
 
 typedef struct		s_thread

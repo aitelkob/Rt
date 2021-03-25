@@ -99,7 +99,7 @@ void			create_bmp(int *img);
 void			display(t_rtv *rtv, t_mlix *mlx);
 int				displayloading(t_mlix *mlx);
 int				key_hook(int keycode, t_rtv *rtv);
-void			setup_mlx(t_mlix *mlx);
+void			setup_mlx(t_mlix *mlx,t_rtv *rtv);
 void			ft_destroy(t_mlix *mlx);
 void			ft_put_pixel(t_mlix *mlx, int x, int y, int color);
 double			get_dest(t_rtv *rtv, t_ray ray,

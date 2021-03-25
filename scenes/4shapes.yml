@@ -1,18 +1,15 @@
 light:
  -origin: 100 0 50
- -intensity: 50
-light:
- -origin: -100 0 50
  -intensity: 100
 sphere:
  -origin: 0 0 0
  -radius: 20
  -translation: 0 0 0
  -color: 255 0 0
- -reflection: 2
  -slice: 3
+ -texture: ./images/me2.png
 plane:
- -origin: 50 -30 0
+ -origin: 0 -30 60
  -aim: 0 1 0
  -color: 100 50 100
  -rot: 0 0 0
@@ -21,6 +18,7 @@ cylinder:
  -aim: 0 1 0
  -rot: 0 0 0
  -radius: 10
+ -texture: ./images/me2.png
  -color: 0 0 250
  -slice: 1
 cone:
@@ -35,6 +33,7 @@ slice:
   -vec: 0 -1 0
   -shape: 0
 camera:
- -origin: 0 0 170
+ -origin: 0 70 70
  -fov: 60
  -look_at: 0 0 0
+ -ambient: 10
