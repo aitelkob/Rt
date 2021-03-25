@@ -1,6 +1,6 @@
 light:
  -origin: 100 0 50
- -intensity: 50
+ -intensity: 100
 light:
  -origin: -100 0 50
  -intensity: 100
@@ -12,7 +12,7 @@ sphere:
  -reflection: 2
  -slice: 3
 plane:
- -origin: 50 -30 0
+ -origin: 50 -30 20
  -aim: 0 1 0
  -color: 100 50 100
  -rot: 0 0 0
@@ -38,3 +38,4 @@ camera:
  -origin: 0 0 170
  -fov: 60
  -look_at: 0 0 0
+ -ambient: 10
