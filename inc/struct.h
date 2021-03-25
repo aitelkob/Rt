@@ -41,236 +41,235 @@ enum				e_disruptions
 	PERLIN
 }					t_disruptions;
 
-typedef	struct		s_vector
+typedef	struct			s_vector
 {
-	double			x;
-	double			y;
-	double			z;
-}					t_vector;
+	double				x;
+	double				y;
+	double				z;
+}						t_vector;
 
-typedef struct		s_bmp
+typedef struct			s_bmp
 {
-	uint16_t		type;
-	uint32_t		size;
-	uint16_t		reserved1;
-	uint16_t		reserved2;
-	uint32_t		offset;
-	uint32_t		header_size;
-	int32_t			width_px;
-	int32_t			height_px;
-	uint16_t		num_planes;
-	uint16_t		bits_per_pixel;
-	uint32_t		compression;
-	uint32_t		image_size_bytes;
-	int32_t			x_resolution_ppm;
-	int32_t			y_resolution_ppm;
-	uint32_t		num_colors;
-	uint32_t		important_colors;
-}					t_bmp;
+	uint16_t			type;
+	uint32_t			size;
+	uint16_t			reserved1;
+	uint16_t			reserved2;
+	uint32_t			offset;
+	uint32_t			header_size;
+	int32_t				width_px;
+	int32_t				height_px;
+	uint16_t			num_planes;
+	uint16_t			bits_per_pixel;
+	uint32_t			compression;
+	uint32_t			image_size_bytes;
+	int32_t				x_resolution_ppm;
+	int32_t				y_resolution_ppm;
+	uint32_t			num_colors;
+	uint32_t			important_colors;
+}						t_bmp;
 
-typedef	struct		s_ray
+typedef	struct				s_ray
+{	
+	t_vector				origin;
+	t_vector				direction;
+	t_vector				direction1;
+	t_vector				direction2;
+}							t_ray;
+
+typedef	struct				s_parse
 {
-	t_vector		origin;
-	t_vector		direction;
-	t_vector		direction1;
-	t_vector		direction2;
-}					t_ray;
+	int						fd;
+	char					*line;
+	int						nb_line;
+	char					**agv;
+	char					*obj_name;
+}							t_parse;
 
-typedef	struct		s_parse
+typedef struct				s_shadowadv
 {
-	int				fd;
-	char			*line;
-	int				nb_line;
-	char			**agv;
-	char			*obj_name;
-}					t_parse;
+	t_vector				light_dir;
+	t_vector				color;
+	double					refra;
+}							t_shadowadv;
 
-typedef struct		s_shadowadv
+typedef	struct				s_light
 {
-	t_vector		light_dir;
-	t_vector		color;
-	double			refra;
-}					t_shadowadv;
+	double					intensity;
+	t_vector				origin;
+	struct s_light			*next;
+}							t_light;
 
-typedef	struct		s_light
+typedef struct				s_key
 {
-	double			intensity;
-	t_vector		origin;
-	struct s_light	*next;
-}					t_light;
+	double					zoom;
+	double					zoom_rn;
+	double					zoom_rx;
+	double					zoom_in;
+	double					zoom_ix;
+	int						position_x;
+	double					altitude;
+	int						position_y;
+	unsigned int			parallel;
+	double					retation_x;
+	double					retation_y;
+	double					color_h;
+	double					color_l;
+	int						menu;
+	int						left_button;
+}							t_key;
 
-typedef struct		s_key
+typedef struct				mlx_img_list_s
 {
-	double			zoom;
-	double			zoom_rn;
-	double			zoom_rx;
-	double			zoom_in;
-	double			zoom_ix;
-	int				position_x;
-	double			altitude;
-	int				position_y;
-	unsigned int	parallel;
-	double			retation_x;
-	double			retation_y;
-	double			color_h;
-	double			color_l;
-	int				menu;
-	int				left_button;
-}					t_key;
+	int						width;
+	int						height;
+	char					*buffer;
+	struct mlx_img_list_s	*next;
+}							mlx_img_list_t;
 
-typedef struct	mlx_img_list_s
+typedef	struct				s_mlix
 {
-  int			width;
-  int			height;
-  char			*buffer;
-  struct mlx_img_list_s	*next;
-} mlx_img_list_t;
+	void					*mlx_ptr;
+	void					*win_ptr;
+	void					*img_ptr;
+	void					*img_ptr3;
+	void					*img_ptr2;
+	void					*img_ptr4;
+	mlx_img_list_t			*img_texture;
+	int						w;
+	int						h;
+	int						*d;
+	int						*img;
+	t_vector				*colors;
+	int						bits_per_pixel;
+	int						size_line;
+	int						endian;
+	double					mouse_x;
+	double					mouse_y;
+	t_key					key;
+	double					tempcount;
+	t_vector				tempvec;
+}							t_mlix;
 
-typedef	struct		s_mlix
+typedef	struct				s_inters
+{	
+	double					a;
+	double					b;
+	double					c;
+	double					tmp;
+	t_vector				x;
+}							t_inters;
+	
+typedef	struct				s_quadratic
+{	
+	double					t0;
+	double					t1;
+}							t_quadratic;
+
+typedef	struct				s_tritemp
 {
-	void			*mlx_ptr;
-	void			*win_ptr;
-	void			*img_ptr;
-	void			*img_ptr3;
-	void			*img_ptr2;
-	void			*img_ptr4;
-	mlx_img_list_t	*img_texture;
-	int				w;
-	int				h;
-	int				*d;
-	int				*img;
-	t_vector		*colors;
-	int				bits_per_pixel;
-	int				size_line;
-	int				endian;
-	double			mouse_x;
-	double			mouse_y;
-	t_key			key;
-	double			tempcount;
-	t_vector		tempvec;
-}					t_mlix;
+	t_vector				v0;
+	t_vector				v1;
+	t_vector				v2;
+	t_vector				v0v1;
+	t_vector				v0v2;
+}							t_tritemp;
 
-typedef	struct		s_inters
+typedef struct				s_txtemp
 {
-	double			a;
-	double			b;
-	double			c;
-	double			tmp;
-	t_vector		x;
-}					t_inters;
+	double					x;
+	double					y;
+	int						ipos;
+	double					scale;
+}							t_txtemp;
 
-typedef	struct		s_quadratic
+typedef	struct				s_object
 {
-	double			t0;
-	double			t1;
-}					t_quadratic;
+	int						type;
+	double					radius;
+	t_vector				origin;
+	t_vector				c1;
+	t_vector				c2;
+	t_vector				rot;
+	t_vector				aim;
+	t_vector				translation;
+	double					angle;
+	t_vector				direction;
+	t_vector				color;
+	t_vector				normal;
+	int						w;
+	int						h;
+	double					reflection;
+	double					refraction;
+	double					refraratio;
+	char					*texture;
+	mlx_img_list_t			*img_texture;
+	int						disruptions;
+	double					negative;
+	int						material;
+	int						slicing;
+	t_tritemp				temp;
+	t_txtemp				txt;
+	struct s_object			*next;
+}							t_object;
 
-typedef	struct		s_tritemp
+typedef struct				s_camera
 {
-	t_vector		v0;
-	t_vector		v1;
-	t_vector		v2;
-	t_vector		v0v1;
-    t_vector		v0v2;
-}					t_tritemp;
+	t_vector				origin;
+	double					fov;
+	t_vector				look_at;
+	int						check;
+	double					depth;
+	double					amblgt;
+	struct s_camera			*next;
+	struct s_camera			*prev;
+}							t_camera;
 
-typedef struct		s_txtemp
+typedef	struct				s_ambient
 {
-	double			x;
-	double			y;
-	int				ipos;
-	double			scale;
-}					t_txtemp;
+	double					intensity;
+}							t_ambient;
 
-
-typedef	struct		s_object
+typedef struct				s_slice
 {
-	int				type;
-	double			radius;
-	t_vector		origin;
-	t_vector		c1;
-	t_vector		c2;
-	t_vector		rot;
-	t_vector		aim;
-	t_vector		translation;
-	double			angle;
-	t_vector		direction;
-	t_vector		color;
-	t_vector		normal;
-	int				w;
-	int				h;
-	double			reflection;
-	double			refraction;
-	double			refraratio;
-	char			*texture;
-	mlx_img_list_t	*img_texture;
-	int				disruptions;
-	double			negative;
-	int				material;
-	int				slicing;
-	t_tritemp		temp;
-	t_txtemp		txt;
-	struct s_object	*next;
-}					t_object;
+	t_vector				origin;
+	t_vector				vec;
+	int						shape;
+	struct s_slice			*next;
+}							t_slice;
 
-typedef struct		s_camera
+typedef	struct				s_rtv
 {
-	t_vector		origin;
-	double			fov;
-	t_vector		look_at;
-	int				check;
-	double			depth;
-	double			amblgt;
-	struct s_camera	*next;
-	struct s_camera	*prev;
-}					t_camera;
+	t_mlix					mlx;
+	t_object				*obj;
+	t_parse					parse;
+	t_camera				*camera;
+	t_light					*light;
+	t_slice					*slice;
+	double					min;
+	clock_t					tic;
+	int						filter;
+	int						start;
+	int						loding;
+	int						translationx;
+	int						translationy;
+	int						scale;
+	t_ray					ray;
+}							t_rtv;
 
-typedef	struct		s_ambient
+typedef	struct				s_hit
 {
-	double			intensity;
-}					t_ambient;
+	t_vector				point;
+	double					dst;
+	int						depth;
+	t_vector				normal;
+	t_vector				color;
+}							t_hit;
 
-typedef struct		s_slice
+typedef struct				s_thread
 {
-	t_vector		origin;
-	t_vector		vec;
-	int				shape;
-	struct s_slice	*next;
-}					t_slice;
-
-typedef	struct		s_rtv
-{
-	t_mlix			mlx;
-	t_object		*obj;
-	t_parse			parse;
-	t_camera		*camera;
-	t_light			*light;
-	t_slice			*slice;
-	double			min;
-	clock_t			tic;
-	int				filter;
-	int				start;
-	int				loding;
-	int				translationx;
-	int				translationy;
-	int				scale;
-	t_ray			ray;
-}					t_rtv;
-
-typedef	struct		s_hit
-{
-	t_vector		point;
-	double			dst;
-	int				depth;
-	t_vector		normal;
-	t_vector		color;
-}					t_hit;
-
-typedef struct		s_thread
-{
-	t_rtv			*rt;
-	int				idthread;
-	int				ending;
-}					t_thread;
+	t_rtv					*rt;
+	int						idthread;
+	int						ending;
+}							t_thread;
 
 #endif
