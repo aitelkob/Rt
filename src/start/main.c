@@ -33,6 +33,7 @@ void			start(t_rtv *rtv)
 	rtv->tic = clock();
 	rtv->filter = 0;
 	rtv->loding = 0;
+	rtv->scale = 40;
 	rtv->start = 0;
 	raytracing(*rtv);
 	display(rtv, &rtv->mlx);

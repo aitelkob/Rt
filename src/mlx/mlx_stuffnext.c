@@ -50,8 +50,56 @@ void			cammouve(int keycode, t_rtv *rtv)
 	cammouve_help(keycode, rtv);
 }
 
+void			key_hook_help(int keycode, t_rtv *rtv)
+{
+	if (keycode == KEY_1)
+	{
+		rtv->scale += 10;
+		displayloading(&rtv->mlx);
+		raytracing(*rtv);
+		display(rtv, &rtv->mlx);
+
+	}
+	if (keycode == KEY_3)
+	{
+		rtv->scale -= 10;
+		displayloading(&rtv->mlx);
+		raytracing(*rtv);
+		display(rtv, &rtv->mlx);
+	}
+	if (keycode ==KEY_4)
+	{
+		rtv->translationx +=10;
+		displayloading(&rtv->mlx);
+		raytracing(*rtv);
+		display(rtv, &rtv->mlx);
+	}
+	if (keycode == KEY_6)
+	{
+		rtv->translationx -=10;
+		displayloading(&rtv->mlx);
+		raytracing(*rtv);
+		display(rtv, &rtv->mlx);
+	}
+	if (keycode ==KEY_5)
+	{
+		rtv->translationy +=10;
+		displayloading(&rtv->mlx);
+		raytracing(*rtv);
+		display(rtv, &rtv->mlx);
+	}
+	if (keycode == KEY_8)
+	{
+		rtv->translationy -=10;
+		displayloading(&rtv->mlx);
+		raytracing(*rtv);
+		display(rtv, &rtv->mlx);
+	}
+}
+
 int				key_hook(int keycode, t_rtv *rtv)
 {
+	key_hook_help(keycode,rtv);
 	if (keycode == KEY_ESC)
 		exiting_program(rtv);
 	if (keycode == SPACE)

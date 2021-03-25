@@ -143,15 +143,15 @@ t_vector texture(t_rtv *rtv, t_object *obj, t_vector point)
 	int x = 0;
 	int y = 0;
 	int ipos = 0;
-	double scale = 40;
+	// double scale = rtv->scale;
 	(void)rtv;
-	int cond = obj->type == PLANE ? point.z > 0  + obj->origin.z - scale / 2.0
-	    && point.z < scale / 2.0 + obj->origin.z: point.y > 0  + obj->origin.y - scale / 2.0
-	    && point.y < scale / 2.0 + obj->origin.y;
+	int cond = obj->type == PLANE ? point.z > 0  + obj->origin.z - rtv->scale / 2.0
+	    && point.z < rtv->scale / 2.0 + obj->origin.z: point.y > 0  + obj->origin.y - rtv->scale / 2.0
+	    && point.y < rtv->scale / 2.0 + obj->origin.y;
 	if(obj->type == PLANE)
 	{	
-		x = fmod((obj->origin.x - scale / 2.0 + point.x )/ scale,1) * 1000;
-		y = fmod((obj->origin.z - scale / 2.0 + point.z )/ scale,1) * 1000;
+		x = fmod((obj->origin.x - rtv->scale / 2.0 + point.x )/ rtv->scale,1) * 1000;
+		y = fmod((obj->origin.z - rtv->scale / 2.0 + point.z )/ rtv->scale,1) * 1000;
 	}
 	else if(obj->type == SPHERE)
 	{	
@@ -166,8 +166,8 @@ t_vector texture(t_rtv *rtv, t_object *obj, t_vector point)
 	x = x < 0 ? 1000 - abs(x) : x;
 	y = y < 0 ? 1000 - abs(y) : y;
 	ipos = 4 * 1000 * y + x * 4;
-	if(	   point.x > 0  + obj->origin.x - scale / 2.0 
-		&& point.x < scale / 2.0 + obj->origin.x
+	if(	   point.x > 0  + obj->origin.x - rtv->scale / 2.0 
+		&& point.x < rtv->scale / 2.0 + obj->origin.x
 	    && cond)
 		return (t_vector) {
 			obj->img_texture->buffer[ipos+2] < 0 ? 255 + obj->img_texture->buffer[ipos+2] : obj->img_texture->buffer[ipos+2],

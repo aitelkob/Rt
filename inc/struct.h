@@ -241,6 +241,9 @@ typedef	struct		s_rtv
 	int				filter;
 	int				start;
 	int				loding;
+	int				translationx;
+	int				translationy;
+	int				scale;
 	t_ray			ray;
 }					t_rtv;
 
