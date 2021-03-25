@@ -221,7 +221,6 @@ typedef struct				s_camera
 	double					depth;
 	double					amblgt;
 	struct s_camera			*next;
-	struct s_camera			*prev;
 }							t_camera;
 
 typedef	struct				s_ambient
