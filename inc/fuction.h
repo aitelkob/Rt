@@ -122,6 +122,7 @@ t_vector		reflectandrefract(t_ray ray, t_object *obj,\
 t_rtv *rtv, t_hit hit);
 t_vector		*initgp(t_object	*obj);
 void			darkcheck(t_vector *c, double ref);
+t_vector		texture(t_rtv *rtv, t_object *obj, t_vector point);  
 
 /*
  ********************************** intersection

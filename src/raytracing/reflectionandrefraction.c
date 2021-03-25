@@ -76,8 +76,11 @@ t_vector		gpxadv(t_rtv *rtv, t_ray ray, t_vector direction, int depth)
 	if ((hit.dst = get_dest(rtv, ray, &obj, NULL)) <= 0)
 		return (color[0]);
 	hit.point = add(ray.origin, multi(direction, hit.dst));
-	if (hit.dst > 0)
-		color[0] = multi(divi(obj->color, 100), rtv->camera->amblgt);
+	hit.color = obj->color;
+	if (obj->w == 1000 && obj->h == 1000)
+		hit.color = texture(rtv, obj, hit.point);
+	if (hit.dst > 0 && rtv->light->intensity == 0)
+		color[0] = multi(divi(hit.color, 100), rtv->camera->amblgt);
 	ratio[0] = obj->reflection + 0.2;
 	ratio[1] = obj->refraction + 0.2;
 	if (rtv->light)
