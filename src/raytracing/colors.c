@@ -18,13 +18,15 @@ t_rtv *rtv, t_object *obj)
 	t_ray			ray_light;
 	t_object		*tmp_obj;
 	double			dst;
+	t_vector		hitpoint;
 
 	ray_light.origin = tmp_light->origin;
 	ray_light.direction = nrm(multi(shadv->light_dir, -1));
 	dst = get_dest(rtv, ray_light, &tmp_obj, obj);
-	if(dst != -1)
+	hitpoint = add(ray_light.origin, multi(ray_light.direction, dst));
+	if(dst != -1 && tmp_obj->w != -1)
 	{
-		shadv->color = tmp_obj->color;
+		shadv->color = texture(rtv, tmp_obj, hitpoint);
 		shadv->refra = tmp_obj->refraction;
 		darkcheck(&shadv->color, shadv->refra);
 	}
