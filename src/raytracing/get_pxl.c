@@ -64,6 +64,7 @@ int					isnegativeobj(t_rtv *rtv, t_ray ray, double dst)
 	t_quadratic		q;
 
 	tmp = rtv->obj;
+	nrm(camera(rtv->camera_vect, x, y, test));
 	while (tmp)
 	{
 		if (tmp->negative == 1)
@@ -92,7 +93,7 @@ tmp = rtv->obj;
 		q.t0 = slice(ray, q, rtv->slice, tmp);
 		if (q.t0 > 0 && (q.t0 < min + 0.000000001 ||\
 		min == -1) && tmp->negative != 1)
-			if ((isnegativeobj(rtv, ray, q.t0) ||\
+			if ( (isnegativeobj(rtv, ray, q.t0) ||\
 			(isnegativeobj(rtv, ray, q.t1) && tmp->type != PLANE)))
 			{
 				if (isnegativeobj(rtv, ray, q.t0))
@@ -156,27 +157,62 @@ t_txtemp *txt)
 {
 	if(obj->type == PLANE)
 	{	
-		txt->x = fmod((obj->origin.x - rtv->scale / 2.0 + point.x)/\
+		txt->x = fmod((-rtv->translationx - obj->origin.x + rtv->scale / 2.0 + point.x)/\
 		rtv->scale,1);
-		txt->y = fmod((obj->origin.z - rtv->scale / 2.0 + point.z)/\
+		txt->y = fmod((-rtv->translationy - obj->origin.z + rtv->scale / 2.0 + point.z)/\
 		rtv->scale,1);
 	}
 	else if(obj->type == SPHERE)
 	{	
-		txt->x = (1 - ((atan2((obj->origin.x - point.x), obj->origin.z -\
+		txt->x = (1 - ((atan2((+obj->origin.x  - point.x), obj->origin.z -\
 		point.z) / (2.0 * PI))));
-		txt->y = ((1 - (acos((((obj->origin.y - point.y))/\
+		txt->y = ((1 - (acos(((( + obj->origin.y  - point.y))/\
 		(obj->radius)))) / PI));
 	}
 	else if(obj->type == CYLINDER || obj->type == CONE)
 	{	
-		txt->x = (1 - (atan2(-obj->origin.x + point.x, -obj->origin.z +\
-		point.z)) / (2.0 * PI));
-		txt->y = fmod((-obj->origin.y + point.y) / rtv->scale, 1);
+		txt->x = (1 - (atan2((- obj->origin.x + point.x) , (-obj->origin.z +\
+		point.z))) / (2.0 * PI)) ;
+		txt->y = fmod(-rtv->translationy + ( - obj->origin.y  + point.y) / rtv->scale, 1);
 	}
-	txt->x = (txt->x < 0 ? fabs(txt->x) : txt->x) * (1000);
-	txt->y = (txt->y < 0 ? fabs(txt->y) : txt->y) * (1000);
-	txt->ipos = 4 * 1000 * (int) txt->y + (int) txt->x  * 4;
+	
+}
+
+
+t_vector	texture_noise(double x, double y,t_vector color)
+{
+	x = floor(x * 2);
+	y = floor(y * 2);
+	if(fmod(x + y, 2) == 0)
+		return (t_vector){0, 0, 0};
+	else
+		return color;
+}
+
+int		png_to_rgb(int value)
+{
+	return value < 0 ? 255 + value: value;
+}
+
+t_vector  texture_fromfile(t_rtv *rtv, t_object *obj, t_vector point, t_txtemp txt)
+{
+	int ipos;
+	txt.x = (txt.x < 0 ? -txt.x : txt.x) * (1000);
+	txt.y = (txt.y < 0 ? -txt.y : txt.y) * (1000);
+	ipos = 4 * 1000 * (int) txt.y + (int) txt.x  * 4;
+	int cond = obj->type == PLANE ? point.z > 0  + obj->origin.z + rtv->translationy - rtv->scale / 2.0
+	    && point.z < rtv->scale / 2.0 + obj->origin.z + rtv->translationy: point.y > 0 +\
+		obj->origin.y + rtv->translationy - rtv->scale / 2.0
+	    && point.y < rtv->scale / 2.0 + obj->origin.y + rtv->translationy;
+	
+	if(	   point.x > 0  + obj->origin.x + rtv->translationx - rtv->scale / 2.0
+		&& point.x < rtv->scale / 2.0 + obj->origin.x + rtv->translationx
+	    && cond)
+		return (t_vector) {
+			png_to_rgb(obj->img_texture->buffer[ipos + 2]),
+			png_to_rgb(obj->img_texture->buffer[ipos + 1]) ,
+			png_to_rgb(obj->img_texture->buffer[ipos])};
+	return obj->color;
 }
 
 t_vector			texture(t_rtv *rtv, t_object *obj, t_vector point)
@@ -184,26 +220,10 @@ t_vector			texture(t_rtv *rtv, t_object *obj, t_vector point)
 	t_txtemp txt;
 
 	txtinit(&txt);
-	int cond = obj->type == PLANE ? point.z > 0  + obj->origin.z -\
-	rtv->scale / 2.0
-	    && point.z < rtv->scale / 2.0 + obj->origin.z: point.y > 0 +\
-		obj->origin.y - rtv->scale / 2.0
-	    && point.y < rtv->scale / 2.0 + obj->origin.y;
 	texture_help(rtv, obj, point, &txt);
-	if(	   point.x > 0  + obj->origin.x - rtv->scale / 2.0 
-		&& point.x < rtv->scale / 2.0 + obj->origin.x
-	    && cond)
-		return (t_vector) {
-			obj->img_texture->buffer[txt.ipos + 2] < 0 ? 255 +\
-			obj->img_texture->buffer[txt.ipos + 2] :\
-			obj->img_texture->buffer[txt.ipos+2],
-			obj->img_texture->buffer[txt.ipos + 1] < 0 ? 255 +\
-			obj->img_texture->buffer[txt.ipos + 1] :\
-			obj->img_texture->buffer[txt.ipos+1],
-			obj->img_texture->buffer[txt.ipos]   < 0 ? 255 +\
-			obj->img_texture->buffer[txt.ipos + 2] :\
-			obj->img_texture->buffer[txt.ipos]};
-	return obj->color;
+	if(obj->disruptions == CHECK)
+		return texture_noise(txt.x,txt.y, obj->color);
+	return texture_fromfile(rtv, obj, point, txt);
 }
 
 t_vector			get_pxl(t_rtv *rtv, t_ray ray)

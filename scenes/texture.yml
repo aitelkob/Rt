@@ -2,17 +2,31 @@ light:
   -origin: 0 200 400
   -intensity: 100
 plane:
-  -origin: 0 0 0
+  -origin: 0 -50 0
   -aim: 0 1 0
   -color: 55 25 255
   -rot: 0 0 0
-sphere:
+cylinder:
   -origin: 0 0 0  
-  -radius: 5
+  -radius: 10
+  -aim: 0 1 0
   -color: 205 10 60
   -negative: 0
+  -slice: 0
+  -texture: ./images/me2.png
+cylinder:
+  -origin: 0 0 0  
+  -radius: 10
+  -aim: 1 0 0
+  -color: 205 10 60
+  -negative: 1
+  -slice: 0
 camera:
-  -origin: 0 20 40
+  -origin: 60 0 0
   -fov: 60
   -look_at: 0 10 0
-  -ambient: 0
+  -ambient: 50
+slice:
+  -origin: 0 0 0
+  -vec: 0 1 0
+  -shape: 1

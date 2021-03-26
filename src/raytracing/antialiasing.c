@@ -30,7 +30,7 @@ void				antialiasing(t_rtv *rtv, double x, double y, t_ray ray2)
 		test.x = (rand() % 10) / 10.0;
 		test.y = (rand() % 10) / 10.0;
 		test.z = 0;
-		ray2.direction = nrm(camera(rtv->camera, x, y, test));
+		ray2.direction = nrm(camera(rtv->camera_vect, x, y, test));
 		color = add(color, get_pxl(rtv, ray2));
 		i++;
 	}
