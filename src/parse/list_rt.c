@@ -46,7 +46,6 @@ void				init_cam(t_camera *cam)
 	cam->look_at = (t_vector){0, 0, 0};
 	cam->amblgt = 25;
 	cam->next = NULL;
-	cam->prev = NULL;
 }
 
 void				light_check(char *data, char *arg,

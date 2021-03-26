@@ -14,16 +14,16 @@
 # define STRUCT_H
 # include "rtv1.h"
 
-enum				e_type
+enum						e_type
 {
 	PLANE = 1,
 	SPHERE,
 	CYLINDER,
 	TRIANGLE,
 	CONE
-}					t_type;
+}							t_type;
 
-enum				e_material
+enum						e_material
 {
 	GLASS = 1,
 	MIRROR,
@@ -31,45 +31,45 @@ enum				e_material
 	WATER,
 	THINGLASS,
 	EMPTY
-}					t_material;
+}							t_material;
 
-enum				e_disruptions
+enum						e_disruptions
 {
 	NORMAL = 1,
 	CHECK,
 	DISRUPT,
 	PERLIN
-}					t_disruptions;
+}							t_disruptions;
 
-typedef	struct			s_vector
+typedef	struct				s_vector
 {
-	double				x;
-	double				y;
-	double				z;
-}						t_vector;
+	double					x;
+	double					y;
+	double					z;
+}							t_vector;
 
-typedef struct			s_bmp
+typedef struct				s_bmp
 {
-	uint16_t			type;
-	uint32_t			size;
-	uint16_t			reserved1;
-	uint16_t			reserved2;
-	uint32_t			offset;
-	uint32_t			header_size;
-	int32_t				width_px;
-	int32_t				height_px;
-	uint16_t			num_planes;
-	uint16_t			bits_per_pixel;
-	uint32_t			compression;
-	uint32_t			image_size_bytes;
-	int32_t				x_resolution_ppm;
-	int32_t				y_resolution_ppm;
-	uint32_t			num_colors;
-	uint32_t			important_colors;
-}						t_bmp;
+	uint16_t				type;
+	uint32_t				size;
+	uint16_t				reserved1;
+	uint16_t				reserved2;
+	uint32_t				offset;
+	uint32_t				header_size;
+	int32_t					width_px;
+	int32_t					height_px;
+	uint16_t				num_planes;
+	uint16_t				bits_per_pixel;
+	uint32_t				compression;
+	uint32_t				image_size_bytes;
+	int32_t					x_resolution_ppm;
+	int32_t					y_resolution_ppm;
+	uint32_t				num_colors;
+	uint32_t				important_colors;
+}							t_bmp;
 
 typedef	struct				s_ray
-{	
+{
 	t_vector				origin;
 	t_vector				direction;
 	t_vector				direction1;
@@ -151,16 +151,16 @@ typedef	struct				s_mlix
 }							t_mlix;
 
 typedef	struct				s_inters
-{	
+{
 	double					a;
 	double					b;
 	double					c;
 	double					tmp;
 	t_vector				x;
 }							t_inters;
-	
+
 typedef	struct				s_quadratic
-{	
+{
 	double					t0;
 	double					t1;
 }							t_quadratic;
@@ -221,7 +221,6 @@ typedef struct				s_camera
 	double					depth;
 	double					amblgt;
 	struct s_camera			*next;
-	struct s_camera			*prev;
 }							t_camera;
 
 typedef	struct				s_ambient
