@@ -4,15 +4,21 @@ light:
 plane:
   -origin: 0 0 0
   -aim: 0 1 0
-  -color: 55 25 255
+  -color: 255 0 0
+  -rot: 0 0 50
+  -reflection: 50
+plane:
+  -origin: 0 0 0
+  -aim: 0 0 1
+  -color: 0 0 255
   -rot: 0 0 0
 sphere:
-  -origin: 0 0 0  
+  -origin: 0 20 20  
   -radius: 5
-  -color: 205 10 60
+  -color: 0 255 0
   -negative: 0
 camera:
   -origin: 0 20 40
   -fov: 60
   -look_at: 0 10 0
-  -ambient: 0
+  -ambient: 100

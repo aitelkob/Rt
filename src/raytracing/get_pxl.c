@@ -85,10 +85,11 @@ t_object **close, t_object *current)
 	t_quadratic		q;
 
 	min = -1;
-tmp = rtv->obj;
+	tmp = rtv->obj;
 	while (tmp)
 	{
-		q = intersection(ray, *tmp);
+		if(tmp != current || ray.type == 1)
+		{q = intersection(ray, *tmp);
 		q.t0 = slice(ray, q, rtv->slice, tmp);
 		if (q.t0 > 0 && (q.t0 < min + 0.000000001 ||\
 		min == -1) && tmp->negative != 1)
@@ -100,7 +101,7 @@ tmp = rtv->obj;
 				else
 					min = q.t1;
 				*close = tmp;
-			}
+			}}
 		tmp = tmp->next;
 	}
 	if (current != NULL && *close == current)
@@ -216,6 +217,7 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 	hit.depth = rtv->camera->depth;
 	color[0] = (t_vector){0, 0, 0};
 	color[1] = (t_vector){0, 0, 0};
+	ray.type = 0;
 	if ((hit.dst = get_dest(rtv, ray, &obj, NULL)) <= 0)
 		return (color[0]);
 	hit.point = add(ray.origin, multi(ray.direction, hit.dst));

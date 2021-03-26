@@ -41,7 +41,7 @@ double					intersection_plane(t_ray ray, t_object plane)
 	t_vector			vector_distance;
 
 	d = dot(plane.aim, ray.direction);
-	vector_distance = vecto_subvec(plane.origin, ray.origin);
+	vector_distance = sub(plane.origin, ray.origin);
 	dist = dot(vector_distance, plane.aim) / d;
 	if (dist > 0)
 		return (dist);

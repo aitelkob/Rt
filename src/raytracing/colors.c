@@ -22,6 +22,7 @@ t_rtv *rtv, t_object *obj)
 
 	ray_light.origin = tmp_light->origin;
 	ray_light.direction = nrm(multi(shadv->light_dir, -1));
+	ray_light.type = 1;
 	dst = get_dest(rtv, ray_light, &tmp_obj, obj);
 	hitpoint = add(ray_light.origin, multi(ray_light.direction, dst));
 	if(dst != -1 && tmp_obj->w != -1)

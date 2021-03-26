@@ -74,6 +74,7 @@ typedef	struct				s_ray
 	t_vector				direction;
 	t_vector				direction1;
 	t_vector				direction2;
+	int						type;
 }							t_ray;
 
 typedef	struct				s_parse
@@ -260,6 +261,7 @@ typedef	struct				s_hit
 	t_vector				point;
 	double					dst;
 	int						depth;
+	t_object				*current;
 	t_vector				normal;
 	t_vector				color;
 }							t_hit;
