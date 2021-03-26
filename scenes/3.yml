@@ -19,6 +19,7 @@ sphere:
   -reflection: 0
   -refraction: 0
   -refraction_index: 0
+  -disrup: normal
 camera:
   -origin: 20 35 60
   -fov: 60
@@ -35,4 +36,3 @@ slice:
   -origin: 0 0 0
   -vec: 0 -1 0
   -shape: -1
-#

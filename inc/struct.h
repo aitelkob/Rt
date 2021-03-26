@@ -38,7 +38,7 @@ enum						e_disruptions
 	NORMAL = 1,
 	CHECK,
 	DISRUPT,
-	PERLIN
+	PERLIN,
 }							t_disruptions;
 
 typedef	struct				s_vector
