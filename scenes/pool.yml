@@ -1,0 +1,40 @@
+light:
+ -origin: 122 80 90
+ -intensity: 100
+camera:
+ -origin: 0 150 -200
+ -look_at: 0 0 0
+ -depth: 5
+plane:
+ -origin: 0 -10 0
+ -aim: 0 1 0
+ -color: 44 130 87
+ -rot: 0 0 0
+sphere:
+ -origin: 0 0 0
+ -radius: 10
+ -color: 255 0 0
+sphere:
+ -origin: 20 0 0
+ -radius: 10
+ -color: 255 0 0
+sphere:
+ -origin: -20 0 0
+ -radius: 10
+ -color: 255 0 0
+sphere:
+ -origin: 10 0 20
+ -radius: 10
+ -color: 255 0 0
+sphere:
+ -origin: -10 0 20
+ -radius: 10
+ -color: 255 0 0
+sphere:
+ -origin: 0 0 40
+ -radius: 10
+ -color: 255 0 0
+sphere:
+ -origin: 0 0 0
+ -radius: 10
+ -color: 255 0 0

@@ -45,7 +45,11 @@ cylinder:
   -origin: -50 0 0
   -radius: 6.5
   -aim: 0 1 0
+<<<<<<< HEAD
   -color: 200 200 200
+=======
+  -color: 223 102 102
+>>>>>>> 30a163a05beee7857be20c61864b3db6816aa390
   -rot: 0 0 0
 cylinder:
   -origin: 50 0 70
