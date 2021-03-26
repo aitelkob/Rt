@@ -79,7 +79,7 @@ t_rtv *rtv, t_hit hit)
 	obj->refraratio), ray.direction2);
 	ray.origin = hit.point;
 	hit.depth--;
-	ratio[0] = obj->reflection + 0.1;
+	ratio[0] = obj->reflection - 0.95;
 	ratio[1] = obj->refraction + 0.1;
 	if (obj->reflection)
 		color[0] = multi(gpxaddv(rtv, ray, ray.direction1, hit), ratio[0]);
