@@ -42,7 +42,7 @@ void				first_light(t_rtv *rtv, t_light *light)
 void				init_cam(t_camera *cam)
 {
 	cam->fov = 60;
-	cam->depth = 5;
+	cam->depth = 25;
 	cam->look_at = (t_vector){0, 0, 0};
 	cam->amblgt = 25;
 	cam->next = NULL;
