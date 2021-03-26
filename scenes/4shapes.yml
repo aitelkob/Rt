@@ -14,7 +14,6 @@ plane:
  -aim: -1 0 0
  -color: 255 255 255
  -rot: 0 0 0
-  -material: mirror
 plane:
  -origin: -200 0 0
  -aim: 1 0 0
@@ -54,4 +53,4 @@ camera:
  -origin: 60 60 200
  -fov: 60
  -look_at: 0 0 0
- -ambient: 10
+ -ambient: 0

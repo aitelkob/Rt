@@ -45,23 +45,27 @@ cylinder:
   -origin: -50 0 0
   -radius: 6.5
   -aim: 0 1 0
+<<<<<<< HEAD
+  -color: 200 200 200
+=======
   -color: 223 102 102
+>>>>>>> 30a163a05beee7857be20c61864b3db6816aa390
   -rot: 0 0 0
 cylinder:
   -origin: 50 0 70
   -radius: 6.5
   -aim: 0 1 0
-  -color: 223 102 102
+  -color: 200 200 200
 cylinder:
   -origin: -50 0 70
   -radius: 6.5
   -aim: 0 1 0
-  -color: 223 102 102
+  -color: 200 200 200
 cylinder:
   -origin: 50 0 0
   -radius: 6.5
   -aim: 0 1 0
-  -color: 255 128 11
+  -color: 200 200 200
 sphere:
   -origin: -50 -50 50
   -radius: 10
@@ -185,49 +189,49 @@ cylinder:
   -aim: 0 1 0
   -color: 200 200 200
 plane:
-  -material: mirror
+  -material: water
   -origin: 0 50 0
   -aim: 0 1 0
   -rot: 0 0 0
   -color: 200 200 200
 plane:
-  -material: mirror
+  -material: water
   -origin: 0 -50 0
   -aim: 0 -1 0
   -rot: 0 0 0
   -color: 230 230 230
 plane:
-  -material: mirror
+  -material: water
   -origin: 100 0 0
   -aim: 1 0 0
   -rot: 0 0 0
   -color: 20 50 250
 plane:
-  -material: mirror
+  -material: water
   -origin: 150 0 0
   -aim: 1 0 0
   -rot: 0 0 60
   -color: 200 200 210
 plane:
-  -material: mirror
+  -material: water
   -origin: 150 0 0
   -aim: 1 0 0
   -rot: 0 0 -60
   -color: 200 200 210
 plane:
-  -material: mirror
+  -material: water
   -origin: -100 0 0
   -aim: -1 0 0
   -rot: 0 0 0
   -color: 20 0 250
 plane:
- -material: mirror
+ -material: water
   -origin: -150 0 0
   -aim: -1 0 0
   -rot: 0 0 -60
   -color: 200 200 210
 plane:
-  -material: mirror
+  -material: water
   -origin: -150 0 0
   -aim: -1 0 0
   -rot: 0 0 60
@@ -243,19 +247,19 @@ plane:
   -rot: 0 70 0
   -color: 200 200 210
 plane:
-  -material: mirror
+  -material: water
   -origin: 0 0 -500
   -aim: 0 0 -1
   -rot: 0 -70 0
   -color: 200 200 210
 plane:
-  -material: mirror
+  -material: water
   -origin: 0 0 -500
   -aim: 0 -1 0
   -rot: 0 0 0
   -color: 200 200 210
 plane:
-  -material: mirror
+  -material: water
   -origin: 0 0 -500
   -aim: 0 -1 0
   -rot: 0 0 0

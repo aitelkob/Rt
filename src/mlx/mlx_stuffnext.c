@@ -67,6 +67,13 @@ void			key_hook_help(int keycode, t_rtv *rtv)
 		raytracing(*rtv);
 		display(rtv, &rtv->mlx);
 	}
+	if (keycode == KEY_T)
+	{
+		rtv->scale -= 10;
+		displayloading(&rtv->mlx);
+		raytracing(*rtv);
+		display(rtv, &rtv->mlx);
+	}
 	if (keycode ==KEY_4)
 	{
 		rtv->translationx +=10;
