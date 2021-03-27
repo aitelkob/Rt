@@ -1,0 +1,64 @@
+light:
+ -origin: 122 60 50
+ -intensity: 100
+light:
+ -origin: -122 60 50
+ -intensity: 100
+light:
+ -origin: 152 5 50
+ -intensity: 100
+light:
+ -origin: -152 5 50
+ -intensity: 100
+camera:
+ -origin: 0 20 250
+ -look_at: 0 0 0
+ -depth: 5
+plane:
+ -origin: 0 -30 0
+ -aim: 0 1 0
+ -color: 255 255 255
+ -rot: 0 0 0
+ -disrup: check
+ -reflection: 10
+sphere:
+ -origin: 0 30 0
+ -radius: 30
+ -color: 255 255 255
+ -material: mirror
+sphere:
+ -origin: 60 30 0
+ -radius: 30
+ -color: 255 0 0
+ -reflection: 1
+ -disrup: check
+ -material: glass
+sphere:
+ -origin: -60 30 0
+ -radius: 30
+ -color: 0 0 255
+ -material: thinglass
+sphere:
+ -origin: 60 -10 60
+ -radius: 20
+ -color: 255 255 255
+ -texture: ./images/abdou.png
+sphere:
+ -origin: -60 -10 60
+ -radius: 20
+ -color: 255 255 255
+ -texture: ./images/soufian.png
+sphere:
+ -origin: 0 -10 60
+ -radius: 20
+ -color: 255 255 255
+ -texture: ./images/youssef.png
+light:
+ -origin: 160 -10 100
+ -intensity: 100
+light:
+ -origin: 0 -10 100
+ -intensity: 100
+light:
+ -origin: -160 -10 100
+ -intensity: 100

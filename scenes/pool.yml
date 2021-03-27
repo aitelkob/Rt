@@ -5,7 +5,7 @@ light:
  -origin: -122 60 50
  -intensity: 100
 light:
- -origin: 0 50 0
+ -origin: 0 50 -50
  -intensity: 100
 camera:
  -origin: 0 150 -200
@@ -16,11 +16,11 @@ plane:
  -aim: 0 1 0
  -color: 44 130 87
  -rot: 0 0 0
+ -texture: ./images/pool.png
 sphere:
  -origin: 0 0 0
  -radius: 10
  -color: 0 0 0
- -texture: ./images/8.png
  -reflection: 1
 sphere:
  -origin: 20 0 0
@@ -91,4 +91,9 @@ sphere:
  -origin: 40 0 -40
  -radius: 10
  -color: 255 0 0
+ -reflection: 1
+sphere:
+ -origin: 30 0 -80
+ -radius: 10
+ -color: 255 255 255
  -reflection: 1
