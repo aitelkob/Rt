@@ -2,12 +2,12 @@ light:
   -origin: 10 35 60
   -intensity: 100
 plane:
-  -origin: 0 -10 0
+  -origin: 0 -14 0
   -aim: 0 1 0
   -color: 255 255 255
   -rot: 0 0 0
   -reflection: 1
-  -texture: ./images/8.png
+  -disrup: check
   -slice: 5
 # sphere:
 #   -origin: 0 0 0
@@ -22,19 +22,19 @@ plane:
 #   -disrup: normal
 sphere:
  -origin: 30 0 0
- -radius: 10
+ -radius: 14
  -color: 255 0 0
- -reflection: 3
+ -reflection: 20
 sphere:
  -origin: -30 0 0
- -radius: 10
+ -radius: 14
  -color: 0 255 0
- -reflection: 3
+ -reflection: 20
 sphere:
  -origin: 0 0 0
- -radius: 10
+ -radius: 14
  -color: 0 0 255
- -reflection: 3
+ -reflection: 20
 camera:
   -origin: 0 10 100
   -fov: 60

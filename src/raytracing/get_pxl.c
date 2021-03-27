@@ -182,8 +182,8 @@ t_txtemp *txt)
 
 t_vector	texture_noise(double x, double y,t_vector color)
 {
-	x = floor(x * 2);
-	y = floor(y * 2);
+	x = floor(x * 4);
+	y = floor(y * 4);
 	if(fmod(x + y, 2) == 0)
 		return (t_vector){0, 0, 0};
 	else
@@ -206,7 +206,7 @@ t_vector  texture_fromfile(t_rtv *rtv, t_object *obj, t_vector point, t_txtemp t
 		obj->origin.y + rtv->translationy - rtv->scale / 2.0
 	    && point.y < rtv->scale / 2.0 + obj->origin.y + rtv->translationy;
 	
-	if(	   point.x > 0  + obj->origin.x + rtv->translationx - rtv->scale / 2.0
+	if( point.x > 0 + obj->origin.x + rtv->translationx - rtv->scale / 2.0
 		&& point.x < rtv->scale / 2.0 + obj->origin.x + rtv->translationx
 	    && cond)
 		return (t_vector) {
@@ -224,7 +224,9 @@ t_vector			texture(t_rtv *rtv, t_object *obj, t_vector point)
 	texture_help(rtv, obj, point, &txt);
 	if(obj->disruptions == CHECK)
 		return texture_noise(txt.x,txt.y, obj->color);
-	return texture_fromfile(rtv, obj, point, txt);
+	else if(obj->w != -1)
+		return  texture_fromfile(rtv, obj, point, txt);
+	return obj->color;
 }
 
 t_vector			get_pxl(t_rtv *rtv, t_ray ray)
@@ -242,8 +244,8 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 		return (color[0]);
 	hit.point = add(ray.origin, multi(ray.direction, hit.dst));
 	hit.color = obj->color;
-	if (obj->w == 1000 && obj->h == 1000)
-		hit.color = texture(rtv, obj, hit.point);
+	// if (obj->w == 1000 && obj->h == 1000)
+	hit.color = texture(rtv, obj, hit.point);
 	if (hit.dst > 0 && rtv->light->intensity == 0)
 		color[0] = multi(divi(hit.color, 100), rtv->camera->amblgt);
 	ratio[0] = obj->reflection + 0.2;
