@@ -19,10 +19,10 @@ void			ft_destroy(t_mlix *mlx)
 	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
 }
 
-void			setup_mlx(t_mlix *mlx,t_rtv *rtv)
+void			setup_mlx(t_mlix *mlx, t_rtv *rtv)
 {
-	t_object *tmp;
-	
+	t_object	*tmp;
+
 	tmp = rtv->obj;
 	mlx->mlx_ptr = mlx_init();
 	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, (WIN_W + 290), WIN_H, "RT");
@@ -32,17 +32,15 @@ void			setup_mlx(t_mlix *mlx,t_rtv *rtv)
 	"./images/cartoon1.png", &mlx->w, &mlx->h);
 	mlx->img_ptr4 = mlx_png_file_to_image(mlx->mlx_ptr,\
 	"./images/white.png", &mlx->w, &mlx->h);
-	
-	while(tmp)
+	while (tmp)
 	{
-		 if (tmp)
-		 {
-			 if (ft_strlen(tmp->texture) > 10)
-			  tmp->img_texture = mlx_png_file_to_image(mlx->mlx_ptr,tmp->texture, &tmp->w, &tmp->h);
-			
+		if (tmp)
+		{
+			if (ft_strlen(tmp->texture) > 10)
+				tmp->img_texture = mlx_png_file_to_image(mlx->mlx_ptr,\
+				tmp->texture, &tmp->w, &tmp->h);
 		}
-		tmp= tmp->next;
-		
+		tmp = tmp->next;
 	}
 	mlx->img_ptr = mlx_new_image(mlx->mlx_ptr, WIN_W, WIN_H);
 	mlx->img = (int*)mlx_get_data_addr(mlx->img_ptr, &mlx->bits_per_pixel,\

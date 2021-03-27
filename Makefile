@@ -6,7 +6,7 @@
 #    By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/23 16:25:47 by yait-el-          #+#    #+#              #
-#    Updated: 2021/03/25 09:56:34 by babdelka         ###   ########.fr        #
+#    Updated: 2021/03/27 15:37:59 by babdelka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,14 +59,17 @@ SRC			+=start/freeing.c
 SRC			+=mlx/mlx_stuff.c
 SRC			+=mlx/mlx_stuffnext.c
 SRC			+=mlx/mlx_stuffnext_help.c
+SRC			+=mlx/mlx_stuffnext_helpone.c
 SRC         +=parse/light_parse.c
 SRC         +=parse/tools_parse2.c
+SRC         +=parse/tools_parse3.c
 SRC			+=parse/parse.c
 SRC			+=parse/parse2.c
 SRC			+=parse/extra.c
 SRC			+=parse/objs_parse.c
 SRC			+=parse/check_obj.c
 SRC			+=parse/check_obj2.c
+SRC			+=parse/check_obj3.c
 SRC			+=parse/tools_parse.c
 SRC			+=parse/list_rt.c
 SRC			+=libvect/calc_vect.c

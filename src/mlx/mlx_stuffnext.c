@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 12:29:39 by babdelka          #+#    #+#             */
-/*   Updated: 2021/03/24 19:16:59 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/27 14:51:51 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,74 +50,9 @@ void			cammouve(int keycode, t_rtv *rtv)
 	cammouve_help(keycode, rtv);
 }
 
-void			key_hook_help(int keycode, t_rtv *rtv)
-{
-	if (keycode == KEY_1)
-	{
-		rtv->scale *= 1.2;
-		displayloading(&rtv->mlx);
-		raytracing(*rtv);
-		display(rtv, &rtv->mlx);
-
-	}
-	if (keycode == KEY_V)
-	{
-		rtv->light->intensity = !rtv->light->intensity * 100;
-		displayloading(&rtv->mlx);
-		raytracing(*rtv);
-		display(rtv, &rtv->mlx);
-
-	}
-	if (keycode == KEY_3)
-	{
-		if(rtv->scale/1.2 > 2)
-		{
-			rtv->scale /= 1.2;
-			displayloading(&rtv->mlx);
-			raytracing(*rtv);
-			display(rtv, &rtv->mlx);
-		}
-	}
-	if (keycode == KEY_T)
-	{
-		rtv->scale -= 10;
-		displayloading(&rtv->mlx);
-		raytracing(*rtv);
-		display(rtv, &rtv->mlx);
-	}
-	if (keycode ==KEY_4)
-	{
-		rtv->translationx -=2;
-		displayloading(&rtv->mlx);
-		raytracing(*rtv);
-		display(rtv, &rtv->mlx);
-	}
-	if (keycode == KEY_6)
-	{
-		rtv->translationx +=2;
-		displayloading(&rtv->mlx);
-		raytracing(*rtv);
-		display(rtv, &rtv->mlx);
-	}
-	if (keycode ==KEY_5)
-	{
-		rtv->translationy +=2;
-		displayloading(&rtv->mlx);
-		raytracing(*rtv);
-		display(rtv, &rtv->mlx);
-	}
-	if (keycode == KEY_8)
-	{
-		rtv->translationy -=2;
-		displayloading(&rtv->mlx);
-		raytracing(*rtv);
-		display(rtv, &rtv->mlx);
-	}
-}
-
 int				key_hook(int keycode, t_rtv *rtv)
 {
-	key_hook_help(keycode,rtv);
+	key_hook_help(keycode, rtv);
 	if (keycode == KEY_ESC)
 		exiting_program(rtv);
 	if (keycode == SPACE)

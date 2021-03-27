@@ -6,16 +6,11 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 15:09:15 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 10:07:38 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/27 15:32:54 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-// void			print_vect(t_vector vec, char *str)
-// {
-// 	printf("%s->x=%0.2f,%0.2f,%0.2f\n", str, vec.x, vec.y, vec.z);
-// }
 
 void			error(char *str, char *where)
 {

@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 17:49:08 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 19:10:38 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/27 15:15:26 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		cylinder_help(char *data, char *arg, t_object *cylinder, t_rtv *rtv)
 	else
 	{
 		free(data);
-		unknown_setting( "cylinder", rtv->parse.nb_line);
+		unknown_setting("cylinder", rtv->parse.nb_line);
 	}
 }
 
@@ -78,7 +78,7 @@ void		cone_checker_help(char *data, char *arg, t_object *cone, t_rtv *rtv)
 	else
 	{
 		free(data);
-		unknown_setting( "cone", rtv->parse.nb_line);
+		unknown_setting("cone", rtv->parse.nb_line);
 	}
 	convertmaterial(cone);
 	free(data);
@@ -104,4 +104,24 @@ void		cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv)
 		cone->refraratio = input_onearg(arg, rtv->parse.nb_line, data);
 	else
 		cone_checker_help(data, arg, cone, rtv);
+}
+
+void		triangle_checker_help(char *data, char *arg, t_object *triangle,\
+t_rtv *rtv)
+{
+	if (!ft_strcmp("-refraction", data))
+		triangle->refraction = input_onearg(arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-reflection", data))
+		triangle->reflection = input_onearg(arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-refraction_index", data))
+		triangle->refraratio = input_onearg(arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-texture", data))
+		triangle->texture = input_texture(arg, rtv->parse.nb_line, data);
+	else if (!ft_strcmp("-disrup", data))
+		triangle->disruptions = input_noise(arg, rtv->parse.nb_line, data);
+	else
+	{
+		free(data);
+		unknown_setting("triangle", rtv->parse.nb_line);
+	}
 }

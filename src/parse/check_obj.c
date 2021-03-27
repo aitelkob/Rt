@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 17:07:15 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 19:10:34 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/27 15:14:41 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	plan_checker_he(char *data, char *arg, t_object *plan, t_rtv *rtv)
 	else
 	{
 		free(data);
-		unknown_setting( data, rtv->parse.nb_line);
+		unknown_setting(data, rtv->parse.nb_line);
 	}
 }
 
@@ -53,26 +53,6 @@ void	plan_checker(char *data, char *arg, t_object *plan, t_rtv *rtv)
 		plan_checker_he(data, arg, plan, rtv);
 	convertmaterial(plan);
 	free(data);
-}
-
-void	triangle_checker_help(char *data, char *arg, t_object *triangle,\
-t_rtv *rtv)
-{
-	if (!ft_strcmp("-refraction", data))
-		triangle->refraction = input_onearg(arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("-reflection", data))
-		triangle->reflection = input_onearg(arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("-refraction_index", data))
-		triangle->refraratio = input_onearg(arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("-texture", data))
-		triangle->texture = input_texture(arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("-disrup", data))
-		triangle->disruptions = input_noise(arg, rtv->parse.nb_line, data);
-	else
-	{
-		free(data);
-		unknown_setting( "triangle", rtv->parse.nb_line);
-	}
 }
 
 void	triangle_checker(char *data, char *arg, t_object *triangle, t_rtv *rtv)
@@ -117,7 +97,7 @@ void	sphere_checker_help(char *data, char *arg, t_object *sphere, t_rtv *rtv)
 	else
 	{
 		free(data);
-		unknown_setting( "sphere", rtv->parse.nb_line);
+		unknown_setting("sphere", rtv->parse.nb_line);
 	}
 }
 

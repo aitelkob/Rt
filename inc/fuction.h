@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 19:16:40 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/27 15:18:25 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,12 @@ void			ambient_parce(t_rtv *rtv);
 void			slice_parce(t_rtv *rtv);
 void			init_cam(t_camera *cam);
 void			light_check(char *data, char *arg, t_light *light, t_rtv *rtv);
+void			key_hook_help(int keycode, t_rtv *rtv);
+void			camera_check(char *data, char *arg,
+t_camera *camera, t_rtv *rtv);
+void			triangle_checker_help(char *data, char *arg, t_object *triangle,\
+t_rtv *rtv);
+
 /*
  ******************************* vector lib
 */

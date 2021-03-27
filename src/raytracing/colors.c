@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 19:15:32 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 16:10:26 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/27 15:48:14 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_rtv *rtv, t_object *obj)
 	ray_light.type = 1;
 	dst = get_dest(rtv, ray_light, &tmp_obj, obj);
 	hitpoint = add(ray_light.origin, multi(ray_light.direction, dst));
-	if(dst != -1 && tmp_obj->w != -1)
+	if (dst != -1 && tmp_obj->w != -1)
 	{
 		shadv->color = texture(rtv, tmp_obj, hitpoint);
 		shadv->refra = tmp_obj->refraction;

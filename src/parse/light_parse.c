@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:22:50 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 18:56:07 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/27 15:19:10 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,6 @@ t_slice *slice, t_rtv *rtv)
 	{
 		free(data);
 		unknown_setting("slice", rtv->parse.nb_line);
-	}
-	free(data);
-}
-
-void						camera_check(char *data, char *arg,
-t_camera *camera, t_rtv *rtv)
-{
-	if (!ft_strcmp("-origin", data))
-		camera->origin = input_vector(arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("-fov", data))
-		camera->fov = input_onearg(arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("-look_at", data))
-		camera->look_at = input_vector(arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("-depth", data))
-		camera->depth = input_onearg(arg, rtv->parse.nb_line, data);
-	else if (!ft_strcmp("-ambient", data))
-		camera->amblgt = input_onearg(arg, rtv->parse.nb_line, data);
-	else
-	{
-		free(data);
-		unknown_setting("camera", rtv->parse.nb_line);
 	}
 	free(data);
 }
@@ -101,7 +80,7 @@ void						light_parce(t_rtv *rtv)
 	}
 }
 
-void				first_cam(t_rtv *rtv, t_camera *camera)
+void						first_cam(t_rtv *rtv, t_camera *camera)
 {
 	t_camera		*tmp;
 
