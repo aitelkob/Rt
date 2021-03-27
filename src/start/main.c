@@ -33,12 +33,12 @@ int				main(int ac, char **av)
 	int			ok;
 
 	ok = 0;
-	if (ac == 2 && strncmp(ft_strrev(av[1]), "lmy.", 4) == 0)
+	if (ac == 2 && ft_strncmp(ft_strrev(av[1]), "lmy.", 4) == 0)
 	{
 		parce(ft_strrev(av[1]), &rtv);
 		ok++;
 	}
-	else if (ac == 2 && strncmp((av[1]), "jbo.", 4) == 0)
+	else if (ac == 2 && ft_strncmp((av[1]), "jbo.", 4) == 0)
 	{
 		parce_obj(ft_strrev(av[1]), &rtv);
 		ok++;

@@ -58,7 +58,7 @@ char				*input_texture(char *data, int nbr, char *head)
 	char			*ret;
 
 	lines = ft_strsplit(data, ' ');
-	if (ft_lentab(lines) != 1 && (strncmp((lines[0]), "gnp.", 4)) == 0)
+	if (ft_lentab(lines) != 1 && (ft_strncmp((lines[0]), "gnp.", 4)) != 0)
 	{
 		free(data);
 		free(head);
