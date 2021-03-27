@@ -80,8 +80,6 @@ void		cone_checker_help(char *data, char *arg, t_object *cone, t_rtv *rtv)
 		free(data);
 		unknown_setting("cone", rtv->parse.nb_line);
 	}
-	convertmaterial(cone);
-	free(data);
 }
 
 void		cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv)
@@ -104,6 +102,8 @@ void		cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv)
 		cone->refraratio = input_onearg(arg, rtv->parse.nb_line, data);
 	else
 		cone_checker_help(data, arg, cone, rtv);
+	convertmaterial(cone);
+	free(data);
 }
 
 void		triangle_checker_help(char *data, char *arg, t_object *triangle,\
