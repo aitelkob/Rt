@@ -175,8 +175,8 @@ t_txtemp *txt)
 		point.z)) / (2.0 * PI));
 		txt->y = fmod((-obj->origin.y + point.y) / rtv->scale, 1);
 	}
-	txt->x = (txt->x < 0 ? fabs(txt->x) : txt->x) * (1000);
-	txt->y = (txt->y < 0 ? fabs(txt->y) : txt->y) * (1000);
+	txt->x = (txt->x < 0 ? fabs(txt->x) : txt->x) * (obj->h);
+	txt->y = (txt->y < 0 ? fabs(txt->y) : txt->y) * (obj->w);
 	txt->ipos = 4 * 1000 * (int) txt->y + (int) txt->x  * 4;
 }
 
