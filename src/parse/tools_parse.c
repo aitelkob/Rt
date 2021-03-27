@@ -58,16 +58,16 @@ char				*input_texture(char *data, int nbr, char *head)
 	char			*ret;
 
 	lines = ft_strsplit(data, ' ');
-	if (ft_lentab(lines) != 1)
+	if (ft_lentab(lines) != 1 || (ft_strncmp(ft_strrev(lines[0]), "gnp.", 4) != 0))
 	{
 		free(data);
 		free(head);
 		syntax_error( data, head, nbr);
 	}
+	printf("this %s \n",lines[0]);
 	free(data);
-	ret = ft_strdup(lines[0]);
-	//free_splited(lines);
-	printf("this is %s \n",ret);
+	ret = ft_strdup(ft_strrev(lines[0]));
+	free_splited(lines);
 	return (ret);
 }
 
@@ -80,7 +80,7 @@ int					input_material(char *data, int nbr, char *head)
 	lines = ft_strsplit(data, ' ');
 	if (ft_lentab(lines) != 1)
 	{
-		free(data);
+		free(data); 
 		free(head);
 		syntax_error( data, head, nbr);
 	}
