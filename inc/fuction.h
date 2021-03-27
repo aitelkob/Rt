@@ -92,6 +92,7 @@ t_vector		int_to_rgb(int colors);
 void			cartoon(t_mlix *mlix, t_vector *colors);
 t_vector		*color_fill();
 t_vector		obj_norm(t_ray ray, t_object *obj, double dst);
+float perlin2d(float x, float y, float freq, int depth);
 /*
  ********************************mlx stuff
 */

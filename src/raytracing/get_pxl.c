@@ -171,9 +171,9 @@ t_txtemp *txt)
 	}
 	else if(obj->type == CYLINDER || obj->type == CONE)
 	{	
-		txt->x = (1 - (atan2((obj->origin.x - point.x) , (obj->origin.z -\
+		txt->x = (1 - (atan2((-obj->origin.x + point.x) , (-obj->origin.z + \
 		point.z))) / (2.0 * PI)) + fabs(rtv->translationx/rtv->scale);
-		txt->y = fmod((obj->origin.y  - point.y) / rtv->scale, 1)  + rtv->translationy/ rtv->scale;
+		txt->y = fmod(( point.y) / rtv->scale, 1)  + rtv->translationy/ rtv->scale;
 	}
 	
 }
@@ -189,16 +189,36 @@ t_vector	texture_noise(double x, double y,t_vector color)
 		return color;
 }
 
-t_vector	texture_noise_sine(double x, double y,t_vector color)
+double min(double a, double b)
 {
-	x = floor(x * 4);
-	y = floor(y * 4);
-	if(fmod(x + y, 2) == 0)
-		return (t_vector){0, 0, 0};
-	else
-		return color;
+	return b > a ? a: b;
 }
 
+double max(double a, double b)
+{
+	return b < a ? a: b;
+}
+
+t_vector	texture_noise_sine(double x, double y)
+{
+	t_vector color;
+	double tetha  = (5.0 * (x < 0 ? 1+x : x)) / (3.0 * (y < 0 ? 1+y : y)) + PI / 2.0;
+	color.x= sin(tetha) * 192 + 128;
+   	color.x=max(0,min(255,color.x));
+	color.y= sin(tetha -  (2.0 * PI )/3.0) * 192 + 128;
+    color.y=max(0,min(255,color.y));
+	color.z= sin(tetha -  (4.0 * PI )/3.0) * 192 + 128;
+	color.z=max(0,min(255,color.z));
+	return color;
+}
+
+
+// t_vector	texture_noise_perlin(double x, double y, t_vector color)
+// {
+// 	t_vector color;
+
+// 	return color;
+// }
 int		png_to_rgb(int value)
 {
 	return value < 0 ? 255 + value: value;
@@ -207,8 +227,8 @@ int		png_to_rgb(int value)
 t_vector  texture_fromfile(t_rtv *rtv, t_object *obj, t_vector point, t_txtemp txt)
 {
 	int ipos;
-	txt.x = (txt.x < 0 ? -txt.x : txt.x) * (obj->w);
-	txt.y = (txt.y < 0 ? -txt.y : txt.y) * (obj->h);
+	txt.x = (txt.x < 0 ? 1+txt.x : txt.x) * (obj->w);
+	txt.y = (txt.y < 0 ? 1+txt.y : txt.y) * (obj->h);
 	ipos = 4 * obj->w * (int) txt.y + (int) txt.x  * 4;
 	if(ipos < 4 * obj->img_texture->width * obj->img_texture->height && ipos >= 0) 
 		return (t_vector) {
@@ -227,14 +247,17 @@ t_vector			texture(t_rtv *rtv, t_object *obj, t_vector point)
 	int cond = obj->type == PLANE ? point.x > obj->origin.x + rtv->translationx && point.x < obj->origin.x + rtv->translationx + rtv->scale  &&
 	point.z > obj->origin.z + rtv->translationy && point.z < obj->origin.z + rtv->translationy + rtv->scale : 1;
 	int concylinder =  obj->type == CONE || obj->type == CYLINDER ? point.y > obj->origin.y + rtv->translationy && point.y < obj->origin.y + rtv->translationy + rtv->scale : 1;
-	 if((concylinder && cond ) || obj->type == SPHERE)
-	{
+	 
 		if(obj->disruptions == CHECK)
-			return texture_noise(txt.x,txt.y, obj->color);
+			return texture_noise_sine(txt.x,txt.y);
+			//return texture_noise(txt.x,txt.y, obj->color);
 		else if(obj->w != -1)
-			return  texture_fromfile(rtv, obj, point, txt);
-	}
-	return obj->color;
+		{
+			if((concylinder && cond ) || obj->type == SPHERE)
+				return  texture_fromfile(rtv, obj, point, txt);
+		}
+	//return multi(obj->color, fmod(random(),10));
+	return multi(obj->color,perlin2d((txt.x < 0 ? -txt.x : txt.x), (txt.y < 0 ? -txt.y : txt.y), 100, 4));
 }
 
 t_vector			get_pxl(t_rtv *rtv, t_ray ray)
@@ -243,7 +266,7 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 	t_object		*obj;
 	t_vector		color[2];
 	double			ratio[2];
-
+	t_vector		normal;	
 	hit.depth = rtv->camera->depth;
 	color[0] = (t_vector){0, 0, 0};
 	color[1] = (t_vector){0, 0, 0};
@@ -252,7 +275,11 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 		return (color[0]);
 	hit.point = add(ray.origin, multi(ray.direction, hit.dst));
 	hit.color = obj->color;
-	hit.color = texture(rtv, obj, hit.point);
+	normal = nrm((t_vector) {2 * hit.point.x , 2 * hit.point.z , -1});
+	hit.color.x = hit.color.x * normal.x;
+	hit.color.y = hit.color.y * normal.y;
+	hit.color.z = hit.color.z * normal.z;
+	//hit.color = texture(rtv, obj, hit.point);
 	if (hit.dst > 0 && rtv->light->intensity == 0)
 		color[0] = multi(divi(hit.color, 100), rtv->camera->amblgt);
 	ratio[0] = obj->reflection + 0.2;

@@ -40,12 +40,14 @@ void				start_draw(t_rtv *rtv, double x, double y, t_ray ray2)
 	t_vector		up;
 	t_vector		color;
 	t_vector		test;
+	t_vector		normal;
 
 	test = (t_vector){0, 0, 0};
 	up = (t_vector){0, 1, 0};
 	ray2.direction = nrm(camera(rtv->camera_vect, x, y, test));
 	color = get_pxl(rtv, ray2);
 	rtv->mlx.colors[(WIN_H - 1 - (int)y) * WIN_W + (int)x] = color;
+	//color = multi(color,perlin2d(x, y, 0.1, 4));
 	rtv->mlx.img[(WIN_H - 1 - (int)y) * WIN_W + (int)x] = rgb_to_int(color);
 }
 
