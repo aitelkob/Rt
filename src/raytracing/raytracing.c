@@ -6,28 +6,32 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 09:49:04 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 19:12:25 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/27 16:05:51 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_camera_vect camera_init(t_camera *camera)
+t_camera_vect		camera_init(t_camera *camera)
 {
-	t_camera_vect camera_vect;
+	t_camera_vect	camera_vect;
 	t_ray			ray;
+
 	ray.origin = camera->origin;
 	ray.direction = camera->look_at;
 	ray.origin.x += 0.000000001;
 	camera_vect.w = nrm(sub(ray.direction, ray.origin));
 	camera_vect.u = nrm(crossproduct(camera_vect.w, (t_vector){0, 1, 0}));
-	camera_vect.v= crossproduct(camera_vect.w, camera_vect.u);
+	camera_vect.v = crossproduct(camera_vect.w, camera_vect.u);
 	camera_vect.fov = camera->fov;
-	return camera_vect;
+	return (camera_vect);
 }
-t_vector			camera(t_camera_vect camera_vect, double x, double y, t_vector test)
+
+t_vector			camera(t_camera_vect camera_vect, double x, double y,\
+t_vector test)
 {
 	t_vector		p;
+
 	p.z = tan(deg_to_rad(camera_vect.fov) / 2.0);
 	p.x = map(x + test.x, -1, ((1.0 - (-1.0)) / (WIN_W - 0.0)));
 	p.y = map(y + test.y, 1, ((-1.0 - (1.0)) / (WIN_W - 0.0)));
@@ -86,8 +90,8 @@ void				raytracing(t_rtv rtv)
 
 	i = 0;
 	t = 1;
-	displayloading(&rtv.mlx); 
-	rtv.camera_vect =  camera_init(rtv.camera);
+	displayloading(&rtv.mlx);
+	rtv.camera_vect = camera_init(rtv.camera);
 	while (i < THREAD_NUMBER)
 	{
 		th[i].rt = &rtv;

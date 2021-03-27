@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yait-el- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 15:39:37 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/02/23 08:59:46 by yait-el-         ###   ########.fr       */
+/*   Updated: 2021/03/27 16:12:52 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void			free_objects(t_rtv *rtv)
 {
-	t_object			*next;
+	t_object	*next;
 
 	while (rtv && rtv->obj)
 	{
@@ -26,7 +26,7 @@ void			free_objects(t_rtv *rtv)
 
 void			free_lights(t_rtv *rtv)
 {
-	t_light				*next;
+	t_light		*next;
 
 	while (rtv && rtv->light)
 	{
@@ -36,7 +36,7 @@ void			free_lights(t_rtv *rtv)
 	}
 }
 
-void					exiting_program(t_rtv *rtv)
+void			exiting_program(t_rtv *rtv)
 {
 	ft_destroy(&rtv->mlx);
 	if (rtv->camera)

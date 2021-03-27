@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:39:56 by babdelka          #+#    #+#             */
-/*   Updated: 2021/03/24 10:52:29 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/27 16:09:27 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_vector		finalcolor(t_vector color1, t_vector color2, double *ratio)
 	color2 = add(color2, multi(color2, (ratio[0] + ratio[1]) / 100));
 	return (add(color1, color2));
 }
+
 t_vector		gpxaddv(t_rtv *rtv, t_ray ray, t_vector direction, t_hit hit)
 {
 	t_object	*obj;
@@ -84,8 +85,6 @@ t_rtv *rtv, t_hit hit)
 		color[0] = multi(gpxaddv(rtv, ray, ray.direction1, hit), ratio[0]);
 	if (obj->refraction)
 		color[1] = multi(gpxaddv(rtv, ray, ray.direction2, hit), ratio[1]);
-	color[0] = divi(color[0], ratio[0] + ratio[1]);
-	color[1] = divi(color[1], ratio[1] + ratio[0]);
-	return (add(color[0], color[1]));
+	return (add(divi(color[0], ratio[0] + ratio[1]),\
+	divi(color[1], ratio[1] + ratio[0])));
 }
-

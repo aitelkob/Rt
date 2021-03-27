@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 17:46:27 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/25 11:49:44 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/27 16:12:30 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void			start(t_rtv *rtv)
 {
-	setup_mlx(&rtv->mlx,rtv);
+	setup_mlx(&rtv->mlx, rtv);
 	rtv->tic = clock();
 	rtv->filter = 0;
 	rtv->loding = 0;

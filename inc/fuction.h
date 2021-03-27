@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/27 15:18:25 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/27 16:15:06 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void			light_check(char *data, char *arg, t_light *light, t_rtv *rtv);
 void			key_hook_help(int keycode, t_rtv *rtv);
 void			camera_check(char *data, char *arg,
 t_camera *camera, t_rtv *rtv);
-void			triangle_checker_help(char *data, char *arg, t_object *triangle,\
-t_rtv *rtv);
+void			triangle_checker_help(char *data, char *arg,\
+t_object *triangle, t_rtv *rtv);
 
 /*
  ******************************* vector lib
@@ -105,7 +105,7 @@ void			create_bmp(int *img);
 void			display(t_rtv *rtv, t_mlix *mlx);
 int				displayloading(t_mlix *mlx);
 int				key_hook(int keycode, t_rtv *rtv);
-void			setup_mlx(t_mlix *mlx,t_rtv *rtv);
+void			setup_mlx(t_mlix *mlx, t_rtv *rtv);
 void			ft_destroy(t_mlix *mlx);
 void			ft_put_pixel(t_mlix *mlx, int x, int y, int color);
 double			get_dest(t_rtv *rtv, t_ray ray,
@@ -121,14 +121,15 @@ void			raytracing(t_rtv rtv);
 t_vector		lighting(t_rtv *rtv, t_object *obj, t_hit hit, t_ray ray);
 t_vector		get_pxl(t_rtv *rtv, t_ray ray);
 void			blur(t_mlix *mlx);
-t_vector		camera(t_camera_vect camera_vect, double x, double y, t_vector test);
+t_vector		camera(t_camera_vect camera_vect, double x,\
+double y, t_vector test);
 t_vector		gpxadv(t_rtv *rtv, t_ray ray, t_vector direction, int depth);
 t_vector		finalcolor(t_vector color1, t_vector color2, double *ratio);
 t_vector		reflectandrefract(t_ray ray, t_object *obj,\
 t_rtv *rtv, t_hit hit);
 t_vector		*initgp(t_object	*obj);
 void			darkcheck(t_vector *c, double ref);
-t_vector		texture(t_rtv *rtv, t_object *obj, t_vector point);  
+t_vector		texture(t_rtv *rtv, t_object *obj, t_vector point);
 
 /*
  ********************************** intersection

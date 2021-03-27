@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:34:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 19:17:08 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/27 16:11:06 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,16 @@ void				stereoscopy(t_rtv *rtv, double x, double y, t_ray ray2)
 	t_vector		color2;
 
 	i = 0;
-	ray2.direction = nrm(camera(rtv->camera_vect, x + 15, y, (t_vector){0, 0, 0}));
+	ray2.direction = nrm(camera(rtv->camera_vect, x + 15, y,
+	(t_vector){0, 0, 0}));
 	color = get_pxl(rtv, ray2);
 	if (!isblack(color))
 	{
 		color.y = 0;
 		color.x += 60;
 	}
-	ray2.direction = nrm(camera(rtv->camera_vect, x - 15, y, (t_vector){0, 0, 0}));
+	ray2.direction = nrm(camera(rtv->camera_vect, x - 15, y,\
+	(t_vector){0, 0, 0}));
 	color2 = get_pxl(rtv, ray2);
 	if (!isblack(color2))
 	{
