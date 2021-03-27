@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 15:26:32 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/27 15:46:48 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/27 17:02:00 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void				init_obj(t_object *obj)
 	obj->reflection = 0;
 	obj->refraction = 0;
 	obj->refraratio = 0.5;
-	obj->texture = ft_strdup("");
+	obj->texture = "";
 	obj->h = -1;
 	obj->w = -1;
 	obj->material = EMPTY;
@@ -65,7 +65,6 @@ char				*input_texture(char *data, int nbr, char *head)
 		free(head);
 		syntax_error(data, head, nbr);
 	}
-	printf("this %s \n", lines[0]);
 	free(data);
 	ret = ft_strdup(ft_strrev(lines[0]));
 	free_splited(lines);

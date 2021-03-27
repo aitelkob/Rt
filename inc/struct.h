@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/27 16:20:00 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/27 16:22:13 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,13 +127,13 @@ typedef struct				s_key
 	int						left_button;
 }							t_key;
 
-typedef struct				mlx_img_list_s
+typedef struct				s_mlx_img_list
 {
 	int						width;
 	int						height;
 	char					*buffer;
-	struct mlx_img_list_s	*next;
-}							mlx_img_list_t;
+	struct s_mlx_img_list	*next;
+}							t_mlx_img_list;
 
 typedef	struct				s_mlix
 {
@@ -143,7 +143,7 @@ typedef	struct				s_mlix
 	void					*img_ptr3;
 	void					*img_ptr2;
 	void					*img_ptr4;
-	mlx_img_list_t			*img_texture;
+	t_mlx_img_list			*img_texture;
 	int						w;
 	int						h;
 	int						*d;
@@ -211,7 +211,7 @@ typedef	struct				s_object
 	double					refraction;
 	double					refraratio;
 	char					*texture;
-	mlx_img_list_t			*img_texture;
+	t_mlx_img_list			*img_texture;
 	int						disruptions;
 	double					negative;
 	int						material;

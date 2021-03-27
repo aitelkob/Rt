@@ -20,7 +20,7 @@ plane:
  -color: 255 255 255
  -rot: 0 0 0
  -disrup: check
- -reflection: 10
+ -reflection: 20
 sphere:
  -origin: 0 30 0
  -radius: 30

@@ -109,7 +109,7 @@ int	mlx_int_get_text_rgb(char *name, char *end)
 }
 
 
-void	mlx_int_xpm_set_pixel(mlx_img_list_t *img, char *data, int opp, int col, int x)
+void	mlx_int_xpm_set_pixel(t_mlx_img_list *img, char *data, int opp, int col, int x)
 {
   /*
   int	dec;
@@ -146,7 +146,7 @@ void	*mlx_int_parse_xpm(mlx_ptr_t *xvar,void *info,int info_size,char *(*f)())
   int	x;
   int	i;
   int	j;
-  mlx_img_list_t	*img;
+  t_mlx_img_list	*img;
   t_xpm_col	*colors;
   int		*colors_direct;
   int	width;
@@ -304,7 +304,7 @@ void	*mlx_xpm_file_to_image(mlx_ptr_t *xvar,char *file,int *width,int *height)
   int	fd;
   int	size;
   char	*ptr;
-  mlx_img_list_t	*img;
+  t_mlx_img_list	*img;
 
   if ((fd = open(file,O_RDONLY))==-1 || (size = lseek(fd,0,SEEK_END))==-1 ||
       (ptr = mmap(0,size,PROT_WRITE|PROT_READ,MAP_PRIVATE,fd,0))==
@@ -327,7 +327,7 @@ void	*mlx_xpm_file_to_image(mlx_ptr_t *xvar,char *file,int *width,int *height)
 
 void	*mlx_xpm_to_image(mlx_ptr_t *xvar,char **xpm_data,int *width,int *height)
 {
-  mlx_img_list_t	*img;
+  t_mlx_img_list	*img;
 
   if ((img = mlx_int_parse_xpm(xvar,xpm_data,0,mlx_int_static_line)))
     {

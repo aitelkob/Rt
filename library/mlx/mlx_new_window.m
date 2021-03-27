@@ -543,7 +543,7 @@ int get_mouse_button(NSEventType eventtype)
   glClear(GL_COLOR_BUFFER_BIT);
 }
 
-- (void) mlx_gl_draw_img:(mlx_img_list_t *)img andCtx:(mlx_img_ctx_t *)imgctx andX:(int)x andY:(int)y
+- (void) mlx_gl_draw_img:(t_mlx_img_list *)img andCtx:(mlx_img_ctx_t *)imgctx andX:(int)x andY:(int)y
 {
 
   if (pixel_nb >0)
@@ -573,7 +573,7 @@ int get_mouse_button(NSEventType eventtype)
 }
 
 
-- (void) mlx_gl_draw_font:(mlx_img_list_t *)img andCtx:(mlx_img_ctx_t *)imgctx andX:(int)x andY:(int)y andColor:(int)color glyphX:(int)gx glyphY:(int)gy
+- (void) mlx_gl_draw_font:(t_mlx_img_list *)img andCtx:(mlx_img_ctx_t *)imgctx andX:(int)x andY:(int)y andColor:(int)color glyphX:(int)gx glyphY:(int)gy
 {
   GLfloat color_tab[4];
 

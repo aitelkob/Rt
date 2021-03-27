@@ -14,7 +14,7 @@
 
 void    *mlx_new_image(mlx_ptr_t *mlx_ptr, int width, int height)
 {
-  mlx_img_list_t        *newimg;
+  t_mlx_img_list        *newimg;
 
   //  if (mlx_ptr->win_list == NULL)
   //    return (NULL);  // need at leat one window created to have openGL context and create texture
@@ -34,7 +34,7 @@ void    *mlx_new_image(mlx_ptr_t *mlx_ptr, int width, int height)
   return (newimg);
 }
 
-mlx_img_ctx_t	*add_img_to_ctx(mlx_img_list_t *img, mlx_win_list_t *win)
+mlx_img_ctx_t	*add_img_to_ctx(t_mlx_img_list *img, mlx_win_list_t *win)
 {
   mlx_img_ctx_t	*imgctx;
 
@@ -73,7 +73,7 @@ mlx_img_ctx_t	*add_img_to_ctx(mlx_img_list_t *img, mlx_win_list_t *win)
 }
 
 
-void    mlx_put_image_to_window(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, mlx_img_list_t *img_ptr, int x, int y)
+void    mlx_put_image_to_window(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, t_mlx_img_list *img_ptr, int x, int y)
 {
   mlx_img_ctx_t	*imgctx;
 
@@ -95,7 +95,7 @@ void    mlx_put_image_to_window(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, mlx
 
 // assume here 32bpp little endian
 
-char    *mlx_get_data_addr(mlx_img_list_t *img_ptr, int *bits_per_pixel, int *size_line, int *endian)
+char    *mlx_get_data_addr(t_mlx_img_list *img_ptr, int *bits_per_pixel, int *size_line, int *endian)
 {
   *bits_per_pixel = UNIQ_BPP*8;
   *size_line = img_ptr->width*UNIQ_BPP;
@@ -147,13 +147,13 @@ int mlx_string_put(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, int x, int y, in
   return (0);
 }
 
-int     mlx_destroy_image(mlx_ptr_t *mlx_ptr, mlx_img_list_t *img_todel)
+int     mlx_destroy_image(mlx_ptr_t *mlx_ptr, t_mlx_img_list *img_todel)
 {
   mlx_img_ctx_t	ctx_first;
   mlx_img_ctx_t	*ctx;
   mlx_img_ctx_t	*ctx_to_del;
-  mlx_img_list_t img_first;
-  mlx_img_list_t *img;
+  t_mlx_img_list img_first;
+  t_mlx_img_list *img;
   mlx_win_list_t *win;
 
   img_first.next = mlx_ptr->img_list;
