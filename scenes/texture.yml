@@ -19,7 +19,7 @@ cylinder:
   -color: 205 10 60
   -negative: 0
   -slice: 0
-  -texture: ./images/me2.png
+  -texture: ./images/screen.png
 cylinder:
   -origin: 0 0 0  
   -radius: 10
@@ -32,7 +32,3 @@ camera:
   -fov: 60
   -look_at: 0 10 0
   -ambient: 50
-slice:
-  -origin: 0 0 0
-  -vec: 0 1 0
-  -shape: 1

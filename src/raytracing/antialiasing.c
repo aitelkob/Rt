@@ -25,7 +25,7 @@ void				antialiasing(t_rtv *rtv, double x, double y, t_ray ray2)
 	up = (t_vector){0, 1, 0};
 	color = (t_vector){0, 0, 0};
 	test = (t_vector){0, 0, 0};
-	while (i < 100)
+	while (i < 300)
 	{
 		test.x = (rand() % 10) / 10.0;
 		test.y = (rand() % 10) / 10.0;

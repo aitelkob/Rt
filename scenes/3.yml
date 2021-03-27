@@ -7,8 +7,8 @@ plane:
   -color: 255 255 255
   -rot: 0 0 0
   -reflection: 1
-  -disrup: check
   -slice: 5
+  -texture: ./images/screenshot.png
 # sphere:
 #   -origin: 0 0 0
 #   -radius: 15
@@ -25,15 +25,18 @@ sphere:
  -radius: 14
  -color: 255 0 0
  -reflection: 20
+ -texture: ./images/me2.png
+cone:
+  -origin: 0 0 0  
+  -aim: 0 1 0
+  -color: 205 10 60
+  -negative: 0
+  -slice: 0
+  -texture: ./images/screen.png
 sphere:
  -origin: -30 0 0
  -radius: 14
  -color: 0 255 0
- -reflection: 20
-sphere:
- -origin: 0 0 0
- -radius: 14
- -color: 0 0 255
  -reflection: 20
 camera:
   -origin: 0 10 100

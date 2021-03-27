@@ -64,7 +64,6 @@ int					isnegativeobj(t_rtv *rtv, t_ray ray, double dst)
 	t_quadratic		q;
 
 	tmp = rtv->obj;
-	// nrm(camera(rtv->camera_vect, x, y, test));
 	while (tmp)
 	{
 		if (tmp->negative == 1)
@@ -158,23 +157,23 @@ t_txtemp *txt)
 {
 	if(obj->type == PLANE)
 	{	
-		txt->x = fmod((-rtv->translationx - obj->origin.x + rtv->scale / 2.0 + point.x)/\
+		txt->x = fmod((-obj->origin.x - rtv->translationx + point.x)/\
 		rtv->scale,1);
-		txt->y = fmod((-rtv->translationy - obj->origin.z + rtv->scale / 2.0 + point.z)/\
+		txt->y = fmod((-obj->origin.z - rtv->translationy + point.z)/\
 		rtv->scale,1);
 	}
 	else if(obj->type == SPHERE)
 	{	
-		txt->x = (1 - ((atan2((+obj->origin.x  - point.x), obj->origin.z -\
-		point.z) / (2.0 * PI))));
-		txt->y = ((1 - (acos(((( + obj->origin.y  - point.y))/\
-		(obj->radius)))) / PI));
+		txt->x = (1 - ((atan2((obj->origin.x-point.x),\
+		obj->origin.z-point.z) / (2.0 * PI)))) + fabs(rtv->translationx/obj->radius);
+		txt->y = ((1 - (acos((((obj->origin.y-point.y))/\
+		(obj->radius)))) / PI)) + fmod(rtv->translationy,obj->radius) /obj->radius;
 	}
 	else if(obj->type == CYLINDER || obj->type == CONE)
 	{	
-		txt->x = (1 - (atan2((- obj->origin.x + point.x) , (-obj->origin.z +\
-		point.z))) / (2.0 * PI)) ;
-		txt->y = fmod(-rtv->translationy + ( - obj->origin.y  + point.y) / rtv->scale, 1);
+		txt->x = (1 - (atan2((obj->origin.x - point.x) , (obj->origin.z -\
+		point.z))) / (2.0 * PI)) + fabs(rtv->translationx/rtv->scale);
+		txt->y = fmod((obj->origin.y  - point.y) / rtv->scale, 1)  + rtv->translationy/ rtv->scale;
 	}
 	
 }
@@ -198,17 +197,10 @@ int		png_to_rgb(int value)
 t_vector  texture_fromfile(t_rtv *rtv, t_object *obj, t_vector point, t_txtemp txt)
 {
 	int ipos;
-	txt.x = (txt.x < 0 ? -txt.x : txt.x) * (1000);
-	txt.y = (txt.y < 0 ? -txt.y : txt.y) * (1000);
-	ipos = 4 * 1000 * (int) txt.y + (int) txt.x  * 4;
-	int cond = obj->type == PLANE ? point.z > 0  + obj->origin.z + rtv->translationy - rtv->scale / 2.0
-	    && point.z < rtv->scale / 2.0 + obj->origin.z + rtv->translationy: point.y > 0 +\
-		obj->origin.y + rtv->translationy - rtv->scale / 2.0
-	    && point.y < rtv->scale / 2.0 + obj->origin.y + rtv->translationy;
-	
-	if( point.x > 0 + obj->origin.x + rtv->translationx - rtv->scale / 2.0
-		&& point.x < rtv->scale / 2.0 + obj->origin.x + rtv->translationx
-	    && cond)
+	txt.x = (txt.x < 0 ? -txt.x : txt.x) * (obj->w);
+	txt.y = (txt.y < 0 ? -txt.y : txt.y) * (obj->h);
+	ipos = 4 * obj->w * (int) txt.y + (int) txt.x  * 4;
+	if(ipos < 4 * obj->img_texture->width * obj->img_texture->height && ipos >= 0) 
 		return (t_vector) {
 			png_to_rgb(obj->img_texture->buffer[ipos + 2]),
 			png_to_rgb(obj->img_texture->buffer[ipos + 1]) ,
@@ -222,10 +214,16 @@ t_vector			texture(t_rtv *rtv, t_object *obj, t_vector point)
 
 	txtinit(&txt);
 	texture_help(rtv, obj, point, &txt);
-	if(obj->disruptions == CHECK)
-		return texture_noise(txt.x,txt.y, obj->color);
-	else if(obj->w != -1)
-		return  texture_fromfile(rtv, obj, point, txt);
+	int cond = obj->type == PLANE ? point.x > obj->origin.x + rtv->translationx && point.x < obj->origin.x + rtv->translationx + rtv->scale  &&
+	point.z > obj->origin.z + rtv->translationy && point.z < obj->origin.z + rtv->translationy + rtv->scale : 1;
+	int concylinder =  obj->type == CONE || obj->type == CYLINDER ? point.y > obj->origin.y + rtv->translationy && point.y < obj->origin.y + rtv->translationy + rtv->scale : 1;
+	 if((concylinder && cond ) || obj->type == SPHERE)
+	{
+		if(obj->disruptions == CHECK)
+			return texture_noise(txt.x,txt.y, obj->color);
+		else if(obj->w != -1)
+			return  texture_fromfile(rtv, obj, point, txt);
+	}
 	return obj->color;
 }
 
@@ -244,7 +242,6 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 		return (color[0]);
 	hit.point = add(ray.origin, multi(ray.direction, hit.dst));
 	hit.color = obj->color;
-	// if (obj->w == 1000 && obj->h == 1000)
 	hit.color = texture(rtv, obj, hit.point);
 	if (hit.dst > 0 && rtv->light->intensity == 0)
 		color[0] = multi(divi(hit.color, 100), rtv->camera->amblgt);

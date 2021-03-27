@@ -23,7 +23,6 @@ t_camera_vect camera_init(t_camera *camera)
 	camera_vect.u = nrm(crossproduct(camera_vect.w, (t_vector){0, 1, 0}));
 	camera_vect.v= crossproduct(camera_vect.w, camera_vect.u);
 	camera_vect.fov = camera->fov;
-	printf("hi\n");
 	return camera_vect;
 }
 t_vector			camera(t_camera_vect camera_vect, double x, double y, t_vector test)
