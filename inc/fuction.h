@@ -115,7 +115,7 @@ void			raytracing(t_rtv rtv);
 t_vector		lighting(t_rtv *rtv, t_object *obj, t_hit hit, t_ray ray);
 t_vector		get_pxl(t_rtv *rtv, t_ray ray);
 void			blur(t_mlix *mlx);
-t_vector		camera(t_camera *camera, double x, double y, t_vector test);
+t_vector		camera(t_camera_vect camera_vect, double x, double y, t_vector test);
 t_vector		gpxadv(t_rtv *rtv, t_ray ray, t_vector direction, int depth);
 t_vector		finalcolor(t_vector color1, t_vector color2, double *ratio);
 t_vector		reflectandrefract(t_ray ray, t_object *obj,\

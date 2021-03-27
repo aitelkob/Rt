@@ -54,7 +54,15 @@ void			key_hook_help(int keycode, t_rtv *rtv)
 {
 	if (keycode == KEY_1)
 	{
-		rtv->scale += 10;
+		rtv->scale *= 1.2;
+		displayloading(&rtv->mlx);
+		raytracing(*rtv);
+		display(rtv, &rtv->mlx);
+
+	}
+	if (keycode == KEY_V)
+	{
+		rtv->light->intensity = !rtv->light->intensity * 100;
 		displayloading(&rtv->mlx);
 		raytracing(*rtv);
 		display(rtv, &rtv->mlx);
@@ -62,10 +70,13 @@ void			key_hook_help(int keycode, t_rtv *rtv)
 	}
 	if (keycode == KEY_3)
 	{
-		rtv->scale -= 10;
-		displayloading(&rtv->mlx);
-		raytracing(*rtv);
-		display(rtv, &rtv->mlx);
+		if(rtv->scale/1.2 > 2)
+		{
+			rtv->scale /= 1.2;
+			displayloading(&rtv->mlx);
+			raytracing(*rtv);
+			display(rtv, &rtv->mlx);
+		}
 	}
 	if (keycode == KEY_T)
 	{
@@ -76,28 +87,28 @@ void			key_hook_help(int keycode, t_rtv *rtv)
 	}
 	if (keycode ==KEY_4)
 	{
-		rtv->translationx +=10;
+		rtv->translationx -=2;
 		displayloading(&rtv->mlx);
 		raytracing(*rtv);
 		display(rtv, &rtv->mlx);
 	}
 	if (keycode == KEY_6)
 	{
-		rtv->translationx -=10;
+		rtv->translationx +=2;
 		displayloading(&rtv->mlx);
 		raytracing(*rtv);
 		display(rtv, &rtv->mlx);
 	}
 	if (keycode ==KEY_5)
 	{
-		rtv->translationy +=10;
+		rtv->translationy +=2;
 		displayloading(&rtv->mlx);
 		raytracing(*rtv);
 		display(rtv, &rtv->mlx);
 	}
 	if (keycode == KEY_8)
 	{
-		rtv->translationy -=10;
+		rtv->translationy -=2;
 		displayloading(&rtv->mlx);
 		raytracing(*rtv);
 		display(rtv, &rtv->mlx);

@@ -27,14 +27,14 @@ void				stereoscopy(t_rtv *rtv, double x, double y, t_ray ray2)
 	t_vector		color2;
 
 	i = 0;
-	ray2.direction = nrm(camera(rtv->camera, x + 15, y, (t_vector){0, 0, 0}));
+	ray2.direction = nrm(camera(rtv->camera_vect, x + 15, y, (t_vector){0, 0, 0}));
 	color = get_pxl(rtv, ray2);
 	if (!isblack(color))
 	{
 		color.y = 0;
 		color.x += 60;
 	}
-	ray2.direction = nrm(camera(rtv->camera, x - 15, y, (t_vector){0, 0, 0}));
+	ray2.direction = nrm(camera(rtv->camera_vect, x - 15, y, (t_vector){0, 0, 0}));
 	color2 = get_pxl(rtv, ray2);
 	if (!isblack(color2))
 	{

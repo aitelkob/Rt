@@ -54,7 +54,7 @@
 # define KEY_T 17
 # define SCENES 1
 # define PI 3.14159
-# define THREAD_NUMBER 6
+# define THREAD_NUMBER 10
 # define OBJ6 "scenes/objback.yml"
 # include <unistd.h>
 # include <fcntl.h>

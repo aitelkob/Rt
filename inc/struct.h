@@ -48,7 +48,15 @@ typedef	struct				s_vector
 	double					z;
 }							t_vector;
 
-typedef struct				s_bmp
+typedef	struct			s_camera_vect
+{
+	t_vector				w;
+	t_vector				u;
+	t_vector				v;
+	double					fov;
+}						t_camera_vect;
+
+typedef struct			s_bmp
 {
 	uint16_t				type;
 	uint32_t				size;
@@ -252,7 +260,8 @@ typedef	struct				s_rtv
 	int						loding;
 	int						translationx;
 	int						translationy;
-	int						scale;
+	double						scale;
+	t_camera_vect			camera_vect;
 	t_ray					ray;
 }							t_rtv;
 

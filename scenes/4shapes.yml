@@ -1,56 +1,33 @@
 light:
- -origin: 50 75 -50
- -intensity: 100
-light:
- -origin: 50 75 50
+ -origin: 0 70 105
  -intensity: 100
 plane:
  -origin: 0 0 0
  -aim: 0 1 0
  -color: 255 255 255
  -rot: 0 0 0
-plane:
- -origin: 200 0 0
- -aim: -1 0 0
- -color: 255 255 255
- -rot: 0 0 0
-plane:
- -origin: -200 0 0
- -aim: 1 0 0
- -color: 255 255 255
- -rot: 0 0 0
-plane:
- -origin: 0 500 0
- -aim: 0 -1 0
- -color: 255 255 255
- -rot: 0 0 0
-plane:
- -origin: 0 0 500
- -aim: 0 0 -1
- -color: 255 0 0
- -rot: 0 0 0
-plane:
- -origin: 0 0 -500
- -aim: 0 0 1
- -color: 255 255 0
- -rot: 0 0 0
+ -texture: ./images/me2.png
 sphere:
- -origin: 0 45 0
+ -origin: 0 30 0  
  -radius: 20
- -translation: 0 0 0
- -color: 0 0 255
- -slice: 3
+ -color: 205 10 60
+ -negative: 1
  -texture: ./images/me2.png
- -refraction: 100
-cylinder:
- -origin: 60 40 -100
- -aim: 0 1 0
- -rot: 0 0 0
- -radius: 10
- -texture: ./images/me2.png
- -color: 0 0 250
+ -disrup: check
+# cone:
+#  -origin: -30 0 0
+#  -aim: 0 1 0
+#  -radius: 50
+#  -rot: 0 0 0
+#  -color: 100 100 100
+# cylinder:
+#  -origin: -30 0 0
+#  -aim: 0 1 0
+#  -radius: 50
+#  -rot: 0 0 0
+#  -color: 100 100 100
 camera:
- -origin: 60 60 200
+ -origin: 0 0 0
  -fov: 60
  -look_at: 0 0 0
- -ambient: 0
+ -ambient: 100
