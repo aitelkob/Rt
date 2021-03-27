@@ -190,6 +190,16 @@ t_vector	texture_noise(double x, double y,t_vector color)
 		return color;
 }
 
+t_vector	texture_noise_sine(double x, double y,t_vector color)
+{
+	x = floor(x * 4);
+	y = floor(y * 4);
+	if(fmod(x + y, 2) == 0)
+		return (t_vector){0, 0, 0};
+	else
+		return color;
+}
+
 int		png_to_rgb(int value)
 {
 	return value < 0 ? 255 + value: value;
