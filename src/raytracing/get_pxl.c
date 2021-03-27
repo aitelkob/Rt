@@ -64,7 +64,7 @@ int					isnegativeobj(t_rtv *rtv, t_ray ray, double dst)
 	t_quadratic		q;
 
 	tmp = rtv->obj;
-	nrm(camera(rtv->camera_vect, x, y, test));
+	// nrm(camera(rtv->camera_vect, x, y, test));
 	while (tmp)
 	{
 		if (tmp->negative == 1)
