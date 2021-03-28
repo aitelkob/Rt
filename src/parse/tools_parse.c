@@ -28,7 +28,7 @@ void				init_obj(t_object *obj)
 	obj->reflection = 0;
 	obj->refraction = 0;
 	obj->refraratio = 0.5;
-	obj->texture = ft_strdup("");
+	obj->texture = "";
 	obj->h = -1;
 	obj->w = -1;
 	obj->material = EMPTY;
