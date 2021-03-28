@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/24 19:16:40 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/28 14:06:51 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ t_vector		texture(t_rtv *rtv, t_object *obj, t_vector point);
 /*
  ********************************** intersection
 */
+t_quadratic		intersection(t_ray ray, t_object tmp);
 double			intersection_plane(t_ray ray, t_object plane);
 t_quadratic		intersection_cylinder(t_ray ray, t_object cylinder);
 t_quadratic		intersection_cone(t_ray ray, t_object cone);
@@ -153,4 +154,19 @@ void			exiting_program(t_rtv *rtv);
 
 void			print_vect(t_vector vec, char *str);
 void			loop_print(t_rtv *rtv);
+
+/*
+ ********************************* extra
+*/
+
+double				maptex(double x);
+void				txtinit(t_txtemp *txt);
+double				min(double a, double b);
+double				max(double a, double b);
+int					png_to_rgb(int value);
+double				slice(t_ray ray, t_quadratic q, t_slice *slice,\
+t_object *obj);
+double			negativeobj(t_rtv *rtv, t_ray ray, t_quadratic q, double min);
+
+
 #endif

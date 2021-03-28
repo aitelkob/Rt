@@ -6,7 +6,7 @@
 #    By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/23 16:25:47 by yait-el-          #+#    #+#              #
-#    Updated: 2021/03/25 09:56:34 by babdelka         ###   ########.fr        #
+#    Updated: 2021/03/28 14:05:40 by babdelka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,6 +87,9 @@ SRC			+=raytracing/reloading.c
 SRC			+=raytracing/stereoscopy.c
 SRC			+=raytracing/sepia_grey.c
 SRC			+=raytracing/reflectionandrefraction.c
+SRC			+=raytracing/texture.c
+SRC			+=raytracing/extra.c
+SRC			+=raytracing/sliceandneg.c
 
 #################### Libraries
 LIBS		:= -L$(MLXDIR) -lmlx
