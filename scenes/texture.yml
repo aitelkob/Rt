@@ -11,6 +11,7 @@ plane:
   -aim: 0 1 0
   -color: 0 0 255
   -rot: 0 0 0
+  -disrup: perlin
 sphere:
  -origin: 0 0 0
  -radius: 15
