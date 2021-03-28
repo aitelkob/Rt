@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_pxl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: selibrah <selibrah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/28 14:04:14 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/28 15:13:17 by selibrah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,35 +62,42 @@ t_object **close, t_object *current)
 	return (min);
 }
 
-t_vector			obj_norm(t_ray ray, t_object *obj, double dst)
+t_vector			obj_norm(t_ray ray, t_object *ob, double dst)
 {
 	double			m;
-	double			tk;
 	t_vector		normal;
 	t_vector		p_c;
 	t_vector		xvec;
 
 	normal = (t_vector){0, 0, 0};
-	xvec = sub(ray.origin, obj->origin);
-	if (obj->type != PLANE && obj->type != SPHERE)
-		m = dot(ray.direction, obj->aim) * dst + dot(xvec, obj->aim);
-	if (obj->type != PLANE)
+	xvec = sub(ray.origin, ob->origin);
+	if (ob->type != PLANE && ob->type != SPHERE)
+		m = dot(ray.direction, ob->aim) * dst + dot(xvec, ob->aim);
+	if (ob->type != PLANE)
 		p_c = add(xvec, multi(ray.direction, dst));
-	tk = 1 + tan(deg_to_rad(60) / 2) * tan(deg_to_rad(60) / 2);
-	if (obj && obj->type == SPHERE)
+	if (ob && ob->type == SPHERE)
 		normal = p_c;
-	else if (obj && obj->type == PLANE)
-		normal = multi(obj->aim, -1);
-	else if (obj && obj->type == CYLINDER)
-		normal = sub(p_c, multi(obj->aim, m));
-	else if (obj && obj->type == CONE)
-		normal = sub(p_c, multi(obj->aim, tk * m));
-	else if (obj && obj->type == TRIANGLE)
-		normal = crossproduct(sub(obj->c1, obj->origin), sub(obj->c2,\
-		obj->origin));
+	else if (ob && ob->type == PLANE)
+		normal = multi(ob->aim, -1);
+	else if (ob && ob->type == CYLINDER)
+		normal = sub(p_c, multi(ob->aim, m));
+	else if (ob && ob->type == CONE)
+		normal = sub(p_c, multi(ob->aim, (1 + tan(deg_to_rad(60) /
+		2) * tan(deg_to_rad(60) / 2)) * m));
+	else if (ob && ob->type == TRIANGLE)
+		normal = crossproduct(sub(ob->c1, ob->origin), sub(ob->c2, ob->origin));
 	if (dot(ray.direction, normal) > 0)
 		normal = multi(normal, -1);
 	return (nrm(normal));
+}
+
+void				init_get_pxl(t_rtv *rtv, t_ray *ray,
+t_hit *hit, t_vector *color)
+{
+	hit->depth = rtv->camera->depth;
+	color[0] = (t_vector){0, 0, 0};
+	color[1] = (t_vector){250, 0, 0};
+	ray->type = 0;
 }
 
 t_vector			get_pxl(t_rtv *rtv, t_ray ray)
@@ -99,16 +106,11 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 	t_object		*obj;
 	t_vector		color[2];
 	double			ratio[2];
-	t_vector		normal;
 
-	hit.depth = rtv->camera->depth;
-	color[0] = (t_vector){0, 0, 0};
-	color[1] = (t_vector){0, 0, 0};
-	ray.type = 0;
+	init_get_pxl(rtv, &ray, &hit, color);
 	if ((hit.dst = get_dest(rtv, ray, &obj, NULL)) <= 0)
 		return (color[0]);
 	hit.point = add(ray.origin, multi(ray.direction, hit.dst));
-	hit.color = obj->color;
 	hit.color = texture(rtv, obj, hit.point);
 	if (hit.dst > 0 && rtv->light->intensity == 0)
 		color[0] = multi(divi(hit.color, 100), rtv->camera->amblgt);

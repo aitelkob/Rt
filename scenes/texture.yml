@@ -11,19 +11,20 @@ plane:
   -aim: 0 1 0
   -color: 0 0 255
   -rot: 0 0 0
-  -disrup: perlin
-sphere:
+  -texture: ./images/soufian.png
+cone:
  -origin: 0 0 0
- -radius: 15
+ -aim: 0 1 0
  -color: 255 0 0
  -reflection: 0
- -negative: 1
+ -negative: 0
 sphere:
  -origin: 15 0 0
  -radius: 15
  -color: 255 0 0
  -reflection: 0
  -negative: 0
+ -texture: ./images/soufian.png
 camera:
   -origin: 0 90 90
   -fov: 60
