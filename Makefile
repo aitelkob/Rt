@@ -91,6 +91,9 @@ SRC			+=effects/reloading.c
 SRC			+=effects/stereoscopy.c
 SRC			+=effects/sepia_grey.c
 SRC			+=raytracing/reflectionandrefraction.c
+SRC			+=raytracing/texture.c
+SRC			+=raytracing/extra.c
+SRC			+=raytracing/sliceandneg.c
 
 #################### Libraries
 LIBS		:= -L$(MLXDIR) -lmlx

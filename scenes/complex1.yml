@@ -17,7 +17,7 @@ camera:
 plane:
  -origin: 0 -30 0
  -aim: 0 1 0
- -color: 255 255 255
+ -color: 190 190 190
  -rot: 0 0 0
  -disrup: check
  -reflection: 20

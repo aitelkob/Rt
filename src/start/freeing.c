@@ -24,6 +24,18 @@ void			free_objects(t_rtv *rtv)
 	}
 }
 
+void			free_slice(t_rtv *rtv)
+{
+	t_slice	*next;
+
+	while (rtv && rtv->slice)
+	{
+		next = rtv->slice->next;
+		free(rtv->slice);
+		rtv->slice = next;
+	}
+}
+
 void			free_lights(t_rtv *rtv)
 {
 	t_light		*next;
@@ -36,14 +48,28 @@ void			free_lights(t_rtv *rtv)
 	}
 }
 
+void			free_cameras(t_rtv *rtv)
+{
+	t_camera		*next;
+
+	while (rtv && rtv->camera)
+	{
+		next = rtv->camera->next;
+		free(rtv->camera);
+		rtv->camera = next;
+	}
+}
+
 void			exiting_program(t_rtv *rtv)
 {
 	ft_destroy(&rtv->mlx);
 	if (rtv->camera)
-		free(rtv->camera);
+		free_cameras(rtv);
 	if (rtv->light)
 		free_lights(rtv);
 	if (rtv->obj)
 		free_objects(rtv);
+	if (rtv->slice)
+		free_lights(rtv);
 	exit(0);
 }

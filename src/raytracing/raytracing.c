@@ -27,8 +27,8 @@ t_camera_vect		camera_init(t_camera *camera)
 	return (camera_vect);
 }
 
-t_vector			camera(t_camera_vect camera_vect, double x, double y,\
-t_vector test)
+t_vector			camera(t_camera_vect camera_vect, double x,
+double y, t_vector test)
 {
 	t_vector		p;
 
@@ -44,6 +44,7 @@ void				start_draw(t_rtv *rtv, double x, double y, t_ray ray2)
 	t_vector		up;
 	t_vector		color;
 	t_vector		test;
+	t_vector		normal;
 
 	test = (t_vector){0, 0, 0};
 	up = (t_vector){0, 1, 0};

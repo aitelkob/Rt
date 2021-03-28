@@ -14,7 +14,7 @@ sphere:
  -origin: 0 0 0
  -radius: 20
  -translation: 0 0 0
- -color: 255 0 0
+ -color: 200 0 0
  -slice: 1
 plane:
  -origin: 50 -30 0
@@ -24,7 +24,7 @@ plane:
 cylinder:
  -origin: 30 0 0
  -aim: 0 1 0
- -radius: 0
+ -radius: 10
  -color: 0 0 250
  -rot: 0 0 45
  -slice: 2
@@ -55,6 +55,6 @@ slice:
   -vec: 0 1 0
   -shape: 1
 slice:
-  -origin: 0 0 0
-  -vec: 1 0 0
+  -origin: 0 -10 0
+  -vec: 0 0 0
   -shape: 1

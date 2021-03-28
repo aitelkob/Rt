@@ -12,7 +12,7 @@
 
 #include "rtv1.h"
 
-void						camera_check(char *data, char *arg,
+void				camera_check(char *data, char *arg,
 t_camera *camera, t_rtv *rtv)
 {
 	if (!ft_strcmp("-origin", data))
@@ -39,7 +39,7 @@ double				input_radius(char *data, int nbr, char *head)
 	double			ret;
 
 	lines = ft_strsplit(data, ' ');
-	if (ft_lentab(lines) != 1 || ft_atoi(lines[0]) > 0)
+	if (ft_lentab(lines) != 1 || ft_atoi(lines[0]) <= 0)
 	{
 		free(data);
 		free(head);
@@ -57,8 +57,8 @@ t_vector			input_vector_color(char *data, int nbr, char *head)
 	t_vector		vec;
 
 	lines = ft_strsplit(data, ' ');
-	if (ft_lentab(lines) != 3 || ft_atof(lines[0]) > -1 ||
-	ft_atof(lines[1]) > -1 || ft_atof(lines[2]) > -1)
+	if (ft_lentab(lines) != 3 || ft_atof(lines[0]) < -1 ||
+	ft_atof(lines[1]) < -1 || ft_atof(lines[2]) < -1)
 	{
 		free(data);
 		free(head);

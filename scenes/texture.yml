@@ -1,34 +1,31 @@
 light:
-  -origin: 0 200 400
+  -origin: 0 90 90
   -intensity: 100
 plane:
-  -origin: 0 -50 0
+  -origin: 0 -20 0
   -aim: 0 1 0
-  -color: 255 0 0
-  -rot: 0 0 50
-  -reflection: 50
+  -color: 255 0 255
+  -rot: 0 0 0
 plane:
   -origin: 0 0 0
-  -aim: 0 0 1
+  -aim: 0 1 0
   -color: 0 0 255
   -rot: 0 0 0
-cylinder:
-  -origin: 0 0 0  
-  -radius: 10
-  -aim: 0 1 0
-  -color: 205 10 60
-  -negative: 0
-  -slice: 0
-  -texture: ./images/screen.png
-cylinder:
-  -origin: 0 0 0  
-  -radius: 10
-  -aim: 1 0 0
-  -color: 205 10 60
-  -negative: 1
-  -slice: 0
+  -disrup: perlin
+sphere:
+ -origin: 0 0 0
+ -radius: 15
+ -color: 255 0 0
+ -reflection: 0
+ -negative: 1
+sphere:
+ -origin: 15 0 0
+ -radius: 15
+ -color: 255 0 0
+ -reflection: 0
+ -negative: 0
 camera:
-  -origin: 60 0 0
+  -origin: 0 90 90
   -fov: 60
   -look_at: 0 10 0
   -ambient: 50

@@ -101,6 +101,7 @@ t_vector		int_to_rgb(int colors);
 void			cartoon(t_mlix *mlix, t_vector *colors);
 t_vector		*color_fill();
 t_vector		obj_norm(t_ray ray, t_object *obj, double dst);
+float perlin2d(float x, float y, float freq, int depth);
 /*
  ********************************mlx stuff
 */
@@ -137,6 +138,7 @@ t_vector		texture(t_rtv *rtv, t_object *obj, t_vector point);
 /*
  ********************************** intersection
 */
+t_quadratic		intersection(t_ray ray, t_object tmp);
 double			intersection_plane(t_ray ray, t_object plane);
 t_quadratic		intersection_cylinder(t_ray ray, t_object cylinder);
 t_quadratic		intersection_cone(t_ray ray, t_object cone);
@@ -162,4 +164,19 @@ void			exiting_program(t_rtv *rtv);
 
 void			print_vect(t_vector vec, char *str);
 void			loop_print(t_rtv *rtv);
+
+/*
+ ********************************* extra
+*/
+
+double				maptex(double x);
+void				txtinit(t_txtemp *txt);
+double				min(double a, double b);
+double				max(double a, double b);
+int					png_to_rgb(int value);
+double				slice(t_ray ray, t_quadratic q, t_slice *slice,\
+t_object *obj);
+double			negativeobj(t_rtv *rtv, t_ray ray, t_quadratic q, double min);
+
+
 #endif
