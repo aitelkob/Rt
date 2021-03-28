@@ -16,7 +16,6 @@ plane:
  -aim: 0 1 0
  -color: 44 130 87
  -rot: 0 0 0
- -texture: ./images/pool.png
 sphere:
  -origin: 0 0 0
  -radius: 10
