@@ -12,27 +12,12 @@
 
 #include "rtv1.h"
 
-void			ft_destroy(t_mlix *mlx)
-{
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr);
-	mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
-	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
-}
-
-void			setup_mlx(t_mlix *mlx, t_rtv *rtv)
+void			obj_rotation_slice(t_mlix *mlx, t_rtv *rtv)
 {
 	t_object	*tmp;
 	t_slice		*tmp2;
 
 	tmp = rtv->obj;
-	mlx->mlx_ptr = mlx_init();
-	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, (WIN_W + 290), WIN_H, "RT");
-	mlx->img_ptr2 = mlx_png_file_to_image(mlx->mlx_ptr,\
-	"./images/cartoon.png", &mlx->w, &mlx->h);
-	mlx->img_ptr3 = mlx_png_file_to_image(mlx->mlx_ptr,\
-	"./images/cartoon1.png", &mlx->w, &mlx->h);
-	mlx->img_ptr4 = mlx_png_file_to_image(mlx->mlx_ptr,\
-	"./images/white.png", &mlx->w, &mlx->h);
 	while (tmp)
 	{
 		if (tmp->rot.x != 0 || tmp->rot.y != 0 || tmp->rot.z != 0)
@@ -50,6 +35,19 @@ void			setup_mlx(t_mlix *mlx, t_rtv *rtv)
 			tmp->texture, &tmp->w, &tmp->h);
 		tmp = tmp->next;
 	}
+}
+
+void			setup_mlx(t_mlix *mlx, t_rtv *rtv)
+{
+	mlx->mlx_ptr = mlx_init();
+	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, (WIN_W + 290), WIN_H, "RT");
+	mlx->img_ptr2 = mlx_png_file_to_image(mlx->mlx_ptr,
+	"./images/cartoon.png", &mlx->w, &mlx->h);
+	mlx->img_ptr3 = mlx_png_file_to_image(mlx->mlx_ptr,
+	"./images/cartoon1.png", &mlx->w, &mlx->h);
+	mlx->img_ptr4 = mlx_png_file_to_image(mlx->mlx_ptr,
+	"./images/white.png", &mlx->w, &mlx->h);
+	obj_rotation_slice(mlx, rtv);
 	mlx->img_ptr = mlx_new_image(mlx->mlx_ptr, WIN_W, WIN_H);
 	mlx->img = (int*)mlx_get_data_addr(mlx->img_ptr, &mlx->bits_per_pixel,\
 	&mlx->size_line, &mlx->endian);

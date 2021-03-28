@@ -14,7 +14,7 @@
 
 void			error(char *str, char *where)
 {
-	int i;
+	int			i;
 
 	i = -1;
 	while (str[++i])

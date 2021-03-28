@@ -86,3 +86,10 @@ void			camfocal(int keycode, t_rtv *rtv)
 	}
 	camfocal_help(keycode, rtv);
 }
+
+void			ft_destroy(t_mlix *mlx)
+{
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr);
+	mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
+	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
+}
