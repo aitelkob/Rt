@@ -12,19 +12,21 @@
 
 #include "rtv1.h"
 
-t_camera_vect camera_init(t_camera *camera)
+t_camera_vect 		camera_init(t_camera *camera)
 {
 	t_camera_vect camera_vect;
 	t_ray			ray;
+
 	ray.origin = camera->origin;
 	ray.direction = camera->look_at;
 	ray.origin.x += 0.000000001;
 	camera_vect.w = nrm(sub(ray.direction, ray.origin));
 	camera_vect.u = nrm(crossproduct(camera_vect.w, (t_vector){0, 1, 0}));
-	camera_vect.v= crossproduct(camera_vect.w, camera_vect.u);
+	camera_vect.v = crossproduct(camera_vect.w, camera_vect.u);
 	camera_vect.fov = camera->fov;
-	return camera_vect;
+	return (camera_vect);
 }
+
 t_vector			camera(t_camera_vect camera_vect, double x, double y, t_vector test)
 {
 	t_vector		p;
@@ -47,7 +49,6 @@ void				start_draw(t_rtv *rtv, double x, double y, t_ray ray2)
 	ray2.direction = nrm(camera(rtv->camera_vect, x, y, test));
 	color = get_pxl(rtv, ray2);
 	rtv->mlx.colors[(WIN_H - 1 - (int)y) * WIN_W + (int)x] = color;
-	//color = multi(color,perlin2d(x, y, 0.1, 4));
 	rtv->mlx.img[(WIN_H - 1 - (int)y) * WIN_W + (int)x] = rgb_to_int(color);
 }
 
@@ -88,8 +89,8 @@ void				raytracing(t_rtv rtv)
 
 	i = 0;
 	t = 1;
-	displayloading(&rtv.mlx); 
-	rtv.camera_vect =  camera_init(rtv.camera);
+	displayloading(&rtv.mlx);
+	rtv.camera_vect = camera_init(rtv.camera);
 	while (i < THREAD_NUMBER)
 	{
 		th[i].rt = &rtv;

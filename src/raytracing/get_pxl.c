@@ -32,12 +32,12 @@ t_object *obj)
 			if (is_sliced < 0)
 			{
 				p_c = add(xvec, multi(ray.direction, q.t1));
-				is_sliced = dot(p_c, tmp->vec) > 0 ? q.t1 : -1;;
+				is_sliced = dot(p_c, tmp->vec) > 0 ? q.t1 : -1;
 			}
 		}
 		tmp = tmp->next;
 	}
-	return is_sliced;
+	return (is_sliced);
 }
 
 t_quadratic			intersection(t_ray ray, t_object tmp)
@@ -48,7 +48,10 @@ t_quadratic			intersection(t_ray ray, t_object tmp)
 	if (tmp.type == SPHERE)
 		q = intersection_sphere(ray, tmp);
 	else if (tmp.type == PLANE)
+	{
 		q.t0 = intersection_plane(ray, tmp);
+		q.t1 = -1;
+	}
 	else if (tmp.type == TRIANGLE)
 		q.t0 = intersection_triangle(ray, tmp);
 	else if (tmp.type == CYLINDER)
@@ -77,6 +80,19 @@ int					isnegativeobj(t_rtv *rtv, t_ray ray, double dst)
 	return (1);
 }
 
+double			negativeobj(t_rtv *rtv, t_ray ray, t_quadratic q, double min)
+{
+	if ((isnegativeobj(rtv, ray, q.t0) ||\
+		(isnegativeobj(rtv, ray, q.t1) && q.t1)))
+	{
+		if (isnegativeobj(rtv, ray, q.t0))
+			return (q.t0);
+		else
+			return (q.t1);
+	}
+	return min;
+}
+
 double				get_dest(t_rtv *rtv, t_ray ray,
 t_object **close, t_object *current)
 {
@@ -88,20 +104,17 @@ t_object **close, t_object *current)
 	tmp = rtv->obj;
 	while (tmp)
 	{
-		if(tmp != current || ray.type == 1)
-		{q = intersection(ray, *tmp);
-		q.t0 = slice(ray, q, rtv->slice, tmp);
-		if (q.t0 > 0 && (q.t0 < min + 0.000000001 ||\
-		min == -1) && tmp->negative != 1)
-			if ( (isnegativeobj(rtv, ray, q.t0) ||\
-			(isnegativeobj(rtv, ray, q.t1) && tmp->type != PLANE)))
+		if (tmp != current || ray.type == 1)
+		{
+			q = intersection(ray, *tmp);
+			q.t0 = slice(ray, q, rtv->slice, tmp);
+			if (q.t0 > 0 && (q.t0 < min + 0.000000001 || 
+				min == -1) && tmp->negative != 1)
 			{
-				if (isnegativeobj(rtv, ray, q.t0))
-					min = q.t0;
-				else
-					min = q.t1;
+				min = negativeobj(rtv, ray, q, min);
 				*close = tmp;
-			}}
+			}
+		}
 		tmp = tmp->next;
 	}
 	if (current != NULL && *close == current)
@@ -164,10 +177,10 @@ t_txtemp *txt)
 	}
 	else if(obj->type == SPHERE)
 	{	
-		txt->x = (1 - ((atan2((obj->origin.x-point.x),\
-		obj->origin.z-point.z) / (2.0 * PI)))) + fabs(rtv->translationx/obj->radius);
-		txt->y = ((1 - (acos((((obj->origin.y-point.y))/\
-		(obj->radius)))) / PI)) + fmod(rtv->translationy,obj->radius) /obj->radius;
+		txt->x = (1 - ((atan2((obj->origin.x-point.x),-obj->origin.z+point.z)\
+		 / (2.0 * PI)))) + fabs(rtv->translationx/obj->radius);
+		txt->y = 1 - (acos((((obj->origin.y-point.y))/(obj->radius)))) / PI\
+		+ fmod(rtv->translationy,obj->radius) / obj->radius;
 	}
 	else if(obj->type == CYLINDER || obj->type == CONE)
 	{	
@@ -181,8 +194,8 @@ t_txtemp *txt)
 
 t_vector	texture_noise(double x, double y,t_vector color)
 {
-	x = floor(x * 4);
-	y = floor(y * 4);
+	x = floor(x * 6);
+	y = floor(y * 6);
 	if(fmod(x + y, 2) == 0)
 		return (t_vector){0, 0, 0};
 	else
@@ -212,13 +225,6 @@ t_vector	texture_noise_sine(double x, double y)
 	return color;
 }
 
-
-// t_vector	texture_noise_perlin(double x, double y, t_vector color)
-// {
-// 	t_vector color;
-
-// 	return color;
-// }
 int		png_to_rgb(int value)
 {
 	return value < 0 ? 255 + value: value;
@@ -248,16 +254,15 @@ t_vector			texture(t_rtv *rtv, t_object *obj, t_vector point)
 	point.z > obj->origin.z + rtv->translationy && point.z < obj->origin.z + rtv->translationy + rtv->scale : 1;
 	int concylinder =  obj->type == CONE || obj->type == CYLINDER ? point.y > obj->origin.y + rtv->translationy && point.y < obj->origin.y + rtv->translationy + rtv->scale : 1;
 	 
-		if(obj->disruptions == CHECK)
-			return texture_noise_sine(txt.x,txt.y);
-			//return texture_noise(txt.x,txt.y, obj->color);
-		else if(obj->w != -1)
-		{
-			if((concylinder && cond ) || obj->type == SPHERE)
-				return  texture_fromfile(rtv, obj, point, txt);
-		}
-	//return multi(obj->color, fmod(random(),10));
-	return multi(obj->color,perlin2d((txt.x < 0 ? -txt.x : txt.x), (txt.y < 0 ? -txt.y : txt.y), 100, 4));
+	if (obj->disruptions == CHECK)
+		return texture_noise(txt.x,txt.y, obj->color);
+	else if (obj->disruptions == DISRUPT)
+		return texture_noise_sine(txt.x,txt.y);
+	else if (obj->disruptions == PERLIN)
+		return multi(obj->color,perlin2d((txt.x < 0 ? -txt.x : txt.x), (txt.y < 0 ? -txt.y : txt.y), 100, 4));
+	else if (obj->w != -1 && ((concylinder && cond ) || obj->type == SPHERE))
+		return  texture_fromfile(rtv, obj, point, txt);
+	return obj->color;
 }
 
 t_vector			get_pxl(t_rtv *rtv, t_ray ray)
@@ -275,11 +280,7 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 		return (color[0]);
 	hit.point = add(ray.origin, multi(ray.direction, hit.dst));
 	hit.color = obj->color;
-	normal = nrm((t_vector) {2 * hit.point.x , 2 * hit.point.z , -1});
-	hit.color.x = hit.color.x * normal.x;
-	hit.color.y = hit.color.y * normal.y;
-	hit.color.z = hit.color.z * normal.z;
-	//hit.color = texture(rtv, obj, hit.point);
+	hit.color = texture(rtv, obj, hit.point);
 	if (hit.dst > 0 && rtv->light->intensity == 0)
 		color[0] = multi(divi(hit.color, 100), rtv->camera->amblgt);
 	ratio[0] = obj->reflection + 0.2;
@@ -295,3 +296,8 @@ t_vector			get_pxl(t_rtv *rtv, t_ray ray)
 		return (color[0]);
 	return (color[1]);
 }
+
+	// normal = nrm((t_vector) {2 * hit.point.x , 2 * hit.point.z , -1});
+	// hit.color.x = hit.color.x * normal.x;
+	// hit.color.y = hit.color.y * normal.y;
+	// hit.color.z = hit.color.z * normal.z;

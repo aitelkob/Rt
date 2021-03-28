@@ -2,16 +2,27 @@ light:
   -origin: 0 90 90
   -intensity: 100
 plane:
+  -origin: 0 -20 0
+  -aim: 0 1 0
+  -color: 255 0 255
+  -rot: 0 0 0
+plane:
   -origin: 0 0 0
   -aim: 0 1 0
   -color: 0 0 255
   -rot: 0 0 0
-cylinder:
+sphere:
  -origin: 0 0 0
  -radius: 15
- -aim: 0 1 0
  -color: 255 0 0
  -reflection: 0
+ -negative: 1
+sphere:
+ -origin: 15 0 0
+ -radius: 15
+ -color: 255 0 0
+ -reflection: 0
+ -negative: 0
 camera:
   -origin: 0 90 90
   -fov: 60
