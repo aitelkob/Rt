@@ -1,46 +1,45 @@
 light:
  -origin: 200 499 -400
- -intensity: 100
+ -intensity: 50
 light:
  -origin: -200 499 0
  -intensity: 50
-light:
- -origin: 0 499 -1999
- -intensity: 100
 plane:
  -origin: 0 -500 0
  -aim: 0 1 0
  -color: 0 0 255
  -rot: 0 0 0
- -reflection: 1
+ -reflection: 10
 plane:
  -origin: 0 2000 0
  -aim: 0 -1 0
  -color: 255 255 255
  -rot: 0 0 0
- -reflection: 1
+ -reflection: 10
 plane:
- -origin: 3000 0 0
+ -origin: 600 0 0
  -aim: 1 0 0
- -color: 0 0 0
+ -color: 0 255 0
  -rot: 0 0 0
- -reflection: 1
+ -reflection: 10
 plane:
- -origin: -1000 0 0
+ -origin: -500 0 0
  -aim: -1 0 0
  -color: 255 255 255
  -rot: 0 0 0
+ -reflection: 10
 plane:
- -origin: 0 0 -2001
+ -origin: 0 0 -3000
  -aim: 0 0 1
  -color: 255 255 255
  -rot: 0 0 0
- -reflection: 1
+ -reflection: 10
 plane:
- -origin: 0 0 2000
+ -origin: 0 0 3000
  -aim: 0 0 -1
  -color: 255 0 0
  -rot: 0 0 0
+ -reflection: 10
 sphere:
  -origin: 0 200 500
  -radius: 150
@@ -66,15 +65,8 @@ sphere:
  -radius: 150
  -color: 0 0 255
  -material: mirror
-cylinder:
- -origin: 500 0 -500
- -aim: 0 1 0
- -rot: 0 0 60
- -radius: 100
- -color: 0 0 250
- -material: glass
 camera:
- -origin: 1000 500 -1999
+ -origin: 500 500 -2800
  -look_at: 0 0 0
  -fov: 80
- -depth: 5
+ -depth: 30
