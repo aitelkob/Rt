@@ -1,33 +1,60 @@
 light:
- -origin: 0 70 105
+ -origin: 100 0 50
+ -intensity: 50
+light:
+ -origin: 0 0 -550
  -intensity: 100
-plane:
- -origin: 0 0 0
- -aim: 0 1 0
- -color: 255 255 255
- -rot: 0 0 0
- -texture: ./images/me2.png
+light:
+ -origin: -100 0 -50
+ -intensity: 50
+light:
+ -origin: 0 0 550
+ -intensity: 100
 sphere:
- -origin: 0 30 0  
+ -origin: 0 0 0
  -radius: 20
- -color: 205 10 60
- -negative: 1
- -texture: ./images/me2.png
- -disrup: check
-# cone:
-#  -origin: -30 0 0
-#  -aim: 0 1 0
-#  -radius: 50
-#  -rot: 0 0 0
-#  -color: 100 100 100
-# cylinder:
-#  -origin: -30 0 0
-#  -aim: 0 1 0
-#  -radius: 50
-#  -rot: 0 0 0
-#  -color: 100 100 100
+ -translation: 0 0 0
+ -color: 255 0 0
+ -slice: 1
+plane:
+ -origin: 50 -30 0
+ -aim: 0 1 0
+ -color: 100 50 100
+ -rot: 0 0 0
+cylinder:
+ -origin: 30 0 0
+ -aim: 0 1 0
+ -radius: 10
+ -color: 0 0 250
+ -rot: 0 0 45
+ -slice: 2
+cone:
+ -origin: -30 0 0
+ -aim: 0 1 0
+ -radius: 50
+ -color: 100 100 100
+ -slice: 0
 camera:
- -origin: 0 10 100
+ -origin: 0 0 170
  -fov: 60
  -look_at: 0 0 0
- -ambient: 100
+slice:
+  -origin: 0 0 0
+  -vec: 0 1 0
+  -shape: 2
+slice:
+  -origin: 0 50 0
+  -vec: 0 -1 0
+  -shape: 2
+slice:
+  -origin: 0 10 0
+  -vec: 0 -1 0
+  -shape: 1
+slice:
+  -origin: 0 -10 0
+  -vec: 0 1 0
+  -shape: 1
+slice:
+  -origin: 0 0 0
+  -vec: 1 0 0
+  -shape: 1

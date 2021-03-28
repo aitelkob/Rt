@@ -32,7 +32,7 @@ t_object *obj)
 			if (is_sliced < 0)
 			{
 				p_c = add(xvec, multi(ray.direction, q.t1));
-				is_sliced = dot(p_c, tmp->vec) > 0 ? q.t1 : -1;;
+				is_sliced = dot(p_c, tmp->vec) > 0 ? q.t1 : -1;
 			}
 		}
 		tmp = tmp->next;

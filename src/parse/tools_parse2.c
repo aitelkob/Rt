@@ -33,6 +33,13 @@ void			rot_trans(t_object *obj)
 	obj->origin = add(obj->origin, obj->translation);
 }
 
+void			rot_trans_slice(t_slice *slice, t_object *obj)
+{
+	slice->vec = nrm(slice->vec);
+	slice->vec = rotation(slice->vec, obj->rot);
+	slice->origin = add(slice->origin, obj->translation);
+}
+
 int				color_nrm(int i)
 {
 	return (i > 255 ? 255 : i);

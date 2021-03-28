@@ -40,6 +40,7 @@ void			cone_parce(t_rtv *rtv);
 void			cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv);
 void			triangle_checker(char *data, char *arg, t_object *cone,\
 t_rtv *rtv);
+void			rot_trans_slice(t_slice *slice,t_object *obj);
 void			light_parce(t_rtv *rtv);
 void			ambient_parce(t_rtv *rtv);
 void			init_obj(t_object *obj);

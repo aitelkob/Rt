@@ -22,8 +22,10 @@ void			ft_destroy(t_mlix *mlx)
 void			setup_mlx(t_mlix *mlx, t_rtv *rtv)
 {
 	t_object	*tmp;
-
+	t_slice		*tmp2;
+	
 	tmp = rtv->obj;
+	
 	mlx->mlx_ptr = mlx_init();
 	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, (WIN_W + 290), WIN_H, "RT");
 	mlx->img_ptr2 = mlx_png_file_to_image(mlx->mlx_ptr,\
@@ -34,12 +36,19 @@ void			setup_mlx(t_mlix *mlx, t_rtv *rtv)
 	"./images/white.png", &mlx->w, &mlx->h);
 	while (tmp)
 	{
-		if (tmp)
+		if (tmp->rot.x != 0 || tmp->rot.y != 0 || tmp->rot.z != 0)
 		{
+			tmp2 = rtv->slice;
+			while(tmp2)
+			{
+				if (tmp2->shape == tmp->slicing)
+					rot_trans_slice(tmp2,tmp);
+				tmp2 = tmp2->next;
+			}
+		}
 			if (ft_strlen(tmp->texture) > 10)
 				tmp->img_texture = mlx_png_file_to_image(mlx->mlx_ptr,\
 				tmp->texture, &tmp->w, &tmp->h);
-		}
 		tmp = tmp->next;
 	}
 	mlx->img_ptr = mlx_new_image(mlx->mlx_ptr, WIN_W, WIN_H);
