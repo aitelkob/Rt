@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:40:46 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/27 16:22:13 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/28 15:26:13 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ typedef	struct				s_vector
 	double					z;
 }							t_vector;
 
-typedef	struct			s_camera_vect
+typedef	struct				s_camera_vect
 {
 	t_vector				w;
 	t_vector				u;
 	t_vector				v;
 	double					fov;
-}						t_camera_vect;
+}							t_camera_vect;
 
 typedef struct				s_bmp
 {

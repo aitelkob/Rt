@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/28 15:21:28 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/28 15:25:53 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ void			cylinder_parce(t_rtv *rtv);
 void			cylinder_checker(char *data, char *arg,
 				t_object *cylinder, t_rtv *rtv);
 void			triangle_checker(char *data, char *arg, t_object *triangle,\
-t_rtv *rtv);
+				t_rtv *rtv);
 void			free_objects(t_rtv *rtv);
 void			free_lights(t_rtv *rtv);
 void			cone_parce(t_rtv *rtv);
 void			cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv);
 void			triangle_checker(char *data, char *arg, t_object *cone,\
-t_rtv *rtv);
-void			rot_trans_slice(t_slice *slice,t_object *obj);
+				t_rtv *rtv);
+void			rot_trans_slice(t_slice *slice, t_object *obj);
 void			light_parce(t_rtv *rtv);
 void			ambient_parce(t_rtv *rtv);
 void			init_obj(t_object *obj);
@@ -67,10 +67,10 @@ void			slice_parce(t_rtv *rtv);
 void			init_cam(t_camera *cam);
 void			light_check(char *data, char *arg, t_light *light, t_rtv *rtv);
 void			key_hook_help(int keycode, t_rtv *rtv);
-void			camera_check(char *data, char *arg,
-t_camera *camera, t_rtv *rtv);
+void			camera_check(char *data, char *arg,\
+				t_camera *camera, t_rtv *rtv);
 void			triangle_checker_help(char *data, char *arg,\
-t_object *triangle, t_rtv *rtv);
+				t_object *triangle, t_rtv *rtv);
 
 /*
  ******************************* vector lib
@@ -101,7 +101,7 @@ t_vector		int_to_rgb(int colors);
 void			cartoon(t_mlix *mlix, t_vector *colors);
 t_vector		*color_fill();
 t_vector		obj_norm(t_ray ray, t_object *obj, double dst);
-float perlin2d(float x, float y, float freq, int depth);
+float			perlin2d(float x, float y, float freq, int depth);
 /*
  ********************************mlx stuff
 */
@@ -169,14 +169,15 @@ void			loop_print(t_rtv *rtv);
  ********************************* extra
 */
 
-double				maptex(double x);
-void				txtinit(t_txtemp *txt);
-double				min(double a, double b);
-double				max(double a, double b);
-int					png_to_rgb(int value);
-double				slice(t_ray ray, t_quadratic q, t_slice *slice,\
+double			maptex(double x);
+void			txtinit(t_txtemp *txt);
+double			min(double a, double b);
+double			max(double a, double b);
+int				png_to_rgb(int value);
+double			slice(t_ray ray, t_quadratic q, t_slice *slice,\
 t_object *obj);
-double			negativeobj(t_rtv *rtv, t_ray ray, t_quadratic q, double min);
+double			negativeobj(t_rtv *rtv, t_ray ray, t_quadratic q,\
+double min);
 int				set_hash(int idx);
 
 #endif
