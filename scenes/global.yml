@@ -22,7 +22,7 @@ sphere:
  -radius: 28
  -translation: 0 0 0
  -texture: ./images/world.png
- -color: 252 0 0
+ -color: 250 0 0
 camera:
  -origin: 0 0 170
  -fov: 60
