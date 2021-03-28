@@ -19,7 +19,7 @@ void		cylinder_help(char *data, char *arg, t_object *cylinder, t_rtv *rtv)
 	else if (!ft_strcmp("-negative", data))
 		cylinder->negative = input_onearg(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-color", data))
-		cylinder->color = input_vector(arg, rtv->parse.nb_line, data);
+		cylinder->color = input_vector_color(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-texture", data))
 		cylinder->texture = input_texture(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-slice", data))
@@ -68,7 +68,7 @@ void		cone_checker_help(char *data, char *arg, t_object *cone, t_rtv *rtv)
 	else if (!ft_strcmp("-negative", data))
 		cone->negative = input_onearg(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-color", data))
-		cone->color = input_vector(arg, rtv->parse.nb_line, data);
+		cone->color = input_vector_color(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-translation", data))
 		cone->translation = input_vector(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-material", data))

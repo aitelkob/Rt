@@ -60,6 +60,7 @@ t_vector		input_vector(char *data, int nbr, char *head);
 double			input_onearg(char *data, int nbr, char *head);
 int				input_material(char *data, int nbr, char *head);
 double			input_radius(char *data, int nbr, char *head);
+t_vector		input_vector_color(char *data, int nbr, char *head);
 void			convertmaterial(t_object *obj);
 void			ambient_parce(t_rtv *rtv);
 void			slice_parce(t_rtv *rtv);

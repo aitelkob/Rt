@@ -24,7 +24,7 @@ plane:
 cylinder:
  -origin: 30 0 0
  -aim: 0 1 0
- -radius: 10
+ -radius: 0
  -color: 0 0 250
  -rot: 0 0 45
  -slice: 2

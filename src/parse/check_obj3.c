@@ -39,7 +39,7 @@ double				input_radius(char *data, int nbr, char *head)
 	double			ret;
 
 	lines = ft_strsplit(data, ' ');
-	if (ft_lentab(lines) != 1 || ft_atoi(lines[0]) > -1)
+	if (ft_lentab(lines) != 1 || ft_atoi(lines[0]) > 0)
 	{
 		free(data);
 		free(head);
@@ -49,4 +49,25 @@ double				input_radius(char *data, int nbr, char *head)
 	ret = ft_atoi(lines[0]);
 	free_splited(lines);
 	return (ret);
+}
+
+t_vector			input_vector_color(char *data, int nbr, char *head)
+{
+	char			**lines;
+	t_vector		vec;
+
+	lines = ft_strsplit(data, ' ');
+	if (ft_lentab(lines) != 3 || ft_atof(lines[0]) > -1 ||
+	ft_atof(lines[1]) > -1 || ft_atof(lines[2]) > -1)
+	{
+		free(data);
+		free(head);
+		syntax_error("reasing", "parameters wrong in", nbr);
+	}
+	free(data);
+	vec.x = ft_atof(lines[0]);
+	vec.y = ft_atof(lines[1]);
+	vec.z = ft_atof(lines[2]);
+	free_splited(lines);
+	return (vec);
 }

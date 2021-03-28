@@ -40,7 +40,7 @@ void	plan_checker(char *data, char *arg, t_object *plan, t_rtv *rtv)
 	else if (!ft_strcmp("-aim", data))
 		plan->aim = input_vector(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-color", data))
-		plan->color = input_vector(arg, rtv->parse.nb_line, data);
+		plan->color = input_vector_color(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-reflection", data))
 		plan->reflection = input_onearg(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-texture", data))
@@ -62,7 +62,7 @@ void	triangle_checker(char *data, char *arg, t_object *triangle, t_rtv *rtv)
 	else if (!ft_strcmp("-c1", data))
 		triangle->c1 = input_vector(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-color", data))
-		triangle->color = input_vector(arg, rtv->parse.nb_line, data);
+		triangle->color = input_vector_color(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-negative", data))
 		triangle->negative = input_onearg(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-slice", data))
@@ -87,7 +87,7 @@ void	sphere_checker_help(char *data, char *arg, t_object *sphere, t_rtv *rtv)
 	else if (!ft_strcmp("-slice", data))
 		sphere->slicing = input_onearg(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-color", data))
-		sphere->color = input_vector(arg, rtv->parse.nb_line, data);
+		sphere->color = input_vector_color(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-translation", data))
 		sphere->translation = input_vector(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-material", data))
