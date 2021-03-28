@@ -37,7 +37,7 @@ enum						e_disruptions
 {
 	NORMAL = 1,
 	CHECK,
-	DISRUPT,
+	WAVE,
 	PERLIN,
 }							t_disruptions;
 

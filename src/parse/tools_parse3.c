@@ -64,8 +64,8 @@ int					noiseret(char **lines)
 		ret = NORMAL;
 	else if (!ft_strcmp("check", lines[0]))
 		ret = CHECK;
-	else if (!ft_strcmp("disrupt", lines[0]))
-		ret = DISRUPT;
+	else if (!ft_strcmp("wave", lines[0]))
+		ret = WAVE;
 	else if (!ft_strcmp("perlin", lines[0]))
 		ret = PERLIN;
 	return (ret);
