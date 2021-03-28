@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:22:35 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/27 16:15:06 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/28 15:21:28 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,6 @@ int					png_to_rgb(int value);
 double				slice(t_ray ray, t_quadratic q, t_slice *slice,\
 t_object *obj);
 double			negativeobj(t_rtv *rtv, t_ray ray, t_quadratic q, double min);
-
+int				set_hash(int idx);
 
 #endif

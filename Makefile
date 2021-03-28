@@ -6,7 +6,7 @@
 #    By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/23 16:25:47 by yait-el-          #+#    #+#              #
-#    Updated: 2021/03/27 15:37:59 by babdelka         ###   ########.fr        #
+#    Updated: 2021/03/28 15:22:17 by babdelka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,8 @@ SRC			+=parse/list_rt.c
 SRC			+=libvect/calc_vect.c
 SRC			+=libvect/vector_calculation.c
 SRC			+=libvect/vector_calculation2.c
+SRC			+=libvect/perlin_noise.c
+SRC			+=libvect/hash_set.c
 SRC			+=error/parse_error.c
 SRC			+=raytracing/raytracing.c
 SRC			+=raytracing/rotation.c
