@@ -54,15 +54,17 @@ sphere:
  -origin: 0 20 0
  -radius: 15
  -color: 0 0 255
+ -texture: ./images/youssef.png
 sphere:
  -origin: 25 25 20
  -radius: 8
  -color: 0 255 255
- -texture: ./images/me2.png
+ -texture: ./images/soufian.png
 sphere:
  -origin: 0 20 70
  -radius: 5
  -color: 0 255 0
+ -texture: ./images/abdou.png
 camera:
  -origin: 15 35 100
  -look_at: 0 0 0

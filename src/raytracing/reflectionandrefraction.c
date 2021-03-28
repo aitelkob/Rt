@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:39:56 by babdelka          #+#    #+#             */
-/*   Updated: 2021/03/27 16:09:27 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/27 18:23:15 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_rtv *rtv, t_hit hit)
 	obj->refraratio), ray.direction2);
 	ray.origin = hit.point;
 	hit.depth--;
-	ratio[0] = obj->reflection - 0.95;
+	ratio[0] = obj->reflection - 0.85;
 	ratio[1] = obj->refraction + 0.1;
 	if (obj->reflection)
 		color[0] = multi(gpxaddv(rtv, ray, ray.direction1, hit), ratio[0]);

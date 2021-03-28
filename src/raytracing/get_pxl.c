@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 10:02:17 by yait-el-          #+#    #+#             */
-/*   Updated: 2021/03/25 12:28:26 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/27 18:22:49 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,12 @@ t_object **close, t_object *current)
 	while (tmp)
 	{
 		if(tmp != current || ray.type == 1)
-		{q = intersection(ray, *tmp);
-		q.t0 = slice(ray, q, rtv->slice, tmp);
-		if (q.t0 > 0 && (q.t0 < min + 0.000000001 ||\
-		min == -1) && tmp->negative != 1)
-			if ( (isnegativeobj(rtv, ray, q.t0) ||\
+		{
+			q = intersection(ray, *tmp);
+			q.t0 = slice(ray, q, rtv->slice, tmp);
+			if (q.t0 > 0 && (q.t0 < min + 0.000000001 ||\
+				min == -1) && tmp->negative != 1)
+			if ((isnegativeobj(rtv, ray, q.t0) ||\
 			(isnegativeobj(rtv, ray, q.t1) && tmp->type != PLANE)))
 			{
 				if (isnegativeobj(rtv, ray, q.t0))
@@ -101,7 +102,8 @@ t_object **close, t_object *current)
 				else
 					min = q.t1;
 				*close = tmp;
-			}}
+			}
+		}
 		tmp = tmp->next;
 	}
 	if (current != NULL && *close == current)
@@ -227,13 +229,12 @@ t_vector			texture(t_rtv *rtv, t_object *obj, t_vector point)
 	int cond = obj->type == PLANE ? point.x > obj->origin.x + rtv->translationx && point.x < obj->origin.x + rtv->translationx + rtv->scale  &&
 	point.z > obj->origin.z + rtv->translationy && point.z < obj->origin.z + rtv->translationy + rtv->scale : 1;
 	int concylinder =  obj->type == CONE || obj->type == CYLINDER ? point.y > obj->origin.y + rtv->translationy && point.y < obj->origin.y + rtv->translationy + rtv->scale : 1;
-	 if((concylinder && cond ) || obj->type == SPHERE)
-	{
-		if(obj->disruptions == CHECK)
-			return texture_noise(txt.x,txt.y, obj->color);
-		else if(obj->w != -1)
-			return  texture_fromfile(rtv, obj, point, txt);
-	}
+	if(obj->disruptions == CHECK)
+		return texture_noise(txt.x,txt.y, obj->color);
+	else if(obj->w != -1 && ((concylinder && cond)
+			|| obj->type == SPHERE))
+		return  texture_fromfile(rtv, obj, point, txt);
+
 	return obj->color;
 }
 
