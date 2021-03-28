@@ -6,7 +6,7 @@
 /*   By: babdelka <babdelka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 14:03:27 by babdelka          #+#    #+#             */
-/*   Updated: 2021/03/28 14:07:10 by babdelka         ###   ########.fr       */
+/*   Updated: 2021/03/28 14:11:46 by babdelka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int					isnegativeobj(t_rtv *rtv, t_ray ray, double dst)
 	return (1);
 }
 
-double			negativeobj(t_rtv *rtv, t_ray ray, t_quadratic q, double min)
+double				negativeobj(t_rtv *rtv, t_ray ray, t_quadratic q,\
+double min)
 {
 	if ((isnegativeobj(rtv, ray, q.t0) ||\
 		(isnegativeobj(rtv, ray, q.t1) && q.t1)))
