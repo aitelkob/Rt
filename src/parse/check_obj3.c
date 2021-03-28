@@ -32,3 +32,21 @@ t_camera *camera, t_rtv *rtv)
 	}
 	free(data);
 }
+
+double				input_radius(char *data, int nbr, char *head)
+{
+	char			**lines;
+	double			ret;
+
+	lines = ft_strsplit(data, ' ');
+	if (ft_lentab(lines) != 1 || ft_atoi(lines[0]) > -1)
+	{
+		free(data);
+		free(head);
+		syntax_error(data, head, nbr);
+	}
+	free(data);
+	ret = ft_atoi(lines[0]);
+	free_splited(lines);
+	return (ret);
+}

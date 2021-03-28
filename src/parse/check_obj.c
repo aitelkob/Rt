@@ -106,7 +106,7 @@ void	sphere_checker(char *data, char *arg, t_object *sphere, t_rtv *rtv)
 	if (!ft_strcmp("-origin", data))
 		sphere->origin = input_vector(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-radius", data))
-		sphere->radius = input_onearg(arg, rtv->parse.nb_line, data);
+		sphere->radius = input_radius(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-texture", data))
 		sphere->texture = input_texture(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-reflection", data))

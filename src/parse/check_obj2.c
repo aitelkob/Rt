@@ -44,7 +44,7 @@ t_object *cylinder, t_rtv *rtv)
 	else if (!ft_strcmp("-aim", data))
 		cylinder->aim = input_vector(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-radius", data))
-		cylinder->radius = input_onearg(arg, rtv->parse.nb_line, data);
+		cylinder->radius = input_radius(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-rot", data))
 		cylinder->rot = input_vector(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-reflection", data))
@@ -89,7 +89,7 @@ void		cone_checker(char *data, char *arg, t_object *cone, t_rtv *rtv)
 	else if (!ft_strcmp("-aim", data))
 		cone->aim = input_vector(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-radius", data))
-		cone->radius = input_onearg(arg, rtv->parse.nb_line, data);
+		cone->radius = input_radius(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-reflection", data))
 		cone->reflection = input_onearg(arg, rtv->parse.nb_line, data);
 	else if (!ft_strcmp("-slice", data))
