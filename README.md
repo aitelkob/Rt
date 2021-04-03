@@ -1,53 +1,8 @@
-<!-- PROJECT LOGO -->
-<br />
-<p align="center">
-  <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="300" height="300">
-  </a>
 
-  <h3 align="center"></h3>
-
-  <p align="center">
-    project_description
-    <br />
-    <a href="https://github.com/aitelkob/Rtv1"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/aitelkob/Rt/tree/master/screenshot">View Demo</a>
-    ·
-    <a href="https://github.com/aitelkob/Rtv1/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/aitelkob/Rtv1/issues">Request Feature</a>
-  </p>
-</p>
-
-
-<!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ol>
-</details>
-
-
+# RT
+RT is an advanced rendering project of school 42. It implements Monte-Carlo Path Tracing algorithm, 
+usesing Multi-threading to accelerate rendering
+*Note:* this project was made for MacOS.
 
 
 <!-- GETTING STARTED -->
@@ -74,7 +29,7 @@ This is an example of how to list things you need to use the software and how to
    ```
 2. enter repository
    ```sh
-   cd Rtv1
+   cd RT
    ```
 
 
@@ -88,7 +43,7 @@ This is an example of how to list things you need to use the software and how to
    ```
 2. Execute
    ```sh
-   ./rt [file_path]
+   ./RT [file_path].yml or .obj
    ```
 3. Exit
    ```sh
